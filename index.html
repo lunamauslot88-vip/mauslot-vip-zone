@@ -29,9 +29,12 @@ body{
   width:100%;
   max-width:470px;
   margin:auto;
-  min-height:100vh;
   padding:12px 10px 30px;
 }
+
+/* ======================
+   HEADER
+====================== */
 
 .logo{
   text-align:center;
@@ -41,7 +44,6 @@ body{
 .logo img{
   width:210px;
   max-width:72%;
-  height:auto;
   display:block;
   margin:auto;
 }
@@ -61,7 +63,6 @@ body{
 .event-title h1{
   margin:4px 0 2px;
   font-size:29px;
-  line-height:1;
   color:#ffd96a;
   text-shadow:
     0 2px 0 #704804,
@@ -104,6 +105,10 @@ body{
   font-size:14px;
 }
 
+/* ======================
+   MACHINE
+====================== */
+
 .machine-wrap{
   position:relative;
   width:100%;
@@ -111,19 +116,21 @@ body{
   margin:auto;
 }
 
+/* frame mesin asli */
 .machine-img{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
   object-fit:contain;
-  z-index:30;
+  z-index:1;
   pointer-events:none;
   filter:
     drop-shadow(0 13px 23px rgba(0,0,0,.55))
     drop-shadow(0 0 11px rgba(255,196,47,.16));
 }
 
+/* area permainan */
 .glass-area{
   position:absolute;
   left:16%;
@@ -131,69 +138,141 @@ body{
   top:16%;
   bottom:30%;
   overflow:hidden;
-  z-index:10;
+  z-index:5;
   border-radius:14px;
-  background:
-    radial-gradient(circle at 50% 20%,rgba(30,119,225,.15),transparent 45%);
 }
 
+/* overlay untuk menyamarkan claw bawaan gambar */
+.static-claw-cover{
+  position:absolute;
+  top:5%;
+  left:26%;
+  right:26%;
+  height:28%;
+  z-index:6;
+  pointer-events:none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(4,25,51,.98) 0%,
+      rgba(5,30,60,.94) 48%,
+      rgba(5,30,60,.35) 72%,
+      transparent 100%
+    );
+}
+
+/* rail baru */
 .rail{
   position:absolute;
-  top:8%;
-  left:6%;
-  right:6%;
-  height:4px;
+  top:7%;
+  left:7%;
+  right:7%;
+  height:5px;
   border-radius:10px;
   background:linear-gradient(90deg,#72500a,#ffe06b,#72500a);
   box-shadow:0 0 8px rgba(255,210,65,.65);
-  z-index:11;
+  z-index:10;
 }
 
-.claw{
+/* ======================
+   CLAW AKTIF
+====================== */
+
+.claw-track{
   position:absolute;
-  top:7%;
+  top:5.2%;
   left:50%;
-  width:23%;
+  width:24%;
+  height:52%;
   transform:translateX(-50%);
-  transition:left .28s ease, top .75s ease;
-  z-index:40;
+  z-index:30;
+  transition:left .28s ease;
   pointer-events:none;
 }
 
-.claw img.main-claw{
+/* carriage */
+.carriage{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:34px;
+  height:20px;
+  transform:translateX(-50%);
+  border-radius:6px;
+  background:linear-gradient(#ffe074,#9c690d);
+  border:2px solid #ffdf70;
+  box-shadow:0 0 9px rgba(255,205,52,.45);
+  z-index:4;
+}
+
+/* cable */
+.cable{
+  position:absolute;
+  top:18px;
+  left:50%;
+  width:4px;
+  height:42px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,#3a3a3a,#dedede,#444);
+  transition:height .75s ease;
+  z-index:2;
+}
+
+/* claw image */
+.active-claw{
+  position:absolute;
+  top:54px;
+  left:50%;
+  width:92px;
+  transform:translateX(-50%);
+  transition:top .75s ease;
+  z-index:3;
+}
+
+.active-claw img{
+  display:block;
   width:100%;
   height:auto;
-  display:block;
-  filter:drop-shadow(0 5px 7px rgba(0,0,0,.5));
+  object-fit:contain;
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.55));
 }
 
-.claw.grabbing{
-  top:48%;
+/* turun */
+.claw-track.down .cable{
+  height:205px;
 }
 
-.caught{
+.claw-track.down .active-claw{
+  top:216px;
+}
+
+/* hadiah yang ikut naik */
+.caught-prize{
   position:absolute;
-  width:50%;
-  height:auto;
   left:50%;
-  bottom:-24%;
+  bottom:-28px;
+  width:48px;
   transform:translateX(-50%);
   display:none;
   object-fit:contain;
-  filter:drop-shadow(0 5px 8px rgba(0,0,0,.55));
+  filter:drop-shadow(0 5px 7px rgba(0,0,0,.55));
 }
 
-.claw.has-prize .caught{
+.active-claw.has-prize .caught-prize{
   display:block;
 }
+
+/* ======================
+   PRIZES
+====================== */
 
 .prize-floor{
   position:absolute;
   left:3%;
   right:3%;
   bottom:5%;
-  height:43%;
-  z-index:12;
+  height:42%;
+  z-index:15;
 }
 
 .ball{
@@ -224,19 +303,18 @@ body{
   height:78%;
   object-fit:contain;
   filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));
-  pointer-events:none;
 }
 
 @keyframes float{
-  0%,100%{ transform:translateY(0) rotate(-2deg); }
-  50%{ transform:translateY(-4px) rotate(2deg); }
+  0%,100%{transform:translateY(0) rotate(-2deg);}
+  50%{transform:translateY(-4px) rotate(2deg);}
 }
 
-.b1{ left:0; bottom:0; }
-.b2{ left:19%; bottom:28%; }
-.b3{ left:39%; bottom:1%; }
-.b4{ right:19%; bottom:29%; }
-.b5{ right:0; bottom:1%; }
+.b1{left:0;bottom:0;}
+.b2{left:19%;bottom:28%;}
+.b3{left:39%;bottom:1%;}
+.b4{right:19%;bottom:29%;}
+.b5{right:0;bottom:1%;}
 
 .b6{
   left:50%;
@@ -256,8 +334,8 @@ body{
     inset 0 0 15px rgba(255,255,255,.3);
 }
 
-.b7{ left:4%; bottom:49%; width:18%; }
-.b8{ right:4%; bottom:50%; width:18%; }
+.b7{left:4%;bottom:49%;width:18%;}
+.b8{right:4%;bottom:50%;width:18%;}
 
 .ball.winner{
   border-color:#ffe474;
@@ -267,13 +345,16 @@ body{
     inset 0 0 15px rgba(255,255,255,.38);
 }
 
+/* ======================
+   CONTROLS
+====================== */
+
 .control-panel{
   margin-top:8px;
   padding:10px;
   border-radius:15px;
   border:1px solid #6c5518;
   background:linear-gradient(180deg,#0d1b2c,#060b12);
-  box-shadow:0 8px 18px rgba(0,0,0,.3);
 }
 
 .controls{
@@ -302,7 +383,6 @@ body{
   font-size:14px;
   background:linear-gradient(180deg,#ffea82,#d5a126);
   border-color:#ffe276;
-  box-shadow:0 0 13px rgba(255,200,49,.20);
 }
 
 .btn:disabled{
@@ -332,6 +412,10 @@ body{
   background:linear-gradient(90deg,#855e09,#f6d25e,#8a620a);
 }
 
+/* ======================
+   RESULT
+====================== */
+
 .modal{
   position:fixed;
   inset:0;
@@ -341,7 +425,6 @@ body{
   justify-content:center;
   padding:18px;
   background:rgba(0,0,0,.84);
-  backdrop-filter:blur(5px);
 }
 
 .modal-box{
@@ -352,7 +435,6 @@ body{
   border-radius:20px;
   border:2px solid #dbaa36;
   background:radial-gradient(circle at top,#163c6d,#07111f 58%);
-  box-shadow:0 0 38px rgba(255,196,43,.25);
 }
 
 .reward-img{
@@ -365,14 +447,12 @@ body{
   border-radius:50%;
   border:1px solid #806319;
   background:radial-gradient(circle,#174278,#071426);
-  box-shadow:0 0 25px rgba(255,201,50,.22);
 }
 
 .reward-img img{
   max-width:100px;
   max-height:100px;
   object-fit:contain;
-  filter:drop-shadow(0 5px 7px rgba(0,0,0,.45));
 }
 
 .modal-small{
@@ -419,11 +499,6 @@ body{
   color:#607085;
   font-size:8px;
 }
-
-@media(max-width:370px){
-  .event-title h1{ font-size:25px; }
-  .controls{ grid-template-columns:58px 1fr 58px; }
-}
 </style>
 </head>
 
@@ -455,46 +530,108 @@ body{
 
   <div class="machine-wrap">
 
+    <!-- MESIN -->
+    <img
+      class="machine-img"
+      src="assets/claw%20machine.png"
+      alt="">
+
+    <!-- ISI MESIN -->
     <div class="glass-area">
 
+      <!-- tutup claw bawaan gambar -->
+      <div class="static-claw-cover"></div>
+
+      <!-- rail aktif -->
       <div class="rail"></div>
 
-      <div class="claw" id="claw">
-        <img class="main-claw" id="clawImage" src="assets/claw%20open.png" alt="">
-        <img class="caught" id="caughtPrize" src="" alt="">
+      <!-- CLAW AKTIF -->
+      <div class="claw-track" id="clawTrack">
+
+        <div class="carriage"></div>
+        <div class="cable"></div>
+
+        <div class="active-claw" id="activeClaw">
+          <img
+            id="clawImage"
+            src="assets/claw%20open.png"
+            alt="">
+
+          <img
+            id="caughtPrize"
+            class="caught-prize"
+            src=""
+            alt="">
+        </div>
+
       </div>
 
+      <!-- HADIAH -->
       <div class="prize-floor">
-        <div class="ball b1" data-id="0"><img src="assets/coin.png" alt=""></div>
-        <div class="ball b2" data-id="1"><img src="assets/gift.png" alt=""></div>
-        <div class="ball b3" data-id="2"><img src="assets/diamond.png" alt=""></div>
-        <div class="ball b4" data-id="3"><img src="assets/crown.png" alt=""></div>
-        <div class="ball b5" data-id="4"><img src="assets/chip.png" alt=""></div>
-        <div class="ball b6" data-id="5"><img src="assets/grand%20prize.png" alt=""></div>
-        <div class="ball b7" data-id="6"><img src="assets/ticket.png" alt=""></div>
-        <div class="ball b8" data-id="7"><img src="assets/mystery.png" alt=""></div>
+
+        <div class="ball b1" data-id="0">
+          <img src="assets/coin.png" alt="">
+        </div>
+
+        <div class="ball b2" data-id="1">
+          <img src="assets/gift.png" alt="">
+        </div>
+
+        <div class="ball b3" data-id="2">
+          <img src="assets/diamond.png" alt="">
+        </div>
+
+        <div class="ball b4" data-id="3">
+          <img src="assets/crown.png" alt="">
+        </div>
+
+        <div class="ball b5" data-id="4">
+          <img src="assets/chip.png" alt="">
+        </div>
+
+        <div class="ball b6" data-id="5">
+          <img src="assets/grand%20prize.png" alt="">
+        </div>
+
+        <div class="ball b7" data-id="6">
+          <img src="assets/ticket.png" alt="">
+        </div>
+
+        <div class="ball b8" data-id="7">
+          <img src="assets/mystery.png" alt="">
+        </div>
+
       </div>
 
     </div>
 
-    <img class="machine-img" src="assets/claw%20machine.png" alt="">
-
   </div>
 
   <div class="control-panel">
+
     <div class="controls">
+
       <button class="btn" id="leftBtn" onclick="moveLeft()">◀</button>
-      <button class="btn grab-btn" id="grabBtn" onclick="playClaw()">🎯 GRAB</button>
+
+      <button class="btn grab-btn" id="grabBtn" onclick="playClaw()">
+        🎯 GRAB
+      </button>
+
       <button class="btn" id="rightBtn" onclick="moveRight()">▶</button>
+
     </div>
 
     <div class="message" id="message">
       Gerakkan capit ke hadiah pilihan lalu tekan <b>GRAB</b>.
     </div>
 
-    <a href="https://mauslot.life/" class="claim" id="claimButton">
+    <a
+      href="https://mauslot.life/"
+      class="claim"
+      id="claimButton">
       🎁 CLAIM HADIAH
     </a>
+
   </div>
 
   <div class="footer">
@@ -503,55 +640,70 @@ body{
 
 </div>
 
+
 <div class="modal" id="rewardModal">
+
   <div class="modal-box">
+
     <div class="reward-img">
       <img id="rewardImage" src="assets/gift.png" alt="">
     </div>
 
-    <div class="modal-small">MAUSLOT 9.9 CLAW MACHINE</div>
+    <div class="modal-small">
+      MAUSLOT 9.9 CLAW MACHINE
+    </div>
+
     <h2>SELAMAT!</h2>
 
-    <div class="reward-name" id="rewardName">VIP REWARD</div>
-    <div class="reward-desc" id="rewardDescription">Hadiah berhasil didapatkan.</div>
+    <div class="reward-name" id="rewardName">
+      VIP REWARD
+    </div>
+
+    <div class="reward-desc" id="rewardDescription">
+      Hadiah berhasil didapatkan.
+    </div>
 
     <a href="https://mauslot.life/" class="modal-claim">
       🎁 CLAIM HADIAH
     </a>
+
   </div>
+
 </div>
 
+
 <script>
+
 const prizes = [
   {
     name:"BONUS SALDO",
     image:"assets/coin.png",
     description:"Bonus saldo spesial Event 9.9.",
-    position:14
+    position:12
   },
   {
     name:"VIP GIFT",
     image:"assets/gift.png",
     description:"Hadiah eksklusif khusus member VIP.",
-    position:29
+    position:28
   },
   {
     name:"DIAMOND REWARD",
     image:"assets/diamond.png",
     description:"Diamond Reward spesial MAUSLOT.",
-    position:43
+    position:44
   },
   {
     name:"CROWN REWARD",
     image:"assets/crown.png",
     description:"Reward premium khusus Event 9.9.",
-    position:59
+    position:60
   },
   {
     name:"VIP POINT",
     image:"assets/chip.png",
     description:"VIP Point berhasil didapatkan.",
-    position:78
+    position:80
   },
   {
     name:"GRAND PRIZE",
@@ -569,7 +721,7 @@ const prizes = [
     name:"MYSTERY REWARD",
     image:"assets/mystery.png",
     description:"Mystery Reward berhasil didapatkan.",
-    position:84
+    position:88
   }
 ];
 
@@ -577,53 +729,100 @@ let ticket = 1;
 let clawPosition = 50;
 let playing = false;
 
-const claw = document.getElementById("claw");
-const clawImage = document.getElementById("clawImage");
-const caughtPrize = document.getElementById("caughtPrize");
-const ticketEl = document.getElementById("ticket");
-const statusText = document.getElementById("statusText");
-const message = document.getElementById("message");
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
-const grabBtn = document.getElementById("grabBtn");
+const clawTrack =
+document.getElementById("clawTrack");
+
+const activeClaw =
+document.getElementById("activeClaw");
+
+const clawImage =
+document.getElementById("clawImage");
+
+const caughtPrize =
+document.getElementById("caughtPrize");
+
+const ticketEl =
+document.getElementById("ticket");
+
+const statusText =
+document.getElementById("statusText");
+
+const message =
+document.getElementById("message");
+
+const leftBtn =
+document.getElementById("leftBtn");
+
+const rightBtn =
+document.getElementById("rightBtn");
+
+const grabBtn =
+document.getElementById("grabBtn");
+
 
 function moveLeft(){
+
   if(playing) return;
+
   clawPosition -= 8;
-  if(clawPosition < 12) clawPosition = 12;
+
+  if(clawPosition < 10){
+    clawPosition = 10;
+  }
+
   updateClaw();
 }
+
 
 function moveRight(){
+
   if(playing) return;
+
   clawPosition += 8;
-  if(clawPosition > 88) clawPosition = 88;
+
+  if(clawPosition > 90){
+    clawPosition = 90;
+  }
+
   updateClaw();
 }
 
+
 function updateClaw(){
-  claw.style.left = clawPosition + "%";
+
+  clawTrack.style.left =
+  clawPosition + "%";
 }
 
+
 function disableControls(){
+
   leftBtn.disabled = true;
   rightBtn.disabled = true;
   grabBtn.disabled = true;
 }
 
+
 function enableControls(){
+
   leftBtn.disabled = false;
   rightBtn.disabled = false;
   grabBtn.disabled = false;
 }
 
+
 function getClosestPrize(){
+
   let selected = 0;
   let smallest = 999;
 
   prizes.forEach((prize,index)=>{
-    const distance = Math.abs(prize.position - clawPosition);
+
+    const distance =
+    Math.abs(prize.position - clawPosition);
+
     if(distance < smallest){
+
       smallest = distance;
       selected = index;
     }
@@ -632,99 +831,190 @@ function getClosestPrize(){
   return selected;
 }
 
+
 async function playClaw(){
+
   if(playing) return;
 
   if(ticket <= 0){
-    message.innerHTML = "Tiket bermain sudah habis.";
+
+    message.innerHTML =
+    "Tiket bermain sudah habis.";
+
     return;
   }
 
   playing = true;
+
   disableControls();
 
-  statusText.innerHTML = "MEMILIH...";
-  message.innerHTML = "Capit sedang menuju hadiah...";
+  statusText.innerHTML =
+  "MEMILIH...";
 
-  const winnerIndex = getClosestPrize();
-  const winner = prizes[winnerIndex];
+  message.innerHTML =
+  "Capit sedang menuju hadiah...";
 
-  clawPosition = winner.position;
+
+  const winnerIndex =
+  getClosestPrize();
+
+  const winner =
+  prizes[winnerIndex];
+
+
+  /* pindah ke posisi hadiah */
+
+  clawPosition =
+  winner.position;
+
   updateClaw();
-
-  await wait(500);
-
-  statusText.innerHTML = "GRABBING";
-  claw.classList.add("grabbing");
-
-  await wait(850);
-
-  clawImage.src = "assets/claw%20close.png";
-  highlightPrize(winnerIndex);
 
   await wait(450);
 
-  caughtPrize.src = winner.image;
-  claw.classList.add("has-prize");
 
-  const winnerElement = document.querySelector(`.ball[data-id="${winnerIndex}"]`);
+  /* turun */
+
+  statusText.innerHTML =
+  "GRABBING";
+
+  clawTrack.classList.add("down");
+
+  await wait(800);
+
+
+  /* tutup claw */
+
+  clawImage.src =
+  "assets/claw%20close.png";
+
+  highlightPrize(winnerIndex);
+
+  await wait(350);
+
+
+  /* tempel hadiah */
+
+  caughtPrize.src =
+  winner.image;
+
+  activeClaw.classList.add(
+    "has-prize"
+  );
+
+
+  const winnerElement =
+  document.querySelector(
+    `.ball[data-id="${winnerIndex}"]`
+  );
+
   if(winnerElement){
     winnerElement.style.opacity = "0";
   }
 
-  await wait(350);
+  await wait(400);
 
-  claw.classList.remove("grabbing");
 
-  statusText.innerHTML = "MENGANGKAT...";
+  /* naik */
+
+  statusText.innerHTML =
+  "MENGANGKAT...";
+
+  clawTrack.classList.remove("down");
 
   await wait(900);
 
+
+  /* tiket */
+
   ticket--;
-  ticketEl.innerHTML = ticket;
+
+  ticketEl.innerHTML =
+  ticket;
+
+
+  /* result */
 
   showReward(winner);
 
-  statusText.innerHTML = "BERHASIL";
-  message.innerHTML = "🎉 Hadiah berhasil didapatkan. Silakan lanjutkan claim.";
-  document.getElementById("claimButton").style.display = "block";
+  statusText.innerHTML =
+  "BERHASIL";
+
+  message.innerHTML =
+  "🎉 Hadiah berhasil didapatkan.";
+
+  document.getElementById(
+    "claimButton"
+  ).style.display = "block";
+
 
   playing = false;
 }
 
+
 function highlightPrize(index){
-  document.querySelectorAll(".ball").forEach(element=>{
-    element.classList.remove("winner");
+
+  document
+  .querySelectorAll(".ball")
+  .forEach(el=>{
+    el.classList.remove("winner");
   });
 
-  const winner = document.querySelector(`.ball[data-id="${index}"]`);
+  const winner =
+  document.querySelector(
+    `.ball[data-id="${index}"]`
+  );
+
   if(winner){
     winner.classList.add("winner");
   }
 }
 
+
 function showReward(prize){
-  document.getElementById("rewardImage").src = prize.image;
-  document.getElementById("rewardName").innerHTML = prize.name;
-  document.getElementById("rewardDescription").innerHTML = prize.description;
-  document.getElementById("rewardModal").style.display = "flex";
+
+  document.getElementById(
+    "rewardImage"
+  ).src =
+  prize.image;
+
+  document.getElementById(
+    "rewardName"
+  ).innerHTML =
+  prize.name;
+
+  document.getElementById(
+    "rewardDescription"
+  ).innerHTML =
+  prize.description;
+
+  document.getElementById(
+    "rewardModal"
+  ).style.display =
+  "flex";
 }
+
 
 function wait(ms){
-  return new Promise(resolve => setTimeout(resolve, ms));
+
+  return new Promise(
+    resolve =>
+    setTimeout(resolve,ms)
+  );
 }
 
-document.getElementById("rewardModal").addEventListener("click", function(event){
+
+document
+.getElementById("rewardModal")
+.addEventListener(
+"click",
+function(event){
+
   if(event.target === this){
     this.style.display = "none";
   }
+
 });
 
-document.addEventListener("keydown", function(event){
-  if(event.key === "ArrowLeft") moveLeft();
-  if(event.key === "ArrowRight") moveRight();
-  if(event.key === "Enter" || event.key === " ") playClaw();
-});
 </script>
 
 </body>
