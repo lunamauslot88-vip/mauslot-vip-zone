@@ -13,7 +13,8 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   margin:0;
   min-height:100%;
 }
@@ -21,322 +22,218 @@ html,body{
 body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
-  position:relative;
   overflow-x:hidden;
 
   background:
-    radial-gradient(circle at 50% 0%,#143e72 0%,#071528 38%,#020610 72%,#010308 100%);
+    linear-gradient(
+      rgba(1,5,14,.25),
+      rgba(1,5,14,.42)
+    ),
+    url("assets/bg-arcade-3d.jpg")
+    center center / cover
+    fixed
+    no-repeat;
+
+  background-color:#020713;
 }
 
-/* =====================================
-   ANIMATED BACKGROUND
-===================================== */
+/* =========================
+   BACKGROUND OVERLAY
+========================= */
 
-.bg-scene{
+.background-depth{
   position:fixed;
   inset:0;
-  z-index:0;
   pointer-events:none;
-  overflow:hidden;
+  z-index:0;
 
   background:
-    radial-gradient(circle at 50% 20%,rgba(24,90,166,.14),transparent 38%),
-    radial-gradient(circle at 50% 100%,rgba(255,192,52,.07),transparent 38%);
+    radial-gradient(
+      ellipse at 50% 38%,
+      transparent 0%,
+      transparent 25%,
+      rgba(0,0,0,.18) 58%,
+      rgba(0,0,0,.48) 100%
+    );
 }
 
-.bg-glow{
-  position:absolute;
+/* FLOOR GLOW */
 
-  width:380px;
-  height:380px;
+.floor-glow{
+  position:fixed;
+
+  left:50%;
+  bottom:-100px;
+
+  width:680px;
+  height:260px;
+
+  transform:translateX(-50%);
+
+  pointer-events:none;
+
+  z-index:0;
 
   border-radius:50%;
 
-  filter:blur(75px);
-
-  opacity:.40;
-
-  animation:
-    bgPulse 6s ease-in-out infinite;
-}
-
-.glow-left{
-  left:-160px;
-  top:110px;
-
   background:
     radial-gradient(
-      circle,
-      rgba(40,140,255,.38),
-      rgba(17,64,145,.16) 48%,
-      transparent 75%
-    );
-}
-
-.glow-right{
-  right:-160px;
-  top:150px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,199,65,.30),
-      rgba(176,117,14,.15) 48%,
-      transparent 75%
+      ellipse,
+      rgba(32,125,255,.24) 0%,
+      rgba(255,192,52,.10) 38%,
+      transparent 72%
     );
 
-  animation-delay:2s;
+  filter:blur(30px);
 }
 
-/* LIGHT BEAM */
+/* =========================
+   REALISTIC LIGHT SWEEP
+========================= */
 
-.light-beam{
-  position:absolute;
+.light-sweep{
+  position:fixed;
 
-  top:-12%;
+  top:-15%;
+  left:-45%;
 
-  width:180px;
-  height:125%;
+  width:38%;
+  height:140%;
 
-  opacity:.08;
+  pointer-events:none;
 
-  filter:blur(5px);
+  z-index:1;
+
+  opacity:.16;
+
+  transform:rotate(10deg);
 
   background:
     linear-gradient(
-      180deg,
+      90deg,
       transparent 0%,
-      rgba(125,198,255,.30) 22%,
-      rgba(255,255,255,.04) 52%,
-      rgba(255,209,84,.22) 82%,
+      rgba(90,165,255,.12) 32%,
+      rgba(255,255,255,.22) 50%,
+      rgba(255,206,88,.10) 68%,
       transparent 100%
     );
 
+  filter:blur(10px);
+
   animation:
-    beamMove 8s ease-in-out infinite;
+    sweepMove 9s ease-in-out infinite;
 }
 
-.beam-1{
-  left:5%;
+@keyframes sweepMove{
+  0%{
+    left:-45%;
+  }
 
-  transform:
-    rotate(12deg);
+  50%{
+    left:105%;
+  }
+
+  100%{
+    left:105%;
+  }
 }
 
-.beam-2{
-  right:5%;
+/* =========================
+   SMALL FLOATING PARTICLES
+========================= */
 
-  transform:
-    rotate(-12deg);
+.particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
 
+.particle{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:#ffd867;
+
+  box-shadow:
+    0 0 8px rgba(255,210,87,.75);
+
+  opacity:.30;
+
+  animation:
+    particleFloat 8s linear infinite;
+}
+
+.p1{
+  left:8%;
+  top:80%;
+  animation-delay:0s;
+}
+
+.p2{
+  left:18%;
+  top:70%;
+  animation-delay:2s;
+}
+
+.p3{
+  right:12%;
+  top:78%;
+  animation-delay:1s;
+}
+
+.p4{
+  right:20%;
+  top:65%;
   animation-delay:3s;
 }
 
-/* FLOATING ORB */
-
-.floating-orb{
-  position:absolute;
-
-  border-radius:50%;
-
-  opacity:.18;
-
-  filter:blur(1px);
-
-  animation:
-    floatOrb 7s ease-in-out infinite;
+.p5{
+  left:28%;
+  top:85%;
+  animation-delay:4s;
 }
 
-.orb-1{
-  width:48px;
-  height:48px;
-
-  left:7%;
-  top:24%;
-
-  background:
-    radial-gradient(
-      circle at 35% 35%,
-      #fff6ba 0%,
-      #ffc844 34%,
-      #174689 100%
-    );
+.p6{
+  right:30%;
+  top:82%;
+  animation-delay:5s;
 }
 
-.orb-2{
-  width:30px;
-  height:30px;
+@keyframes particleFloat{
+  0%{
+    transform:
+      translateY(0)
+      scale(.8);
 
-  left:13%;
-  bottom:17%;
+    opacity:0;
+  }
 
-  background:
-    radial-gradient(
-      circle at 35% 35%,
-      #fff 0%,
-      #74bfff 38%,
-      #133d80 100%
-    );
+  20%{
+    opacity:.45;
+  }
 
-  animation-delay:1.3s;
-}
-
-.orb-3{
-  width:53px;
-  height:53px;
-
-  right:7%;
-  top:29%;
-
-  background:
-    radial-gradient(
-      circle at 35% 35%,
-      #fff6bd 0%,
-      #ffcd53 36%,
-      #153f81 100%
-    );
-
-  animation-delay:2.2s;
-}
-
-.orb-4{
-  width:34px;
-  height:34px;
-
-  right:11%;
-  bottom:20%;
-
-  background:
-    radial-gradient(
-      circle at 35% 35%,
-      #fff 0%,
-      #79bfff 36%,
-      #11366d 100%
-    );
-
-  animation-delay:3.1s;
-}
-
-/* SPARK */
-
-.spark{
-  position:absolute;
-
-  width:6px;
-  height:6px;
-
-  border-radius:50%;
-
-  background:#9fd5ff;
-
-  box-shadow:
-    0 0 8px rgba(128,202,255,.8),
-    0 0 16px rgba(128,202,255,.45);
-
-  opacity:.75;
-
-  animation:
-    sparkle 3s ease-in-out infinite;
-}
-
-.spark-1{
-  left:9%;
-  top:14%;
-}
-
-.spark-2{
-  left:14%;
-  top:48%;
-  animation-delay:.8s;
-}
-
-.spark-3{
-  left:10%;
-  bottom:15%;
-  animation-delay:1.7s;
-}
-
-.spark-4{
-  right:9%;
-  top:17%;
-  animation-delay:.4s;
-}
-
-.spark-5{
-  right:15%;
-  top:53%;
-  animation-delay:1.5s;
-}
-
-.spark-6{
-  right:11%;
-  bottom:14%;
-  animation-delay:2.3s;
-}
-
-/* BACKGROUND ANIMATION */
-
-@keyframes bgPulse{
-
-  0%,100%{
-    transform:scale(1);
+  80%{
     opacity:.30;
   }
 
-  50%{
-    transform:scale(1.08);
-    opacity:.50;
-  }
-
-}
-
-@keyframes beamMove{
-
-  0%,100%{
-    translate:0 -28px;
-    opacity:.05;
-  }
-
-  50%{
-    translate:0 26px;
-    opacity:.13;
-  }
-
-}
-
-@keyframes floatOrb{
-
-  0%,100%{
+  100%{
     transform:
-      translateY(0)
-      translateX(0);
-  }
+      translateY(-220px)
+      scale(1.2);
 
-  50%{
-    transform:
-      translateY(-16px)
-      translateX(6px);
+    opacity:0;
   }
-
 }
 
-@keyframes sparkle{
-
-  0%,100%{
-    transform:scale(.75);
-    opacity:.20;
-  }
-
-  50%{
-    transform:scale(1.55);
-    opacity:1;
-  }
-
-}
-
-/* =====================================
+/* =========================
    PAGE
-===================================== */
+========================= */
 
 .page{
   width:100%;
@@ -344,16 +241,16 @@ body{
 
   margin:0 auto;
 
-  padding:12px 10px 30px;
+  padding:14px 10px 30px;
 
   position:relative;
 
-  z-index:2;
+  z-index:5;
 }
 
-/* =====================================
-   HEADER
-===================================== */
+/* =========================
+   LOGO
+========================= */
 
 .logo{
   text-align:center;
@@ -370,9 +267,13 @@ body{
 
   filter:
     drop-shadow(
-      0 4px 10px rgba(0,0,0,.35)
+      0 5px 10px rgba(0,0,0,.50)
     );
 }
+
+/* =========================
+   TITLE
+========================= */
 
 .title{
   text-align:center;
@@ -383,13 +284,16 @@ body{
 .title small{
   display:block;
 
-  color:#91a4ba;
+  color:#b1c1d5;
 
   font-size:9px;
 
   letter-spacing:3px;
 
   font-weight:bold;
+
+  text-shadow:
+    0 2px 4px rgba(0,0,0,.8);
 }
 
 .title h1{
@@ -402,23 +306,27 @@ body{
   line-height:1;
 
   text-shadow:
-    0 2px 0 #714a04,
-    0 0 16px rgba(255,202,50,.35);
+    0 2px 0 #704804,
+    0 0 18px rgba(255,202,50,.40),
+    0 5px 10px rgba(0,0,0,.65);
 }
 
 .title p{
   margin:6px 0 0;
 
-  color:#ccd5e0;
+  color:#e2e6eb;
 
   font-size:9px;
 
   letter-spacing:1.4px;
+
+  text-shadow:
+    0 2px 4px rgba(0,0,0,.75);
 }
 
-/* =====================================
+/* =========================
    STATUS
-===================================== */
+========================= */
 
 .status-row{
   display:grid;
@@ -436,21 +344,24 @@ body{
 
   text-align:center;
 
-  border-radius:10px;
+  border-radius:11px;
 
   border:
-    1px solid #765b19;
+    1px solid rgba(216,170,44,.70);
 
   background:
     linear-gradient(
       180deg,
-      rgba(10,28,50,.95),
-      rgba(4,13,25,.95)
+      rgba(7,24,45,.88),
+      rgba(3,10,20,.93)
     );
 
+  backdrop-filter:
+    blur(7px);
+
   box-shadow:
-    inset 0 0 14px rgba(255,204,62,.035),
-    0 6px 15px rgba(0,0,0,.18);
+    0 8px 18px rgba(0,0,0,.28),
+    inset 0 0 12px rgba(255,206,75,.04);
 }
 
 .status-box span{
@@ -458,7 +369,7 @@ body{
 
   font-size:8px;
 
-  color:#8292a6;
+  color:#92a2b5;
 
   letter-spacing:1px;
 }
@@ -473,9 +384,9 @@ body{
   font-size:14px;
 }
 
-/* =====================================
-   MACHINE
-===================================== */
+/* =========================
+   MACHINE WRAPPER
+========================= */
 
 .machine-wrap{
   position:relative;
@@ -487,9 +398,14 @@ body{
 
   filter:
     drop-shadow(
-      0 0 24px rgba(71,158,255,.10)
+      0 22px 30px rgba(0,0,0,.55)
+    )
+    drop-shadow(
+      0 0 28px rgba(28,127,255,.14)
     );
 }
+
+/* FRAME */
 
 .machine-frame{
   position:absolute;
@@ -505,16 +421,11 @@ body{
   z-index:1;
 
   pointer-events:none;
-
-  filter:
-    drop-shadow(
-      0 15px 25px rgba(0,0,0,.55)
-    );
 }
 
-/* =====================================
+/* =========================
    GAME GLASS
-===================================== */
+========================= */
 
 .game-glass{
   position:absolute;
@@ -533,17 +444,19 @@ body{
 
   background:
     radial-gradient(
-      circle at 50% 24%,
-      #0d457e 0%,
-      #082d55 35%,
-      #051d38 68%,
-      #031325 100%
+      circle at 50% 25%,
+      rgba(17,83,148,.98) 0%,
+      rgba(7,43,81,.98) 38%,
+      rgba(3,21,40,.98) 72%,
+      rgba(2,11,22,.98) 100%
     );
 
   box-shadow:
-    inset 0 0 25px rgba(0,139,255,.32),
-    inset 0 -35px 55px rgba(0,0,0,.35);
+    inset 0 0 28px rgba(0,144,255,.28),
+    inset 0 -45px 65px rgba(0,0,0,.34);
 }
+
+/* glass reflection */
 
 .game-glass:after{
   content:"";
@@ -558,17 +471,17 @@ body{
 
   background:
     linear-gradient(
-      115deg,
-      rgba(255,255,255,.06),
-      transparent 28%,
+      112deg,
+      rgba(255,255,255,.08),
+      transparent 25%,
       transparent 72%,
       rgba(255,255,255,.025)
     );
 }
 
-/* =====================================
-   LIGHT INSIDE MACHINE
-===================================== */
+/* =========================
+   MACHINE LIGHTS
+========================= */
 
 .lights{
   position:absolute;
@@ -591,39 +504,38 @@ body{
 
   border-radius:50%;
 
-  background:#55b8ff;
+  background:#65c0ff;
 
   box-shadow:
-    0 0 8px #42a8ff,
-    0 0 14px #278eff;
+    0 0 8px #65c0ff,
+    0 0 16px #268fff;
 
   animation:
-    lightBlink 1.4s ease-in-out infinite;
+    insideLight 1.8s ease-in-out infinite;
 }
 
 .light:nth-child(2){
-  animation-delay:.4s;
+  animation-delay:.5s;
 }
 
 .light:nth-child(3){
-  animation-delay:.8s;
+  animation-delay:1s;
 }
 
-@keyframes lightBlink{
-
-  0%,100%{
+@keyframes insideLight{
+  0%,
+  100%{
     opacity:.55;
   }
 
   50%{
     opacity:1;
   }
-
 }
 
-/* =====================================
+/* =========================
    RAIL
-===================================== */
+========================= */
 
 .rail{
   position:absolute;
@@ -642,17 +554,17 @@ body{
   background:
     linear-gradient(
       180deg,
-      #ffe178,
-      #bc7f13
+      #ffe886,
+      #c48b16
     );
 
   box-shadow:
-    0 0 10px rgba(255,210,65,.55);
+    0 0 10px rgba(255,211,66,.55);
 }
 
-/* =====================================
-   CLAW SYSTEM
-===================================== */
+/* =========================
+   CLAW
+========================= */
 
 .claw-system{
   position:absolute;
@@ -685,15 +597,15 @@ body{
   background:
     linear-gradient(
       180deg,
-      #ffe57a,
-      #a46d0d
+      #ffeb86,
+      #aa7310
     );
 
   border:
-    2px solid #ffe783;
+    2px solid #ffe989;
 
   box-shadow:
-    0 0 8px rgba(255,208,54,.45);
+    0 0 10px rgba(255,210,55,.42);
 }
 
 .cable{
@@ -706,9 +618,9 @@ body{
   background:
     linear-gradient(
       90deg,
-      #383838,
-      #d5d5d5,
-      #474747
+      #393939,
+      #d8d8d8,
+      #434343
     );
 
   transition:
@@ -734,11 +646,9 @@ body{
 
   filter:
     drop-shadow(
-      0 6px 8px rgba(0,0,0,.55)
+      0 7px 9px rgba(0,0,0,.60)
     );
 }
-
-/* CAUGHT PRIZE */
 
 .caught{
   position:absolute;
@@ -759,7 +669,7 @@ body{
 
   filter:
     drop-shadow(
-      0 5px 7px rgba(0,0,0,.55)
+      0 5px 7px rgba(0,0,0,.60)
     );
 }
 
@@ -767,9 +677,9 @@ body{
   display:block;
 }
 
-/* =====================================
-   PRIZE FLOOR
-===================================== */
+/* =========================
+   PRIZES
+========================= */
 
 .prize-floor{
   position:absolute;
@@ -783,10 +693,6 @@ body{
 
   z-index:20;
 }
-
-/* =====================================
-   BALL
-===================================== */
 
 .ball{
   position:absolute;
@@ -842,8 +748,8 @@ body{
 }
 
 @keyframes floatBall{
-
-  0%,100%{
+  0%,
+  100%{
     transform:
       translateY(0);
   }
@@ -852,10 +758,9 @@ body{
     transform:
       translateY(-3px);
   }
-
 }
 
-/* BALL POSITION */
+/* POSITION */
 
 .b1{
   left:0;
@@ -934,9 +839,9 @@ body{
     inset 0 0 16px rgba(255,255,255,.4);
 }
 
-/* =====================================
+/* =========================
    CONTROL
-===================================== */
+========================= */
 
 .control{
   margin-top:8px;
@@ -946,18 +851,21 @@ body{
   border-radius:15px;
 
   border:
-    1px solid #705719;
+    1px solid rgba(217,174,52,.70);
 
   background:
     linear-gradient(
       180deg,
-      rgba(12,29,49,.98),
-      rgba(4,10,18,.98)
+      rgba(10,27,47,.91),
+      rgba(3,9,17,.95)
     );
 
+  backdrop-filter:
+    blur(8px);
+
   box-shadow:
-    0 10px 28px rgba(0,0,0,.35),
-    0 0 18px rgba(255,199,72,.08);
+    0 12px 30px rgba(0,0,0,.40),
+    0 0 18px rgba(255,198,45,.07);
 }
 
 .buttons{
@@ -975,16 +883,16 @@ button{
   border-radius:11px;
 
   border:
-    1px solid #b58b21;
+    1px solid #b78d24;
 
   background:
     linear-gradient(
       180deg,
-      #10233d,
-      #071426
+      #10233c,
+      #071323
     );
 
-  color:#ffd55b;
+  color:#ffd75e;
 
   font-size:20px;
 
@@ -993,17 +901,15 @@ button{
   cursor:pointer;
 
   touch-action:manipulation;
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 button:active{
-  transform:scale(.96);
+  transform:
+    scale(.96);
 }
 
 button:disabled{
-  opacity:.4;
+  opacity:.40;
 }
 
 .grab{
@@ -1014,33 +920,14 @@ button:disabled{
   background:
     linear-gradient(
       180deg,
-      #fff09b 0%,
-      #f4cd55 45%,
-      #c88e17 100%
+      #fff09b,
+      #f1cb52 46%,
+      #c58b14 100%
     );
 
   box-shadow:
-    0 0 10px rgba(255,206,63,.25),
-    inset 0 1px 0 rgba(255,255,255,.55);
-
-  animation:
-    grabGlow 2.2s ease-in-out infinite;
-}
-
-@keyframes grabGlow{
-
-  0%,100%{
-    box-shadow:
-      0 0 8px rgba(255,204,55,.20),
-      inset 0 1px 0 rgba(255,255,255,.55);
-  }
-
-  50%{
-    box-shadow:
-      0 0 20px rgba(255,204,55,.45),
-      inset 0 1px 0 rgba(255,255,255,.65);
-  }
-
+    0 0 12px rgba(255,207,61,.25),
+    inset 0 1px 0 rgba(255,255,255,.60);
 }
 
 .message{
@@ -1054,12 +941,12 @@ button:disabled{
 
   line-height:1.5;
 
-  color:#c4ccd7;
+  color:#d0d7df;
 }
 
-/* =====================================
+/* =========================
    CLAIM
-===================================== */
+========================= */
 
 .claim{
   display:none;
@@ -1069,14 +956,6 @@ button:disabled{
   padding:12px;
 
   border-radius:10px;
-
-  background:
-    linear-gradient(
-      90deg,
-      #875f08,
-      #f6d25f,
-      #875f08
-    );
 
   text-align:center;
 
@@ -1088,13 +967,18 @@ button:disabled{
 
   font-weight:bold;
 
-  box-shadow:
-    0 5px 15px rgba(255,196,40,.18);
+  background:
+    linear-gradient(
+      90deg,
+      #855d07,
+      #f7d462,
+      #855d07
+    );
 }
 
-/* =====================================
+/* =========================
    MODAL
-===================================== */
+========================= */
 
 .modal{
   position:fixed;
@@ -1112,10 +996,10 @@ button:disabled{
   padding:18px;
 
   background:
-    rgba(0,0,0,.85);
+    rgba(0,0,0,.84);
 
   backdrop-filter:
-    blur(5px);
+    blur(7px);
 }
 
 .modal-box{
@@ -1123,8 +1007,7 @@ button:disabled{
 
   max-width:330px;
 
-  padding:
-    22px 17px 17px;
+  padding:22px 17px 17px;
 
   text-align:center;
 
@@ -1141,7 +1024,7 @@ button:disabled{
     );
 
   box-shadow:
-    0 0 38px rgba(255,196,43,.25);
+    0 0 40px rgba(255,196,43,.24);
 }
 
 .reward-image{
@@ -1164,7 +1047,7 @@ button:disabled{
     1px solid #84671a;
 
   box-shadow:
-    0 0 24px rgba(255,201,55,.15);
+    0 0 24px rgba(255,200,50,.14);
 }
 
 .reward-image img{
@@ -1228,14 +1111,14 @@ button:disabled{
 
   padding-top:12px;
 
-  color:#607085;
+  color:#76879b;
 
   font-size:8px;
 }
 
-/* =====================================
+/* =========================
    MOBILE
-===================================== */
+========================= */
 
 @media(max-width:370px){
 
@@ -1252,11 +1135,6 @@ button:disabled{
     width:100px;
   }
 
-  .bg-glow{
-    width:280px;
-    height:280px;
-  }
-
 }
 </style>
 </head>
@@ -1264,36 +1142,21 @@ button:disabled{
 
 <body>
 
-<!-- =====================================
-     ANIMATED BACKGROUND
-===================================== -->
+<!-- BACKGROUND FX -->
 
-<div class="bg-scene">
+<div class="background-depth"></div>
+<div class="floor-glow"></div>
+<div class="light-sweep"></div>
 
-  <div class="bg-glow glow-left"></div>
-  <div class="bg-glow glow-right"></div>
-
-  <div class="light-beam beam-1"></div>
-  <div class="light-beam beam-2"></div>
-
-  <div class="floating-orb orb-1"></div>
-  <div class="floating-orb orb-2"></div>
-  <div class="floating-orb orb-3"></div>
-  <div class="floating-orb orb-4"></div>
-
-  <div class="spark spark-1"></div>
-  <div class="spark spark-2"></div>
-  <div class="spark spark-3"></div>
-  <div class="spark spark-4"></div>
-  <div class="spark spark-5"></div>
-  <div class="spark spark-6"></div>
-
+<div class="particles">
+  <div class="particle p1"></div>
+  <div class="particle p2"></div>
+  <div class="particle p3"></div>
+  <div class="particle p4"></div>
+  <div class="particle p5"></div>
+  <div class="particle p6"></div>
 </div>
 
-
-<!-- =====================================
-     PAGE
-===================================== -->
 
 <div class="page">
 
@@ -1359,9 +1222,7 @@ button:disabled{
   </div>
 
 
-  <!-- =====================================
-       MACHINE
-  ===================================== -->
+  <!-- MACHINE -->
 
   <div class="machine-wrap">
 
@@ -1376,14 +1237,12 @@ button:disabled{
       id="gameGlass">
 
 
-      <!-- LIGHT -->
+      <!-- LIGHTS -->
 
       <div class="lights">
-
         <div class="light"></div>
         <div class="light"></div>
         <div class="light"></div>
-
       </div>
 
 
@@ -1438,83 +1297,43 @@ button:disabled{
       <div class="prize-floor">
 
 
-        <div
-          class="ball b1"
-          data-id="0">
-
-          <img
-            src="assets/coin.png">
-
+        <div class="ball b1" data-id="0">
+          <img src="assets/coin.png">
         </div>
 
 
-        <div
-          class="ball b2"
-          data-id="1">
-
-          <img
-            src="assets/gift.png">
-
+        <div class="ball b2" data-id="1">
+          <img src="assets/gift.png">
         </div>
 
 
-        <div
-          class="ball b3"
-          data-id="2">
-
-          <img
-            src="assets/diamond.png">
-
+        <div class="ball b3" data-id="2">
+          <img src="assets/diamond.png">
         </div>
 
 
-        <div
-          class="ball b4"
-          data-id="3">
-
-          <img
-            src="assets/crown.png">
-
+        <div class="ball b4" data-id="3">
+          <img src="assets/crown.png">
         </div>
 
 
-        <div
-          class="ball b5"
-          data-id="4">
-
-          <img
-            src="assets/chip.png">
-
+        <div class="ball b5" data-id="4">
+          <img src="assets/chip.png">
         </div>
 
 
-        <div
-          class="ball b6"
-          data-id="5">
-
-          <img
-            src="assets/grand%20prize.png">
-
+        <div class="ball b6" data-id="5">
+          <img src="assets/grand%20prize.png">
         </div>
 
 
-        <div
-          class="ball b7"
-          data-id="6">
-
-          <img
-            src="assets/ticket.png">
-
+        <div class="ball b7" data-id="6">
+          <img src="assets/ticket.png">
         </div>
 
 
-        <div
-          class="ball b8"
-          data-id="7">
-
-          <img
-            src="assets/mystery.png">
-
+        <div class="ball b8" data-id="7">
+          <img src="assets/mystery.png">
         </div>
 
 
@@ -1527,9 +1346,7 @@ button:disabled{
   </div>
 
 
-  <!-- =====================================
-       CONTROLS
-  ===================================== -->
+  <!-- CONTROL -->
 
   <div class="control">
 
@@ -1601,10 +1418,7 @@ button:disabled{
 </div>
 
 
-
-<!-- =====================================
-     RESULT MODAL
-===================================== -->
+<!-- RESULT -->
 
 <div
   class="modal"
@@ -1663,9 +1477,9 @@ button:disabled{
 
 <script>
 
-/* =====================================
-   DATA HADIAH
-===================================== */
+/* =============================
+   DATA
+============================= */
 
 const prizes = [
 
@@ -1720,85 +1534,59 @@ const prizes = [
 ];
 
 
-/* =====================================
+/* =============================
    STATE
-===================================== */
+============================= */
 
 let ticket = 1;
-
 let position = 50;
-
 let playing = false;
 
 
-/* =====================================
-   ELEMENTS
-===================================== */
+/* =============================
+   ELEMENT
+============================= */
 
 const gameGlass =
-document.getElementById(
-  "gameGlass"
-);
+document.getElementById("gameGlass");
 
 const clawSystem =
-document.getElementById(
-  "clawSystem"
-);
+document.getElementById("clawSystem");
 
 const cable =
-document.getElementById(
-  "cable"
-);
+document.getElementById("cable");
 
 const clawHolder =
-document.getElementById(
-  "clawHolder"
-);
+document.getElementById("clawHolder");
 
 const clawImage =
-document.getElementById(
-  "clawImage"
-);
+document.getElementById("clawImage");
 
 const caughtPrize =
-document.getElementById(
-  "caughtPrize"
-);
+document.getElementById("caughtPrize");
 
 const statusText =
-document.getElementById(
-  "status"
-);
+document.getElementById("status");
 
 const ticketText =
-document.getElementById(
-  "ticket"
-);
+document.getElementById("ticket");
 
 const message =
-document.getElementById(
-  "message"
-);
+document.getElementById("message");
 
 const leftButton =
-document.getElementById(
-  "leftButton"
-);
+document.getElementById("leftButton");
 
 const rightButton =
-document.getElementById(
-  "rightButton"
-);
+document.getElementById("rightButton");
 
 const grabButton =
-document.getElementById(
-  "grabButton"
-);
+document.getElementById("grabButton");
 
 
-/* =====================================
+/* =============================
    POSITION
-===================================== */
+============================= */
 
 function updatePosition(){
 
@@ -1808,9 +1596,9 @@ function updatePosition(){
 }
 
 
-/* =====================================
+/* =============================
    LEFT
-===================================== */
+============================= */
 
 function moveLeft(){
 
@@ -1818,19 +1606,13 @@ function moveLeft(){
     return;
   }
 
-
   position -= 8;
 
-
   if(position < 12){
-
     position = 12;
-
   }
 
-
   updatePosition();
-
 
   message.innerHTML =
   "Capit bergerak ke kiri.";
@@ -1838,9 +1620,9 @@ function moveLeft(){
 }
 
 
-/* =====================================
+/* =============================
    RIGHT
-===================================== */
+============================= */
 
 function moveRight(){
 
@@ -1848,19 +1630,13 @@ function moveRight(){
     return;
   }
 
-
   position += 8;
 
-
   if(position > 88){
-
     position = 88;
-
   }
 
-
   updatePosition();
-
 
   message.innerHTML =
   "Capit bergerak ke kanan.";
@@ -1868,21 +1644,17 @@ function moveRight(){
 }
 
 
-/* =====================================
-   GET CENTER OF PRIZE
-===================================== */
+/* =============================
+   PRIZE CENTER
+============================= */
 
-function getPrizeCenter(
-  element
-){
+function getPrizeCenter(element){
 
   const glassRect =
   gameGlass.getBoundingClientRect();
 
-
   const prizeRect =
   element.getBoundingClientRect();
-
 
   return {
 
@@ -1911,33 +1683,24 @@ function getPrizeCenter(
 }
 
 
-/* =====================================
-   FIND CLOSEST PRIZE
-===================================== */
+/* =============================
+   FIND NEAREST
+============================= */
 
 function findClosestPrize(){
 
   const balls =
-  document.querySelectorAll(
-    ".ball"
-  );
-
+  document.querySelectorAll(".ball");
 
   const glassRect =
   gameGlass.getBoundingClientRect();
 
-
   const targetX =
   glassRect.width *
-  (
-    position / 100
-  );
-
+  (position / 100);
 
   let winner = 0;
-
-  let smallestDistance =
-  Infinity;
+  let smallest = Infinity;
 
 
   balls.forEach(
@@ -1945,17 +1708,14 @@ function findClosestPrize(){
 
 
       if(
-        ball.style.opacity ===
-        "0"
+        ball.style.opacity === "0"
       ){
         return;
       }
 
 
       const center =
-      getPrizeCenter(
-        ball
-      );
+      getPrizeCenter(ball);
 
 
       const distance =
@@ -1965,12 +1725,9 @@ function findClosestPrize(){
       );
 
 
-      if(
-        distance <
-        smallestDistance
-      ){
+      if(distance < smallest){
 
-        smallestDistance =
+        smallest =
         distance;
 
         winner =
@@ -1987,13 +1744,11 @@ function findClosestPrize(){
 }
 
 
-/* =====================================
-   MOVE CLAW EXACTLY TO PRIZE
-===================================== */
+/* =============================
+   MOVE TO PRIZE
+============================= */
 
-function moveToPrize(
-  prizeElement
-){
+function moveToPrize(prizeElement){
 
   const glassRect =
   gameGlass.getBoundingClientRect();
@@ -2027,13 +1782,11 @@ function moveToPrize(
 }
 
 
-/* =====================================
-   AUTO DROP CALCULATION
-===================================== */
+/* =============================
+   DROP DISTANCE
+============================= */
 
-function calculateDrop(
-  prizeElement
-){
+function calculateDrop(prizeElement){
 
   const glassRect =
   gameGlass.getBoundingClientRect();
@@ -2047,10 +1800,6 @@ function calculateDrop(
   clawImage.getBoundingClientRect();
 
 
-  /*
-  CENTER OF PRIZE
-  */
-
   const prizeCenterY =
   (
     prizeRect.top -
@@ -2062,79 +1811,50 @@ function calculateDrop(
   );
 
 
-  /*
-  CURRENT CLAW BOTTOM
-  */
-
   const clawBottom =
   clawRect.bottom -
   glassRect.top;
 
 
-  /*
-  TARGET CLAW POSITION
-  CLAW DIBUAT MASUK SEDIKIT
-  KE AREA BOLA
-  */
-
   const targetY =
   prizeCenterY -
   (
-    prizeRect.height *
-    .10
+    prizeRect.height * .10
   );
 
 
-  let additionalDrop =
+  let drop =
   targetY -
   clawBottom;
 
 
-  if(
-    additionalDrop < 0
-  ){
-
-    additionalDrop = 0;
-
+  if(drop < 0){
+    drop = 0;
   }
 
-
-  /*
-  BATAS MAKSIMUM
-  */
 
   const maxDrop =
-  glassRect.height *
-  .60;
+  glassRect.height * .60;
 
 
-  if(
-    additionalDrop >
-    maxDrop
-  ){
-
-    additionalDrop =
-    maxDrop;
-
+  if(drop > maxDrop){
+    drop = maxDrop;
   }
 
 
-  return 42 +
-  additionalDrop;
+  return 42 + drop;
 
 }
 
 
-/* =====================================
+/* =============================
    LOCK
-===================================== */
+============================= */
 
 function lockControls(){
 
   leftButton.disabled = true;
-
   rightButton.disabled = true;
-
   grabButton.disabled = true;
 
 }
@@ -2143,17 +1863,15 @@ function lockControls(){
 function unlockControls(){
 
   leftButton.disabled = false;
-
   rightButton.disabled = false;
-
   grabButton.disabled = false;
 
 }
 
 
-/* =====================================
+/* =============================
    GRAB
-===================================== */
+============================= */
 
 async function grabPrize(){
 
@@ -2178,10 +1896,6 @@ async function grabPrize(){
   lockControls();
 
 
-  /*
-  RESET CLAW OPEN
-  */
-
   clawImage.src =
   "assets/claw%20open.png";
 
@@ -2193,10 +1907,6 @@ async function grabPrize(){
 
   caughtPrize.src = "";
 
-
-  /*
-  PILIH HADIAH TERDEKAT
-  */
 
   const winnerIndex =
   findClosestPrize();
@@ -2211,10 +1921,6 @@ async function grabPrize(){
     `.ball[data-id="${winnerIndex}"]`
   );
 
-
-  /*
-  MOVE X
-  */
 
   statusText.innerHTML =
   "MENUJU HADIAH";
@@ -2232,19 +1938,11 @@ async function grabPrize(){
   await wait(500);
 
 
-  /*
-  CALCULATE Y
-  */
-
   const dropHeight =
   calculateDrop(
     prizeElement
   );
 
-
-  /*
-  DROP
-  */
 
   statusText.innerHTML =
   "GRABBING";
@@ -2261,10 +1959,6 @@ async function grabPrize(){
   await wait(800);
 
 
-  /*
-  CLOSE
-  */
-
   clawImage.src =
   "assets/claw%20close.png";
 
@@ -2276,10 +1970,6 @@ async function grabPrize(){
 
   await wait(350);
 
-
-  /*
-  CATCH PRIZE
-  */
 
   caughtPrize.src =
   prize.image;
@@ -2297,10 +1987,6 @@ async function grabPrize(){
   await wait(350);
 
 
-  /*
-  LIFT
-  */
-
   statusText.innerHTML =
   "MENGANGKAT";
 
@@ -2316,20 +2002,12 @@ async function grabPrize(){
   await wait(900);
 
 
-  /*
-  TICKET
-  */
-
   ticket--;
 
 
   ticketText.innerHTML =
   ticket;
 
-
-  /*
-  RESULT
-  */
 
   showResult(
     prize
@@ -2355,13 +2033,11 @@ async function grabPrize(){
 }
 
 
-/* =====================================
+/* =============================
    RESULT
-===================================== */
+============================= */
 
-function showResult(
-  prize
-){
+function showResult(prize){
 
   document.getElementById(
     "resultImage"
@@ -2389,83 +2065,56 @@ function showResult(
 }
 
 
-/* =====================================
+/* =============================
    WAIT
-===================================== */
+============================= */
 
 function wait(ms){
 
   return new Promise(
     resolve =>
-    setTimeout(
-      resolve,
-      ms
-    )
+    setTimeout(resolve,ms)
   );
 
 }
 
 
-/* =====================================
+/* =============================
    CLOSE MODAL
-===================================== */
+============================= */
 
 document
-.getElementById(
-  "modal"
-)
+.getElementById("modal")
 .addEventListener(
   "click",
   function(e){
 
-    if(
-      e.target === this
-    ){
-
-      this.style.display =
-      "none";
-
+    if(e.target === this){
+      this.style.display = "none";
     }
 
   }
 );
 
 
-/* =====================================
+/* =============================
    KEYBOARD
-===================================== */
+============================= */
 
 document.addEventListener(
   "keydown",
   function(e){
 
-    if(
-      e.key ===
-      "ArrowLeft"
-    ){
-
+    if(e.key === "ArrowLeft"){
       moveLeft();
-
     }
 
-
-    if(
-      e.key ===
-      "ArrowRight"
-    ){
-
+    if(e.key === "ArrowRight"){
       moveRight();
-
     }
 
-
-    if(
-      e.key ===
-      "Enter"
-    ){
-
+    if(e.key === "Enter"){
       grabPrize();
-
     }
 
   }
