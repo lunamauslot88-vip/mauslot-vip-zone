@@ -22,7 +22,7 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   background:
-    radial-gradient(circle at 50% 0%,#123d76 0%,#061a36 25%,#020713 58%,#010309 100%);
+    radial-gradient(circle at 50% -10%,#17477f 0%,#07172d 32%,#020610 68%,#010208 100%);
   overflow-x:hidden;
 }
 
@@ -32,505 +32,430 @@ body:before{
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 15% 25%,rgba(25,126,255,.14),transparent 25%),
-    radial-gradient(circle at 85% 55%,rgba(255,194,48,.10),transparent 25%);
+    radial-gradient(circle at 15% 30%,rgba(28,126,255,.12),transparent 25%),
+    radial-gradient(circle at 85% 55%,rgba(255,194,45,.10),transparent 25%);
 }
 
 .page{
   width:100%;
-  max-width:460px;
+  max-width:470px;
   margin:auto;
   min-height:100vh;
-  padding:14px 11px 30px;
+  padding:12px 10px 28px;
   position:relative;
   z-index:2;
 }
 
-/* =====================
+/* =========================
    LOGO
-===================== */
+========================= */
 
 .logo{
   text-align:center;
-  padding:2px 0 7px;
+  padding:3px 0 6px;
 }
 
 .logo img{
-  display:block;
   width:205px;
-  max-width:72%;
+  max-width:70%;
   height:auto;
-  margin:auto;
   object-fit:contain;
 }
 
-/* =====================
+/* =========================
    TITLE
-===================== */
+========================= */
 
 .event-title{
   text-align:center;
-  margin-bottom:11px;
+  padding:2px 10px 11px;
 }
 
-.event-title .mini{
+.event-title .small{
   font-size:9px;
   letter-spacing:3px;
-  font-weight:bold;
-  color:#8fa5bf;
+  color:#93a6bc;
+  font-weight:700;
 }
 
 .event-title h1{
-  margin:4px 0 1px;
-  font-size:30px;
+  margin:4px 0 2px;
+  font-size:29px;
   line-height:1;
-  color:#ffd966;
+  color:#ffd96a;
   text-shadow:
-    0 2px 0 #6f4700,
-    0 0 17px rgba(255,204,60,.30);
+    0 2px 0 #704804,
+    0 0 17px rgba(255,205,61,.30);
 }
 
 .event-title p{
   margin:7px 0 0;
   font-size:9px;
-  letter-spacing:1.5px;
-  color:#d0d8e4;
+  letter-spacing:1.4px;
+  color:#d1d8e2;
 }
 
-/* =====================
+/* =========================
    STATUS
-===================== */
+========================= */
 
 .status-row{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
-  margin-bottom:9px;
+  margin-bottom:10px;
 }
 
 .status-card{
-  background:linear-gradient(180deg,#0b1c31,#06101d);
-  border:1px solid #745b1c;
-  border-radius:10px;
   padding:8px;
   text-align:center;
-  box-shadow:inset 0 0 12px rgba(255,210,70,.04);
+  border-radius:11px;
+  border:1px solid #74591a;
+  background:
+    linear-gradient(180deg,#0b1c31,#06101d);
 }
 
 .status-card span{
   display:block;
+  color:#8596aa;
   font-size:8px;
-  color:#8191a6;
   letter-spacing:1px;
 }
 
 .status-card strong{
   display:block;
-  color:#ffd65f;
-  font-size:14px;
   margin-top:3px;
+  color:#ffd65d;
+  font-size:14px;
 }
 
-/* =====================
-   CLAW MACHINE
-===================== */
+/* =========================
+   MACHINE WRAPPER
+========================= */
 
-.machine{
+.machine-wrap{
   position:relative;
-  height:445px;
-  border:3px solid #d5a934;
-  border-radius:20px;
+  width:100%;
+  aspect-ratio:3 / 4.15;
+  margin:auto;
+}
+
+/* GAMBAR MESIN 3D */
+
+.machine-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  z-index:20;
+  pointer-events:none;
+
+  filter:
+    drop-shadow(0 12px 25px rgba(0,0,0,.55))
+    drop-shadow(0 0 12px rgba(255,196,47,.14));
+}
+
+/* =========================
+   AREA KACA MESIN
+========================= */
+
+.glass-area{
+  position:absolute;
+
+  /*
+  Posisi ini menyesuaikan gambar claw-machine.png
+  */
+  left:15.5%;
+  right:15.5%;
+  top:15.5%;
+  bottom:31%;
+
   overflow:hidden;
+  z-index:5;
+
+  border-radius:12px;
 
   background:
-    radial-gradient(circle at 50% 20%,rgba(0,126,255,.20),transparent 36%),
-    linear-gradient(180deg,#08294e 0%,#04182e 45%,#030b16 100%);
-
-  box-shadow:
-    0 0 28px rgba(255,198,46,.18),
-    inset 0 0 35px rgba(0,134,255,.14);
+    radial-gradient(circle at 50% 20%,rgba(27,112,220,.14),transparent 45%);
 }
 
-.machine:after{
+/* LIGHT REFLECTION */
+
+.glass-area:before{
   content:"";
   position:absolute;
-  inset:6px;
-  border:1px solid rgba(255,224,120,.20);
-  border-radius:14px;
+  inset:0;
   pointer-events:none;
-  z-index:40;
-}
-
-.machine-top{
-  height:43px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  z-index:30;
-
   background:
-    linear-gradient(180deg,#f0c54c 0%,#b77b10 48%,#6d4304 100%);
-
-  color:#06101c;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:2px;
-
-  box-shadow:0 5px 15px rgba(0,0,0,.35);
+    linear-gradient(
+      110deg,
+      transparent 0%,
+      rgba(255,255,255,.05) 25%,
+      transparent 43%
+    );
+  z-index:50;
 }
 
-/* LIGHTS */
-
-.light{
-  position:absolute;
-  top:53px;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#64b8ff;
-  box-shadow:0 0 10px #258cff;
-  animation:blink .8s infinite alternate;
-}
-
-.light.l1{left:35px;}
-.light.l2{left:75px;animation-delay:.2s;}
-.light.l3{right:75px;animation-delay:.4s;}
-.light.l4{right:35px;animation-delay:.6s;}
-
-@keyframes blink{
-  from{opacity:.35;}
-  to{opacity:1;}
-}
-
-/* RAIL */
+/* =========================
+   RAIL
+========================= */
 
 .rail{
   position:absolute;
-  top:73px;
-  left:24px;
-  right:24px;
-  height:8px;
-  border-radius:20px;
-
-  background:
-    linear-gradient(90deg,#75500b,#ffdf70,#75500b);
-
-  box-shadow:
-    0 0 10px rgba(255,213,77,.65);
-}
-
-/* =====================
-   CLAW
-===================== */
-
-.claw{
-  position:absolute;
-  top:57px;
-  left:50%;
-  width:82px;
-  height:280px;
-  transform:translateX(-50%);
-  transition:left .28s ease;
-  z-index:25;
-}
-
-.claw-holder{
-  width:38px;
-  height:22px;
-  margin:auto;
-
-  border:2px solid #ffe170;
-  border-radius:5px;
-
-  background:
-    linear-gradient(#ffe47c,#9a690d);
-
-  box-shadow:
-    0 0 10px rgba(255,207,63,.45);
-}
-
-.cable{
-  width:5px;
-  height:64px;
-  margin:auto;
-
-  background:
-    linear-gradient(90deg,#343434,#d9d9d9,#4b4b4b);
-
-  transition:height .75s ease;
-}
-
-.claw-head{
-  width:44px;
-  height:27px;
-  margin:auto;
-
-  border:2px solid #ffd860;
-  border-radius:7px 7px 12px 12px;
-
-  background:
-    linear-gradient(#ffda58,#754904);
-}
-
-.claw-arms{
-  position:relative;
-  width:80px;
-  height:52px;
-  margin:auto;
-}
-
-.arm{
-  position:absolute;
-  top:0;
-  width:7px;
-  height:47px;
+  top:11%;
+  left:7%;
+  right:7%;
+  height:4px;
   border-radius:10px;
 
   background:
-    linear-gradient(#ffdb67,#8d5a06);
+    linear-gradient(90deg,#7c5308,#ffe16d,#805809);
 
-  transform-origin:top center;
-  transition:transform .3s;
+  box-shadow:
+    0 0 8px rgba(255,210,65,.65);
+
+  z-index:7;
 }
 
-.arm.left{
-  left:19px;
-  transform:rotate(31deg);
-}
+/* =========================
+   CLAW 3D
+========================= */
 
-.arm.right{
-  right:19px;
-  transform:rotate(-31deg);
-}
-
-.claw.drop .cable{
-  height:218px;
-}
-
-.claw.close .arm.left{
-  transform:rotate(9deg);
-}
-
-.claw.close .arm.right{
-  transform:rotate(-9deg);
-}
-
-/* OBJECT YANG DICAPIT */
-
-.caught-prize{
+.claw{
   position:absolute;
-  width:58px;
-  height:58px;
+  z-index:35;
+
+  top:8%;
   left:50%;
+
+  width:19%;
+
   transform:translateX(-50%);
-  top:112px;
-  object-fit:contain;
-  display:none;
-  filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));
+
+  transition:
+    left .28s ease,
+    top .75s ease;
+
+  pointer-events:none;
 }
 
-.claw.has-prize .caught-prize{
+.claw img{
+  display:block;
+  width:100%;
+  height:auto;
+
+  filter:
+    drop-shadow(0 5px 7px rgba(0,0,0,.48));
+}
+
+.claw.grabbing{
+  top:49%;
+}
+
+.claw.lifting{
+  top:8%;
+}
+
+.caught{
+  position:absolute;
+
+  width:54%;
+  aspect-ratio:1/1;
+
+  left:50%;
+  bottom:-30%;
+
+  transform:translateX(-50%);
+
+  display:none;
+
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 5px 7px rgba(0,0,0,.5));
+}
+
+.claw.has-prize .caught{
   display:block;
 }
 
-/* =====================
-   PRIZE AREA
-===================== */
+/* =========================
+   PRIZE FLOOR
+========================= */
 
-.prize-area{
+.prize-floor{
   position:absolute;
-  left:10px;
-  right:10px;
-  bottom:10px;
-  height:215px;
 
-  border-radius:14px;
+  left:4%;
+  right:4%;
+  bottom:3%;
 
-  background:
-    radial-gradient(circle at 50% 110%,#154574,#06162b 58%,transparent 75%);
+  height:43%;
 
-  overflow:hidden;
+  z-index:8;
 }
 
-.prize-area:after{
-  content:"";
+/* =========================
+   BALL/CAPSULE
+========================= */
+
+.ball{
   position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:26px;
 
-  background:
-    linear-gradient(#162033,#02050a);
+  width:21%;
+  aspect-ratio:1;
 
-  border-top:2px solid #725a18;
-}
-
-/* =====================
-   3D PRIZES
-===================== */
-
-.prize{
-  position:absolute;
-  width:72px;
-  height:72px;
-  z-index:4;
+  border-radius:50%;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  border-radius:50%;
+  border:
+    1px solid rgba(255,255,255,.46);
 
   background:
-    radial-gradient(circle at 35% 25%,rgba(255,255,255,.50),rgba(48,117,196,.18) 25%,rgba(6,17,31,.30) 62%);
-
-  border:2px solid rgba(255,255,255,.40);
+    radial-gradient(
+      circle at 32% 24%,
+      rgba(255,255,255,.50),
+      rgba(61,128,202,.14) 34%,
+      rgba(6,13,25,.22) 68%
+    );
 
   box-shadow:
-    inset 0 0 14px rgba(255,255,255,.22),
-    0 7px 14px rgba(0,0,0,.48);
+    inset 0 0 13px rgba(255,255,255,.18),
+    0 6px 12px rgba(0,0,0,.40);
 
-  animation:floatPrize 3s ease-in-out infinite;
+  transition:
+    opacity .3s,
+    transform .3s,
+    filter .3s;
+
+  animation:float 3s ease-in-out infinite;
 }
 
-.prize img{
-  width:58px;
-  height:58px;
+.ball img{
+  width:78%;
+  height:78%;
   object-fit:contain;
-  pointer-events:none;
-  user-select:none;
 
   filter:
     drop-shadow(0 3px 5px rgba(0,0,0,.35));
+
+  pointer-events:none;
 }
 
-.prize.winner{
-  z-index:10;
-
-  border-color:#ffe36f;
-
-  box-shadow:
-    0 0 30px rgba(255,204,52,.95),
-    inset 0 0 18px rgba(255,255,255,.35);
-}
-
-@keyframes floatPrize{
+@keyframes float{
   0%,100%{
     transform:translateY(0) rotate(-2deg);
   }
 
   50%{
-    transform:translateY(-5px) rotate(2deg);
+    transform:translateY(-4px) rotate(2deg);
   }
 }
 
-/* posisi hadiah */
+/* POSISI HADIAH */
 
-.p1{
-  left:4px;
-  bottom:14px;
+.b1{
+  left:0;
+  bottom:0;
 }
 
-.p2{
-  left:72px;
-  bottom:58px;
+.b2{
+  left:19%;
+  bottom:29%;
   animation-delay:.4s;
 }
 
-.p3{
-  left:140px;
-  bottom:10px;
-  animation-delay:.7s;
+.b3{
+  left:39%;
+  bottom:2%;
+  animation-delay:.8s;
 }
 
-.p4{
-  right:75px;
-  bottom:62px;
-  animation-delay:1s;
-}
-
-.p5{
-  right:4px;
-  bottom:13px;
+.b4{
+  right:19%;
+  bottom:30%;
   animation-delay:.3s;
 }
 
-.p6{
+.b5{
+  right:0;
+  bottom:2%;
+  animation-delay:.9s;
+}
+
+/* GRAND PRIZE */
+
+.b6{
   left:50%;
-  bottom:118px;
+  bottom:57%;
+
+  width:23%;
+
   transform:translateX(-50%);
+
   animation:none;
 
   background:
-    radial-gradient(circle at 35% 25%,#fff7bf,#d99a14 45%,#6b3b00 100%);
+    radial-gradient(
+      circle at 32% 24%,
+      rgba(255,255,255,.80),
+      rgba(255,199,45,.45) 34%,
+      rgba(125,70,0,.28) 70%
+    );
 
   box-shadow:
-    0 0 27px rgba(255,200,49,.65),
-    inset 0 0 17px rgba(255,255,255,.4);
+    0 0 20px rgba(255,198,42,.60),
+    inset 0 0 14px rgba(255,255,255,.28);
 }
 
-.p7{
-  left:34px;
-  bottom:107px;
-  width:61px;
-  height:61px;
+.b7{
+  left:4%;
+  bottom:48%;
+  width:18%;
+  animation-delay:.6s;
 }
 
-.p7 img{
-  width:50px;
-  height:50px;
+.b8{
+  right:4%;
+  bottom:50%;
+  width:18%;
+  animation-delay:1.1s;
 }
 
-.p8{
-  right:31px;
-  bottom:114px;
-  width:61px;
-  height:61px;
-}
+/* WINNER */
 
-.p8 img{
-  width:50px;
-  height:50px;
-}
+.ball.winner{
+  border-color:#ffe474;
 
-/* PRIZE SLOT */
-
-.prize-slot{
-  position:absolute;
-  bottom:5px;
-  left:50%;
-  transform:translateX(-50%);
-
-  width:112px;
-  height:15px;
-
-  border-radius:50%;
-
-  background:#010205;
-
-  border:2px solid #9f7b1c;
+  filter:brightness(1.15);
 
   box-shadow:
-    0 0 13px rgba(255,194,40,.45);
-
-  z-index:12;
+    0 0 27px rgba(255,205,52,.95),
+    inset 0 0 15px rgba(255,255,255,.38);
 }
 
-/* =====================
+/* =========================
    CONTROLS
-===================== */
+========================= */
 
 .control-panel{
-  margin-top:10px;
-  padding:11px;
+  margin-top:5px;
 
-  border:1px solid #6e5719;
-  border-radius:14px;
+  padding:10px;
+
+  border-radius:15px;
+
+  border:1px solid #6c5518;
 
   background:
-    linear-gradient(180deg,#0d1b2d,#060b12);
+    linear-gradient(180deg,#0d1b2c,#060b12);
+
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.3);
 }
 
 .controls{
@@ -542,17 +467,19 @@ body:before{
 .btn{
   height:48px;
 
-  border:1px solid #ae8622;
   border-radius:11px;
 
-  background:#0c1b30;
+  border:1px solid #b18a22;
 
-  color:#ffd75b;
+  background:#0d1c30;
 
-  font-size:20px;
+  color:#ffd55d;
+
+  font-size:19px;
   font-weight:900;
 
   cursor:pointer;
+
   touch-action:manipulation;
 }
 
@@ -560,75 +487,88 @@ body:before{
   transform:scale(.96);
 }
 
-.grab{
+.grab-btn{
+  color:#07101a;
+
   font-size:14px;
-  color:#07101b;
 
   background:
-    linear-gradient(180deg,#ffe984,#d5a126);
+    linear-gradient(
+      180deg,
+      #ffea82,
+      #d5a126
+    );
 
-  border-color:#ffe272;
+  border-color:#ffe276;
 
   box-shadow:
-    0 0 14px rgba(255,200,48,.22);
+    0 0 13px rgba(255,200,49,.20);
 }
 
 .btn:disabled{
-  opacity:.4;
-  cursor:not-allowed;
+  opacity:.40;
 }
 
-/* =====================
+/* =========================
    MESSAGE
-===================== */
+========================= */
 
 .message{
-  min-height:43px;
-  padding:9px 5px 0;
+  min-height:40px;
+
+  padding:9px 4px 0;
 
   text-align:center;
 
-  font-size:10px;
-  line-height:1.45;
+  color:#c4ccd7;
 
-  color:#c5ceda;
+  font-size:10px;
+
+  line-height:1.5;
 }
 
-/* =====================
+/* =========================
    CLAIM
-===================== */
+========================= */
 
-.claim-btn{
+.claim{
   display:none;
 
-  margin-top:8px;
+  width:100%;
 
-  padding:12px 10px;
+  margin-top:7px;
+
+  padding:12px 9px;
+
+  text-align:center;
+
+  text-decoration:none;
 
   border-radius:10px;
 
-  text-align:center;
-  text-decoration:none;
-
-  color:#060b12;
+  color:#07101a;
 
   font-size:12px;
   font-weight:900;
 
   background:
-    linear-gradient(90deg,#7e5908,#f8d563,#8d6209);
-
-  box-shadow:
-    0 4px 14px rgba(255,196,43,.18);
+    linear-gradient(
+      90deg,
+      #855e09,
+      #f6d25e,
+      #8a620a
+    );
 }
 
-/* =====================
+/* =========================
    MODAL
-===================== */
+========================= */
 
 .modal{
   position:fixed;
   inset:0;
+
+  z-index:9999;
 
   display:none;
   align-items:center;
@@ -640,32 +580,31 @@ body:before{
     rgba(0,0,0,.84);
 
   backdrop-filter:blur(5px);
-
-  z-index:999;
 }
 
 .modal-box{
   width:100%;
   max-width:330px;
 
-  padding:22px 16px 17px;
-
   text-align:center;
 
-  border:2px solid #d9ac36;
+  padding:22px 17px 17px;
 
   border-radius:20px;
 
+  border:2px solid #dbaa36;
+
   background:
-    radial-gradient(circle at top,#153c6f,#081425 55%,#04080f);
+    radial-gradient(circle at top,#163c6d,#07111f 58%);
 
   box-shadow:
-    0 0 40px rgba(255,198,43,.27);
+    0 0 38px rgba(255,196,43,.25);
 }
 
-.reward-image{
-  width:110px;
-  height:110px;
+.reward-img{
+  width:115px;
+  height:115px;
+
   margin:auto;
 
   display:flex;
@@ -674,52 +613,58 @@ body:before{
 
   border-radius:50%;
 
-  background:
-    radial-gradient(circle,#153a6c,#05101e);
+  border:1px solid #806319;
 
-  border:1px solid #8d6c1c;
+  background:
+    radial-gradient(circle,#174278,#071426);
 
   box-shadow:
-    0 0 22px rgba(255,204,54,.23);
+    0 0 25px rgba(255,201,50,.22);
 }
 
-.reward-image img{
-  max-width:95px;
-  max-height:95px;
+.reward-img img{
+  max-width:100px;
+  max-height:100px;
+
   object-fit:contain;
 
   filter:
-    drop-shadow(0 5px 8px rgba(0,0,0,.45));
+    drop-shadow(0 5px 7px rgba(0,0,0,.45));
 }
 
-.modal-mini{
-  color:#8798ad;
+.modal-small{
+  margin-top:12px;
+
   font-size:8px;
+
   letter-spacing:2px;
-  margin-top:14px;
+
+  color:#8798ad;
 }
 
 .modal h2{
-  margin:4px 0;
+  margin:5px 0;
 
-  color:#ffd65e;
+  color:#ffd55c;
 
   font-size:21px;
 }
 
 .reward-name{
+  margin:10px 0 4px;
+
   color:#fff;
 
   font-size:18px;
   font-weight:900;
-
-  margin:10px 0 5px;
 }
 
-.reward-description{
-  font-size:10px;
-  line-height:1.5;
+.reward-desc{
   color:#bdc7d4;
+
+  font-size:10px;
+
+  line-height:1.5;
 }
 
 .modal-claim{
@@ -732,9 +677,14 @@ body:before{
   border-radius:9px;
 
   background:
-    linear-gradient(90deg,#8a6108,#f5d15d,#8a6108);
+    linear-gradient(
+      90deg,
+      #865f08,
+      #f7d461,
+      #865f08
+    );
 
-  color:#050a11;
+  color:#07101a;
 
   font-size:11px;
   font-weight:900;
@@ -742,51 +692,32 @@ body:before{
   text-decoration:none;
 }
 
-/* =====================
-   FOOTER
-===================== */
-
 .footer{
   text-align:center;
+
   padding:12px 5px 0;
 
-  font-size:8px;
-  line-height:1.5;
+  color:#607085;
 
-  color:#617083;
+  font-size:8px;
+
+  line-height:1.5;
 }
 
-@media(max-width:380px){
+@media(max-width:370px){
 
-  .machine{
-    height:425px;
+  .event-title h1{
+    font-size:25px;
   }
 
-  .prize{
-    width:64px;
-    height:64px;
-  }
-
-  .prize img{
-    width:52px;
-    height:52px;
-  }
-
-  .p2{
-    left:62px;
-  }
-
-  .p3{
-    left:125px;
-  }
-
-  .p4{
-    right:63px;
+  .controls{
+    grid-template-columns:58px 1fr 58px;
   }
 
 }
 </style>
 </head>
+
 
 <body>
 
@@ -794,15 +725,18 @@ body:before{
 
   <!-- LOGO -->
   <div class="logo">
+
     <img
       src="assets/logo-mauslot.png"
       alt="MAUSLOT">
+
   </div>
+
 
   <!-- TITLE -->
   <div class="event-title">
 
-    <div class="mini">
+    <div class="small">
       EVENT SPECIAL
     </div>
 
@@ -816,267 +750,306 @@ body:before{
 
   </div>
 
+
   <!-- STATUS -->
   <div class="status-row">
 
     <div class="status-card">
-      <span>TIKET BERMAIN</span>
-      <strong id="ticket">1</strong>
+
+      <span>
+        TIKET BERMAIN
+      </span>
+
+      <strong id="ticket">
+        1
+      </strong>
+
     </div>
 
+
     <div class="status-card">
-      <span>STATUS</span>
+
+      <span>
+        STATUS
+      </span>
+
       <strong id="statusText">
         SIAP MAIN
       </strong>
+
     </div>
 
   </div>
 
+
   <!-- MACHINE -->
-  <div class="machine">
 
-    <div class="machine-top">
-      MAUSLOT VIP PRIZE MACHINE
-    </div>
-
-    <div class="light l1"></div>
-    <div class="light l2"></div>
-    <div class="light l3"></div>
-    <div class="light l4"></div>
-
-    <div class="rail"></div>
-
-    <!-- CLAW -->
-    <div
-      class="claw"
-      id="claw">
-
-      <div class="claw-holder"></div>
-
-      <div class="cable"></div>
-
-      <div class="claw-head"></div>
-
-      <div class="claw-arms">
-
-        <div class="arm left"></div>
-
-        <div class="arm right"></div>
-
-      </div>
-
-      <img
-        id="caughtPrize"
-        class="caught-prize"
-        src=""
-        alt="Prize">
-
-    </div>
+  <div class="machine-wrap">
 
 
-    <!-- PRIZE AREA -->
-    <div class="prize-area">
+    <!-- AREA DALAM KACA -->
+
+    <div class="glass-area">
 
 
-      <!-- BONUS SALDO -->
+      <!-- RAIL -->
+
+      <div class="rail"></div>
+
+
+      <!-- CLAW -->
+
       <div
-        class="prize p1"
-        data-id="0">
+        class="claw"
+        id="claw">
 
         <img
-          src="assets/coin.png"
-          alt="Bonus Saldo">
+          id="clawImage"
+          src="assets/claw-open.png"
+          alt="Claw">
+
+
+        <img
+          class="caught"
+          id="caughtPrize"
+          src=""
+          alt="Prize">
 
       </div>
 
 
-      <!-- VIP GIFT -->
-      <div
-        class="prize p2"
-        data-id="1">
+      <!-- HADIAH -->
 
-        <img
-          src="assets/gift.png"
-          alt="VIP Gift">
-
-      </div>
+      <div class="prize-floor">
 
 
-      <!-- DIAMOND -->
-      <div
-        class="prize p3"
-        data-id="2">
+        <div
+          class="ball b1"
+          data-id="0">
 
-        <img
-          src="assets/diamond.png"
-          alt="Diamond Reward">
+          <img
+            src="assets/coin.png"
+            alt="Bonus Saldo">
 
-      </div>
-
-
-      <!-- CROWN -->
-      <div
-        class="prize p4"
-        data-id="3">
-
-        <img
-          src="assets/crown.png"
-          alt="Crown Reward">
-
-      </div>
+        </div>
 
 
-      <!-- CHIP -->
-      <div
-        class="prize p5"
-        data-id="4">
+        <div
+          class="ball b2"
+          data-id="1">
 
-        <img
-          src="assets/chip.png"
-          alt="VIP Point">
+          <img
+            src="assets/gift.png"
+            alt="VIP Gift">
 
-      </div>
-
-
-      <!-- GRAND PRIZE -->
-      <div
-        class="prize p6"
-        data-id="5">
-
-        <img
-          src="assets/grand%20prize.png"
-          alt="Grand Prize">
-
-      </div>
+        </div>
 
 
-      <!-- VIP TICKET -->
-      <div
-        class="prize p7"
-        data-id="6">
+        <div
+          class="ball b3"
+          data-id="2">
 
-        <img
-          src="assets/ticket.png"
-          alt="VIP Ticket">
+          <img
+            src="assets/diamond.png"
+            alt="Diamond">
 
-      </div>
+        </div>
 
 
-      <!-- MYSTERY -->
-      <div
-        class="prize p8"
-        data-id="7">
+        <div
+          class="ball b4"
+          data-id="3">
 
-        <img
-          src="assets/mystery.png"
-          alt="Mystery Reward">
+          <img
+            src="assets/crown.png"
+            alt="Crown">
+
+        </div>
+
+
+        <div
+          class="ball b5"
+          data-id="4">
+
+          <img
+            src="assets/chip.png"
+            alt="VIP Point">
+
+        </div>
+
+
+        <div
+          class="ball b6"
+          data-id="5">
+
+          <img
+            src="assets/grand%20prize.png"
+            alt="Grand Prize">
+
+        </div>
+
+
+        <div
+          class="ball b7"
+          data-id="6">
+
+          <img
+            src="assets/ticket.png"
+            alt="VIP Ticket">
+
+        </div>
+
+
+        <div
+          class="ball b8"
+          data-id="7">
+
+          <img
+            src="assets/mystery.png"
+            alt="Mystery">
+
+        </div>
+
 
       </div>
 
     </div>
 
-    <div class="prize-slot"></div>
+
+    <!-- FRAME MESIN 3D -->
+
+    <img
+      class="machine-img"
+      src="assets/claw-machine.png"
+      alt="MAUSLOT Claw Machine">
 
   </div>
 
 
   <!-- CONTROL -->
+
   <div class="control-panel">
 
+
     <div class="controls">
+
 
       <button
         class="btn"
         id="leftBtn"
         onclick="moveLeft()">
+
         ◀
+
       </button>
 
+
       <button
-        class="btn grab"
+        class="btn grab-btn"
         id="grabBtn"
         onclick="playClaw()">
+
         🎯 GRAB
+
       </button>
+
 
       <button
         class="btn"
         id="rightBtn"
         onclick="moveRight()">
+
         ▶
+
       </button>
 
+
     </div>
+
 
     <div
       class="message"
       id="message">
 
-      Gerakkan capit ke posisi hadiah lalu tekan
-      <b>GRAB</b>.
+      Gerakkan capit ke hadiah pilihan,
+      lalu tekan <b>GRAB</b>.
 
     </div>
 
+
     <a
       href="https://mauslot.life/"
-      class="claim-btn"
-      id="claimBtn">
+      class="claim"
+      id="claimButton">
 
       🎁 CLAIM HADIAH
 
     </a>
 
+
   </div>
 
 
   <div class="footer">
+
     MAUSLOT VIP • EVENT SPECIAL 9.9
+
   </div>
+
 
 </div>
 
 
-<!-- RESULT -->
+
+<!-- RESULT MODAL -->
 
 <div
   class="modal"
   id="rewardModal">
 
+
   <div class="modal-box">
 
-    <div class="reward-image">
+
+    <div class="reward-img">
 
       <img
-        id="resultImage"
+        id="rewardImage"
         src="assets/gift.png"
         alt="Reward">
 
     </div>
 
-    <div class="modal-mini">
+
+    <div class="modal-small">
+
       MAUSLOT 9.9 CLAW MACHINE
+
     </div>
+
 
     <h2>
       SELAMAT!
     </h2>
 
+
     <div
       class="reward-name"
-      id="resultName">
+      id="rewardName">
 
       VIP REWARD
 
     </div>
 
+
     <div
-      class="reward-description"
-      id="resultDescription">
+      class="reward-desc"
+      id="rewardDescription">
 
       Hadiah berhasil didapatkan.
 
     </div>
+
 
     <a
       href="https://mauslot.life/"
@@ -1086,6 +1059,7 @@ body:before{
 
     </a>
 
+
   </div>
 
 </div>
@@ -1093,9 +1067,9 @@ body:before{
 
 <script>
 
-/* ===========================
-   DATA HADIAH
-=========================== */
+/* ================================
+   HADIAH
+================================ */
 
 const prizes = [
 
@@ -1103,21 +1077,21 @@ const prizes = [
     name:"BONUS SALDO",
     image:"assets/coin.png",
     description:"Bonus saldo spesial Event 9.9.",
-    position:17
+    position:14
   },
 
   {
     name:"VIP GIFT",
     image:"assets/gift.png",
     description:"Hadiah eksklusif khusus member VIP.",
-    position:31
+    position:29
   },
 
   {
     name:"DIAMOND REWARD",
     image:"assets/diamond.png",
     description:"Diamond Reward spesial MAUSLOT.",
-    position:45
+    position:43
   },
 
   {
@@ -1130,8 +1104,8 @@ const prizes = [
   {
     name:"VIP POINT",
     image:"assets/chip.png",
-    description:"Tambahan VIP Point berhasil didapatkan.",
-    position:75
+    description:"VIP Point berhasil didapatkan.",
+    position:78
   },
 
   {
@@ -1145,36 +1119,39 @@ const prizes = [
     name:"VIP TICKET",
     image:"assets/ticket.png",
     description:"VIP Ticket spesial berhasil didapatkan.",
-    position:24
+    position:20
   },
 
   {
     name:"MYSTERY REWARD",
     image:"assets/mystery.png",
-    description:"Mystery Reward menunggu untuk diklaim.",
-    position:82
+    description:"Mystery Reward berhasil didapatkan.",
+    position:84
   }
 
 ];
 
 
-/* ===========================
-   GAME STATE
-=========================== */
+/* ================================
+   STATE
+================================ */
 
 let ticket = 1;
 
-let playing = false;
-
 let clawPosition = 50;
 
+let playing = false;
 
-/* ===========================
-   ELEMENTS
-=========================== */
+
+/* ================================
+   ELEMENT
+================================ */
 
 const claw =
 document.getElementById("claw");
+
+const clawImage =
+document.getElementById("clawImage");
 
 const caughtPrize =
 document.getElementById("caughtPrize");
@@ -1188,57 +1165,70 @@ document.getElementById("statusText");
 const message =
 document.getElementById("message");
 
-const grabBtn =
-document.getElementById("grabBtn");
-
 const leftBtn =
 document.getElementById("leftBtn");
 
 const rightBtn =
 document.getElementById("rightBtn");
 
+const grabBtn =
+document.getElementById("grabBtn");
 
-/* ===========================
-   MOVE LEFT
-=========================== */
+
+/* ================================
+   LEFT
+================================ */
 
 function moveLeft(){
 
-  if(playing) return;
-
-  clawPosition -= 9;
-
-  if(clawPosition < 14){
-    clawPosition = 14;
+  if(playing){
+    return;
   }
+
+  clawPosition -= 8;
+
+
+  if(clawPosition < 12){
+
+    clawPosition = 12;
+
+  }
+
 
   updateClaw();
 
 }
 
 
-/* ===========================
-   MOVE RIGHT
-=========================== */
+/* ================================
+   RIGHT
+================================ */
 
 function moveRight(){
 
-  if(playing) return;
-
-  clawPosition += 9;
-
-  if(clawPosition > 86){
-    clawPosition = 86;
+  if(playing){
+    return;
   }
+
+
+  clawPosition += 8;
+
+
+  if(clawPosition > 88){
+
+    clawPosition = 88;
+
+  }
+
 
   updateClaw();
 
 }
 
 
-/* ===========================
-   UPDATE CLAW
-=========================== */
+/* ================================
+   UPDATE
+================================ */
 
 function updateClaw(){
 
@@ -1248,58 +1238,60 @@ function updateClaw(){
 }
 
 
-/* ===========================
-   DISABLE
-=========================== */
+/* ================================
+   CONTROLS
+================================ */
 
 function disableControls(){
 
-  grabBtn.disabled = true;
   leftBtn.disabled = true;
+
   rightBtn.disabled = true;
+
+  grabBtn.disabled = true;
 
 }
 
-
-/* ===========================
-   ENABLE
-=========================== */
 
 function enableControls(){
 
-  grabBtn.disabled = false;
   leftBtn.disabled = false;
+
   rightBtn.disabled = false;
+
+  grabBtn.disabled = false;
 
 }
 
 
-/* ===========================
-   CARI HADIAH TERDEKAT
-=========================== */
+/* ================================
+   PILIH HADIAH TERDEKAT
+================================ */
 
 function getClosestPrize(){
 
   let selected = 0;
 
-  let distance = 999;
+  let smallest = 999;
+
 
   prizes.forEach(
     (prize,index)=>{
 
-      const currentDistance =
+
+      const distance =
       Math.abs(
         prize.position -
         clawPosition
       );
 
+
       if(
-        currentDistance <
-        distance
+        distance < smallest
       ){
 
-        distance =
-        currentDistance;
+        smallest =
+        distance;
 
         selected =
         index;
@@ -1309,18 +1301,21 @@ function getClosestPrize(){
     }
   );
 
+
   return selected;
 
 }
 
 
-/* ===========================
-   MAIN GAME
-=========================== */
+/* ================================
+   PLAY
+================================ */
 
 async function playClaw(){
 
-  if(playing) return;
+  if(playing){
+    return;
+  }
 
 
   if(ticket <= 0){
@@ -1335,30 +1330,31 @@ async function playClaw(){
 
   playing = true;
 
+
   disableControls();
 
 
   statusText.innerHTML =
-  "MENGAMBIL...";
+  "MEMILIH...";
 
 
   message.innerHTML =
   "Capit sedang menuju hadiah...";
 
 
-  /* PILIH HADIAH */
-
   const winnerIndex =
   getClosestPrize();
+
 
   const winner =
   prizes[winnerIndex];
 
 
-  /* POSISI CAPIT */
+  /* PINDAH KE HADIAH */
 
   clawPosition =
   winner.position;
+
 
   updateClaw();
 
@@ -1366,20 +1362,24 @@ async function playClaw(){
   await wait(500);
 
 
-  /* CAPIT TURUN */
-
-  claw.classList.add("drop");
+  /* TURUN */
 
   statusText.innerHTML =
   "GRABBING";
 
 
-  await wait(900);
+  claw.classList.add(
+    "grabbing"
+  );
 
 
-  /* CAPIT MENUTUP */
+  await wait(850);
 
-  claw.classList.add("close");
+
+  /* TUTUP CAPIT */
+
+  clawImage.src =
+  "assets/claw-close.png";
 
 
   highlightPrize(
@@ -1390,48 +1390,57 @@ async function playClaw(){
   await wait(450);
 
 
-  /* MASUKKAN IMAGE KE CLAW */
+  /* HADIAH MASUK CAPIT */
 
   caughtPrize.src =
   winner.image;
+
 
   claw.classList.add(
     "has-prize"
   );
 
 
-  /* SEMBUNYIKAN BOLA */
-
-  const prizeElement =
+  const winnerElement =
   document.querySelector(
-    `.prize[data-id="${winnerIndex}"]`
+    `.ball[data-id="${winnerIndex}"]`
   );
 
 
-  if(prizeElement){
+  if(winnerElement){
 
-    prizeElement.style.opacity =
-    ".15";
+    winnerElement.style.opacity =
+    "0";
 
   }
 
 
-  await wait(400);
+  await wait(350);
 
 
-  /* CAPIT NAIK */
+  /* NAIK */
 
   claw.classList.remove(
-    "drop"
+    "grabbing"
   );
+
+
+  claw.classList.add(
+    "lifting"
+  );
+
+
+  statusText.innerHTML =
+  "MENGANGKAT...";
 
 
   await wait(900);
 
 
-  /* UPDATE TICKET */
+  /* TIKET */
 
   ticket--;
+
 
   ticketEl.innerHTML =
   ticket;
@@ -1449,45 +1458,30 @@ async function playClaw(){
 
 
   message.innerHTML =
-  "🎉 Hadiah berhasil didapatkan. Silakan claim hadiah.";
+  "🎉 Hadiah berhasil didapatkan. Silakan lanjutkan claim.";
 
 
   document.getElementById(
-    "claimBtn"
+    "claimButton"
   ).style.display =
   "block";
 
 
-  await wait(300);
-
-
-  claw.classList.remove(
-    "close"
-  );
-
-
   playing = false;
-
-
-  if(ticket > 0){
-
-    enableControls();
-
-  }
 
 }
 
 
-/* ===========================
+/* ================================
    HIGHLIGHT
-=========================== */
+================================ */
 
 function highlightPrize(index){
 
   document
-  .querySelectorAll(".prize")
+  .querySelectorAll(".ball")
   .forEach(
-    element => {
+    element=>{
 
       element.classList.remove(
         "winner"
@@ -1497,15 +1491,15 @@ function highlightPrize(index){
   );
 
 
-  const winner =
+  const element =
   document.querySelector(
-    `.prize[data-id="${index}"]`
+    `.ball[data-id="${index}"]`
   );
 
 
-  if(winner){
+  if(element){
 
-    winner.classList.add(
+    element.classList.add(
       "winner"
     );
 
@@ -1514,26 +1508,26 @@ function highlightPrize(index){
 }
 
 
-/* ===========================
+/* ================================
    RESULT
-=========================== */
+================================ */
 
 function showReward(prize){
 
   document.getElementById(
-    "resultImage"
+    "rewardImage"
   ).src =
   prize.image;
 
 
   document.getElementById(
-    "resultName"
+    "rewardName"
   ).innerHTML =
   prize.name;
 
 
   document.getElementById(
-    "resultDescription"
+    "rewardDescription"
   ).innerHTML =
   prize.description;
 
@@ -1546,14 +1540,14 @@ function showReward(prize){
 }
 
 
-/* ===========================
+/* ================================
    WAIT
-=========================== */
+================================ */
 
 function wait(ms){
 
   return new Promise(
-    resolve =>
+    resolve=>
     setTimeout(
       resolve,
       ms
@@ -1563,9 +1557,9 @@ function wait(ms){
 }
 
 
-/* ===========================
+/* ================================
    CLOSE MODAL
-=========================== */
+================================ */
 
 document
 .getElementById(
@@ -1588,9 +1582,9 @@ document
 );
 
 
-/* ===========================
+/* ================================
    KEYBOARD
-=========================== */
+================================ */
 
 document.addEventListener(
   "keydown",
