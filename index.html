@@ -22,18 +22,8 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   background:
-    radial-gradient(circle at 50% -10%,#17477f 0%,#07172d 32%,#020610 68%,#010208 100%);
+    radial-gradient(circle at 50% -10%,#16477f 0%,#07182f 32%,#020610 68%,#010208 100%);
   overflow-x:hidden;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 15% 30%,rgba(28,126,255,.12),transparent 25%),
-    radial-gradient(circle at 85% 55%,rgba(255,194,45,.10),transparent 25%);
 }
 
 .page{
@@ -41,30 +31,29 @@ body:before{
   max-width:470px;
   margin:auto;
   min-height:100vh;
-  padding:12px 10px 28px;
-  position:relative;
-  z-index:2;
+  padding:12px 10px 30px;
 }
 
-/* =========================
+/* =====================
    LOGO
-========================= */
+===================== */
 
 .logo{
   text-align:center;
-  padding:3px 0 6px;
+  padding:4px 0 7px;
 }
 
 .logo img{
-  width:205px;
-  max-width:70%;
+  width:210px;
+  max-width:72%;
   height:auto;
-  object-fit:contain;
+  display:block;
+  margin:auto;
 }
 
-/* =========================
+/* =====================
    TITLE
-========================= */
+===================== */
 
 .event-title{
   text-align:center;
@@ -74,7 +63,7 @@ body:before{
 .event-title .small{
   font-size:9px;
   letter-spacing:3px;
-  color:#93a6bc;
+  color:#94a7bc;
   font-weight:700;
 }
 
@@ -95,9 +84,9 @@ body:before{
   color:#d1d8e2;
 }
 
-/* =========================
+/* =====================
    STATUS
-========================= */
+===================== */
 
 .status-row{
   display:grid;
@@ -111,8 +100,7 @@ body:before{
   text-align:center;
   border-radius:11px;
   border:1px solid #74591a;
-  background:
-    linear-gradient(180deg,#0b1c31,#06101d);
+  background:linear-gradient(180deg,#0b1c31,#06101d);
 }
 
 .status-card span{
@@ -129,18 +117,16 @@ body:before{
   font-size:14px;
 }
 
-/* =========================
-   MACHINE WRAPPER
-========================= */
+/* =====================
+   MACHINE
+===================== */
 
 .machine-wrap{
   position:relative;
   width:100%;
-  aspect-ratio:3 / 4.15;
+  aspect-ratio:3 / 4.1;
   margin:auto;
 }
-
-/* GAMBAR MESIN 3D */
 
 .machine-img{
   position:absolute;
@@ -148,88 +134,65 @@ body:before{
   width:100%;
   height:100%;
   object-fit:contain;
-  z-index:20;
+  z-index:30;
   pointer-events:none;
-
   filter:
-    drop-shadow(0 12px 25px rgba(0,0,0,.55))
-    drop-shadow(0 0 12px rgba(255,196,47,.14));
+    drop-shadow(0 13px 23px rgba(0,0,0,.55))
+    drop-shadow(0 0 11px rgba(255,196,47,.16));
 }
 
-/* =========================
-   AREA KACA MESIN
-========================= */
+/* area kaca mesin */
 
 .glass-area{
   position:absolute;
 
-  /*
-  Posisi ini menyesuaikan gambar claw-machine.png
-  */
-  left:15.5%;
-  right:15.5%;
-  top:15.5%;
-  bottom:31%;
+  left:16%;
+  right:16%;
+  top:16%;
+  bottom:30%;
 
   overflow:hidden;
-  z-index:5;
+  z-index:10;
 
-  border-radius:12px;
+  border-radius:14px;
 
   background:
-    radial-gradient(circle at 50% 20%,rgba(27,112,220,.14),transparent 45%);
+    radial-gradient(circle at 50% 20%,rgba(30,119,225,.15),transparent 45%);
 }
 
-/* LIGHT REFLECTION */
-
-.glass-area:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:
-    linear-gradient(
-      110deg,
-      transparent 0%,
-      rgba(255,255,255,.05) 25%,
-      transparent 43%
-    );
-  z-index:50;
-}
-
-/* =========================
+/* =====================
    RAIL
-========================= */
+===================== */
 
 .rail{
   position:absolute;
-  top:11%;
-  left:7%;
-  right:7%;
+  top:8%;
+  left:6%;
+  right:6%;
   height:4px;
+
   border-radius:10px;
 
   background:
-    linear-gradient(90deg,#7c5308,#ffe16d,#805809);
+    linear-gradient(90deg,#72500a,#ffe06b,#72500a);
 
   box-shadow:
     0 0 8px rgba(255,210,65,.65);
 
-  z-index:7;
+  z-index:11;
 }
 
-/* =========================
-   CLAW 3D
-========================= */
+/* =====================
+   CLAW IMAGE
+===================== */
 
 .claw{
   position:absolute;
-  z-index:35;
 
-  top:8%;
+  top:7%;
   left:50%;
 
-  width:19%;
+  width:23%;
 
   transform:translateX(-50%);
 
@@ -237,34 +200,36 @@ body:before{
     left .28s ease,
     top .75s ease;
 
+  z-index:40;
+
   pointer-events:none;
 }
 
-.claw img{
-  display:block;
+.claw img.main-claw{
   width:100%;
   height:auto;
+  display:block;
 
   filter:
-    drop-shadow(0 5px 7px rgba(0,0,0,.48));
+    drop-shadow(0 5px 7px rgba(0,0,0,.5));
 }
+
+/* turun */
 
 .claw.grabbing{
-  top:49%;
+  top:48%;
 }
 
-.claw.lifting{
-  top:8%;
-}
+/* hadiah ikut naik */
 
 .caught{
   position:absolute;
 
-  width:54%;
-  aspect-ratio:1/1;
+  width:50%;
+  height:auto;
 
   left:50%;
-  bottom:-30%;
+  bottom:-24%;
 
   transform:translateX(-50%);
 
@@ -273,32 +238,32 @@ body:before{
   object-fit:contain;
 
   filter:
-    drop-shadow(0 5px 7px rgba(0,0,0,.5));
+    drop-shadow(0 5px 8px rgba(0,0,0,.55));
 }
 
 .claw.has-prize .caught{
   display:block;
 }
 
-/* =========================
+/* =====================
    PRIZE FLOOR
-========================= */
+===================== */
 
 .prize-floor{
   position:absolute;
 
-  left:4%;
-  right:4%;
-  bottom:3%;
+  left:3%;
+  right:3%;
+  bottom:5%;
 
   height:43%;
 
-  z-index:8;
+  z-index:12;
 }
 
-/* =========================
-   BALL/CAPSULE
-========================= */
+/* =====================
+   BALL
+===================== */
 
 .ball{
   position:absolute;
@@ -312,24 +277,22 @@ body:before{
   align-items:center;
   justify-content:center;
 
-  border:
-    1px solid rgba(255,255,255,.46);
+  border:1px solid rgba(255,255,255,.46);
 
   background:
     radial-gradient(
       circle at 32% 24%,
-      rgba(255,255,255,.50),
-      rgba(61,128,202,.14) 34%,
-      rgba(6,13,25,.22) 68%
+      rgba(255,255,255,.52),
+      rgba(58,127,204,.17) 34%,
+      rgba(4,12,24,.20) 70%
     );
 
   box-shadow:
     inset 0 0 13px rgba(255,255,255,.18),
-    0 6px 12px rgba(0,0,0,.40);
+    0 6px 12px rgba(0,0,0,.45);
 
   transition:
     opacity .3s,
-    transform .3s,
     filter .3s;
 
   animation:float 3s ease-in-out infinite;
@@ -356,7 +319,7 @@ body:before{
   }
 }
 
-/* POSISI HADIAH */
+/* posisi bola */
 
 .b1{
   left:0;
@@ -365,29 +328,25 @@ body:before{
 
 .b2{
   left:19%;
-  bottom:29%;
-  animation-delay:.4s;
+  bottom:28%;
 }
 
 .b3{
   left:39%;
-  bottom:2%;
-  animation-delay:.8s;
+  bottom:1%;
 }
 
 .b4{
   right:19%;
-  bottom:30%;
-  animation-delay:.3s;
+  bottom:29%;
 }
 
 .b5{
   right:0;
-  bottom:2%;
-  animation-delay:.9s;
+  bottom:1%;
 }
 
-/* GRAND PRIZE */
+/* grand prize */
 
 .b6{
   left:50%;
@@ -402,48 +361,46 @@ body:before{
   background:
     radial-gradient(
       circle at 32% 24%,
-      rgba(255,255,255,.80),
-      rgba(255,199,45,.45) 34%,
-      rgba(125,70,0,.28) 70%
+      rgba(255,255,255,.85),
+      rgba(255,200,52,.50) 34%,
+      rgba(120,67,0,.24) 72%
     );
 
   box-shadow:
-    0 0 20px rgba(255,198,42,.60),
-    inset 0 0 14px rgba(255,255,255,.28);
+    0 0 23px rgba(255,198,42,.70),
+    inset 0 0 15px rgba(255,255,255,.3);
 }
 
 .b7{
   left:4%;
-  bottom:48%;
+  bottom:49%;
   width:18%;
-  animation-delay:.6s;
 }
 
 .b8{
   right:4%;
   bottom:50%;
   width:18%;
-  animation-delay:1.1s;
 }
 
-/* WINNER */
+/* winner */
 
 .ball.winner{
   border-color:#ffe474;
 
-  filter:brightness(1.15);
+  filter:brightness(1.2);
 
   box-shadow:
-    0 0 27px rgba(255,205,52,.95),
+    0 0 30px rgba(255,205,52,.95),
     inset 0 0 15px rgba(255,255,255,.38);
 }
 
-/* =========================
-   CONTROLS
-========================= */
+/* =====================
+   CONTROL
+===================== */
 
 .control-panel{
-  margin-top:5px;
+  margin-top:8px;
 
   padding:10px;
 
@@ -479,8 +436,6 @@ body:before{
   font-weight:900;
 
   cursor:pointer;
-
-  touch-action:manipulation;
 }
 
 .btn:active{
@@ -506,12 +461,12 @@ body:before{
 }
 
 .btn:disabled{
-  opacity:.40;
+  opacity:.4;
 }
 
-/* =========================
+/* =====================
    MESSAGE
-========================= */
+===================== */
 
 .message{
   min-height:40px;
@@ -527,9 +482,9 @@ body:before{
   line-height:1.5;
 }
 
-/* =========================
+/* =====================
    CLAIM
-========================= */
+===================== */
 
 .claim{
   display:none;
@@ -560,9 +515,9 @@ body:before{
     );
 }
 
-/* =========================
+/* =====================
    MODAL
-========================= */
+===================== */
 
 .modal{
   position:fixed;
@@ -700,9 +655,9 @@ body:before{
   color:#607085;
 
   font-size:8px;
-
-  line-height:1.5;
 }
+
+/* mobile */
 
 @media(max-width:370px){
 
@@ -724,6 +679,7 @@ body:before{
 <div class="page">
 
   <!-- LOGO -->
+
   <div class="logo">
 
     <img
@@ -734,6 +690,7 @@ body:before{
 
 
   <!-- TITLE -->
+
   <div class="event-title">
 
     <div class="small">
@@ -752,6 +709,7 @@ body:before{
 
 
   <!-- STATUS -->
+
   <div class="status-row">
 
     <div class="status-card">
@@ -787,12 +745,10 @@ body:before{
   <div class="machine-wrap">
 
 
-    <!-- AREA DALAM KACA -->
+    <!-- BAGIAN DALAM -->
 
     <div class="glass-area">
 
-
-      <!-- RAIL -->
 
       <div class="rail"></div>
 
@@ -804,16 +760,17 @@ body:before{
         id="claw">
 
         <img
+          class="main-claw"
           id="clawImage"
-          src="assets/claw-open.png"
-          alt="Claw">
+          src="assets/futuristic_gold_arcade_claw_mechanism.png"
+          alt="">
 
 
         <img
           class="caught"
           id="caughtPrize"
           src=""
-          alt="Prize">
+          alt="">
 
       </div>
 
@@ -829,7 +786,7 @@ body:before{
 
           <img
             src="assets/coin.png"
-            alt="Bonus Saldo">
+            alt="">
 
         </div>
 
@@ -840,7 +797,7 @@ body:before{
 
           <img
             src="assets/gift.png"
-            alt="VIP Gift">
+            alt="">
 
         </div>
 
@@ -851,7 +808,7 @@ body:before{
 
           <img
             src="assets/diamond.png"
-            alt="Diamond">
+            alt="">
 
         </div>
 
@@ -862,7 +819,7 @@ body:before{
 
           <img
             src="assets/crown.png"
-            alt="Crown">
+            alt="">
 
         </div>
 
@@ -873,7 +830,7 @@ body:before{
 
           <img
             src="assets/chip.png"
-            alt="VIP Point">
+            alt="">
 
         </div>
 
@@ -884,7 +841,7 @@ body:before{
 
           <img
             src="assets/grand%20prize.png"
-            alt="Grand Prize">
+            alt="">
 
         </div>
 
@@ -895,7 +852,7 @@ body:before{
 
           <img
             src="assets/ticket.png"
-            alt="VIP Ticket">
+            alt="">
 
         </div>
 
@@ -906,7 +863,7 @@ body:before{
 
           <img
             src="assets/mystery.png"
-            alt="Mystery">
+            alt="">
 
         </div>
 
@@ -916,17 +873,17 @@ body:before{
     </div>
 
 
-    <!-- FRAME MESIN 3D -->
+    <!-- FRAME MESIN -->
 
     <img
       class="machine-img"
-      src="assets/claw-machine.png"
-      alt="MAUSLOT Claw Machine">
+      src="assets/luxury_navy_gold_claw_machine.png"
+      alt="">
 
   </div>
 
 
-  <!-- CONTROL -->
+  <!-- CONTROLS -->
 
   <div class="control-panel">
 
@@ -971,8 +928,8 @@ body:before{
       class="message"
       id="message">
 
-      Gerakkan capit ke hadiah pilihan,
-      lalu tekan <b>GRAB</b>.
+      Gerakkan capit ke hadiah pilihan lalu tekan
+      <b>GRAB</b>.
 
     </div>
 
@@ -996,12 +953,11 @@ body:before{
 
   </div>
 
-
 </div>
 
 
 
-<!-- RESULT MODAL -->
+<!-- MODAL -->
 
 <div
   class="modal"
@@ -1016,7 +972,7 @@ body:before{
       <img
         id="rewardImage"
         src="assets/gift.png"
-        alt="Reward">
+        alt="">
 
     </div>
 
@@ -1067,9 +1023,9 @@ body:before{
 
 <script>
 
-/* ================================
-   HADIAH
-================================ */
+/* ==========================
+   PRIZES
+========================== */
 
 const prizes = [
 
@@ -1132,9 +1088,9 @@ const prizes = [
 ];
 
 
-/* ================================
+/* ==========================
    STATE
-================================ */
+========================== */
 
 let ticket = 1;
 
@@ -1143,9 +1099,9 @@ let clawPosition = 50;
 let playing = false;
 
 
-/* ================================
-   ELEMENT
-================================ */
+/* ==========================
+   ELEMENTS
+========================== */
 
 const claw =
 document.getElementById("claw");
@@ -1175,9 +1131,9 @@ const grabBtn =
 document.getElementById("grabBtn");
 
 
-/* ================================
-   LEFT
-================================ */
+/* ==========================
+   MOVE LEFT
+========================== */
 
 function moveLeft(){
 
@@ -1187,22 +1143,20 @@ function moveLeft(){
 
   clawPosition -= 8;
 
-
   if(clawPosition < 12){
 
     clawPosition = 12;
 
   }
 
-
   updateClaw();
 
 }
 
 
-/* ================================
-   RIGHT
-================================ */
+/* ==========================
+   MOVE RIGHT
+========================== */
 
 function moveRight(){
 
@@ -1210,9 +1164,7 @@ function moveRight(){
     return;
   }
 
-
   clawPosition += 8;
-
 
   if(clawPosition > 88){
 
@@ -1220,15 +1172,14 @@ function moveRight(){
 
   }
 
-
   updateClaw();
 
 }
 
 
-/* ================================
-   UPDATE
-================================ */
+/* ==========================
+   UPDATE POSITION
+========================== */
 
 function updateClaw(){
 
@@ -1238,9 +1189,9 @@ function updateClaw(){
 }
 
 
-/* ================================
-   CONTROLS
-================================ */
+/* ==========================
+   CONTROL
+========================== */
 
 function disableControls(){
 
@@ -1264,9 +1215,9 @@ function enableControls(){
 }
 
 
-/* ================================
-   PILIH HADIAH TERDEKAT
-================================ */
+/* ==========================
+   GET CLOSEST PRIZE
+========================== */
 
 function getClosestPrize(){
 
@@ -1278,38 +1229,31 @@ function getClosestPrize(){
   prizes.forEach(
     (prize,index)=>{
 
-
       const distance =
       Math.abs(
         prize.position -
         clawPosition
       );
 
+      if(distance < smallest){
 
-      if(
-        distance < smallest
-      ){
+        smallest = distance;
 
-        smallest =
-        distance;
-
-        selected =
-        index;
+        selected = index;
 
       }
 
     }
   );
 
-
   return selected;
 
 }
 
 
-/* ================================
+/* ==========================
    PLAY
-================================ */
+========================== */
 
 async function playClaw(){
 
@@ -1330,7 +1274,6 @@ async function playClaw(){
 
   playing = true;
 
-
   disableControls();
 
 
@@ -1350,11 +1293,10 @@ async function playClaw(){
   prizes[winnerIndex];
 
 
-  /* PINDAH KE HADIAH */
+  /* PINDAH */
 
   clawPosition =
   winner.position;
-
 
   updateClaw();
 
@@ -1376,10 +1318,10 @@ async function playClaw(){
   await wait(850);
 
 
-  /* TUTUP CAPIT */
+  /* GANTI CAPIT TERTUTUP */
 
   clawImage.src =
-  "assets/claw-close.png";
+  "assets/golden_arcade_claw_grabber.png";
 
 
   highlightPrize(
@@ -1390,7 +1332,7 @@ async function playClaw(){
   await wait(450);
 
 
-  /* HADIAH MASUK CAPIT */
+  /* HADIAH MASUK KE CAPIT */
 
   caughtPrize.src =
   winner.image;
@@ -1418,15 +1360,10 @@ async function playClaw(){
   await wait(350);
 
 
-  /* NAIK */
+  /* CAPIT NAIK */
 
   claw.classList.remove(
     "grabbing"
-  );
-
-
-  claw.classList.add(
-    "lifting"
   );
 
 
@@ -1437,16 +1374,15 @@ async function playClaw(){
   await wait(900);
 
 
-  /* TIKET */
+  /* UPDATE TIKET */
 
   ticket--;
-
 
   ticketEl.innerHTML =
   ticket;
 
 
-  /* RESULT */
+  /* SHOW RESULT */
 
   showReward(
     winner
@@ -1472,9 +1408,9 @@ async function playClaw(){
 }
 
 
-/* ================================
+/* ==========================
    HIGHLIGHT
-================================ */
+========================== */
 
 function highlightPrize(index){
 
@@ -1491,15 +1427,15 @@ function highlightPrize(index){
   );
 
 
-  const element =
+  const winner =
   document.querySelector(
     `.ball[data-id="${index}"]`
   );
 
 
-  if(element){
+  if(winner){
 
-    element.classList.add(
+    winner.classList.add(
       "winner"
     );
 
@@ -1508,9 +1444,9 @@ function highlightPrize(index){
 }
 
 
-/* ================================
+/* ==========================
    RESULT
-================================ */
+========================== */
 
 function showReward(prize){
 
@@ -1540,14 +1476,14 @@ function showReward(prize){
 }
 
 
-/* ================================
+/* ==========================
    WAIT
-================================ */
+========================== */
 
 function wait(ms){
 
   return new Promise(
-    resolve=>
+    resolve =>
     setTimeout(
       resolve,
       ms
@@ -1557,9 +1493,9 @@ function wait(ms){
 }
 
 
-/* ================================
+/* ==========================
    CLOSE MODAL
-================================ */
+========================== */
 
 document
 .getElementById(
@@ -1569,9 +1505,7 @@ document
   "click",
   function(event){
 
-    if(
-      event.target === this
-    ){
+    if(event.target === this){
 
       this.style.display =
       "none";
@@ -1582,37 +1516,28 @@ document
 );
 
 
-/* ================================
+/* ==========================
    KEYBOARD
-================================ */
+========================== */
 
 document.addEventListener(
   "keydown",
   function(event){
 
-    if(
-      event.key ===
-      "ArrowLeft"
-    ){
+    if(event.key === "ArrowLeft"){
 
       moveLeft();
 
     }
 
-
-    if(
-      event.key ===
-      "ArrowRight"
-    ){
+    if(event.key === "ArrowRight"){
 
       moveRight();
 
     }
 
-
     if(
-      event.key ===
-      "Enter" ||
+      event.key === "Enter" ||
       event.key === " "
     ){
 
