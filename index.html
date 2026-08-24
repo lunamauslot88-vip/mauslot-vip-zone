@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="theme-color" content="#020713">
-<title>MAUSLOT VIP - 9.9 Claw Machine</title>
+
+<title>MAUSLOT 9.9 Claw Machine</title>
 
 <style>
 *{
@@ -21,60 +22,64 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
   background:
-    radial-gradient(circle at 50% -10%,#16477f 0%,#07182f 32%,#020610 68%,#010208 100%);
-  overflow-x:hidden;
+    radial-gradient(circle at 50% 0%,#173f72,#071426 38%,#01040a 100%);
 }
 
 .page{
   width:100%;
   max-width:470px;
-  margin:auto;
+  margin:0 auto;
   padding:12px 10px 30px;
 }
 
-/* ======================
+/* =========================
    HEADER
-====================== */
+========================= */
 
 .logo{
   text-align:center;
-  padding:4px 0 7px;
+  margin-bottom:5px;
 }
 
 .logo img{
-  width:210px;
-  max-width:72%;
-  display:block;
-  margin:auto;
+  width:205px;
+  max-width:70%;
+  height:auto;
 }
 
-.event-title{
+.title{
   text-align:center;
-  padding:2px 10px 11px;
+  margin-bottom:10px;
 }
 
-.event-title .small{
+.title small{
+  display:block;
+  color:#91a4ba;
   font-size:9px;
   letter-spacing:3px;
-  color:#94a7bc;
-  font-weight:700;
+  font-weight:bold;
 }
 
-.event-title h1{
-  margin:4px 0 2px;
+.title h1{
+  margin:4px 0;
+  color:#ffd563;
   font-size:29px;
-  color:#ffd96a;
+  line-height:1;
   text-shadow:
-    0 2px 0 #704804,
-    0 0 17px rgba(255,205,61,.30);
+    0 2px 0 #714a04,
+    0 0 16px rgba(255,202,50,.35);
 }
 
-.event-title p{
-  margin:7px 0 0;
+.title p{
+  margin:6px 0 0;
+  color:#ccd5e0;
   font-size:9px;
   letter-spacing:1.4px;
-  color:#d1d8e2;
 }
+
+/* =========================
+   STATUS
+========================= */
 
 .status-row{
   display:grid;
@@ -83,41 +88,42 @@ body{
   margin-bottom:10px;
 }
 
-.status-card{
+.status-box{
   padding:8px;
   text-align:center;
-  border-radius:11px;
-  border:1px solid #74591a;
-  background:linear-gradient(180deg,#0b1c31,#06101d);
+  border-radius:10px;
+  border:1px solid #765b19;
+  background:#071526;
 }
 
-.status-card span{
+.status-box span{
   display:block;
-  color:#8596aa;
   font-size:8px;
+  color:#8292a6;
   letter-spacing:1px;
 }
 
-.status-card strong{
+.status-box strong{
   display:block;
   margin-top:3px;
-  color:#ffd65d;
+  color:#ffd75d;
   font-size:14px;
 }
 
-/* ======================
+/* =========================
    MACHINE
-====================== */
+========================= */
 
 .machine-wrap{
   position:relative;
   width:100%;
-  aspect-ratio:3 / 4.1;
-  margin:auto;
+  aspect-ratio:3 / 4.05;
 }
 
-/* frame mesin asli */
-.machine-img{
+/*
+FRAME MESIN ASLI
+*/
+.machine-frame{
   position:absolute;
   inset:0;
   width:100%;
@@ -126,715 +132,1267 @@ body{
   z-index:1;
   pointer-events:none;
   filter:
-    drop-shadow(0 13px 23px rgba(0,0,0,.55))
-    drop-shadow(0 0 11px rgba(255,196,47,.16));
+    drop-shadow(0 15px 25px rgba(0,0,0,.55));
 }
 
-/* area permainan */
-.glass-area{
+/*
+AREA BARU YANG MENUTUP
+ISI KACA BAWAAN GAMBAR
+*/
+.game-glass{
   position:absolute;
-  left:16%;
-  right:16%;
-  top:16%;
-  bottom:30%;
-  overflow:hidden;
+
+  left:15.4%;
+  right:15.4%;
+
+  top:15.7%;
+  bottom:34.1%;
+
   z-index:5;
-  border-radius:14px;
-}
 
-/* overlay untuk menyamarkan claw bawaan gambar */
-.static-claw-cover{
-  position:absolute;
-  top:5%;
-  left:26%;
-  right:26%;
-  height:28%;
-  z-index:6;
-  pointer-events:none;
+  overflow:hidden;
+
+  border-radius:10px;
+
   background:
     radial-gradient(
-      ellipse at center,
-      rgba(4,25,51,.98) 0%,
-      rgba(5,30,60,.94) 48%,
-      rgba(5,30,60,.35) 72%,
-      transparent 100%
+      circle at 50% 30%,
+      #0c4179 0%,
+      #07294f 33%,
+      #041b35 68%,
+      #031325 100%
+    );
+
+  box-shadow:
+    inset 0 0 25px rgba(0,139,255,.32),
+    inset 0 -35px 55px rgba(0,0,0,.35);
+}
+
+/* kaca glossy */
+.game-glass:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:60;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,.07),
+      transparent 28%,
+      transparent 72%,
+      rgba(255,255,255,.025)
     );
 }
 
-/* rail baru */
-.rail{
+/* =========================
+   LIGHT
+========================= */
+
+.lights{
   position:absolute;
-  top:7%;
-  left:7%;
-  right:7%;
-  height:5px;
-  border-radius:10px;
-  background:linear-gradient(90deg,#72500a,#ffe06b,#72500a);
-  box-shadow:0 0 8px rgba(255,210,65,.65);
-  z-index:10;
+  top:5%;
+  left:12%;
+  right:12%;
+  display:flex;
+  justify-content:space-between;
+  z-index:8;
 }
 
-/* ======================
-   CLAW AKTIF
-====================== */
+.light{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#55b8ff;
+  box-shadow:
+    0 0 8px #42a8ff,
+    0 0 14px #278eff;
+}
 
-.claw-track{
+/* =========================
+   RAIL
+========================= */
+
+.rail{
   position:absolute;
-  top:5.2%;
+
+  top:10%;
+  left:7%;
+  right:7%;
+
+  height:6px;
+
+  border-radius:20px;
+
+  z-index:10;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe178,
+      #bc7f13
+    );
+
+  box-shadow:
+    0 0 10px rgba(255,210,65,.55);
+}
+
+/* =========================
+   MOVING CLAW
+========================= */
+
+.claw-system{
+  position:absolute;
+
   left:50%;
-  width:24%;
-  height:52%;
+  top:7%;
+
+  width:115px;
+
   transform:translateX(-50%);
-  z-index:30;
-  transition:left .28s ease;
+
+  z-index:40;
+
+  transition:
+    left .25s ease;
+
   pointer-events:none;
 }
 
 /* carriage */
 .carriage{
-  position:absolute;
-  top:0;
-  left:50%;
-  width:34px;
-  height:20px;
-  transform:translateX(-50%);
+  width:42px;
+  height:23px;
+
+  margin:0 auto;
+
   border-radius:6px;
-  background:linear-gradient(#ffe074,#9c690d);
-  border:2px solid #ffdf70;
-  box-shadow:0 0 9px rgba(255,205,52,.45);
-  z-index:4;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe57a,
+      #a46d0d
+    );
+
+  border:2px solid #ffe783;
+
+  box-shadow:
+    0 0 8px rgba(255,208,54,.45);
 }
 
-/* cable */
+/* kabel */
 .cable{
-  position:absolute;
-  top:18px;
-  left:50%;
   width:4px;
-  height:42px;
-  transform:translateX(-50%);
-  background:linear-gradient(90deg,#3a3a3a,#dedede,#444);
-  transition:height .75s ease;
-  z-index:2;
+  height:45px;
+
+  margin:0 auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      #383838,
+      #d5d5d5,
+      #474747
+    );
+
+  transition:
+    height .72s ease;
 }
 
-/* claw image */
-.active-claw{
-  position:absolute;
-  top:54px;
-  left:50%;
-  width:92px;
-  transform:translateX(-50%);
-  transition:top .75s ease;
-  z-index:3;
+/* gambar claw */
+.claw-holder{
+  width:105px;
+
+  margin:0 auto;
+
+  position:relative;
+
+  transition:
+    transform .72s ease;
 }
 
-.active-claw img{
+.claw-holder img.claw-img{
   display:block;
   width:100%;
   height:auto;
+
   object-fit:contain;
-  filter:drop-shadow(0 6px 8px rgba(0,0,0,.55));
+
+  filter:
+    drop-shadow(0 6px 8px rgba(0,0,0,.55));
 }
 
 /* turun */
-.claw-track.down .cable{
-  height:205px;
+.claw-system.down .cable{
+  height:190px;
 }
 
-.claw-track.down .active-claw{
-  top:216px;
-}
-
-/* hadiah yang ikut naik */
-.caught-prize{
+/* hadiah ikut tercapit */
+.caught{
   position:absolute;
+
   left:50%;
-  bottom:-28px;
-  width:48px;
+  bottom:-30px;
+
   transform:translateX(-50%);
-  display:none;
+
+  width:50px;
+  height:50px;
+
   object-fit:contain;
-  filter:drop-shadow(0 5px 7px rgba(0,0,0,.55));
+
+  display:none;
+
+  filter:
+    drop-shadow(0 5px 7px rgba(0,0,0,.55));
 }
 
-.active-claw.has-prize .caught-prize{
+.claw-holder.has-prize .caught{
   display:block;
 }
 
-/* ======================
-   PRIZES
-====================== */
+/* =========================
+   PRIZE AREA
+========================= */
 
 .prize-floor{
   position:absolute;
-  left:3%;
-  right:3%;
-  bottom:5%;
-  height:42%;
-  z-index:15;
+
+  left:4%;
+  right:4%;
+  bottom:4%;
+
+  height:43%;
+
+  z-index:20;
 }
 
+/* bola transparan */
 .ball{
   position:absolute;
+
   width:21%;
   aspect-ratio:1;
+
   border-radius:50%;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  border:1px solid rgba(255,255,255,.46);
+
+  border:
+    1.5px solid rgba(255,255,255,.38);
+
   background:
     radial-gradient(
-      circle at 32% 24%,
-      rgba(255,255,255,.52),
-      rgba(58,127,204,.17) 34%,
-      rgba(4,12,24,.20) 70%
+      circle at 30% 22%,
+      rgba(255,255,255,.55),
+      rgba(57,128,205,.15) 34%,
+      rgba(4,13,26,.18) 70%
     );
+
   box-shadow:
-    inset 0 0 13px rgba(255,255,255,.18),
-    0 6px 12px rgba(0,0,0,.45);
-  transition:opacity .3s, filter .3s;
-  animation:float 3s ease-in-out infinite;
+    inset 0 0 15px rgba(255,255,255,.16),
+    0 7px 14px rgba(0,0,0,.42);
+
+  animation:
+    floatBall 3s ease-in-out infinite;
+
+  transition:
+    opacity .3s,
+    filter .3s;
 }
 
 .ball img{
   width:78%;
   height:78%;
+
   object-fit:contain;
-  filter:drop-shadow(0 3px 5px rgba(0,0,0,.35));
+
+  pointer-events:none;
+
+  filter:
+    drop-shadow(0 3px 5px rgba(0,0,0,.35));
 }
 
-@keyframes float{
-  0%,100%{transform:translateY(0) rotate(-2deg);}
-  50%{transform:translateY(-4px) rotate(2deg);}
+@keyframes floatBall{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-4px);
+  }
 }
 
-.b1{left:0;bottom:0;}
-.b2{left:19%;bottom:28%;}
-.b3{left:39%;bottom:1%;}
-.b4{right:19%;bottom:29%;}
-.b5{right:0;bottom:1%;}
+/* posisi */
+
+.b1{
+  left:0;
+  bottom:0;
+}
+
+.b2{
+  left:20%;
+  bottom:27%;
+}
+
+.b3{
+  left:40%;
+  bottom:0;
+}
+
+.b4{
+  right:20%;
+  bottom:28%;
+}
+
+.b5{
+  right:0;
+  bottom:0;
+}
 
 .b6{
   left:50%;
-  bottom:57%;
+  bottom:59%;
+
   width:23%;
+
   transform:translateX(-50%);
+
   animation:none;
+
   background:
     radial-gradient(
-      circle at 32% 24%,
-      rgba(255,255,255,.85),
-      rgba(255,200,52,.50) 34%,
-      rgba(120,67,0,.24) 72%
+      circle at 32% 22%,
+      #fff3ad,
+      rgba(255,194,39,.5) 40%,
+      rgba(125,71,0,.27) 75%
     );
+
   box-shadow:
-    0 0 23px rgba(255,198,42,.70),
-    inset 0 0 15px rgba(255,255,255,.3);
+    0 0 26px rgba(255,198,39,.7),
+    inset 0 0 15px rgba(255,255,255,.32);
 }
 
-.b7{left:4%;bottom:49%;width:18%;}
-.b8{right:4%;bottom:50%;width:18%;}
+.b7{
+  left:4%;
+  bottom:50%;
+  width:18%;
+}
+
+.b8{
+  right:4%;
+  bottom:50%;
+  width:18%;
+}
 
 .ball.winner{
-  border-color:#ffe474;
-  filter:brightness(1.2);
+  filter:brightness(1.25);
+
+  border-color:#ffe66f;
+
   box-shadow:
-    0 0 30px rgba(255,205,52,.95),
-    inset 0 0 15px rgba(255,255,255,.38);
+    0 0 32px rgba(255,205,50,1),
+    inset 0 0 16px rgba(255,255,255,.4);
 }
 
-/* ======================
-   CONTROLS
-====================== */
+/* =========================
+   CONTROL
+========================= */
 
-.control-panel{
+.control{
   margin-top:8px;
+
   padding:10px;
-  border-radius:15px;
-  border:1px solid #6c5518;
-  background:linear-gradient(180deg,#0d1b2c,#060b12);
+
+  border-radius:14px;
+
+  border:1px solid #705719;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0b1a2c,
+      #050b12
+    );
 }
 
-.controls{
+.buttons{
   display:grid;
-  grid-template-columns:65px 1fr 65px;
+
+  grid-template-columns:
+    68px 1fr 68px;
+
   gap:8px;
 }
 
-.btn{
-  height:48px;
+button{
+  height:49px;
+
   border-radius:11px;
-  border:1px solid #b18a22;
+
+  border:1px solid #b58b21;
+
   background:#0d1c30;
-  color:#ffd55d;
-  font-size:19px;
-  font-weight:900;
+
+  color:#ffd55b;
+
+  font-size:20px;
+
+  font-weight:bold;
+
   cursor:pointer;
+
+  touch-action:manipulation;
 }
 
-.btn:active{
+button:active{
   transform:scale(.96);
 }
 
-.grab-btn{
-  color:#07101a;
-  font-size:14px;
-  background:linear-gradient(180deg,#ffea82,#d5a126);
-  border-color:#ffe276;
+button:disabled{
+  opacity:.4;
 }
 
-.btn:disabled{
-  opacity:.4;
+.grab{
+  font-size:14px;
+
+  color:#07101a;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffe984,
+      #d6a126
+    );
 }
 
 .message{
   min-height:40px;
-  padding:9px 4px 0;
+
+  padding-top:9px;
+
   text-align:center;
-  color:#c4ccd7;
+
   font-size:10px;
+
   line-height:1.5;
+
+  color:#c4ccd7;
 }
+
+/* =========================
+   CLAIM
+========================= */
 
 .claim{
   display:none;
-  width:100%;
-  margin-top:7px;
-  padding:12px 9px;
-  text-align:center;
-  text-decoration:none;
+
+  margin-top:8px;
+
+  padding:12px;
+
   border-radius:10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #875f08,
+      #f6d25f,
+      #875f08
+    );
+
+  text-align:center;
+
+  text-decoration:none;
+
   color:#07101a;
+
   font-size:12px;
-  font-weight:900;
-  background:linear-gradient(90deg,#855e09,#f6d25e,#8a620a);
+
+  font-weight:bold;
 }
 
-/* ======================
-   RESULT
-====================== */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   position:fixed;
+
   inset:0;
+
   z-index:9999;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:18px;
-  background:rgba(0,0,0,.84);
+
+  background:
+    rgba(0,0,0,.85);
 }
 
 .modal-box{
   width:100%;
+
   max-width:330px;
-  text-align:center;
+
   padding:22px 17px 17px;
+
+  text-align:center;
+
   border-radius:20px;
-  border:2px solid #dbaa36;
-  background:radial-gradient(circle at top,#163c6d,#07111f 58%);
+
+  border:2px solid #d7aa34;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #173e70,
+      #07111f 60%
+    );
 }
 
-.reward-img{
+.reward-image{
   width:115px;
   height:115px;
+
   margin:auto;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   border-radius:50%;
-  border:1px solid #806319;
-  background:radial-gradient(circle,#174278,#071426);
+
+  background:#0a2340;
+
+  border:1px solid #84671a;
 }
 
-.reward-img img{
-  max-width:100px;
-  max-height:100px;
+.reward-image img{
+  width:100px;
+  height:100px;
+
   object-fit:contain;
 }
 
-.modal-small{
-  margin-top:12px;
-  font-size:8px;
-  letter-spacing:2px;
-  color:#8798ad;
-}
-
 .modal h2{
-  margin:5px 0;
-  color:#ffd55c;
-  font-size:21px;
+  color:#ffd65d;
+  margin:10px 0 5px;
 }
 
 .reward-name{
-  margin:10px 0 4px;
-  color:#fff;
   font-size:18px;
-  font-weight:900;
+  font-weight:bold;
+  margin:9px 0 5px;
 }
 
 .reward-desc{
-  color:#bdc7d4;
   font-size:10px;
   line-height:1.5;
+  color:#bdc7d4;
 }
 
 .modal-claim{
   display:block;
+
   margin-top:14px;
+
   padding:12px;
+
   border-radius:9px;
-  background:linear-gradient(90deg,#865f08,#f7d461,#865f08);
-  color:#07101a;
-  font-size:11px;
-  font-weight:900;
+
   text-decoration:none;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  color:#07101a;
+
+  background:
+    linear-gradient(
+      90deg,
+      #875f08,
+      #f7d35e,
+      #875f08
+    );
 }
 
 .footer{
   text-align:center;
-  padding:12px 5px 0;
+
+  padding-top:12px;
+
   color:#607085;
+
   font-size:8px;
+}
+
+@media(max-width:370px){
+
+  .title h1{
+    font-size:25px;
+  }
+
+  .buttons{
+    grid-template-columns:
+      58px 1fr 58px;
+  }
+
+  .claw-system{
+    width:100px;
+  }
+
 }
 </style>
 </head>
+
 
 <body>
 
 <div class="page">
 
+  <!-- LOGO -->
+
   <div class="logo">
-    <img src="assets/logo-mauslot.png" alt="MAUSLOT">
+    <img
+      src="assets/logo-mauslot.png"
+      alt="MAUSLOT">
   </div>
 
-  <div class="event-title">
-    <div class="small">EVENT SPECIAL</div>
-    <h1>9.9 CLAW MACHINE</h1>
-    <p>GRAB IT • WIN IT • CLAIM IT</p>
+
+  <!-- TITLE -->
+
+  <div class="title">
+
+    <small>
+      EVENT SPECIAL
+    </small>
+
+    <h1>
+      9.9 CLAW MACHINE
+    </h1>
+
+    <p>
+      GRAB IT • WIN IT • CLAIM IT
+    </p>
+
   </div>
+
+
+  <!-- STATUS -->
 
   <div class="status-row">
-    <div class="status-card">
-      <span>TIKET BERMAIN</span>
-      <strong id="ticket">1</strong>
+
+    <div class="status-box">
+
+      <span>
+        TIKET BERMAIN
+      </span>
+
+      <strong id="ticket">
+        1
+      </strong>
+
     </div>
 
-    <div class="status-card">
-      <span>STATUS</span>
-      <strong id="statusText">SIAP MAIN</strong>
+
+    <div class="status-box">
+
+      <span>
+        STATUS
+      </span>
+
+      <strong id="status">
+        SIAP MAIN
+      </strong>
+
     </div>
+
   </div>
+
+
+  <!-- MACHINE -->
 
   <div class="machine-wrap">
 
-    <!-- MESIN -->
+
+    <!-- frame asli -->
+
     <img
-      class="machine-img"
+      class="machine-frame"
       src="assets/claw%20machine.png"
       alt="">
 
-    <!-- ISI MESIN -->
-    <div class="glass-area">
 
-      <!-- tutup claw bawaan gambar -->
-      <div class="static-claw-cover"></div>
+    <!-- interior baru -->
 
-      <!-- rail aktif -->
+    <div class="game-glass">
+
+
+      <div class="lights">
+
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+
+      </div>
+
+
       <div class="rail"></div>
 
-      <!-- CLAW AKTIF -->
-      <div class="claw-track" id="clawTrack">
+
+      <!-- CLAW MOVING -->
+
+      <div
+        class="claw-system"
+        id="clawSystem">
+
 
         <div class="carriage"></div>
+
+
         <div class="cable"></div>
 
-        <div class="active-claw" id="activeClaw">
+
+        <div
+          class="claw-holder"
+          id="clawHolder">
+
+
           <img
+            class="claw-img"
             id="clawImage"
             src="assets/claw%20open.png"
             alt="">
 
+
           <img
+            class="caught"
             id="caughtPrize"
-            class="caught-prize"
             src=""
             alt="">
+
+
         </div>
 
       </div>
+
 
       <!-- HADIAH -->
+
       <div class="prize-floor">
 
-        <div class="ball b1" data-id="0">
-          <img src="assets/coin.png" alt="">
+
+        <div
+          class="ball b1"
+          data-id="0">
+
+          <img
+            src="assets/coin.png">
+
         </div>
 
-        <div class="ball b2" data-id="1">
-          <img src="assets/gift.png" alt="">
+
+        <div
+          class="ball b2"
+          data-id="1">
+
+          <img
+            src="assets/gift.png">
+
         </div>
 
-        <div class="ball b3" data-id="2">
-          <img src="assets/diamond.png" alt="">
+
+        <div
+          class="ball b3"
+          data-id="2">
+
+          <img
+            src="assets/diamond.png">
+
         </div>
 
-        <div class="ball b4" data-id="3">
-          <img src="assets/crown.png" alt="">
+
+        <div
+          class="ball b4"
+          data-id="3">
+
+          <img
+            src="assets/crown.png">
+
         </div>
 
-        <div class="ball b5" data-id="4">
-          <img src="assets/chip.png" alt="">
+
+        <div
+          class="ball b5"
+          data-id="4">
+
+          <img
+            src="assets/chip.png">
+
         </div>
 
-        <div class="ball b6" data-id="5">
-          <img src="assets/grand%20prize.png" alt="">
+
+        <div
+          class="ball b6"
+          data-id="5">
+
+          <img
+            src="assets/grand%20prize.png">
+
         </div>
 
-        <div class="ball b7" data-id="6">
-          <img src="assets/ticket.png" alt="">
+
+        <div
+          class="ball b7"
+          data-id="6">
+
+          <img
+            src="assets/ticket.png">
+
         </div>
 
-        <div class="ball b8" data-id="7">
-          <img src="assets/mystery.png" alt="">
+
+        <div
+          class="ball b8"
+          data-id="7">
+
+          <img
+            src="assets/mystery.png">
+
         </div>
+
 
       </div>
 
+
     </div>
+
 
   </div>
 
-  <div class="control-panel">
 
-    <div class="controls">
+  <!-- CONTROL -->
 
-      <button class="btn" id="leftBtn" onclick="moveLeft()">◀</button>
+  <div class="control">
 
-      <button class="btn grab-btn" id="grabBtn" onclick="playClaw()">
-        🎯 GRAB
+
+    <div class="buttons">
+
+
+      <button
+        id="leftButton"
+        onclick="moveLeft()">
+
+        ◀
+
       </button>
 
-      <button class="btn" id="rightBtn" onclick="moveRight()">▶</button>
+
+      <button
+        class="grab"
+        id="grabButton"
+        onclick="grabPrize()">
+
+        🎯 GRAB
+
+      </button>
+
+
+      <button
+        id="rightButton"
+        onclick="moveRight()">
+
+        ▶
+
+      </button>
+
 
     </div>
 
-    <div class="message" id="message">
-      Gerakkan capit ke hadiah pilihan lalu tekan <b>GRAB</b>.
+
+    <div
+      class="message"
+      id="message">
+
+      Gunakan tombol kiri / kanan untuk menggerakkan capit.
+
     </div>
+
 
     <a
       href="https://mauslot.life/"
-      class="claim"
-      id="claimButton">
+      id="claimButton"
+      class="claim">
+
       🎁 CLAIM HADIAH
+
     </a>
 
+
   </div>
+
 
   <div class="footer">
     MAUSLOT VIP • EVENT SPECIAL 9.9
   </div>
 
+
 </div>
 
 
-<div class="modal" id="rewardModal">
+
+<!-- RESULT -->
+
+<div
+  class="modal"
+  id="modal">
+
 
   <div class="modal-box">
 
-    <div class="reward-img">
-      <img id="rewardImage" src="assets/gift.png" alt="">
+
+    <div class="reward-image">
+
+      <img
+        id="resultImage"
+        src="assets/gift.png">
+
     </div>
 
-    <div class="modal-small">
-      MAUSLOT 9.9 CLAW MACHINE
-    </div>
 
-    <h2>SELAMAT!</h2>
+    <h2>
+      SELAMAT!
+    </h2>
 
-    <div class="reward-name" id="rewardName">
+
+    <div
+      class="reward-name"
+      id="resultName">
+
       VIP REWARD
+
     </div>
 
-    <div class="reward-desc" id="rewardDescription">
+
+    <div
+      class="reward-desc"
+      id="resultDesc">
+
       Hadiah berhasil didapatkan.
+
     </div>
 
-    <a href="https://mauslot.life/" class="modal-claim">
+
+    <a
+      href="https://mauslot.life/"
+      class="modal-claim">
+
       🎁 CLAIM HADIAH
+
     </a>
+
 
   </div>
 
 </div>
 
 
+
 <script>
 
+/* =============================
+   HADIAH
+============================= */
+
 const prizes = [
+
   {
     name:"BONUS SALDO",
     image:"assets/coin.png",
     description:"Bonus saldo spesial Event 9.9.",
-    position:12
+    x:10
   },
+
   {
     name:"VIP GIFT",
     image:"assets/gift.png",
-    description:"Hadiah eksklusif khusus member VIP.",
-    position:28
+    description:"Hadiah VIP spesial berhasil didapatkan.",
+    x:28
   },
+
   {
     name:"DIAMOND REWARD",
     image:"assets/diamond.png",
     description:"Diamond Reward spesial MAUSLOT.",
-    position:44
+    x:44
   },
+
   {
     name:"CROWN REWARD",
     image:"assets/crown.png",
-    description:"Reward premium khusus Event 9.9.",
-    position:60
+    description:"Crown Reward spesial Event 9.9.",
+    x:60
   },
+
   {
     name:"VIP POINT",
     image:"assets/chip.png",
-    description:"VIP Point berhasil didapatkan.",
-    position:80
+    description:"Tambahan VIP Point berhasil didapatkan.",
+    x:79
   },
+
   {
     name:"GRAND PRIZE",
     image:"assets/grand%20prize.png",
     description:"Grand Prize spesial MAUSLOT 9.9.",
-    position:50
+    x:50
   },
+
   {
     name:"VIP TICKET",
     image:"assets/ticket.png",
-    description:"VIP Ticket spesial berhasil didapatkan.",
-    position:20
+    description:"VIP Ticket berhasil didapatkan.",
+    x:18
   },
+
   {
     name:"MYSTERY REWARD",
     image:"assets/mystery.png",
     description:"Mystery Reward berhasil didapatkan.",
-    position:88
+    x:88
   }
+
 ];
 
+
+/* =============================
+   STATE
+============================= */
+
 let ticket = 1;
-let clawPosition = 50;
+
+let position = 50;
+
 let playing = false;
 
-const clawTrack =
-document.getElementById("clawTrack");
 
-const activeClaw =
-document.getElementById("activeClaw");
+/* =============================
+   ELEMENT
+============================= */
+
+const clawSystem =
+document.getElementById(
+  "clawSystem"
+);
+
+const clawHolder =
+document.getElementById(
+  "clawHolder"
+);
 
 const clawImage =
-document.getElementById("clawImage");
+document.getElementById(
+  "clawImage"
+);
 
 const caughtPrize =
-document.getElementById("caughtPrize");
-
-const ticketEl =
-document.getElementById("ticket");
+document.getElementById(
+  "caughtPrize"
+);
 
 const statusText =
-document.getElementById("statusText");
+document.getElementById(
+  "status"
+);
+
+const ticketText =
+document.getElementById(
+  "ticket"
+);
 
 const message =
-document.getElementById("message");
+document.getElementById(
+  "message"
+);
 
-const leftBtn =
-document.getElementById("leftBtn");
+const leftButton =
+document.getElementById(
+  "leftButton"
+);
 
-const rightBtn =
-document.getElementById("rightBtn");
+const rightButton =
+document.getElementById(
+  "rightButton"
+);
 
-const grabBtn =
-document.getElementById("grabBtn");
+const grabButton =
+document.getElementById(
+  "grabButton"
+);
 
+
+/* =============================
+   TEST MOVEMENT
+============================= */
+
+function updatePosition(){
+
+  clawSystem.style.left =
+  position + "%";
+
+}
+
+
+/* =============================
+   LEFT
+============================= */
 
 function moveLeft(){
 
-  if(playing) return;
-
-  clawPosition -= 8;
-
-  if(clawPosition < 10){
-    clawPosition = 10;
+  if(playing){
+    return;
   }
 
-  updateClaw();
+  position -= 10;
+
+
+  if(position < 12){
+
+    position = 12;
+
+  }
+
+
+  updatePosition();
+
+
+  message.innerHTML =
+  "Capit bergerak ke kiri.";
+
 }
 
+
+/* =============================
+   RIGHT
+============================= */
 
 function moveRight(){
 
-  if(playing) return;
-
-  clawPosition += 8;
-
-  if(clawPosition > 90){
-    clawPosition = 90;
+  if(playing){
+    return;
   }
 
-  updateClaw();
+
+  position += 10;
+
+
+  if(position > 88){
+
+    position = 88;
+
+  }
+
+
+  updatePosition();
+
+
+  message.innerHTML =
+  "Capit bergerak ke kanan.";
+
 }
 
 
-function updateClaw(){
+/* =============================
+   FIND PRIZE
+============================= */
 
-  clawTrack.style.left =
-  clawPosition + "%";
-}
-
-
-function disableControls(){
-
-  leftBtn.disabled = true;
-  rightBtn.disabled = true;
-  grabBtn.disabled = true;
-}
-
-
-function enableControls(){
-
-  leftBtn.disabled = false;
-  rightBtn.disabled = false;
-  grabBtn.disabled = false;
-}
-
-
-function getClosestPrize(){
+function closestPrize(){
 
   let selected = 0;
+
   let smallest = 999;
 
-  prizes.forEach((prize,index)=>{
 
-    const distance =
-    Math.abs(prize.position - clawPosition);
+  prizes.forEach(
+    (prize,index)=>{
 
-    if(distance < smallest){
 
-      smallest = distance;
-      selected = index;
+      const distance =
+      Math.abs(
+        prize.x -
+        position
+      );
+
+
+      if(
+        distance <
+        smallest
+      ){
+
+        smallest =
+        distance;
+
+        selected =
+        index;
+
+      }
+
+
     }
-  });
+  );
+
 
   return selected;
+
 }
 
 
-async function playClaw(){
+/* =============================
+   CONTROLS
+============================= */
 
-  if(playing) return;
+function lockControls(){
+
+  leftButton.disabled = true;
+
+  rightButton.disabled = true;
+
+  grabButton.disabled = true;
+
+}
+
+
+function unlockControls(){
+
+  leftButton.disabled = false;
+
+  rightButton.disabled = false;
+
+  grabButton.disabled = false;
+
+}
+
+
+/* =============================
+   GRAB
+============================= */
+
+async function grabPrize(){
+
+  if(playing){
+    return;
+  }
+
 
   if(ticket <= 0){
 
@@ -842,178 +1400,276 @@ async function playClaw(){
     "Tiket bermain sudah habis.";
 
     return;
+
   }
+
 
   playing = true;
 
-  disableControls();
+
+  lockControls();
+
+
+  const index =
+  closestPrize();
+
+
+  const prize =
+  prizes[index];
+
+
+  /*
+  SNAP KE HADIAH
+  */
+
+  position =
+  prize.x;
+
+
+  updatePosition();
+
 
   statusText.innerHTML =
-  "MEMILIH...";
-
-  message.innerHTML =
-  "Capit sedang menuju hadiah...";
+  "MENUJU HADIAH";
 
 
-  const winnerIndex =
-  getClosestPrize();
-
-  const winner =
-  prizes[winnerIndex];
+  await wait(500);
 
 
-  /* pindah ke posisi hadiah */
-
-  clawPosition =
-  winner.position;
-
-  updateClaw();
-
-  await wait(450);
-
-
-  /* turun */
+  /*
+  TURUN
+  */
 
   statusText.innerHTML =
   "GRABBING";
 
-  clawTrack.classList.add("down");
 
-  await wait(800);
+  clawSystem.classList.add(
+    "down"
+  );
 
 
-  /* tutup claw */
+  await wait(850);
+
+
+  /*
+  TUTUP
+  */
 
   clawImage.src =
   "assets/claw%20close.png";
 
-  highlightPrize(winnerIndex);
 
-  await wait(350);
-
-
-  /* tempel hadiah */
-
-  caughtPrize.src =
-  winner.image;
-
-  activeClaw.classList.add(
-    "has-prize"
-  );
-
-
-  const winnerElement =
-  document.querySelector(
-    `.ball[data-id="${winnerIndex}"]`
-  );
-
-  if(winnerElement){
-    winnerElement.style.opacity = "0";
-  }
-
-  await wait(400);
-
-
-  /* naik */
-
-  statusText.innerHTML =
-  "MENGANGKAT...";
-
-  clawTrack.classList.remove("down");
-
-  await wait(900);
-
-
-  /* tiket */
-
-  ticket--;
-
-  ticketEl.innerHTML =
-  ticket;
-
-
-  /* result */
-
-  showReward(winner);
-
-  statusText.innerHTML =
-  "BERHASIL";
-
-  message.innerHTML =
-  "🎉 Hadiah berhasil didapatkan.";
-
-  document.getElementById(
-    "claimButton"
-  ).style.display = "block";
-
-
-  playing = false;
-}
-
-
-function highlightPrize(index){
-
-  document
-  .querySelectorAll(".ball")
-  .forEach(el=>{
-    el.classList.remove("winner");
-  });
-
-  const winner =
+  const prizeElement =
   document.querySelector(
     `.ball[data-id="${index}"]`
   );
 
-  if(winner){
-    winner.classList.add("winner");
+
+  if(prizeElement){
+
+    prizeElement.classList.add(
+      "winner"
+    );
+
   }
+
+
+  await wait(350);
+
+
+  /*
+  AMBIL GAMBAR
+  */
+
+  caughtPrize.src =
+  prize.image;
+
+
+  clawHolder.classList.add(
+    "has-prize"
+  );
+
+
+  if(prizeElement){
+
+    prizeElement.style.opacity =
+    "0";
+
+  }
+
+
+  await wait(350);
+
+
+  /*
+  NAIK
+  */
+
+  statusText.innerHTML =
+  "MENGANGKAT";
+
+
+  clawSystem.classList.remove(
+    "down"
+  );
+
+
+  await wait(900);
+
+
+  /*
+  UPDATE TIKET
+  */
+
+  ticket--;
+
+
+  ticketText.innerHTML =
+  ticket;
+
+
+  /*
+  RESULT
+  */
+
+  showResult(
+    prize
+  );
+
+
+  statusText.innerHTML =
+  "BERHASIL";
+
+
+  message.innerHTML =
+  "🎉 Hadiah berhasil didapatkan.";
+
+
+  document.getElementById(
+    "claimButton"
+  ).style.display =
+  "block";
+
+
+  playing = false;
+
 }
 
 
-function showReward(prize){
+/* =============================
+   RESULT
+============================= */
+
+function showResult(prize){
 
   document.getElementById(
-    "rewardImage"
+    "resultImage"
   ).src =
   prize.image;
 
+
   document.getElementById(
-    "rewardName"
+    "resultName"
   ).innerHTML =
   prize.name;
 
+
   document.getElementById(
-    "rewardDescription"
+    "resultDesc"
   ).innerHTML =
   prize.description;
 
+
   document.getElementById(
-    "rewardModal"
+    "modal"
   ).style.display =
   "flex";
+
 }
 
+
+/* =============================
+   WAIT
+============================= */
 
 function wait(ms){
 
   return new Promise(
     resolve =>
-    setTimeout(resolve,ms)
+    setTimeout(
+      resolve,
+      ms
+    )
   );
+
 }
 
 
+/* =============================
+   CLOSE MODAL
+============================= */
+
 document
-.getElementById("rewardModal")
+.getElementById(
+  "modal"
+)
 .addEventListener(
-"click",
-function(event){
+  "click",
+  function(e){
 
-  if(event.target === this){
-    this.style.display = "none";
+    if(
+      e.target === this
+    ){
+
+      this.style.display =
+      "none";
+
+    }
+
   }
+);
 
-});
+
+/* =============================
+   KEYBOARD
+============================= */
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(
+      e.key ===
+      "ArrowLeft"
+    ){
+
+      moveLeft();
+
+    }
+
+
+    if(
+      e.key ===
+      "ArrowRight"
+    ){
+
+      moveRight();
+
+    }
+
+
+    if(
+      e.key ===
+      "Enter"
+    ){
+
+      grabPrize();
+
+    }
+
+  }
+);
 
 </script>
 
