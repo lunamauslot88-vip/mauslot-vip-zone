@@ -120,9 +120,7 @@ body{
   aspect-ratio:3 / 4.05;
 }
 
-/*
-FRAME MESIN ASLI
-*/
+/* frame mesin */
 .machine-frame{
   position:absolute;
   inset:0;
@@ -135,31 +133,25 @@ FRAME MESIN ASLI
     drop-shadow(0 15px 25px rgba(0,0,0,.55));
 }
 
-/*
-AREA BARU YANG MENUTUP
-ISI KACA BAWAAN GAMBAR
-*/
+/* area isi kaca */
 .game-glass{
   position:absolute;
 
   left:15.4%;
   right:15.4%;
-
   top:15.7%;
   bottom:34.1%;
 
   z-index:5;
-
   overflow:hidden;
-
   border-radius:10px;
 
   background:
     radial-gradient(
-      circle at 50% 30%,
-      #0c4179 0%,
-      #07294f 33%,
-      #041b35 68%,
+      circle at 50% 24%,
+      #0d457e 0%,
+      #082d55 35%,
+      #051d38 68%,
       #031325 100%
     );
 
@@ -168,7 +160,6 @@ ISI KACA BAWAAN GAMBAR
     inset 0 -35px 55px rgba(0,0,0,.35);
 }
 
-/* kaca glossy */
 .game-glass:after{
   content:"";
   position:absolute;
@@ -179,7 +170,7 @@ ISI KACA BAWAAN GAMBAR
   background:
     linear-gradient(
       115deg,
-      rgba(255,255,255,.07),
+      rgba(255,255,255,.06),
       transparent 28%,
       transparent 72%,
       rgba(255,255,255,.025)
@@ -192,7 +183,7 @@ ISI KACA BAWAAN GAMBAR
 
 .lights{
   position:absolute;
-  top:5%;
+  top:4.5%;
   left:12%;
   right:12%;
   display:flex;
@@ -217,7 +208,7 @@ ISI KACA BAWAAN GAMBAR
 .rail{
   position:absolute;
 
-  top:10%;
+  top:9%;
   left:7%;
   right:7%;
 
@@ -239,28 +230,27 @@ ISI KACA BAWAAN GAMBAR
 }
 
 /* =========================
-   MOVING CLAW
+   CLAW
 ========================= */
 
 .claw-system{
   position:absolute;
 
   left:50%;
-  top:7%;
+  top:5.5%;
 
-  width:115px;
+  width:110px;
 
   transform:translateX(-50%);
 
   z-index:40;
 
-  transition:
-    left .25s ease;
+  transition:left .25s ease;
 
   pointer-events:none;
 }
 
-/* carriage */
+/* kepala rel */
 .carriage{
   width:42px;
   height:23px;
@@ -285,7 +275,11 @@ ISI KACA BAWAAN GAMBAR
 /* kabel */
 .cable{
   width:4px;
-  height:45px;
+
+  /*
+  POSISI AWAL CLAW LEBIH TINGGI
+  */
+  height:42px;
 
   margin:0 auto;
 
@@ -301,45 +295,43 @@ ISI KACA BAWAAN GAMBAR
     height .72s ease;
 }
 
-/* gambar claw */
+/* claw */
 .claw-holder{
-  width:105px;
-
+  width:100px;
   margin:0 auto;
-
   position:relative;
-
-  transition:
-    transform .72s ease;
 }
 
 .claw-holder img.claw-img{
   display:block;
   width:100%;
   height:auto;
-
   object-fit:contain;
 
   filter:
     drop-shadow(0 6px 8px rgba(0,0,0,.55));
 }
 
-/* turun */
+/*
+SAAT GRAB:
+tidak turun terlalu dalam,
+tapi masih mencapai bola.
+*/
 .claw-system.down .cable{
-  height:190px;
+  height:158px;
 }
 
-/* hadiah ikut tercapit */
+/* hadiah tercapit */
 .caught{
   position:absolute;
 
   left:50%;
-  bottom:-30px;
+  bottom:-28px;
 
   transform:translateX(-50%);
 
-  width:50px;
-  height:50px;
+  width:48px;
+  height:48px;
 
   object-fit:contain;
 
@@ -362,14 +354,25 @@ ISI KACA BAWAAN GAMBAR
 
   left:4%;
   right:4%;
-  bottom:4%;
 
-  height:43%;
+  /*
+  HADIAH DITURUNKAN
+  */
+  bottom:0.5%;
+
+  /*
+  AREA HADIAH DIBUAT LEBIH PENDEK
+  AGAR ADA JARAK DENGAN CLAW
+  */
+  height:32%;
 
   z-index:20;
 }
 
-/* bola transparan */
+/* =========================
+   BALL
+========================= */
+
 .ball{
   position:absolute;
 
@@ -408,9 +411,7 @@ ISI KACA BAWAAN GAMBAR
 .ball img{
   width:78%;
   height:78%;
-
   object-fit:contain;
-
   pointer-events:none;
 
   filter:
@@ -423,20 +424,19 @@ ISI KACA BAWAAN GAMBAR
   }
 
   50%{
-    transform:translateY(-4px);
+    transform:translateY(-3px);
   }
 }
 
-/* posisi */
+/* =========================
+   POSISI HADIAH BARU
+========================= */
+
+/* baris bawah */
 
 .b1{
   left:0;
   bottom:0;
-}
-
-.b2{
-  left:20%;
-  bottom:27%;
 }
 
 .b3{
@@ -444,19 +444,27 @@ ISI KACA BAWAAN GAMBAR
   bottom:0;
 }
 
-.b4{
-  right:20%;
-  bottom:28%;
-}
-
 .b5{
   right:0;
   bottom:0;
 }
 
+/* baris tengah */
+
+.b2{
+  left:20%;
+  bottom:17%;
+}
+
+.b4{
+  right:20%;
+  bottom:18%;
+}
+
+/* grand prize */
 .b6{
   left:50%;
-  bottom:59%;
+  bottom:40%;
 
   width:23%;
 
@@ -477,15 +485,17 @@ ISI KACA BAWAAN GAMBAR
     inset 0 0 15px rgba(255,255,255,.32);
 }
 
+/* hadiah samping atas */
+
 .b7{
   left:4%;
-  bottom:50%;
+  bottom:31%;
   width:18%;
 }
 
 .b8{
   right:4%;
-  bottom:50%;
+  bottom:31%;
   width:18%;
 }
 
@@ -763,9 +773,11 @@ button:disabled{
   <!-- LOGO -->
 
   <div class="logo">
+
     <img
       src="assets/logo-mauslot.png"
       alt="MAUSLOT">
+
   </div>
 
 
@@ -825,7 +837,7 @@ button:disabled{
   <div class="machine-wrap">
 
 
-    <!-- frame asli -->
+    <!-- FRAME -->
 
     <img
       class="machine-frame"
@@ -833,10 +845,12 @@ button:disabled{
       alt="">
 
 
-    <!-- interior baru -->
+    <!-- GAME AREA -->
 
     <div class="game-glass">
 
+
+      <!-- LIGHTS -->
 
       <div class="lights">
 
@@ -847,10 +861,12 @@ button:disabled{
       </div>
 
 
+      <!-- RAIL -->
+
       <div class="rail"></div>
 
 
-      <!-- CLAW MOVING -->
+      <!-- MOVING CLAW -->
 
       <div
         class="claw-system"
@@ -884,10 +900,11 @@ button:disabled{
 
         </div>
 
+
       </div>
 
 
-      <!-- HADIAH -->
+      <!-- PRIZES -->
 
       <div class="prize-floor">
 
@@ -1024,7 +1041,8 @@ button:disabled{
       class="message"
       id="message">
 
-      Gunakan tombol kiri / kanan untuk menggerakkan capit.
+      Gerakkan capit ke hadiah pilihan lalu tekan
+      <b>GRAB</b>.
 
     </div>
 
@@ -1043,7 +1061,9 @@ button:disabled{
 
 
   <div class="footer">
+
     MAUSLOT VIP • EVENT SPECIAL 9.9
+
   </div>
 
 
@@ -1051,7 +1071,7 @@ button:disabled{
 
 
 
-<!-- RESULT -->
+<!-- RESULT MODAL -->
 
 <div
   class="modal"
@@ -1242,7 +1262,7 @@ document.getElementById(
 
 
 /* =============================
-   TEST MOVEMENT
+   POSITION
 ============================= */
 
 function updatePosition(){
@@ -1262,6 +1282,7 @@ function moveLeft(){
   if(playing){
     return;
   }
+
 
   position -= 10;
 
@@ -1418,9 +1439,7 @@ async function grabPrize(){
   prizes[index];
 
 
-  /*
-  SNAP KE HADIAH
-  */
+  /* menuju hadiah */
 
   position =
   prize.x;
@@ -1436,9 +1455,7 @@ async function grabPrize(){
   await wait(500);
 
 
-  /*
-  TURUN
-  */
+  /* turun */
 
   statusText.innerHTML =
   "GRABBING";
@@ -1449,12 +1466,10 @@ async function grabPrize(){
   );
 
 
-  await wait(850);
+  await wait(800);
 
 
-  /*
-  TUTUP
-  */
+  /* tutup claw */
 
   clawImage.src =
   "assets/claw%20close.png";
@@ -1478,9 +1493,7 @@ async function grabPrize(){
   await wait(350);
 
 
-  /*
-  AMBIL GAMBAR
-  */
+  /* ambil hadiah */
 
   caughtPrize.src =
   prize.image;
@@ -1502,9 +1515,7 @@ async function grabPrize(){
   await wait(350);
 
 
-  /*
-  NAIK
-  */
+  /* naik */
 
   statusText.innerHTML =
   "MENGANGKAT";
@@ -1518,9 +1529,7 @@ async function grabPrize(){
   await wait(900);
 
 
-  /*
-  UPDATE TIKET
-  */
+  /* update tiket */
 
   ticket--;
 
@@ -1529,9 +1538,7 @@ async function grabPrize(){
   ticket;
 
 
-  /*
-  RESULT
-  */
+  /* result */
 
   showResult(
     prize
