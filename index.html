@@ -95,7 +95,7 @@ body{
 
 
 /* =====================================================
-   BACKGROUND LIGHT
+   FLOOR LIGHT
 ===================================================== */
 
 .floor-light{
@@ -125,6 +125,11 @@ body{
 
   filter:blur(26px);
 }
+
+
+/* =====================================================
+   SPOTLIGHT
+===================================================== */
 
 .spotlight{
   position:fixed;
@@ -619,7 +624,7 @@ body{
 
 
 /* =====================================================
-   MACHINE LIGHT
+   LIGHTS
 ===================================================== */
 
 .lights{
@@ -738,16 +743,8 @@ body{
 
 
 /* =====================================================
-   NEW CLAW SYSTEM
+   CLAW SYSTEM
 ===================================================== */
-
-/*
-  --drop mengontrol jarak claw turun.
-
-  carriage tetap.
-  cable memanjang.
-  claw-holder benar-benar bergerak ke bawah.
-*/
 
 .claw-system{
   --drop:0px;
@@ -772,7 +769,7 @@ body{
 }
 
 
-/* CARRIAGE */
+/* carriage */
 
 .carriage{
   position:absolute;
@@ -802,7 +799,7 @@ body{
 }
 
 
-/* CABLE */
+/* cable */
 
 .cable{
   position:absolute;
@@ -834,13 +831,11 @@ body{
     0 0 3px rgba(255,255,255,.25);
 
   transition:
-    height
-    .85s
-    cubic-bezier(.35,.05,.2,1);
+    height .85s cubic-bezier(.35,.05,.2,1);
 }
 
 
-/* ACTUAL MOVING CLAW */
+/* claw holder */
 
 .claw-holder{
   position:absolute;
@@ -855,15 +850,13 @@ body{
     translateY(var(--drop));
 
   transition:
-    transform
-    .85s
-    cubic-bezier(.35,.05,.2,1);
+    transform .85s cubic-bezier(.35,.05,.2,1);
 
   will-change:transform;
 }
 
 
-/* CLAW IMAGE */
+/* claw */
 
 .claw-img{
   display:block;
@@ -881,21 +874,17 @@ body{
 }
 
 
-/* CAUGHT PRIZE */
+/* reward attached */
 
 .caught{
   position:absolute;
 
   left:50%;
 
-  /*
-    hadiah dibuat berada
-    tepat di area bawah claw
-  */
-  bottom:-16px;
+  bottom:-4px;
 
-  width:49px;
-  height:49px;
+  width:46px;
+  height:46px;
 
   transform:
     translateX(-50%);
@@ -917,12 +906,12 @@ body{
 }
 
 
-/* sedikit shake saat menjepit */
+/* closing shake */
 
 .claw-holder.closing{
   animation:
     clawCatchShake
-    .26s
+    .30s
     ease-in-out;
 }
 
@@ -1007,8 +996,7 @@ body{
 
   transition:
     opacity .3s,
-    filter .3s,
-    transform .3s;
+    filter .3s;
 }
 
 .ball img{
@@ -1093,22 +1081,18 @@ body{
 
 .b7{
   left:4%;
-
   bottom:31%;
-
   width:18%;
 }
 
 .b8{
   right:4%;
-
   bottom:31%;
-
   width:18%;
 }
 
 
-/* TARGET HIGHLIGHT */
+/* target */
 
 .ball.target{
   border-color:#ffe779;
@@ -1256,7 +1240,7 @@ body{
 
 
 /* =====================================================
-   BUTTON
+   BUTTONS
 ===================================================== */
 
 .buttons{
@@ -1320,7 +1304,7 @@ button:disabled{
 }
 
 
-/* GRAB */
+/* grab */
 
 .grab{
   height:64px;
@@ -1498,9 +1482,7 @@ button:disabled{
   }
 
   100%{
-    transform:
-      scale(1);
-
+    transform:scale(1);
     opacity:1;
   }
 
@@ -1843,22 +1825,32 @@ button:disabled{
 <!-- BACKGROUND -->
 
 <div class="bg-wall"></div>
+
 <div class="bg-overlay"></div>
+
 <div class="bg-vignette"></div>
+
 <div class="floor-light"></div>
 
 <div class="spotlight spot-left"></div>
+
 <div class="spotlight spot-center"></div>
+
 <div class="spotlight spot-right"></div>
 
 
 <div class="particles">
 
   <div class="particle p1"></div>
+
   <div class="particle p2"></div>
+
   <div class="particle p3"></div>
+
   <div class="particle p4"></div>
+
   <div class="particle p5"></div>
+
   <div class="particle p6"></div>
 
 </div>
@@ -1984,7 +1976,7 @@ button:disabled{
 
 
 
-      <!-- NEW CLAW SYSTEM -->
+      <!-- CLAW -->
 
       <div
         class="claw-system"
@@ -2033,114 +2025,43 @@ button:disabled{
       <div class="prize-floor">
 
 
-        <div
-          class="ball b1"
-          data-id="0"
-        >
-
-          <img
-            src="./assets/coin.png"
-            alt=""
-          >
-
+        <div class="ball b1" data-id="0">
+          <img src="./assets/coin.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b2"
-          data-id="1"
-        >
-
-          <img
-            src="./assets/gift.png"
-            alt=""
-          >
-
+        <div class="ball b2" data-id="1">
+          <img src="./assets/gift.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b3"
-          data-id="2"
-        >
-
-          <img
-            src="./assets/diamond.png"
-            alt=""
-          >
-
+        <div class="ball b3" data-id="2">
+          <img src="./assets/diamond.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b4"
-          data-id="3"
-        >
-
-          <img
-            src="./assets/crown.png"
-            alt=""
-          >
-
+        <div class="ball b4" data-id="3">
+          <img src="./assets/crown.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b5"
-          data-id="4"
-        >
-
-          <img
-            src="./assets/chip.png"
-            alt=""
-          >
-
+        <div class="ball b5" data-id="4">
+          <img src="./assets/chip.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b6"
-          data-id="5"
-        >
-
-          <img
-            src="./assets/grand%20prize.png"
-            alt=""
-          >
-
+        <div class="ball b6" data-id="5">
+          <img src="./assets/grand%20prize.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b7"
-          data-id="6"
-        >
-
-          <img
-            src="./assets/ticket.png"
-            alt=""
-          >
-
+        <div class="ball b7" data-id="6">
+          <img src="./assets/ticket.png" alt="">
         </div>
 
 
-
-        <div
-          class="ball b8"
-          data-id="7"
-        >
-
-          <img
-            src="./assets/mystery.png"
-            alt=""
-          >
-
+        <div class="ball b8" data-id="7">
+          <img src="./assets/mystery.png" alt="">
         </div>
 
 
@@ -2157,7 +2078,7 @@ button:disabled{
 
 
 
-<!-- ARCADE CONTROL -->
+<!-- CONTROL -->
 
 <div class="control">
 
@@ -2180,9 +2101,7 @@ button:disabled{
       id="leftButton"
       onclick="moveLeft()"
     >
-
       ◀
-
     </button>
 
 
@@ -2191,9 +2110,7 @@ button:disabled{
       id="grabButton"
       onclick="grabPrize()"
     >
-
       🎯 GRAB
-
     </button>
 
 
@@ -2201,9 +2118,7 @@ button:disabled{
       id="rightButton"
       onclick="moveRight()"
     >
-
       ▶
-
     </button>
 
 
@@ -2247,7 +2162,7 @@ button:disabled{
 
 
 
-<!-- RESULT -->
+<!-- MODAL -->
 
 <div
   class="modal"
@@ -2292,9 +2207,7 @@ button:disabled{
       class="reward-name"
       id="resultName"
     >
-
       VIP REWARD
-
     </div>
 
 
@@ -2302,9 +2215,7 @@ button:disabled{
       class="reward-desc"
       id="resultDesc"
     >
-
       Hadiah berhasil didapatkan.
-
     </div>
 
 
@@ -2325,6 +2236,43 @@ button:disabled{
 
 
 <script>
+
+/* =====================================================
+   CALIBRATION
+
+   Ini bagian yang paling penting
+   untuk posisi jepit claw.
+===================================================== */
+
+/*
+  TITIK JEPIT VISUAL CLAW.
+
+  Jika claw berhenti TERLALU TINGGI:
+  kecilkan angka ini, contoh 70.
+
+  Jika claw berhenti TERLALU RENDAH:
+  besarkan angka ini, contoh 86.
+*/
+
+const GRIP_OFFSET = 78;
+
+
+/*
+  Posisi target terhadap titik tengah bola.
+
+  0 = tepat tengah.
+  positif = sedikit lebih atas.
+*/
+
+const GRAB_TARGET_OFFSET = 0.08;
+
+
+/*
+  Posisi hadiah setelah ikut claw.
+*/
+
+const MIN_DROP = 20;
+
 
 /* =====================================================
    PRIZE DATA
@@ -2399,41 +2347,41 @@ let playing = false;
 ===================================================== */
 
 const gameGlass =
-document.getElementById("gameGlass");
+  document.getElementById("gameGlass");
 
 const clawSystem =
-document.getElementById("clawSystem");
+  document.getElementById("clawSystem");
 
 const clawHolder =
-document.getElementById("clawHolder");
+  document.getElementById("clawHolder");
 
 const clawImage =
-document.getElementById("clawImage");
+  document.getElementById("clawImage");
 
 const caughtPrize =
-document.getElementById("caughtPrize");
+  document.getElementById("caughtPrize");
 
 const statusText =
-document.getElementById("status");
+  document.getElementById("status");
 
 const ticketText =
-document.getElementById("ticket");
+  document.getElementById("ticket");
 
 const message =
-document.getElementById("message");
+  document.getElementById("message");
 
 const leftButton =
-document.getElementById("leftButton");
+  document.getElementById("leftButton");
 
 const rightButton =
-document.getElementById("rightButton");
+  document.getElementById("rightButton");
 
 const grabButton =
-document.getElementById("grabButton");
+  document.getElementById("grabButton");
 
 
 /* =====================================================
-   POSITION X
+   POSITION
 ===================================================== */
 
 function updatePosition(){
@@ -2493,7 +2441,7 @@ function moveRight(){
 
 
 /* =====================================================
-   GET CENTER
+   PRIZE CENTER
 ===================================================== */
 
 function getPrizeCenter(element){
@@ -2522,7 +2470,7 @@ function getPrizeCenter(element){
 
 
 /* =====================================================
-   FIND CLOSEST BALL
+   FIND CLOSEST
 ===================================================== */
 
 function findClosestPrize(){
@@ -2589,7 +2537,7 @@ function findClosestPrize(){
 
 
 /* =====================================================
-   MOVE EXACTLY ABOVE BALL
+   MOVE EXACTLY TO BALL
 ===================================================== */
 
 function moveToPrize(prizeElement){
@@ -2623,7 +2571,7 @@ function moveToPrize(prizeElement){
 
 
 /* =====================================================
-   NEW DROP CALCULATION
+   CALCULATE DROP
 ===================================================== */
 
 function calculateDrop(prizeElement){
@@ -2639,7 +2587,7 @@ function calculateDrop(prizeElement){
 
 
   /*
-    titik tengah bola
+    Tengah bola
   */
 
   const prizeCenterY =
@@ -2655,7 +2603,7 @@ function calculateDrop(prizeElement){
 
 
   /*
-    posisi atas holder pada posisi awal
+    Posisi atas claw
   */
 
   const holderTop =
@@ -2664,65 +2612,63 @@ function calculateDrop(prizeElement){
 
 
   /*
-    Ini adalah titik visual
-    penjepit claw.
-
-    Tidak pakai tinggi PNG karena
-    PNG bisa punya area transparan.
+    Titik jepit visual claw
   */
 
-  const visualGripPoint =
+  const gripPointY =
     holderTop +
-    (
-      clawHolder.offsetWidth *
-      0.64
-    );
+    GRIP_OFFSET;
 
 
   /*
-    Turunkan grip sampai sedikit
-    masuk ke tengah bola
+    Target jepit:
+    sedikit di atas tengah bola
   */
 
   const targetGripY =
-    prizeCenterY -
+    prizeCenterY
+    -
     (
       prizeRect.height *
-      0.02
+      GRAB_TARGET_OFFSET
     );
 
 
   let drop =
     targetGripY -
-    visualGripPoint;
+    gripPointY;
 
 
   /*
-    supaya animasi turun tetap terlihat
+    minimum drop
   */
 
-  if(drop < 35){
-    drop = 35;
+  if(drop < MIN_DROP){
+
+    drop =
+      MIN_DROP;
+
   }
 
 
   /*
-    batas bawah game
+    maksimum agar claw
+    tidak keluar area kaca
   */
 
-  const holderHeight =
-    clawHolder.offsetWidth;
-
-
   const maxDrop =
-    glassRect.height -
-    holderTop -
-    holderHeight -
-    8;
+    glassRect.height
+    -
+    holderTop
+    -
+    100;
 
 
   if(drop > maxDrop){
-    drop = maxDrop;
+
+    drop =
+      maxDrop;
+
   }
 
 
@@ -2749,7 +2695,7 @@ function setClawDrop(px){
 
 
 /* =====================================================
-   CONTROLS
+   CONTROL
 ===================================================== */
 
 function lockControls(){
@@ -2775,7 +2721,7 @@ function unlockControls(){
 
 
 /* =====================================================
-   CLEAR TARGET
+   TARGET
 ===================================================== */
 
 function clearTargets(){
@@ -2787,6 +2733,10 @@ function clearTargets(){
 
       ball.classList.remove(
         "target"
+      );
+
+      ball.classList.remove(
+        "winner"
       );
 
     }
@@ -2829,23 +2779,27 @@ async function grabPrize(){
 
   setClawDrop(0);
 
+
   clawImage.src =
     "./assets/claw%20open.png";
+
 
   clawHolder.classList.remove(
     "has-prize"
   );
 
+
   clawHolder.classList.remove(
     "closing"
   );
+
 
   caughtPrize.src =
     "";
 
 
   /*
-    FIND TARGET
+    PILIH BOLA
   */
 
   const winnerIndex =
@@ -2868,7 +2822,7 @@ async function grabPrize(){
 
 
   /*
-    MOVE HORIZONTAL
+    HORIZONTAL
   */
 
   statusText.innerHTML =
@@ -2884,11 +2838,13 @@ async function grabPrize(){
   );
 
 
-  await wait(650);
+  await wait(
+    650
+  );
 
 
   /*
-    CALCULATE DROP AFTER X FINISHED
+    CALCULATE Y
   */
 
   const dropDistance =
@@ -2898,7 +2854,7 @@ async function grabPrize(){
 
 
   /*
-    DROP
+    TURUN
   */
 
   statusText.innerHTML =
@@ -2914,11 +2870,13 @@ async function grabPrize(){
   );
 
 
-  await wait(950);
+  await wait(
+    950
+  );
 
 
   /*
-    CLOSE
+    JEPIT
   */
 
   statusText.innerHTML =
@@ -2943,11 +2901,18 @@ async function grabPrize(){
   );
 
 
-  await wait(400);
+  /*
+    Jangan langsung hilangkan bola,
+    biar efek jepit terlihat.
+  */
+
+  await wait(
+    550
+  );
 
 
   /*
-    ATTACH BALL TO CLAW
+    HADIAH MASUK KE CLAW
   */
 
   caughtPrize.src =
@@ -2963,11 +2928,13 @@ async function grabPrize(){
     "0";
 
 
-  await wait(300);
+  await wait(
+    300
+  );
 
 
   /*
-    LIFT
+    ANGKAT
   */
 
   statusText.innerHTML =
@@ -2981,7 +2948,9 @@ async function grabPrize(){
   setClawDrop(0);
 
 
-  await wait(1050);
+  await wait(
+    1050
+  );
 
 
   /*
