@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -9,21 +8,15 @@
   content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
 >
 
-<meta
-  name="theme-color"
-  content="#020713"
->
+<meta name="theme-color" content="#020713">
 
-<title>
-MAUSLOT 9.9 Claw Machine
-</title>
-
+<title>MAUSLOT 9.9 Claw Machine</title>
 
 <style>
 
-/* =========================================================
+/* =====================================================
    RESET
-========================================================= */
+===================================================== */
 
 *{
   box-sizing:border-box;
@@ -38,32 +31,24 @@ body{
 
 body{
   position:relative;
-
   overflow-x:hidden;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
 
-  color:#ffffff;
-
+  color:#fff;
   background:#020713;
 }
 
 
-
-/* =========================================================
+/* =====================================================
    BACKGROUND
-========================================================= */
+===================================================== */
 
 .bg-wall{
   position:fixed;
-
   inset:0;
 
   z-index:0;
-
   pointer-events:none;
 
   background:
@@ -75,83 +60,71 @@ body{
   transform:scale(1.015);
 }
 
-
 .bg-overlay{
   position:fixed;
-
   inset:0;
 
   z-index:1;
-
   pointer-events:none;
 
   background:
-
     linear-gradient(
       180deg,
-      rgba(1,5,13,.14) 0%,
-      rgba(1,6,15,.20) 34%,
-      rgba(1,6,15,.42) 100%
+      rgba(1,5,13,.10),
+      rgba(1,6,15,.18) 38%,
+      rgba(1,6,15,.42)
     );
 }
 
-
 .bg-vignette{
   position:fixed;
-
   inset:0;
 
   z-index:2;
-
   pointer-events:none;
 
   background:
     radial-gradient(
-      circle at 50% 35%,
+      circle at 50% 36%,
       transparent 0%,
       transparent 31%,
-      rgba(0,0,0,.15) 57%,
+      rgba(0,0,0,.16) 58%,
       rgba(0,0,0,.50) 100%
     );
 }
 
 
-
-/* =========================================================
-   SCENE LIGHT
-========================================================= */
+/* =====================================================
+   BACKGROUND LIGHT
+===================================================== */
 
 .floor-light{
   position:fixed;
 
   left:50%;
-
   bottom:-80px;
 
   width:820px;
   height:280px;
 
-  transform:
-    translateX(-50%);
-
-  border-radius:50%;
+  transform:translateX(-50%);
 
   z-index:2;
 
   pointer-events:none;
 
+  border-radius:50%;
+
   background:
     radial-gradient(
       ellipse,
-      rgba(46,147,255,.24) 0%,
-      rgba(255,199,67,.10) 37%,
-      transparent 72%
+      rgba(46,147,255,.23),
+      rgba(255,199,67,.10) 38%,
+      transparent 73%
     );
 
-  filter:
-    blur(26px);
+  filter:blur(26px);
 }
-
 
 .spotlight{
   position:fixed;
@@ -165,18 +138,17 @@ body{
 
   pointer-events:none;
 
-  opacity:.13;
+  opacity:.12;
 
-  filter:
-    blur(8px);
+  filter:blur(8px);
 
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,.06) 0%,
+      rgba(255,255,255,.06),
       rgba(104,188,255,.23) 28%,
       rgba(255,218,125,.13) 58%,
-      transparent 100%
+      transparent
     );
 
   clip-path:
@@ -188,149 +160,28 @@ body{
     );
 }
 
-
 .spot-left{
   left:12%;
-
-  transform:
-    rotate(7deg);
+  transform:rotate(7deg);
 }
-
 
 .spot-center{
   left:50%;
-
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 }
-
 
 .spot-right{
   right:12%;
-
-  transform:
-    rotate(-7deg);
+  transform:rotate(-7deg);
 }
 
 
-
-/* =========================================================
-   SIDE LIGHT
-========================================================= */
-
-.side-glow{
-  position:fixed;
-
-  top:0;
-
-  width:19%;
-  height:100%;
-
-  z-index:2;
-
-  pointer-events:none;
-
-  opacity:.23;
-
-  filter:
-    blur(8px);
-}
-
-
-.side-left{
-  left:0;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(66,157,255,.16),
-      transparent 72%
-    );
-}
-
-
-.side-right{
-  right:0;
-
-  background:
-    linear-gradient(
-      270deg,
-      rgba(255,196,61,.15),
-      transparent 72%
-    );
-}
-
-
-
-/* =========================================================
-   MOVING LIGHT SWEEP
-========================================================= */
-
-.light-sweep{
-  position:fixed;
-
-  top:-12%;
-
-  left:-42%;
-
-  width:30%;
-  height:135%;
-
-  z-index:2;
-
-  pointer-events:none;
-
-  opacity:.10;
-
-  transform:
-    rotate(10deg);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(96,180,255,.09),
-      rgba(255,255,255,.18),
-      rgba(255,208,77,.08),
-      transparent
-    );
-
-  filter:
-    blur(10px);
-
-  animation:
-    sweepMove
-    10s
-    ease-in-out
-    infinite;
-}
-
-
-@keyframes sweepMove{
-
-  0%{
-    left:-42%;
-  }
-
-  45%{
-    left:110%;
-  }
-
-  100%{
-    left:110%;
-  }
-
-}
-
-
-
-/* =========================================================
+/* =====================================================
    PARTICLES
-========================================================= */
+===================================================== */
 
 .particles{
   position:fixed;
-
   inset:0;
 
   z-index:2;
@@ -339,7 +190,6 @@ body{
 
   overflow:hidden;
 }
-
 
 .particle{
   position:absolute;
@@ -352,8 +202,7 @@ body{
   background:#ffd86a;
 
   box-shadow:
-    0 0 7px
-    rgba(255,211,95,.75);
+    0 0 7px rgba(255,211,95,.75);
 
   opacity:.22;
 
@@ -364,50 +213,17 @@ body{
     infinite;
 }
 
-
-.p1{
-  left:8%;
-  top:82%;
-}
-
-.p2{
-  left:17%;
-  top:72%;
-  animation-delay:1.5s;
-}
-
-.p3{
-  left:28%;
-  top:88%;
-  animation-delay:3.2s;
-}
-
-.p4{
-  right:9%;
-  top:80%;
-  animation-delay:.8s;
-}
-
-.p5{
-  right:18%;
-  top:69%;
-  animation-delay:2.3s;
-}
-
-.p6{
-  right:28%;
-  top:87%;
-  animation-delay:4s;
-}
-
+.p1{left:8%;top:82%;}
+.p2{left:17%;top:72%;animation-delay:1.5s;}
+.p3{left:28%;top:88%;animation-delay:3.2s;}
+.p4{right:9%;top:80%;animation-delay:.8s;}
+.p5{right:18%;top:69%;animation-delay:2.3s;}
+.p6{right:28%;top:87%;animation-delay:4s;}
 
 @keyframes particleFloat{
 
   0%{
-    transform:
-      translateY(0)
-      scale(.8);
-
+    transform:translateY(0) scale(.8);
     opacity:0;
   }
 
@@ -420,20 +236,16 @@ body{
   }
 
   100%{
-    transform:
-      translateY(-250px)
-      scale(1.15);
-
+    transform:translateY(-250px) scale(1.15);
     opacity:0;
   }
 
 }
 
 
-
-/* =========================================================
-   MAIN PAGE
-========================================================= */
+/* =====================================================
+   PAGE
+===================================================== */
 
 .page{
   position:relative;
@@ -441,35 +253,27 @@ body{
   z-index:5;
 
   width:100%;
-
   max-width:510px;
 
   margin:0 auto;
 
-  padding:
-    12px
-    12px
-    34px;
+  padding:12px 12px 34px;
 }
 
 
-
-/* =========================================================
+/* =====================================================
    LOGO
-========================================================= */
+===================================================== */
 
 .logo{
   text-align:center;
-
   margin-bottom:5px;
 }
-
 
 .logo img{
   display:block;
 
   width:255px;
-
   max-width:78%;
 
   height:auto;
@@ -480,23 +284,19 @@ body{
 
   filter:
     drop-shadow(
-      0 6px 12px
-      rgba(0,0,0,.48)
+      0 6px 12px rgba(0,0,0,.48)
     );
 }
 
 
-
-/* =========================================================
+/* =====================================================
    TITLE
-========================================================= */
+===================================================== */
 
 .title{
   text-align:center;
-
   margin-bottom:11px;
 }
-
 
 .title small{
   display:block;
@@ -504,60 +304,42 @@ body{
   color:#b6c7da;
 
   font-size:9px;
-
   font-weight:bold;
 
   letter-spacing:3px;
 
   text-shadow:
-    0 2px 4px
-    rgba(0,0,0,.75);
+    0 2px 4px rgba(0,0,0,.75);
 }
 
-
 .title h1{
-  margin:
-    4px 0;
+  margin:4px 0;
 
   color:#ffd764;
 
   font-size:30px;
-
   line-height:1;
 
   text-shadow:
-
-    0 2px 0
-    #724904,
-
-    0 0 17px
-    rgba(255,202,50,.38),
-
-    0 6px 12px
-    rgba(0,0,0,.62);
+    0 2px 0 #724904,
+    0 0 17px rgba(255,202,50,.38),
+    0 6px 12px rgba(0,0,0,.62);
 }
 
-
 .title p{
-  margin:
-    6px 0 0;
+  margin:6px 0 0;
 
   color:#e3e9ef;
 
   font-size:9px;
 
   letter-spacing:1.5px;
-
-  text-shadow:
-    0 2px 4px
-    rgba(0,0,0,.72);
 }
 
 
-
-/* =========================================================
+/* =====================================================
    STATUS
-========================================================= */
+===================================================== */
 
 .status-row{
   display:grid;
@@ -570,18 +352,15 @@ body{
   margin-bottom:10px;
 }
 
-
 .status-box{
-  padding:
-    9px 8px;
+  padding:9px 8px;
 
   text-align:center;
 
   border-radius:12px;
 
   border:
-    1px solid
-    rgba(217,173,53,.72);
+    1px solid rgba(217,173,53,.72);
 
   background:
     linear-gradient(
@@ -590,18 +369,12 @@ body{
       rgba(3,11,20,.95)
     );
 
-  backdrop-filter:
-    blur(8px);
+  backdrop-filter:blur(8px);
 
   box-shadow:
-
-    0 8px 20px
-    rgba(0,0,0,.28),
-
-    inset 0 1px 0
-    rgba(255,255,255,.04);
+    0 8px 20px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
-
 
 .status-box span{
   display:block;
@@ -612,7 +385,6 @@ body{
 
   letter-spacing:1px;
 }
-
 
 .status-box strong{
   display:block;
@@ -625,35 +397,26 @@ body{
 }
 
 
-
-/* =========================================================
+/* =====================================================
    MACHINE STAGE
-========================================================= */
+===================================================== */
 
 .machine-stage{
   position:relative;
 
-  margin-top:0;
-
   padding-bottom:74px;
 }
-
-
-
-/* FLOOR GLOW */
 
 .machine-floor-glow{
   position:absolute;
 
   left:50%;
-
   bottom:29px;
 
   width:82%;
   height:82px;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   z-index:1;
 
@@ -662,28 +425,24 @@ body{
   background:
     radial-gradient(
       ellipse,
-      rgba(53,151,255,.24) 0%,
+      rgba(53,151,255,.24),
       rgba(255,199,71,.11) 38%,
       transparent 77%
     );
 
-  filter:
-    blur(17px);
+  filter:blur(17px);
 }
-
 
 .machine-floor-shine{
   position:absolute;
 
   left:50%;
-
   bottom:18px;
 
   width:88%;
   height:40px;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   z-index:2;
 
@@ -699,19 +458,13 @@ body{
       transparent
     );
 
-  filter:
-    blur(9px);
+  filter:blur(9px);
 }
-
-
-
-/* REFLECTION */
 
 .machine-reflection{
   position:absolute;
 
   left:50%;
-
   bottom:-46px;
 
   width:94%;
@@ -724,8 +477,7 @@ body{
 
   opacity:.13;
 
-  filter:
-    blur(5px);
+  filter:blur(5px);
 
   pointer-events:none;
 
@@ -747,8 +499,9 @@ body{
 }
 
 
-
-/* MACHINE WRAPPER */
+/* =====================================================
+   MACHINE
+===================================================== */
 
 .machine-wrap{
   position:relative;
@@ -757,24 +510,18 @@ body{
 
   margin-left:-3.5%;
 
-  aspect-ratio:
-    3 / 4.05;
+  aspect-ratio:3 / 4.05;
 
   z-index:5;
 
   filter:
-
     drop-shadow(
-      0 24px 34px
-      rgba(0,0,0,.56)
+      0 24px 34px rgba(0,0,0,.56)
     )
-
     drop-shadow(
-      0 0 32px
-      rgba(31,126,255,.12)
+      0 0 32px rgba(31,126,255,.12)
     );
 }
-
 
 .machine-frame{
   position:absolute;
@@ -792,10 +539,9 @@ body{
 }
 
 
-
-/* =========================================================
+/* =====================================================
    GAME GLASS
-========================================================= */
+===================================================== */
 
 .game-glass{
   position:absolute;
@@ -818,20 +564,13 @@ body{
       rgba(18,87,157,.98),
       rgba(8,45,84,.98) 38%,
       rgba(3,22,42,.98) 72%,
-      rgba(2,11,21,.98) 100%
+      rgba(2,11,21,.98)
     );
 
   box-shadow:
-
-    inset 0 0 30px
-    rgba(0,145,255,.27),
-
-    inset 0 -48px 68px
-    rgba(0,0,0,.35);
+    inset 0 0 30px rgba(0,145,255,.27),
+    inset 0 -48px 68px rgba(0,0,0,.35);
 }
-
-
-/* GLASS REFLECTION */
 
 .game-glass::before{
   content:"";
@@ -851,12 +590,11 @@ body{
   background:
     linear-gradient(
       105deg,
-      rgba(255,255,255,.14),
-      rgba(255,255,255,.04) 33%,
-      transparent 57%
+      rgba(255,255,255,.12),
+      rgba(255,255,255,.035) 34%,
+      transparent 58%
     );
 }
-
 
 .game-glass::after{
   content:"";
@@ -880,10 +618,9 @@ body{
 }
 
 
-
-/* =========================================================
+/* =====================================================
    MACHINE LIGHT
-========================================================= */
+===================================================== */
 
 .lights{
   position:absolute;
@@ -895,12 +632,10 @@ body{
 
   display:flex;
 
-  justify-content:
-    space-between;
+  justify-content:space-between;
 
   z-index:8;
 }
-
 
 .light{
   width:7px;
@@ -911,12 +646,8 @@ body{
   background:#69c2ff;
 
   box-shadow:
-
-    0 0 8px
-    #69c2ff,
-
-    0 0 16px
-    #278fff;
+    0 0 8px #69c2ff,
+    0 0 16px #278fff;
 
   animation:
     insideLight
@@ -924,7 +655,6 @@ body{
     ease-in-out
     infinite;
 }
-
 
 .light:nth-child(2){
   animation-delay:.5s;
@@ -934,11 +664,9 @@ body{
   animation-delay:1s;
 }
 
-
 @keyframes insideLight{
 
-  0%,
-  100%{
+  0%,100%{
     opacity:.55;
   }
 
@@ -949,10 +677,9 @@ body{
 }
 
 
-
-/* =========================================================
+/* =====================================================
    INNER FLOOR
-========================================================= */
+===================================================== */
 
 .inner-floor-glow{
   position:absolute;
@@ -960,7 +687,7 @@ body{
   left:8%;
   right:8%;
 
-  bottom:5%;
+  bottom:4%;
 
   height:18px;
 
@@ -976,15 +703,13 @@ body{
       transparent 75%
     );
 
-  filter:
-    blur(6px);
+  filter:blur(6px);
 }
 
 
-
-/* =========================================================
+/* =====================================================
    RAIL
-========================================================= */
+===================================================== */
 
 .rail{
   position:absolute;
@@ -1008,92 +733,137 @@ body{
     );
 
   box-shadow:
-    0 0 10px
-    rgba(255,211,66,.55);
+    0 0 10px rgba(255,211,66,.55);
 }
 
 
+/* =====================================================
+   NEW CLAW SYSTEM
+===================================================== */
 
-/* =========================================================
-   CLAW
-========================================================= */
+/*
+  --drop mengontrol jarak claw turun.
+
+  carriage tetap.
+  cable memanjang.
+  claw-holder benar-benar bergerak ke bawah.
+*/
 
 .claw-system{
+  --drop:0px;
+
   position:absolute;
 
   left:50%;
-
   top:5.5%;
 
   width:110px;
 
-  transform:
-    translateX(-50%);
+  height:100%;
+
+  transform:translateX(-50%);
 
   z-index:40;
 
   transition:
-    left .28s ease;
+    left .32s cubic-bezier(.4,0,.2,1);
 
   pointer-events:none;
 }
 
 
+/* CARRIAGE */
+
 .carriage{
+  position:absolute;
+
+  top:0;
+  left:50%;
+
   width:42px;
   height:23px;
 
-  margin:0 auto;
+  transform:translateX(-50%);
 
   border-radius:6px;
 
   background:
     linear-gradient(
       180deg,
-      #ffeb86,
-      #aa7310
+      #ffed8d,
+      #b17810
     );
 
   border:
-    2px solid
-    #ffe989;
+    2px solid #ffe989;
 
   box-shadow:
-    0 0 10px
-    rgba(255,210,55,.42);
+    0 0 10px rgba(255,210,55,.42);
 }
 
 
+/* CABLE */
+
 .cable{
+  position:absolute;
+
+  top:21px;
+  left:50%;
+
   width:4px;
 
-  height:42px;
+  height:
+    calc(
+      42px + var(--drop)
+    );
 
-  margin:0 auto;
+  transform:
+    translateX(-50%);
+
+  transform-origin:top;
 
   background:
     linear-gradient(
       90deg,
-      #393939,
-      #d8d8d8,
-      #434343
+      #303030,
+      #dfdfdf,
+      #3d3d3d
     );
+
+  box-shadow:
+    0 0 3px rgba(255,255,255,.25);
 
   transition:
     height
-    .75s
-    cubic-bezier(.4,0,.2,1);
+    .85s
+    cubic-bezier(.35,.05,.2,1);
 }
 
 
+/* ACTUAL MOVING CLAW */
+
 .claw-holder{
-  position:relative;
+  position:absolute;
+
+  top:63px;
+  left:50%;
 
   width:100px;
 
-  margin:0 auto;
+  transform:
+    translateX(-50%)
+    translateY(var(--drop));
+
+  transition:
+    transform
+    .85s
+    cubic-bezier(.35,.05,.2,1);
+
+  will-change:transform;
 }
 
+
+/* CLAW IMAGE */
 
 .claw-img{
   display:block;
@@ -1106,21 +876,26 @@ body{
 
   filter:
     drop-shadow(
-      0 7px 9px
-      rgba(0,0,0,.60)
+      0 7px 9px rgba(0,0,0,.60)
     );
 }
 
+
+/* CAUGHT PRIZE */
 
 .caught{
   position:absolute;
 
   left:50%;
 
-  bottom:-28px;
+  /*
+    hadiah dibuat berada
+    tepat di area bawah claw
+  */
+  bottom:-16px;
 
-  width:48px;
-  height:48px;
+  width:49px;
+  height:49px;
 
   transform:
     translateX(-50%);
@@ -1129,24 +904,52 @@ body{
 
   display:none;
 
+  z-index:-1;
+
   filter:
     drop-shadow(
-      0 5px 7px
-      rgba(0,0,0,.60)
+      0 5px 7px rgba(0,0,0,.60)
     );
 }
 
-
-.claw-holder.has-prize
-.caught{
+.claw-holder.has-prize .caught{
   display:block;
 }
 
 
+/* sedikit shake saat menjepit */
 
-/* =========================================================
-   PRIZE AREA
-========================================================= */
+.claw-holder.closing{
+  animation:
+    clawCatchShake
+    .26s
+    ease-in-out;
+}
+
+@keyframes clawCatchShake{
+
+  0%{
+    margin-left:0;
+  }
+
+  30%{
+    margin-left:-2px;
+  }
+
+  60%{
+    margin-left:2px;
+  }
+
+  100%{
+    margin-left:0;
+  }
+
+}
+
+
+/* =====================================================
+   PRIZE FLOOR
+===================================================== */
 
 .prize-floor{
   position:absolute;
@@ -1162,10 +965,9 @@ body{
 }
 
 
-
-/* =========================================================
-   PRIZE BALLS
-========================================================= */
+/* =====================================================
+   BALL
+===================================================== */
 
 .ball{
   position:absolute;
@@ -1183,8 +985,7 @@ body{
   justify-content:center;
 
   border:
-    1.5px solid
-    rgba(255,255,255,.38);
+    1.5px solid rgba(255,255,255,.38);
 
   background:
     radial-gradient(
@@ -1195,12 +996,8 @@ body{
     );
 
   box-shadow:
-
-    inset 0 0 15px
-    rgba(255,255,255,.16),
-
-    0 7px 14px
-    rgba(0,0,0,.42);
+    inset 0 0 15px rgba(255,255,255,.16),
+    0 7px 14px rgba(0,0,0,.42);
 
   animation:
     floatBall
@@ -1210,9 +1007,9 @@ body{
 
   transition:
     opacity .3s,
-    filter .3s;
+    filter .3s,
+    transform .3s;
 }
-
 
 .ball img{
   width:78%;
@@ -1224,62 +1021,51 @@ body{
 
   filter:
     drop-shadow(
-      0 3px 5px
-      rgba(0,0,0,.35)
+      0 3px 5px rgba(0,0,0,.35)
     );
 }
 
-
 @keyframes floatBall{
 
-  0%,
-  100%{
-    transform:
-      translateY(0);
+  0%,100%{
+    transform:translateY(0);
   }
 
   50%{
-    transform:
-      translateY(-3px);
+    transform:translateY(-3px);
   }
 
 }
 
 
-
-/* =========================================================
-   BALL POSITIONS
-========================================================= */
+/* =====================================================
+   BALL POSITION
+===================================================== */
 
 .b1{
   left:0;
   bottom:0;
 }
 
-
 .b2{
   left:20%;
   bottom:17%;
 }
-
 
 .b3{
   left:40%;
   bottom:0;
 }
 
-
 .b4{
   right:20%;
   bottom:18%;
 }
 
-
 .b5{
   right:0;
   bottom:0;
 }
-
 
 .b6{
   left:50%;
@@ -1288,8 +1074,7 @@ body{
 
   width:23%;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   animation:none;
 
@@ -1302,14 +1087,9 @@ body{
     );
 
   box-shadow:
-
-    0 0 26px
-    rgba(255,198,39,.7),
-
-    inset 0 0 15px
-    rgba(255,255,255,.32);
+    0 0 26px rgba(255,198,39,.7),
+    inset 0 0 15px rgba(255,255,255,.32);
 }
-
 
 .b7{
   left:4%;
@@ -1318,7 +1098,6 @@ body{
 
   width:18%;
 }
-
 
 .b8{
   right:4%;
@@ -1329,37 +1108,36 @@ body{
 }
 
 
-.ball.winner{
-  filter:
-    brightness(1.25);
+/* TARGET HIGHLIGHT */
 
-  border-color:
-    #ffe66f;
+.ball.target{
+  border-color:#ffe779;
 
   box-shadow:
+    0 0 28px rgba(255,213,82,.78),
+    inset 0 0 17px rgba(255,255,255,.28);
+}
 
-    0 0 32px
-    rgba(255,205,50,1),
+.ball.winner{
+  filter:brightness(1.28);
 
-    inset 0 0 16px
-    rgba(255,255,255,.4);
+  border-color:#ffe66f;
+
+  box-shadow:
+    0 0 34px rgba(255,205,50,1),
+    inset 0 0 17px rgba(255,255,255,.4);
 }
 
 
-
-/* =========================================================
-   ARCADE CONTROL CONSOLE
-========================================================= */
+/* =====================================================
+   ARCADE CONSOLE
+===================================================== */
 
 .control{
   position:relative;
 
-  margin-top:0;
-
   padding:
-    17px
-    16px
-    16px;
+    17px 16px 16px;
 
   overflow:hidden;
 
@@ -1370,33 +1148,23 @@ body{
     28px;
 
   border:
-    2px solid
-    #b98418;
+    2px solid #b98418;
 
   background:
     linear-gradient(
       180deg,
-      #173b61 0%,
+      #173b61,
       #0a213b 16%,
       #07172a 52%,
-      #030b15 100%
+      #030b15
     );
 
   box-shadow:
-
-    inset 0 2px 0
-    rgba(255,255,255,.12),
-
-    inset 0 -7px 14px
-    rgba(0,0,0,.55),
-
-    0 12px 28px
-    rgba(0,0,0,.48),
-
-    0 0 22px
-    rgba(255,197,52,.10);
+    inset 0 2px 0 rgba(255,255,255,.12),
+    inset 0 -7px 14px rgba(0,0,0,.55),
+    0 12px 28px rgba(0,0,0,.48),
+    0 0 22px rgba(255,197,52,.10);
 }
-
 
 .control::before{
   content:"";
@@ -1405,7 +1173,6 @@ body{
 
   left:4%;
   right:4%;
-
   top:7px;
 
   height:3px;
@@ -1421,37 +1188,12 @@ body{
       #ffe282,
       #684405
     );
-
-  box-shadow:
-    0 0 9px
-    rgba(255,209,72,.30);
 }
 
 
-.control::after{
-  content:"";
-
-  position:absolute;
-
-  inset:0;
-
-  pointer-events:none;
-
-  background:
-    linear-gradient(
-      115deg,
-      rgba(255,255,255,.07),
-      transparent 24%,
-      transparent 75%,
-      rgba(255,255,255,.025)
-    );
-}
-
-
-
-/* =========================================================
+/* =====================================================
    LED
-========================================================= */
+===================================================== */
 
 .arcade-led-row{
   position:relative;
@@ -1467,7 +1209,6 @@ body{
   margin-bottom:11px;
 }
 
-
 .arcade-led{
   width:6px;
   height:6px;
@@ -1477,12 +1218,8 @@ body{
   background:#42b5ff;
 
   box-shadow:
-
-    0 0 6px
-    #42b5ff,
-
-    0 0 13px
-    rgba(58,174,255,.65);
+    0 0 6px #42b5ff,
+    0 0 13px rgba(58,174,255,.65);
 
   animation:
     consoleLed
@@ -1491,32 +1228,23 @@ body{
     infinite;
 }
 
-
 .arcade-led:nth-child(2){
-
   background:#ffd353;
 
   box-shadow:
-
-    0 0 6px
-    #ffd353,
-
-    0 0 13px
-    rgba(255,203,64,.65);
+    0 0 6px #ffd353,
+    0 0 13px rgba(255,203,64,.65);
 
   animation-delay:.3s;
 }
-
 
 .arcade-led:nth-child(3){
   animation-delay:.6s;
 }
 
-
 @keyframes consoleLed{
 
-  0%,
-  100%{
+  0%,100%{
     opacity:.45;
   }
 
@@ -1527,10 +1255,9 @@ body{
 }
 
 
-
-/* =========================================================
-   ARCADE BUTTONS
-========================================================= */
+/* =====================================================
+   BUTTON
+===================================================== */
 
 .buttons{
   position:relative;
@@ -1540,40 +1267,33 @@ body{
   display:grid;
 
   grid-template-columns:
-    76px
-    1fr
-    76px;
+    76px 1fr 76px;
 
   gap:12px;
 
   align-items:center;
 }
 
-
 button{
-  position:relative;
-
   height:58px;
 
   border-radius:50%;
 
   border:
-    3px solid
-    #d3a128;
+    3px solid #d3a128;
 
   background:
     radial-gradient(
       circle at 35% 27%,
-      #284e79 0%,
+      #284e79,
       #102c4c 42%,
       #061426 72%,
-      #020811 100%
+      #020811
     );
 
   color:#ffd75d;
 
   font-size:23px;
-
   font-weight:bold;
 
   cursor:pointer;
@@ -1581,54 +1301,26 @@ button{
   touch-action:manipulation;
 
   box-shadow:
-
-    inset 0 3px 4px
-    rgba(255,255,255,.13),
-
-    inset 0 -8px 10px
-    rgba(0,0,0,.48),
-
-    0 5px 0
-    #76500c,
-
-    0 10px 15px
-    rgba(0,0,0,.38),
-
-    0 0 13px
-    rgba(255,199,56,.10);
+    inset 0 3px 4px rgba(255,255,255,.13),
+    inset 0 -8px 10px rgba(0,0,0,.48),
+    0 5px 0 #76500c,
+    0 10px 15px rgba(0,0,0,.38);
 
   transition:
     transform .08s ease,
     box-shadow .08s ease;
 }
 
-
 button:active{
-  transform:
-    translateY(4px);
-
-  box-shadow:
-
-    inset 0 3px 7px
-    rgba(0,0,0,.42),
-
-    0 1px 0
-    #76500c,
-
-    0 5px 8px
-    rgba(0,0,0,.30);
+  transform:translateY(4px);
 }
-
 
 button:disabled{
   opacity:.38;
 }
 
 
-
-/* =========================================================
-   GRAB BUTTON
-========================================================= */
+/* GRAB */
 
 .grab{
   height:64px;
@@ -1642,97 +1334,47 @@ button:disabled{
   letter-spacing:.6px;
 
   border:
-    3px solid
-    #8f620c;
+    3px solid #8f620c;
 
   background:
     radial-gradient(
       circle at 50% 22%,
-      #fff9cb 0%,
+      #fff9cb,
       #ffe46e 27%,
       #f7bc2b 62%,
-      #ad7006 100%
+      #ad7006
     );
 
   box-shadow:
-
-    inset 0 4px 5px
-    rgba(255,255,255,.72),
-
-    inset 0 -10px 13px
-    rgba(142,82,0,.40),
-
-    0 6px 0
-    #785008,
-
-    0 11px 18px
-    rgba(0,0,0,.40),
-
-    0 0 22px
-    rgba(255,204,62,.36);
+    inset 0 4px 5px rgba(255,255,255,.72),
+    inset 0 -10px 13px rgba(142,82,0,.40),
+    0 6px 0 #785008,
+    0 11px 18px rgba(0,0,0,.40),
+    0 0 22px rgba(255,204,62,.36);
 
   animation:
-    grabArcadeGlow
+    grabGlow
     2s
     ease-in-out
     infinite;
 }
 
+@keyframes grabGlow{
 
-@keyframes grabArcadeGlow{
-
-  0%,
-  100%{
-    filter:
-      brightness(1);
+  0%,100%{
+    filter:brightness(1);
   }
 
   50%{
-    filter:
-      brightness(1.14);
-
-    box-shadow:
-
-      inset 0 4px 5px
-      rgba(255,255,255,.72),
-
-      inset 0 -10px 13px
-      rgba(142,82,0,.40),
-
-      0 6px 0
-      #785008,
-
-      0 11px 18px
-      rgba(0,0,0,.40),
-
-      0 0 32px
-      rgba(255,211,78,.55);
+    filter:brightness(1.14);
   }
 
 }
 
 
-.grab:active{
-  transform:
-    translateY(5px);
-
-  box-shadow:
-
-    inset 0 6px 12px
-    rgba(123,70,0,.40),
-
-    0 1px 0
-    #785008,
-
-    0 5px 8px
-    rgba(0,0,0,.30);
-}
-
-
-
-/* =========================================================
+/* =====================================================
    MESSAGE
-========================================================= */
+===================================================== */
 
 .message{
   position:relative;
@@ -1744,9 +1386,7 @@ button:disabled{
   margin-top:11px;
 
   padding:
-    9px
-    10px
-    0;
+    9px 10px 0;
 
   text-align:center;
 
@@ -1757,15 +1397,13 @@ button:disabled{
   color:#cdd8e5;
 
   border-top:
-    1px solid
-    rgba(255,217,105,.13);
+    1px solid rgba(255,217,105,.13);
 }
 
 
-
-/* =========================================================
-   CLAIM BUTTON
-========================================================= */
+/* =====================================================
+   CLAIM
+===================================================== */
 
 .claim{
   position:relative;
@@ -1781,16 +1419,12 @@ button:disabled{
   border-radius:12px;
 
   text-align:center;
-
   text-decoration:none;
 
   color:#101010;
 
   font-size:12px;
-
   font-weight:900;
-
-  letter-spacing:.4px;
 
   background:
     linear-gradient(
@@ -1801,21 +1435,12 @@ button:disabled{
       #ffe887,
       #ac7510
     );
-
-  box-shadow:
-
-    0 6px 16px
-    rgba(0,0,0,.35),
-
-    0 0 17px
-    rgba(255,206,68,.22);
 }
 
 
-
-/* =========================================================
+/* =====================================================
    MODAL
-========================================================= */
+===================================================== */
 
 .modal{
   position:fixed;
@@ -1839,26 +1464,20 @@ button:disabled{
       rgba(0,0,0,.88) 64%
     );
 
-  backdrop-filter:
-    blur(8px);
+  backdrop-filter:blur(8px);
 }
-
 
 .modal.show{
   display:flex;
 }
 
-
-.modal.show
-.modal-box{
-
+.modal.show .modal-box{
   animation:
     rewardPop
     .55s
     cubic-bezier(.2,.8,.2,1)
     both;
 }
-
 
 @keyframes rewardPop{
 
@@ -1880,31 +1499,21 @@ button:disabled{
 
   100%{
     transform:
-      scale(1)
-      translateY(0);
+      scale(1);
 
     opacity:1;
   }
 
 }
 
-
-
-/* =========================================================
-   MODAL BOX
-========================================================= */
-
 .modal-box{
   position:relative;
 
   width:100%;
-
   max-width:350px;
 
   padding:
-    25px
-    18px
-    18px;
+    25px 18px 18px;
 
   overflow:hidden;
 
@@ -1913,106 +1522,26 @@ button:disabled{
   border-radius:24px;
 
   border:
-    2px solid
-    #d6a528;
+    2px solid #d6a528;
 
   background:
     radial-gradient(
       circle at 50% 18%,
-      #19518b 0%,
+      #19518b,
       #0b284b 28%,
       #06182d 58%,
-      #030a13 100%
+      #030a13
     );
 
   box-shadow:
-
-    0 25px 70px
-    rgba(0,0,0,.65),
-
-    0 0 45px
-    rgba(255,200,45,.22),
-
-    inset 0 0 32px
-    rgba(51,148,255,.12);
+    0 25px 70px rgba(0,0,0,.65),
+    0 0 45px rgba(255,200,45,.22);
 }
 
 
-.modal-box::before{
-  content:"";
-
-  position:absolute;
-
-  left:-20%;
-
-  top:-28%;
-
-  width:140%;
-  height:72%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(255,220,111,.25),
-      transparent 65%
-    );
-
-  pointer-events:none;
-}
-
-
-.modal-box::after{
-  content:"";
-
-  position:absolute;
-
-  top:-30%;
-
-  left:-75%;
-
-  width:36%;
-  height:160%;
-
-  transform:
-    rotate(18deg);
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.15),
-      transparent
-    );
-
-  animation:
-    rewardShine
-    3s
-    ease-in-out
-    infinite;
-
-  pointer-events:none;
-}
-
-
-@keyframes rewardShine{
-
-  0%,
-  25%{
-    left:-75%;
-  }
-
-  70%,
-  100%{
-    left:145%;
-  }
-
-}
-
-
-
-/* =========================================================
-   REWARD STAGE
-========================================================= */
+/* =====================================================
+   REWARD
+===================================================== */
 
 .reward-stage{
   position:relative;
@@ -2020,8 +1549,7 @@ button:disabled{
   width:154px;
   height:154px;
 
-  margin:
-    0 auto 8px;
+  margin:0 auto 8px;
 
   display:flex;
 
@@ -2029,7 +1557,6 @@ button:disabled{
 
   justify-content:center;
 }
-
 
 .reward-ring{
   position:absolute;
@@ -2039,28 +1566,20 @@ button:disabled{
   border-radius:50%;
 
   border:
-    2px solid
-    rgba(255,207,67,.58);
+    2px solid rgba(255,207,67,.58);
 
   box-shadow:
-
-    0 0 18px
-    rgba(255,197,53,.28),
-
-    inset 0 0 18px
-    rgba(63,159,255,.12);
+    0 0 18px rgba(255,197,53,.28);
 
   animation:
-    rewardRingRotate
+    rewardRing
     7s
     linear
     infinite;
 }
 
-
 .reward-ring::before,
 .reward-ring::after{
-
   content:"";
 
   position:absolute;
@@ -2073,34 +1592,24 @@ button:disabled{
   background:#ffe278;
 
   box-shadow:
-    0 0 9px
-    #ffd351;
+    0 0 9px #ffd351;
 }
-
 
 .reward-ring::before{
   left:50%;
-
   top:-5px;
 }
 
-
 .reward-ring::after{
   left:50%;
-
   bottom:-5px;
 }
 
-
-@keyframes rewardRingRotate{
-
+@keyframes rewardRing{
   to{
-    transform:
-      rotate(360deg);
+    transform:rotate(360deg);
   }
-
 }
-
 
 .reward-burst{
   position:absolute;
@@ -2111,33 +1620,22 @@ button:disabled{
 
   background:
     repeating-conic-gradient(
-      from 0deg,
-      rgba(255,215,93,.15) 0deg 5deg,
+      rgba(255,215,93,.14) 0deg 5deg,
       transparent 5deg 13deg
     );
 
   animation:
-    rewardBurstRotate
+    rewardBurst
     16s
     linear
     infinite;
 }
 
-
-@keyframes rewardBurstRotate{
-
+@keyframes rewardBurst{
   to{
-    transform:
-      rotate(-360deg);
+    transform:rotate(-360deg);
   }
-
 }
-
-
-
-/* =========================================================
-   REWARD IMAGE
-========================================================= */
 
 .reward-image{
   position:relative;
@@ -2158,22 +1656,16 @@ button:disabled{
   background:
     radial-gradient(
       circle at 38% 28%,
-      #1c5e9b 0%,
+      #1c5e9b,
       #0b315c 43%,
-      #06182d 100%
+      #06182d
     );
 
   border:
-    2px solid
-    rgba(255,208,74,.78);
+    2px solid rgba(255,208,74,.78);
 
   box-shadow:
-
-    0 0 28px
-    rgba(255,199,52,.22),
-
-    inset 0 0 22px
-    rgba(75,169,255,.19);
+    0 0 28px rgba(255,199,52,.22);
 
   animation:
     rewardFloat
@@ -2182,112 +1674,65 @@ button:disabled{
     infinite;
 }
 
-
 .reward-image img{
   width:92px;
   height:92px;
 
   object-fit:contain;
-
-  filter:
-    drop-shadow(
-      0 8px 8px
-      rgba(0,0,0,.36)
-    );
 }
-
 
 @keyframes rewardFloat{
 
-  0%,
-  100%{
-    transform:
-      translateY(0);
+  0%,100%{
+    transform:translateY(0);
   }
 
   50%{
-    transform:
-      translateY(-6px);
+    transform:translateY(-6px);
   }
 
 }
 
-
-
-/* =========================================================
-   MODAL TEXT
-========================================================= */
-
 .reward-label{
-  position:relative;
-
-  z-index:4;
-
   display:inline-block;
 
-  margin-top:3px;
-
-  padding:
-    5px 13px;
+  padding:5px 13px;
 
   border-radius:999px;
 
   color:#ffd969;
 
   font-size:9px;
-
   font-weight:800;
 
   letter-spacing:1.8px;
 
   border:
-    1px solid
-    rgba(255,208,74,.42);
+    1px solid rgba(255,208,74,.42);
 
   background:
     rgba(6,18,34,.72);
 }
 
-
 .modal h2{
-  position:relative;
-
-  z-index:4;
-
   margin:
     9px 0 4px;
 
   color:#ffe274;
 
   font-size:25px;
-
-  text-shadow:
-    0 0 16px
-    rgba(255,204,57,.36);
 }
 
-
 .reward-name{
-  position:relative;
-
-  z-index:4;
-
   margin:
     8px 0 5px;
 
   font-size:18px;
 
   font-weight:900;
-
-  color:#ffffff;
 }
 
-
 .reward-desc{
-  position:relative;
-
-  z-index:4;
-
   max-width:270px;
 
   margin:0 auto;
@@ -2299,30 +1744,18 @@ button:disabled{
   line-height:1.55;
 }
 
-
-
-/* =========================================================
-   MODAL CLAIM BUTTON
-========================================================= */
-
 .modal-claim{
-  position:relative;
-
-  z-index:4;
-
   display:block;
 
   margin-top:15px;
 
   padding:13px;
 
-  overflow:hidden;
-
   border-radius:12px;
 
   text-decoration:none;
 
-  color:#111111;
+  color:#111;
 
   font-size:12px;
 
@@ -2337,62 +1770,12 @@ button:disabled{
       #ffe786,
       #a66d09
     );
-
-  box-shadow:
-
-    0 8px 19px
-    rgba(0,0,0,.32),
-
-    0 0 18px
-    rgba(255,204,63,.20);
 }
 
 
-.modal-claim::after{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-
-  left:-45%;
-
-  width:34%;
-  height:100%;
-
-  transform:
-    skewX(-24deg);
-
-  background:
-    rgba(255,255,255,.36);
-
-  animation:
-    claimShine
-    2.5s
-    ease-in-out
-    infinite;
-}
-
-
-@keyframes claimShine{
-
-  0%,
-  25%{
-    left:-45%;
-  }
-
-  75%,
-  100%{
-    left:125%;
-  }
-
-}
-
-
-
-/* =========================================================
+/* =====================================================
    FOOTER
-========================================================= */
+===================================================== */
 
 .footer{
   padding-top:12px;
@@ -2405,10 +1788,9 @@ button:disabled{
 }
 
 
-
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
 @media(max-width:370px){
 
@@ -2417,108 +1799,71 @@ button:disabled{
     padding-right:8px;
   }
 
-
   .title h1{
     font-size:25px;
   }
-
 
   .machine-stage{
     padding-bottom:60px;
   }
 
-
   .claw-system{
     width:100px;
   }
 
+  .claw-holder{
+    width:92px;
+  }
 
   .buttons{
     grid-template-columns:
-      62px
-      1fr
-      62px;
+      62px 1fr 62px;
 
     gap:9px;
   }
-
 
   button{
     height:54px;
   }
 
-
   .grab{
     height:58px;
-
     font-size:13px;
-  }
-
-
-  .logo img{
-    width:220px;
   }
 
 }
 
 </style>
-
 </head>
-
 
 
 <body>
 
 
-<!-- =====================================================
-     BACKGROUND
-===================================================== -->
+<!-- BACKGROUND -->
 
 <div class="bg-wall"></div>
-
 <div class="bg-overlay"></div>
-
 <div class="bg-vignette"></div>
-
 <div class="floor-light"></div>
 
-
 <div class="spotlight spot-left"></div>
-
 <div class="spotlight spot-center"></div>
-
 <div class="spotlight spot-right"></div>
-
-
-<div class="side-glow side-left"></div>
-
-<div class="side-glow side-right"></div>
-
-
-<div class="light-sweep"></div>
 
 
 <div class="particles">
 
   <div class="particle p1"></div>
-
   <div class="particle p2"></div>
-
   <div class="particle p3"></div>
-
   <div class="particle p4"></div>
-
   <div class="particle p5"></div>
-
   <div class="particle p6"></div>
 
 </div>
 
 
-
-<!-- =====================================================
-     MAIN PAGE
-===================================================== -->
 
 <div class="page">
 
@@ -2560,7 +1905,6 @@ button:disabled{
 
 <div class="status-row">
 
-
   <div class="status-box">
 
     <span>
@@ -2586,14 +1930,11 @@ button:disabled{
 
   </div>
 
-
 </div>
 
 
 
-<!-- =====================================================
-     MACHINE
-===================================================== -->
+<!-- MACHINE -->
 
 <div class="machine-stage">
 
@@ -2620,16 +1961,11 @@ button:disabled{
     >
 
 
-
-    <!-- GAME GLASS -->
-
     <div
       class="game-glass"
       id="gameGlass"
     >
 
-
-      <!-- LIGHT -->
 
       <div class="lights">
 
@@ -2642,17 +1978,13 @@ button:disabled{
       </div>
 
 
+      <div class="rail"></div>
+
       <div class="inner-floor-glow"></div>
 
 
 
-      <!-- RAIL -->
-
-      <div class="rail"></div>
-
-
-
-      <!-- CLAW -->
+      <!-- NEW CLAW SYSTEM -->
 
       <div
         class="claw-system"
@@ -2674,7 +2006,6 @@ button:disabled{
           id="clawHolder"
         >
 
-
           <img
             class="claw-img"
             id="clawImage"
@@ -2690,7 +2021,6 @@ button:disabled{
             alt=""
           >
 
-
         </div>
 
 
@@ -2698,9 +2028,7 @@ button:disabled{
 
 
 
-      <!-- =================================================
-           PRIZES
-      ================================================= -->
+      <!-- PRIZES -->
 
       <div class="prize-floor">
 
@@ -2829,9 +2157,7 @@ button:disabled{
 
 
 
-<!-- =====================================================
-     ARCADE CONTROL
-===================================================== -->
+<!-- ARCADE CONTROL -->
 
 <div class="control">
 
@@ -2847,7 +2173,6 @@ button:disabled{
   </div>
 
 
-
   <div class="buttons">
 
 
@@ -2855,9 +2180,10 @@ button:disabled{
       id="leftButton"
       onclick="moveLeft()"
     >
-      ◀
-    </button>
 
+      ◀
+
+    </button>
 
 
     <button
@@ -2871,17 +2197,17 @@ button:disabled{
     </button>
 
 
-
     <button
       id="rightButton"
       onclick="moveRight()"
     >
+
       ▶
+
     </button>
 
 
   </div>
-
 
 
   <div
@@ -2891,12 +2217,9 @@ button:disabled{
 
     Gerakkan capit ke hadiah pilihan lalu tekan
 
-    <b>
-      GRAB
-    </b>.
+    <b>GRAB</b>.
 
   </div>
-
 
 
   <a
@@ -2913,7 +2236,6 @@ button:disabled{
 </div>
 
 
-
 <div class="footer">
 
   MAUSLOT VIP • EVENT SPECIAL 9.9
@@ -2925,27 +2247,21 @@ button:disabled{
 
 
 
-<!-- =====================================================
-     PREMIUM REWARD MODAL
-===================================================== -->
+<!-- RESULT -->
 
 <div
   class="modal"
   id="modal"
 >
 
-
   <div class="modal-box">
 
 
     <div class="reward-stage">
 
-
       <div class="reward-burst"></div>
 
-
       <div class="reward-ring"></div>
-
 
       <div class="reward-image">
 
@@ -2957,9 +2273,7 @@ button:disabled{
 
       </div>
 
-
     </div>
-
 
 
     <div class="reward-label">
@@ -2969,13 +2283,9 @@ button:disabled{
     </div>
 
 
-
     <h2>
-
       SELAMAT!
-
     </h2>
-
 
 
     <div
@@ -2988,7 +2298,6 @@ button:disabled{
     </div>
 
 
-
     <div
       class="reward-desc"
       id="resultDesc"
@@ -2997,7 +2306,6 @@ button:disabled{
       Hadiah berhasil didapatkan.
 
     </div>
-
 
 
     <a
@@ -3012,244 +2320,133 @@ button:disabled{
 
   </div>
 
-
 </div>
 
 
 
 <script>
 
-/* =========================================================
+/* =====================================================
    PRIZE DATA
-========================================================= */
+===================================================== */
 
 const prizes = [
 
   {
-
-    name:
-    "BONUS SALDO",
-
-    image:
-    "./assets/coin.png",
-
-    description:
-    "Bonus saldo spesial Event 9.9."
-
+    name:"BONUS SALDO",
+    image:"./assets/coin.png",
+    description:"Bonus saldo spesial Event 9.9."
   },
 
-
   {
-
-    name:
-    "VIP GIFT",
-
-    image:
-    "./assets/gift.png",
-
-    description:
-    "Hadiah VIP spesial berhasil didapatkan."
-
+    name:"VIP GIFT",
+    image:"./assets/gift.png",
+    description:"Hadiah VIP spesial berhasil didapatkan."
   },
 
-
   {
-
-    name:
-    "DIAMOND REWARD",
-
-    image:
-    "./assets/diamond.png",
-
-    description:
-    "Diamond Reward spesial MAUSLOT."
-
+    name:"DIAMOND REWARD",
+    image:"./assets/diamond.png",
+    description:"Diamond Reward spesial MAUSLOT."
   },
 
-
   {
-
-    name:
-    "CROWN REWARD",
-
-    image:
-    "./assets/crown.png",
-
-    description:
-    "Crown Reward spesial Event 9.9."
-
+    name:"CROWN REWARD",
+    image:"./assets/crown.png",
+    description:"Crown Reward spesial Event 9.9."
   },
 
-
   {
-
-    name:
-    "VIP POINT",
-
-    image:
-    "./assets/chip.png",
-
-    description:
-    "Tambahan VIP Point berhasil didapatkan."
-
+    name:"VIP POINT",
+    image:"./assets/chip.png",
+    description:"Tambahan VIP Point berhasil didapatkan."
   },
 
-
   {
-
-    name:
-    "GRAND PRIZE",
-
-    image:
-    "./assets/grand%20prize.png",
-
-    description:
-    "Grand Prize spesial MAUSLOT 9.9."
-
+    name:"GRAND PRIZE",
+    image:"./assets/grand%20prize.png",
+    description:"Grand Prize spesial MAUSLOT 9.9."
   },
 
-
   {
-
-    name:
-    "VIP TICKET",
-
-    image:
-    "./assets/ticket.png",
-
-    description:
-    "VIP Ticket berhasil didapatkan."
-
+    name:"VIP TICKET",
+    image:"./assets/ticket.png",
+    description:"VIP Ticket berhasil didapatkan."
   },
 
-
   {
-
-    name:
-    "MYSTERY REWARD",
-
-    image:
-    "./assets/mystery.png",
-
-    description:
-    "Mystery Reward berhasil didapatkan."
-
+    name:"MYSTERY REWARD",
+    image:"./assets/mystery.png",
+    description:"Mystery Reward berhasil didapatkan."
   }
 
 ];
 
 
+/* =====================================================
+   STATE
+===================================================== */
 
-/* =========================================================
-   GAME STATE
-========================================================= */
+let ticket = 1;
 
-let ticket =
-1;
+let position = 50;
 
-
-let position =
-50;
+let playing = false;
 
 
-let playing =
-false;
-
-
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
+/* =====================================================
+   ELEMENT
+===================================================== */
 
 const gameGlass =
-document.getElementById(
-  "gameGlass"
-);
-
+document.getElementById("gameGlass");
 
 const clawSystem =
-document.getElementById(
-  "clawSystem"
-);
-
-
-const cable =
-document.getElementById(
-  "cable"
-);
-
+document.getElementById("clawSystem");
 
 const clawHolder =
-document.getElementById(
-  "clawHolder"
-);
-
+document.getElementById("clawHolder");
 
 const clawImage =
-document.getElementById(
-  "clawImage"
-);
-
+document.getElementById("clawImage");
 
 const caughtPrize =
-document.getElementById(
-  "caughtPrize"
-);
-
+document.getElementById("caughtPrize");
 
 const statusText =
-document.getElementById(
-  "status"
-);
-
+document.getElementById("status");
 
 const ticketText =
-document.getElementById(
-  "ticket"
-);
-
+document.getElementById("ticket");
 
 const message =
-document.getElementById(
-  "message"
-);
-
+document.getElementById("message");
 
 const leftButton =
-document.getElementById(
-  "leftButton"
-);
-
+document.getElementById("leftButton");
 
 const rightButton =
-document.getElementById(
-  "rightButton"
-);
-
+document.getElementById("rightButton");
 
 const grabButton =
-document.getElementById(
-  "grabButton"
-);
+document.getElementById("grabButton");
 
 
-
-/* =========================================================
-   CLAW POSITION
-========================================================= */
+/* =====================================================
+   POSITION X
+===================================================== */
 
 function updatePosition(){
 
   clawSystem.style.left =
-  position + "%";
+    position + "%";
 
 }
 
 
-
-/* =========================================================
-   MOVE LEFT
-========================================================= */
+/* =====================================================
+   LEFT
+===================================================== */
 
 function moveLeft(){
 
@@ -3257,33 +2454,23 @@ function moveLeft(){
     return;
   }
 
+  position -= 7;
 
-  position -= 8;
-
-
-  if(
-    position < 12
-  ){
-
-    position =
-    12;
-
+  if(position < 12){
+    position = 12;
   }
-
 
   updatePosition();
 
-
   message.innerHTML =
-  "Capit bergerak ke kiri.";
+    "Capit bergerak ke kiri.";
 
 }
 
 
-
-/* =========================================================
-   MOVE RIGHT
-========================================================= */
+/* =====================================================
+   RIGHT
+===================================================== */
 
 function moveRight(){
 
@@ -3291,149 +2478,91 @@ function moveRight(){
     return;
   }
 
+  position += 7;
 
-  position += 8;
-
-
-  if(
-    position > 88
-  ){
-
-    position =
-    88;
-
+  if(position > 88){
+    position = 88;
   }
-
 
   updatePosition();
 
-
   message.innerHTML =
-  "Capit bergerak ke kanan.";
+    "Capit bergerak ke kanan.";
 
 }
 
 
+/* =====================================================
+   GET CENTER
+===================================================== */
 
-/* =========================================================
-   GET PRIZE CENTER
-========================================================= */
-
-function getPrizeCenter(
-  element
-){
+function getPrizeCenter(element){
 
   const glassRect =
-  gameGlass
-  .getBoundingClientRect();
-
+    gameGlass.getBoundingClientRect();
 
   const prizeRect =
-  element
-  .getBoundingClientRect();
-
+    element.getBoundingClientRect();
 
   return {
 
     x:
-
-      (
-        prizeRect.left -
-        glassRect.left
-      )
-
+      (prizeRect.left - glassRect.left)
       +
-
-      (
-        prizeRect.width /
-        2
-      ),
-
+      (prizeRect.width / 2),
 
     y:
-
-      (
-        prizeRect.top -
-        glassRect.top
-      )
-
+      (prizeRect.top - glassRect.top)
       +
-
-      (
-        prizeRect.height /
-        2
-      )
+      (prizeRect.height / 2)
 
   };
 
 }
 
 
-
-/* =========================================================
-   FIND CLOSEST PRIZE
-========================================================= */
+/* =====================================================
+   FIND CLOSEST BALL
+===================================================== */
 
 function findClosestPrize(){
 
   const balls =
-  document.querySelectorAll(
-    ".ball"
-  );
-
+    document.querySelectorAll(".ball");
 
   const glassRect =
-  gameGlass
-  .getBoundingClientRect();
-
+    gameGlass.getBoundingClientRect();
 
   const targetX =
+    glassRect.width *
+    (position / 100);
 
-  glassRect.width *
-
-  (
-    position /
-    100
-  );
-
-
-  let winner =
-  0;
-
+  let winner = 0;
 
   let smallest =
-  Infinity;
-
+    Infinity;
 
 
   balls.forEach(
-    (
-      ball,
-      index
-    ) => {
+    (ball,index)=>{
 
 
       if(
-        ball.style.opacity ===
-        "0"
+        ball.style.opacity === "0"
       ){
-
         return;
-
       }
 
 
       const center =
-      getPrizeCenter(
-        ball
-      );
+        getPrizeCenter(ball);
 
 
       const distance =
-      Math.abs(
-        center.x -
-        targetX
-      );
+        Math.abs(
+          center.x -
+          targetX
+        );
 
 
       if(
@@ -3442,11 +2571,10 @@ function findClosestPrize(){
       ){
 
         smallest =
-        distance;
-
+          distance;
 
         winner =
-        index;
+          index;
 
       }
 
@@ -3460,49 +2588,33 @@ function findClosestPrize(){
 }
 
 
+/* =====================================================
+   MOVE EXACTLY ABOVE BALL
+===================================================== */
 
-/* =========================================================
-   MOVE CLAW EXACTLY TO PRIZE
-========================================================= */
-
-function moveToPrize(
-  prizeElement
-){
+function moveToPrize(prizeElement){
 
   const glassRect =
-  gameGlass
-  .getBoundingClientRect();
-
+    gameGlass.getBoundingClientRect();
 
   const center =
-  getPrizeCenter(
-    prizeElement
-  );
-
+    getPrizeCenter(prizeElement);
 
   const percentage =
-
-  (
-    center.x /
-    glassRect.width
-  )
-
-  *
-
-  100;
+    (
+      center.x /
+      glassRect.width
+    ) * 100;
 
 
   position =
-  Math.max(
-
-    12,
-
-    Math.min(
-      88,
-      percentage
-    )
-
-  );
+    Math.max(
+      12,
+      Math.min(
+        88,
+        percentage
+      )
+    );
 
 
   updatePosition();
@@ -3510,251 +2622,261 @@ function moveToPrize(
 }
 
 
+/* =====================================================
+   NEW DROP CALCULATION
+===================================================== */
 
-/* =========================================================
-   AUTO CALCULATE DROP
-========================================================= */
-
-function calculateDrop(
-  prizeElement
-){
+function calculateDrop(prizeElement){
 
   const glassRect =
-  gameGlass
-  .getBoundingClientRect();
-
+    gameGlass.getBoundingClientRect();
 
   const prizeRect =
-  prizeElement
-  .getBoundingClientRect();
+    prizeElement.getBoundingClientRect();
 
-
-  const clawRect =
-  clawImage
-  .getBoundingClientRect();
-
-
-
-  const prizeCenterY =
-
-  (
-    prizeRect.top -
-    glassRect.top
-  )
-
-  +
-
-  (
-    prizeRect.height /
-    2
-  );
-
-
-
-  const clawBottom =
-
-  clawRect.bottom -
-  glassRect.top;
-
+  const holderRect =
+    clawHolder.getBoundingClientRect();
 
 
   /*
-  Capit diturunkan sedikit
-  masuk ke tengah bola
-  agar terlihat menjepit.
+    titik tengah bola
   */
 
-  const targetY =
+  const prizeCenterY =
+    (
+      prizeRect.top -
+      glassRect.top
+    )
+    +
+    (
+      prizeRect.height /
+      2
+    );
 
-  prizeCenterY
 
-  -
+  /*
+    posisi atas holder pada posisi awal
+  */
 
-  (
-    prizeRect.height *
-    .08
-  );
+  const holderTop =
+    holderRect.top -
+    glassRect.top;
 
+
+  /*
+    Ini adalah titik visual
+    penjepit claw.
+
+    Tidak pakai tinggi PNG karena
+    PNG bisa punya area transparan.
+  */
+
+  const visualGripPoint =
+    holderTop +
+    (
+      clawHolder.offsetWidth *
+      0.64
+    );
+
+
+  /*
+    Turunkan grip sampai sedikit
+    masuk ke tengah bola
+  */
+
+  const targetGripY =
+    prizeCenterY -
+    (
+      prizeRect.height *
+      0.02
+    );
 
 
   let drop =
-
-  targetY -
-  clawBottom;
-
+    targetGripY -
+    visualGripPoint;
 
 
-  if(
-    drop < 0
-  ){
+  /*
+    supaya animasi turun tetap terlihat
+  */
 
-    drop =
-    0;
-
+  if(drop < 35){
+    drop = 35;
   }
 
+
+  /*
+    batas bawah game
+  */
+
+  const holderHeight =
+    clawHolder.offsetWidth;
 
 
   const maxDrop =
+    glassRect.height -
+    holderTop -
+    holderHeight -
+    8;
 
-  glassRect.height *
-  .62;
 
-
-
-  if(
-    drop >
-    maxDrop
-  ){
-
-    drop =
-    maxDrop;
-
+  if(drop > maxDrop){
+    drop = maxDrop;
   }
 
 
-
-  return
-
-  42 +
-  drop;
+  return Math.max(
+    0,
+    drop
+  );
 
 }
 
 
+/* =====================================================
+   SET DROP
+===================================================== */
 
-/* =========================================================
-   LOCK CONTROL
-========================================================= */
+function setClawDrop(px){
+
+  clawSystem.style.setProperty(
+    "--drop",
+    px + "px"
+  );
+
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
 
 function lockControls(){
 
-  leftButton.disabled =
-  true;
+  leftButton.disabled = true;
 
+  rightButton.disabled = true;
 
-  rightButton.disabled =
-  true;
-
-
-  grabButton.disabled =
-  true;
+  grabButton.disabled = true;
 
 }
-
 
 
 function unlockControls(){
 
-  leftButton.disabled =
-  false;
+  leftButton.disabled = false;
 
+  rightButton.disabled = false;
 
-  rightButton.disabled =
-  false;
-
-
-  grabButton.disabled =
-  false;
+  grabButton.disabled = false;
 
 }
 
 
+/* =====================================================
+   CLEAR TARGET
+===================================================== */
 
-/* =========================================================
-   GRAB PRIZE
-========================================================= */
+function clearTargets(){
+
+  document
+  .querySelectorAll(".ball")
+  .forEach(
+    ball => {
+
+      ball.classList.remove(
+        "target"
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   GRAB
+===================================================== */
 
 async function grabPrize(){
 
-  if(
-    playing
-  ){
-
+  if(playing){
     return;
-
   }
 
 
-
-  if(
-    ticket <= 0
-  ){
+  if(ticket <= 0){
 
     message.innerHTML =
-    "Tiket bermain sudah habis.";
-
+      "Tiket bermain sudah habis.";
 
     return;
 
   }
 
 
-
-  playing =
-  true;
-
-
+  playing = true;
 
   lockControls();
 
+  clearTargets();
 
 
   /*
-  RESET CLAW
+    RESET
   */
 
+  setClawDrop(0);
+
   clawImage.src =
-  "./assets/claw%20open.png";
+    "./assets/claw%20open.png";
 
-
-  clawHolder
-  .classList
-  .remove(
+  clawHolder.classList.remove(
     "has-prize"
   );
 
+  clawHolder.classList.remove(
+    "closing"
+  );
 
   caughtPrize.src =
-  "";
-
+    "";
 
 
   /*
-  FIND TARGET
+    FIND TARGET
   */
 
   const winnerIndex =
-  findClosestPrize();
-
+    findClosestPrize();
 
 
   const prize =
-  prizes[
-    winnerIndex
-  ];
-
+    prizes[winnerIndex];
 
 
   const prizeElement =
-  document.querySelector(
+    document.querySelector(
+      `.ball[data-id="${winnerIndex}"]`
+    );
 
-    `.ball[data-id="${winnerIndex}"]`
 
+  prizeElement.classList.add(
+    "target"
   );
 
 
-
   /*
-  MOVE HORIZONTAL
+    MOVE HORIZONTAL
   */
 
   statusText.innerHTML =
-  "MENUJU HADIAH";
+    "MENUJU HADIAH";
 
 
   message.innerHTML =
-  "Capit sedang menuju hadiah...";
+    "Capit bergerak menuju hadiah...";
 
 
   moveToPrize(
@@ -3762,143 +2884,123 @@ async function grabPrize(){
   );
 
 
-  await wait(
-    500
-  );
-
+  await wait(650);
 
 
   /*
-  CALCULATE VERTICAL
+    CALCULATE DROP AFTER X FINISHED
   */
 
-  const dropHeight =
-  calculateDrop(
-    prizeElement
-  );
-
+  const dropDistance =
+    calculateDrop(
+      prizeElement
+    );
 
 
   /*
-  DROP
+    DROP
   */
 
   statusText.innerHTML =
-  "GRABBING";
+    "MENURUNKAN CAPIT";
 
 
   message.innerHTML =
-  "Capit sedang turun...";
+    "Capit sedang turun ke hadiah...";
 
 
-  cable.style.height =
-  dropHeight +
-  "px";
-
-
-  await wait(
-    800
+  setClawDrop(
+    dropDistance
   );
 
 
+  await wait(950);
+
 
   /*
-  CLOSE CLAW
+    CLOSE
   */
 
+  statusText.innerHTML =
+    "MENJEPIT";
+
+
+  message.innerHTML =
+    "Capit sedang menjepit hadiah...";
+
+
   clawImage.src =
-  "./assets/claw%20close.png";
+    "./assets/claw%20close.png";
 
 
-  prizeElement
-  .classList
-  .add(
+  clawHolder.classList.add(
+    "closing"
+  );
+
+
+  prizeElement.classList.add(
     "winner"
   );
 
 
-  await wait(
-    330
-  );
-
+  await wait(400);
 
 
   /*
-  ATTACH PRIZE
+    ATTACH BALL TO CLAW
   */
 
   caughtPrize.src =
-  prize.image;
+    prize.image;
 
 
-  clawHolder
-  .classList
-  .add(
+  clawHolder.classList.add(
     "has-prize"
   );
 
 
   prizeElement.style.opacity =
-  "0";
+    "0";
 
 
-  await wait(
-    350
-  );
-
+  await wait(300);
 
 
   /*
-  LIFT
+    LIFT
   */
 
   statusText.innerHTML =
-  "MENGANGKAT";
+    "MENGANGKAT";
 
 
   message.innerHTML =
-  "Hadiah berhasil tercapit...";
+    "Hadiah sedang diangkat...";
 
 
-  cable.style.height =
-  "42px";
+  setClawDrop(0);
 
 
-  await wait(
-    900
-  );
-
+  await wait(1050);
 
 
   /*
-  TICKET
+    FINISH
   */
 
   ticket--;
 
 
   ticketText.innerHTML =
-  ticket;
-
-
-
-  /*
-  SHOW RESULT
-  */
-
-  showResult(
-    prize
-  );
-
+    ticket;
 
 
   statusText.innerHTML =
-  "BERHASIL";
+    "BERHASIL";
 
 
   message.innerHTML =
-  "🎉 Hadiah berhasil didapatkan.";
-
+    "🎉 Hadiah berhasil didapatkan.";
 
 
   document
@@ -3907,18 +3009,18 @@ async function grabPrize(){
   )
   .style
   .display =
-  "block";
+    "block";
 
 
+  showResult(
+    prize
+  );
 
-  playing =
-  false;
+
+  playing = false;
 
 
-
-  if(
-    ticket > 0
-  ){
+  if(ticket > 0){
 
     unlockControls();
 
@@ -3927,22 +3029,18 @@ async function grabPrize(){
 }
 
 
+/* =====================================================
+   RESULT
+===================================================== */
 
-/* =========================================================
-   RESULT POPUP
-========================================================= */
-
-function showResult(
-  prize
-){
+function showResult(prize){
 
   document
   .getElementById(
     "resultImage"
   )
   .src =
-  prize.image;
-
+    prize.image;
 
 
   document
@@ -3950,8 +3048,7 @@ function showResult(
     "resultName"
   )
   .innerHTML =
-  prize.name;
-
+    prize.name;
 
 
   document
@@ -3959,18 +3056,17 @@ function showResult(
     "resultDesc"
   )
   .innerHTML =
-  prize.description;
-
+    prize.description;
 
 
   const modal =
-  document.getElementById(
-    "modal"
-  );
+    document.getElementById(
+      "modal"
+    );
 
 
   modal.style.display =
-  "flex";
+    "flex";
 
 
   modal.classList.remove(
@@ -3988,10 +3084,9 @@ function showResult(
 }
 
 
-
-/* =========================================================
-   CLOSE RESULT
-========================================================= */
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
 
 document
 .getElementById(
@@ -3999,22 +3094,16 @@ document
 )
 .addEventListener(
   "click",
-  function(
-    e
-  ){
+  function(e){
 
-    if(
-      e.target ===
-      this
-    ){
+    if(e.target === this){
 
       this.classList.remove(
         "show"
       );
 
-
       this.style.display =
-      "none";
+        "none";
 
     }
 
@@ -4022,85 +3111,56 @@ document
 );
 
 
-
-/* =========================================================
+/* =====================================================
    WAIT
-========================================================= */
+===================================================== */
 
-function wait(
-  ms
-){
+function wait(ms){
 
   return new Promise(
-
     resolve =>
-
-    setTimeout(
-      resolve,
-      ms
-    )
-
+      setTimeout(
+        resolve,
+        ms
+      )
   );
 
 }
 
 
-
-/* =========================================================
+/* =====================================================
    KEYBOARD
-========================================================= */
+===================================================== */
 
 document.addEventListener(
   "keydown",
-  function(
-    e
-  ){
+  function(e){
 
-
-    if(
-      e.key ===
-      "ArrowLeft"
-    ){
-
+    if(e.key === "ArrowLeft"){
       moveLeft();
-
     }
 
-
-    if(
-      e.key ===
-      "ArrowRight"
-    ){
-
+    if(e.key === "ArrowRight"){
       moveRight();
-
     }
 
-
-    if(
-      e.key ===
-      "Enter"
-    ){
-
+    if(e.key === "Enter"){
       grabPrize();
-
     }
-
 
   }
 );
 
 
-
-/* =========================================================
+/* =====================================================
    INITIAL
-========================================================= */
+===================================================== */
+
+setClawDrop(0);
 
 updatePosition();
 
 </script>
 
-
 </body>
-
 </html>
