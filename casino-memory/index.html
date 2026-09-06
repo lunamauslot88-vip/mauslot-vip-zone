@@ -23,7 +23,8 @@
   padding:0;
 }
 
-html,body{
+html,
+body{
   width:100%;
   min-height:100%;
 }
@@ -31,83 +32,171 @@ html,body{
 body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
+
   background:
     linear-gradient(
-      rgba(2,8,18,.52),
-      rgba(2,8,18,.78)
+      rgba(1,7,17,.34),
+      rgba(1,7,17,.76)
     ),
-    url("asset/bg-casino-memory.png") center center / cover fixed no-repeat;
+    url("asset/bg-casino-memory.png")
+    center center / cover fixed no-repeat;
 
   overflow-x:hidden;
+  position:relative;
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
+/* BACKGROUND GLOW */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      circle at 18% 30%,
+      rgba(31,108,255,.19),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 24%,
+      rgba(255,187,65,.16),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 50% 88%,
+      rgba(20,71,179,.19),
+      transparent 40%
+    );
+
+  animation:bgGlow 9s ease-in-out infinite alternate;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:-25%;
+  z-index:0;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      115deg,
+      transparent 37%,
+      rgba(255,231,167,.025) 44%,
+      rgba(255,218,126,.08) 49%,
+      rgba(255,245,202,.12) 50%,
+      rgba(255,218,126,.08) 51%,
+      rgba(255,231,167,.025) 56%,
+      transparent 63%
+    );
+
+  animation:lightSweep 9s linear infinite;
+}
+
+@keyframes bgGlow{
+  0%{
+    opacity:.7;
+    transform:scale(1);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1.06);
+  }
+}
+
+@keyframes lightSweep{
+  from{
+    transform:translateX(-28%);
+  }
+
+  to{
+    transform:translateX(28%);
+  }
+}
+
+/* MAIN */
 
 .game-wrapper{
-  width:min(1180px, 96%);
+  position:relative;
+  z-index:2;
+
+  width:min(1180px,96%);
   margin:auto;
-  padding:18px 0 35px;
+
+  padding:16px 0 34px;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header{
-  position:relative;
   text-align:center;
-  margin-bottom:13px;
+  margin-bottom:10px;
 }
 
 .brand-logo{
   display:block;
-  width:min(290px,55vw);
-  max-height:95px;
+
+  width:min(300px,58vw);
+  max-height:90px;
+
   object-fit:contain;
+
   margin:0 auto 3px;
-  filter:drop-shadow(0 5px 15px rgba(0,0,0,.5));
+
+  filter:
+    drop-shadow(0 5px 14px rgba(0,0,0,.65));
 }
 
 .game-title{
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(30px,4vw,51px);
+
+  font-size:clamp(30px,4vw,52px);
   line-height:1;
+
   font-weight:900;
   letter-spacing:2px;
 
-  background:linear-gradient(
-    #fff5bd 0%,
-    #ffd26c 30%,
-    #ba7917 75%,
-    #fff0a6 100%
-  );
+  background:
+    linear-gradient(
+      #fff4bd 0%,
+      #ffd36b 32%,
+      #b87a1a 72%,
+      #fff0a8 100%
+    );
 
   -webkit-background-clip:text;
+  background-clip:text;
+
   color:transparent;
 
   text-shadow:
-    0 4px 8px rgba(0,0,0,.45);
+    0 4px 10px rgba(0,0,0,.38);
 }
 
 .subtitle{
-  font-size:13px;
-  letter-spacing:3px;
-  margin-top:8px;
-  color:#e9e2d0;
+  font-size:12px;
+  letter-spacing:2.6px;
+
+  color:#e8dfcb;
+
+  margin-top:7px;
+
   text-transform:uppercase;
 }
 
-/* =========================
-   HUD
-========================= */
+/* HUD */
 
 .hud{
-  width:min(900px,100%);
-  margin:16px auto;
+  width:min(920px,100%);
+  margin:14px auto 12px;
+
   display:grid;
   grid-template-columns:repeat(4,1fr);
+
   gap:9px;
 }
 
@@ -121,8 +210,10 @@ body{
       rgba(3,12,28,.97)
     );
 
-  border:1px solid rgba(230,182,79,.8);
-  border-radius:15px;
+  border:
+    1px solid rgba(230,182,79,.82);
+
+  border-radius:14px;
 
   padding:9px 7px;
 
@@ -130,106 +221,185 @@ body{
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.08),
-    0 7px 18px rgba(0,0,0,.28);
+    0 7px 18px rgba(0,0,0,.3),
+    0 0 16px rgba(209,157,48,.04);
 }
 
 .hud-label{
   color:#dcbf7e;
+
   font-size:10px;
-  letter-spacing:1.5px;
+  letter-spacing:1.4px;
   font-weight:700;
 }
 
 .hud-value{
   margin-top:2px;
+
   font-size:clamp(20px,3vw,29px);
+
   font-weight:900;
-  font-variant-numeric:tabular-nums;
+
+  font-variant-numeric:
+    tabular-nums;
 }
 
-/* =========================
-   BOARD
-========================= */
+/* BOARD */
 
 .board-frame{
   position:relative;
 
-  width:min(880px,100%);
+  width:min(920px,100%);
+
   margin:auto;
 
-  padding:15px;
+  padding:17px;
 
-  border-radius:25px;
+  border-radius:28px;
+
+  overflow:hidden;
 
   background:
     linear-gradient(
       145deg,
-      rgba(6,27,52,.97),
-      rgba(2,11,26,.98)
+      rgba(4,24,48,.94),
+      rgba(1,10,24,.98)
     );
 
-  border:2px solid #c99432;
+  border:
+    2px solid rgba(219,169,67,.93);
 
   box-shadow:
-    0 30px 65px rgba(0,0,0,.55),
-    inset 0 0 0 4px rgba(255,220,127,.04),
-    0 0 25px rgba(224,169,59,.12);
+    0 34px 80px rgba(0,0,0,.58),
+    inset 0 0 0 4px rgba(255,228,156,.035),
+    inset 0 28px 80px rgba(39,113,205,.06),
+    0 0 30px rgba(223,166,55,.14);
 }
 
 .board-frame::before{
   content:"";
+
   position:absolute;
   inset:6px;
+
   pointer-events:none;
-  border-radius:19px;
-  border:1px solid rgba(255,221,137,.25);
+
+  border-radius:21px;
+
+  border:
+    1px solid rgba(255,224,147,.18);
+
+  z-index:1;
+}
+
+.board-frame::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  pointer-events:none;
+
+  border-radius:26px;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.015) 42%,
+      rgba(255,216,123,.09) 50%,
+      rgba(255,255,255,.015) 58%,
+      transparent 100%
+    );
+
+  transform:
+    translateX(-120%);
+
+  animation:
+    boardShine 6.5s ease-in-out infinite;
+
+  z-index:2;
+}
+
+@keyframes boardShine{
+
+  0%,
+  38%{
+    transform:
+      translateX(-120%);
+  }
+
+  70%,
+  100%{
+    transform:
+      translateX(120%);
+  }
+
 }
 
 .board{
   position:relative;
-  z-index:1;
+  z-index:3;
 
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
 
   gap:12px;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS */
 
 .card{
   position:relative;
 
   width:100%;
+
   aspect-ratio:2 / 3;
 
-  border:0;
   padding:0;
+  border:0;
 
   background:transparent;
 
   cursor:pointer;
-  perspective:1300px;
+
+  perspective:1350px;
 
   touch-action:manipulation;
+
+  transition:
+    transform .22s ease;
+}
+
+.card:hover{
+  transform:
+    translateY(-3px);
 }
 
 .card-inner{
   position:absolute;
   inset:0;
 
-  transform-style:preserve-3d;
+  transform-style:
+    preserve-3d;
 
   transition:
-    transform .55s cubic-bezier(.2,.75,.15,1),
-    filter .3s ease;
+    transform .55s
+      cubic-bezier(.2,.75,.15,1),
+    filter .28s ease;
+}
+
+.card:hover .card-inner{
+  filter:
+    brightness(1.055);
 }
 
 .card.open .card-inner,
 .card.matched .card-inner{
-  transform:rotateY(180deg);
+  transform:
+    rotateY(180deg);
 }
 
 .card-face{
@@ -240,79 +410,92 @@ body{
   -webkit-backface-visibility:hidden;
 
   border-radius:12px;
+
   overflow:hidden;
 
   box-shadow:
-    0 9px 16px rgba(0,0,0,.48),
+    0 9px 17px rgba(0,0,0,.48),
     0 2px 2px rgba(255,255,255,.08);
 }
 
 .card-face img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:block;
 }
 
 .card-front{
-  transform:rotateY(180deg);
+  transform:
+    rotateY(180deg);
 }
 
-/* CLICK EFFECT */
-
-.card:not(.matched):active .card-inner{
-  transform:scale(.96);
+.card:not(.matched):active{
+  transform:
+    scale(.97);
 }
 
-.card.open:active .card-inner{
-  transform:rotateY(180deg) scale(.96);
-}
-
-/* MATCH EFFECT */
+/* MATCH */
 
 .card.matched .card-front{
   box-shadow:
-    0 0 0 3px rgba(255,216,107,.95),
-    0 0 22px rgba(255,193,46,.9),
-    0 0 45px rgba(32,126,255,.35);
+    0 0 0 3px rgba(255,217,107,.96),
+    0 0 22px rgba(255,194,46,.85),
+    0 0 48px rgba(32,126,255,.35);
 }
 
 .card.matched{
-  animation:matchPop .5s ease;
+  animation:
+    matchPop .52s ease;
 }
 
 @keyframes matchPop{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.07)}
-  100%{transform:scale(1)}
+  0%{
+    transform:scale(1);
+  }
+
+  50%{
+    transform:scale(1.065);
+  }
+
+  100%{
+    transform:scale(1);
+  }
 }
 
-/* =========================
-   BOTTOM STATUS
-========================= */
+/* BOTTOM */
 
 .bottom-panel{
-  width:min(880px,100%);
-  margin:13px auto 0;
+  width:min(920px,100%);
+
+  margin:12px auto 0;
 
   display:grid;
-  grid-template-columns:1fr 2fr 1fr;
+
+  grid-template-columns:
+    1fr 2fr 1fr;
 
   gap:9px;
 }
 
 .bottom-box{
-  min-height:55px;
+  min-height:54px;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
   text-align:center;
 
-  background:rgba(3,13,29,.94);
+  background:
+    rgba(3,13,29,.94);
 
-  border:1px solid rgba(222,175,73,.68);
+  border:
+    1px solid rgba(222,175,73,.68);
+
   border-radius:14px;
 
   padding:9px 14px;
@@ -323,25 +506,28 @@ body{
 }
 
 .score-box{
-  font-weight:900;
   color:#ffd56e;
+
+  font-weight:900;
+
   font-size:18px;
 }
 
 .game-status{
   color:#edf4ff;
+
   font-size:14px;
+
   font-weight:700;
 }
 
-/* =========================
-   BUTTON
-========================= */
+/* BUTTON */
 
 .gold-button{
-  min-height:55px;
+  min-height:54px;
 
   border:0;
+
   border-radius:14px;
 
   cursor:pointer;
@@ -349,7 +535,9 @@ body{
   color:#161005;
 
   font-weight:900;
+
   font-size:14px;
+
   letter-spacing:.4px;
 
   background:
@@ -360,40 +548,48 @@ body{
       #ae7018 100%
     );
 
-  border:1px solid #ffe39a;
+  border:
+    1px solid #ffe39a;
 
   box-shadow:
     inset 0 2px rgba(255,255,255,.65),
     0 8px 20px rgba(209,153,44,.25);
+
+  transition:
+    filter .2s ease,
+    transform .15s ease;
 }
 
 .gold-button:hover{
-  filter:brightness(1.08);
+  filter:
+    brightness(1.08);
 }
 
 .gold-button:active{
-  transform:translateY(1px);
+  transform:
+    translateY(1px);
 }
 
-/* =========================
-   START / RESULT OVERLAY
-========================= */
+/* OVERLAY */
 
 .overlay{
   position:fixed;
   inset:0;
+
   z-index:100;
 
   display:flex;
+
   align-items:center;
   justify-content:center;
 
   padding:20px;
 
   background:
-    rgba(0,5,15,.79);
+    rgba(0,5,15,.8);
 
-  backdrop-filter:blur(8px);
+  backdrop-filter:
+    blur(8px);
 }
 
 .overlay.hidden{
@@ -416,31 +612,39 @@ body{
       rgba(2,12,27,.99)
     );
 
-  border:1px solid #d3a449;
+  border:
+    1px solid #d3a449;
 
   box-shadow:
-    0 30px 90px rgba(0,0,0,.7),
+    0 30px 90px rgba(0,0,0,.72),
     inset 0 1px rgba(255,255,255,.08);
 }
 
 .popup-logo{
   width:min(245px,72%);
   max-height:80px;
+
   object-fit:contain;
-  margin-bottom:12px;
+
+  margin-bottom:11px;
 }
 
 .popup-title{
   color:#f5d174;
 
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   font-size:29px;
+
   font-weight:900;
 }
 
 .popup-subtitle{
   margin-top:9px;
+
   line-height:1.55;
 
   color:#bdcbe0;
@@ -453,7 +657,8 @@ body{
 
   border-radius:13px;
 
-  background:rgba(255,255,255,.035);
+  background:
+    rgba(255,255,255,.035);
 
   padding:13px;
 
@@ -466,99 +671,143 @@ body{
 
 .popup .gold-button{
   width:100%;
+
   margin-top:5px;
 }
 
-/* =========================
-   TIMER DANGER
-========================= */
+/* TIMER */
 
 .timer-danger{
   color:#ff6374 !important;
 
-  animation:timerPulse .48s infinite alternate;
+  animation:
+    timerPulse .48s
+    infinite alternate;
 }
 
 @keyframes timerPulse{
-  from{transform:scale(1)}
-  to{transform:scale(1.12)}
+
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.12);
+  }
+
 }
 
-/* =========================
-   FLOAT PARTICLES
-========================= */
+/* AMBIENT PARTICLE */
 
-.particle{
+.ambient-dot{
   position:fixed;
 
   pointer-events:none;
 
-  width:4px;
-  height:4px;
+  z-index:1;
+
+  width:5px;
+  height:5px;
 
   border-radius:50%;
 
-  background:#fbd46e;
+  background:
+    radial-gradient(
+      circle,
+      #fff9d9,
+      #e6b64e 45%,
+      transparent 70%
+    );
 
   opacity:0;
 
-  z-index:2;
-
-  animation:particleMove linear forwards;
+  animation:
+    ambientFloat
+    linear forwards;
 }
 
-@keyframes particleMove{
+.ambient-dot.blue{
+  background:
+    radial-gradient(
+      circle,
+      #d7edff,
+      #448cff 45%,
+      transparent 70%
+    );
+}
+
+@keyframes ambientFloat{
+
   0%{
-    transform:translateY(30px) scale(.5);
+    transform:
+      translateY(25px)
+      translateX(0)
+      scale(.45);
+
     opacity:0;
   }
 
-  20%{
-    opacity:.65;
+  18%{
+    opacity:.45;
+  }
+
+  78%{
+    opacity:.3;
   }
 
   100%{
-    transform:translateY(-220px) scale(1.3);
+    transform:
+      translateY(-260px)
+      translateX(25px)
+      scale(1.2);
+
     opacity:0;
   }
+
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:700px){
 
   body{
-    background-attachment:scroll;
+    background-attachment:
+      scroll;
   }
 
   .game-wrapper{
-    width:calc(100% - 10px);
-    padding-top:9px;
+    width:
+      calc(100% - 10px);
+
+    padding-top:8px;
   }
 
   .brand-logo{
     width:min(220px,60vw);
-    max-height:70px;
+
+    max-height:68px;
   }
 
   .game-title{
-    font-size:29px;
+    font-size:28px;
   }
 
   .subtitle{
     font-size:9px;
-    letter-spacing:1.5px;
+
+    letter-spacing:1.4px;
   }
 
   .hud{
-    margin:11px auto 9px;
+    margin:
+      10px auto 8px;
+
     gap:5px;
   }
 
   .hud-box{
     border-radius:10px;
+
     padding:7px 3px;
   }
 
@@ -567,12 +816,13 @@ body{
   }
 
   .hud-value{
-    font-size:18px;
+    font-size:17px;
   }
 
   .board-frame{
     padding:7px;
-    border-radius:16px;
+
+    border-radius:17px;
   }
 
   .board{
@@ -584,7 +834,8 @@ body{
   }
 
   .bottom-panel{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
 
     gap:6px;
 
@@ -592,17 +843,19 @@ body{
   }
 
   .game-status{
-    grid-column:1 / -1;
+    grid-column:
+      1 / -1;
+
     grid-row:1;
 
-    min-height:46px;
+    min-height:45px;
 
     font-size:12px;
   }
 
   .score-box,
   .gold-button{
-    min-height:46px;
+    min-height:45px;
   }
 
   .score-box{
@@ -623,29 +876,29 @@ body{
 
 }
 
-/* Accessibility */
-
 @media(prefers-reduced-motion:reduce){
 
-  .card-inner{
-    transition:none;
-  }
-
+  body::before,
+  body::after,
+  .board-frame::after,
+  .ambient-dot,
+  .card,
   .matched,
   .timer-danger{
     animation:none !important;
   }
 
-}
+  .card-inner{
+    transition:none;
+  }
 
+}
 </style>
 </head>
 
 <body>
 
 <div class="game-wrapper">
-
-  <!-- HEADER -->
 
   <header class="header">
 
@@ -666,40 +919,69 @@ body{
   </header>
 
 
-  <!-- HUD -->
-
   <section class="hud">
 
     <div class="hud-box">
-      <div class="hud-label">TIME</div>
-      <div class="hud-value" id="time">60</div>
+
+      <div class="hud-label">
+        TIME
+      </div>
+
+      <div
+        class="hud-value"
+        id="time">
+        60
+      </div>
+
     </div>
 
+
     <div class="hud-box">
-      <div class="hud-label">MATCH</div>
-      <div class="hud-value" id="match">
+
+      <div class="hud-label">
+        MATCH
+      </div>
+
+      <div
+        class="hud-value"
+        id="match">
         0 / 8
       </div>
+
     </div>
 
-    <div class="hud-box">
-      <div class="hud-label">MOVES</div>
-      <div class="hud-value" id="moves">
-        0
-      </div>
-    </div>
 
     <div class="hud-box">
-      <div class="hud-label">SCORE</div>
-      <div class="hud-value" id="score">
+
+      <div class="hud-label">
+        MOVES
+      </div>
+
+      <div
+        class="hud-value"
+        id="moves">
         0
       </div>
+
+    </div>
+
+
+    <div class="hud-box">
+
+      <div class="hud-label">
+        SCORE
+      </div>
+
+      <div
+        class="hud-value"
+        id="score">
+        0
+      </div>
+
     </div>
 
   </section>
 
-
-  <!-- BOARD -->
 
   <section class="board-frame">
 
@@ -711,28 +993,36 @@ body{
   </section>
 
 
-  <!-- BOTTOM -->
-
   <section class="bottom-panel">
 
     <div class="bottom-box score-box">
-      ⭐&nbsp;
+
+      ⭐
+      &nbsp;
+
       <span id="bottomScore">
         0
       </span>
+
     </div>
+
 
     <div
       class="bottom-box game-status"
       id="status">
+
       Tekan MULAI PERMAINAN.
+
     </div>
+
 
     <button
       class="gold-button"
       id="resetButton"
       type="button">
+
       RESET GAME
+
     </button>
 
   </section>
@@ -740,7 +1030,41 @@ body{
 </div>
 
 
-<!-- START POPUP -->
+<!-- AUDIO -->
+
+<audio
+  id="soundFlip"
+  src="asset/sound-flip.mp3"
+  preload="auto">
+</audio>
+
+<audio
+  id="soundMatch"
+  src="asset/sound-match.mp3"
+  preload="auto">
+</audio>
+
+<audio
+  id="soundMiss"
+  src="asset/sound-miss.mp3"
+  preload="auto">
+</audio>
+
+<audio
+  id="soundWin"
+  src="asset/sound-win.mp3"
+  preload="auto">
+</audio>
+
+<audio
+  id="casinoAmbient"
+  src="asset/casino-ambient.mp3"
+  preload="auto"
+  loop>
+</audio>
+
+
+<!-- START -->
 
 <div
   class="overlay"
@@ -758,7 +1082,9 @@ body{
     </div>
 
     <div class="popup-subtitle">
+
       Temukan seluruh pasangan kartu sebelum waktu habis.
+
     </div>
 
     <div class="popup-info">
@@ -769,10 +1095,10 @@ body{
       ⏱️ Waktu Bermain: 60 Detik
       <br>
 
-      ⭐ Match berturut-turut menghasilkan Combo
+      ⭐ Match beruntun menghasilkan Combo
       <br>
 
-      👑 Selesaikan seluruh kartu untuk menyelesaikan permainan
+      🔊 Efek suara aktif saat permainan dimulai
 
     </div>
 
@@ -790,7 +1116,7 @@ body{
 </div>
 
 
-<!-- RESULT POPUP -->
+<!-- RESULT -->
 
 <div
   class="overlay hidden"
@@ -801,7 +1127,9 @@ body{
     <div
       id="resultIcon"
       style="font-size:48px">
+
       🏆
+
     </div>
 
     <div
@@ -833,9 +1161,7 @@ body{
 
 <script>
 
-/* ================================
-   CARD ASSET
-================================ */
+/* ASSETS */
 
 const cardAssets = [
 
@@ -881,101 +1207,213 @@ const cardAssets = [
 
 ];
 
-
 const CARD_BACK =
   "asset/card-back.png";
 
 
-/* ================================
-   ELEMENT
-================================ */
+/* ELEMENTS */
 
 const board =
-  document.getElementById("board");
+  document.getElementById(
+    "board"
+  );
 
 const timeElement =
-  document.getElementById("time");
+  document.getElementById(
+    "time"
+  );
 
 const matchElement =
-  document.getElementById("match");
+  document.getElementById(
+    "match"
+  );
 
 const movesElement =
-  document.getElementById("moves");
+  document.getElementById(
+    "moves"
+  );
 
 const scoreElement =
-  document.getElementById("score");
+  document.getElementById(
+    "score"
+  );
 
 const bottomScore =
-  document.getElementById("bottomScore");
+  document.getElementById(
+    "bottomScore"
+  );
 
 const statusElement =
-  document.getElementById("status");
+  document.getElementById(
+    "status"
+  );
 
 const startOverlay =
-  document.getElementById("startOverlay");
+  document.getElementById(
+    "startOverlay"
+  );
 
 const resultOverlay =
-  document.getElementById("resultOverlay");
+  document.getElementById(
+    "resultOverlay"
+  );
 
 const resultTitle =
-  document.getElementById("resultTitle");
+  document.getElementById(
+    "resultTitle"
+  );
 
 const resultText =
-  document.getElementById("resultText");
+  document.getElementById(
+    "resultText"
+  );
 
 const resultIcon =
-  document.getElementById("resultIcon");
+  document.getElementById(
+    "resultIcon"
+  );
 
 const startButton =
-  document.getElementById("startButton");
+  document.getElementById(
+    "startButton"
+  );
 
 const resetButton =
-  document.getElementById("resetButton");
+  document.getElementById(
+    "resetButton"
+  );
 
 const playAgainButton =
-  document.getElementById("playAgainButton");
+  document.getElementById(
+    "playAgainButton"
+  );
 
 
-/* ================================
-   STATE
-================================ */
+/* SOUND */
+
+const soundFlip =
+  document.getElementById(
+    "soundFlip"
+  );
+
+const soundMatch =
+  document.getElementById(
+    "soundMatch"
+  );
+
+const soundMiss =
+  document.getElementById(
+    "soundMiss"
+  );
+
+const soundWin =
+  document.getElementById(
+    "soundWin"
+  );
+
+const casinoAmbient =
+  document.getElementById(
+    "casinoAmbient"
+  );
+
+
+function playSound(
+  audio,
+  volume = .6
+){
+
+  if(!audio){
+    return;
+  }
+
+  try{
+
+    audio.pause();
+
+    audio.currentTime =
+      0;
+
+    audio.volume =
+      volume;
+
+    const promise =
+      audio.play();
+
+    if(
+      promise &&
+      typeof promise.catch ===
+      "function"
+    ){
+
+      promise.catch(
+        ()=>{}
+      );
+
+    }
+
+  }
+  catch(error){}
+
+}
+
+
+/* STATE */
 
 let deck = [];
 
-let firstCard = null;
-let secondCard = null;
+let firstCard =
+  null;
 
-let boardLocked = true;
+let secondCard =
+  null;
 
-let matches = 0;
-let moves = 0;
-let score = 0;
+let boardLocked =
+  true;
 
-let combo = 0;
+let matches =
+  0;
 
-let timeLeft = 60;
+let moves =
+  0;
 
-let timer = null;
+let score =
+  0;
 
-let gameStarted = false;
-let gameFinished = false;
+let combo =
+  0;
+
+let timeLeft =
+  60;
+
+let timer =
+  null;
+
+let gameStarted =
+  false;
+
+let gameFinished =
+  false;
 
 
-/* ================================
-   SHUFFLE
-================================ */
+/* SHUFFLE */
 
-function shuffle(array){
+function shuffle(
+  array
+){
 
   for(
-    let i = array.length - 1;
+    let i =
+      array.length - 1;
+
     i > 0;
+
     i--
   ){
 
     const j =
       Math.floor(
-        Math.random() * (i + 1)
+        Math.random() *
+        (i + 1)
       );
 
     [
@@ -994,52 +1432,65 @@ function shuffle(array){
 }
 
 
-/* ================================
-   CREATE DECK
-================================ */
+/* CREATE DECK */
 
 function createDeck(){
 
-  const cards = [];
+  const cards =
+    [];
 
   cardAssets.forEach(
     (asset,index)=>{
 
       cards.push({
+
         ...asset,
+
         pair:index,
-        unique:index+"A"
+
+        unique:
+          index + "A"
+
       });
 
       cards.push({
+
         ...asset,
+
         pair:index,
-        unique:index+"B"
+
+        unique:
+          index + "B"
+
       });
 
     }
   );
 
-  return shuffle(cards);
+  return shuffle(
+    cards
+  );
 
 }
 
 
-/* ================================
-   RENDER BOARD
-================================ */
+/* RENDER */
 
 function renderBoard(){
 
-  board.innerHTML = "";
+  board.innerHTML =
+    "";
 
   deck.forEach(
     (card,index)=>{
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
-      button.type = "button";
+      button.type =
+        "button";
 
       button.className =
         "card";
@@ -1081,7 +1532,7 @@ function renderBoard(){
 
       button.addEventListener(
         "click",
-        function(){
+        ()=>{
 
           selectCard(
             button,
@@ -1102,9 +1553,7 @@ function renderBoard(){
 }
 
 
-/* ================================
-   SELECT CARD
-================================ */
+/* SELECT CARD */
 
 function selectCard(
   element,
@@ -1116,8 +1565,11 @@ function selectCard(
     gameFinished ||
     boardLocked
   ){
+
     return;
+
   }
+
 
   if(
     element.classList.contains(
@@ -1127,7 +1579,9 @@ function selectCard(
       "matched"
     )
   ){
+
     return;
+
   }
 
 
@@ -1136,17 +1590,28 @@ function selectCard(
   );
 
 
+  playSound(
+    soundFlip,
+    .32
+  );
+
+
   if(
-    firstCard === null
+    firstCard ===
+    null
   ){
 
     firstCard = {
+
       element,
       index
+
     };
+
 
     statusElement.textContent =
       "Pilih kartu kedua.";
+
 
     return;
 
@@ -1154,14 +1619,18 @@ function selectCard(
 
 
   secondCard = {
+
     element,
     index
+
   };
 
 
   moves++;
 
-  boardLocked = true;
+
+  boardLocked =
+    true;
 
 
   checkCards();
@@ -1172,17 +1641,19 @@ function selectCard(
 }
 
 
-/* ================================
-   CHECK CARDS
-================================ */
+/* CHECK */
 
 function checkCards(){
 
   const card1 =
-    deck[firstCard.index];
+    deck[
+      firstCard.index
+    ];
 
   const card2 =
-    deck[secondCard.index];
+    deck[
+      secondCard.index
+    ];
 
 
   if(
@@ -1202,9 +1673,7 @@ function checkCards(){
 }
 
 
-/* ================================
-   MATCH
-================================ */
+/* MATCH */
 
 function handleMatch(){
 
@@ -1218,7 +1687,8 @@ function handleMatch(){
 
 
   if(
-    combo === 2
+    combo ===
+    2
   ){
 
     points =
@@ -1228,7 +1698,8 @@ function handleMatch(){
 
 
   if(
-    combo >= 3
+    combo >=
+    3
   ){
 
     points =
@@ -1239,6 +1710,12 @@ function handleMatch(){
 
   score +=
     points;
+
+
+  playSound(
+    soundMatch,
+    .72
+  );
 
 
   firstCard.element.classList.remove(
@@ -1260,10 +1737,12 @@ function handleMatch(){
 
 
   if(
-    combo >= 2
+    combo >=
+    2
   ){
 
     statusElement.textContent =
+
       "MATCH! COMBO x" +
       combo +
       "  +" +
@@ -1273,6 +1752,7 @@ function handleMatch(){
   else{
 
     statusElement.textContent =
+
       "MATCH! +" +
       points;
 
@@ -1293,7 +1773,8 @@ function handleMatch(){
 
 
   if(
-    matches === 8
+    matches ===
+    8
   ){
 
     finishGame(
@@ -1305,13 +1786,18 @@ function handleMatch(){
 }
 
 
-/* ================================
-   MISS
-================================ */
+/* MISS */
 
 function handleMiss(){
 
-  combo = 0;
+  combo =
+    0;
+
+
+  playSound(
+    soundMiss,
+    .55
+  );
 
 
   statusElement.textContent =
@@ -1324,7 +1810,9 @@ function handleMiss(){
       if(
         gameFinished
       ){
+
         return;
+
       }
 
 
@@ -1354,9 +1842,7 @@ function handleMiss(){
 }
 
 
-/* ================================
-   UPDATE HUD
-================================ */
+/* HUD */
 
 function updateHUD(){
 
@@ -1364,6 +1850,7 @@ function updateHUD(){
     timeLeft;
 
   matchElement.textContent =
+
     matches +
     " / 8";
 
@@ -1378,7 +1865,8 @@ function updateHUD(){
 
 
   if(
-    timeLeft <= 10 &&
+    timeLeft <=
+    10 &&
     gameStarted &&
     !gameFinished
   ){
@@ -1399,9 +1887,7 @@ function updateHUD(){
 }
 
 
-/* ================================
-   TIMER
-================================ */
+/* TIMER */
 
 function startTimer(){
 
@@ -1418,16 +1904,21 @@ function startTimer(){
 
 
         if(
-          timeLeft <= 0
+          timeLeft <=
+          0
         ){
 
-          timeLeft = 0;
+          timeLeft =
+            0;
+
 
           updateHUD();
+
 
           finishGame(
             false
           );
+
 
           return;
 
@@ -1443,16 +1934,78 @@ function startTimer(){
 }
 
 
-/* ================================
-   START GAME
-================================ */
+/* AMBIENT SOUND */
+
+function startAmbient(){
+
+  if(
+    !casinoAmbient
+  ){
+
+    return;
+
+  }
+
+  try{
+
+    casinoAmbient.pause();
+
+    casinoAmbient.currentTime =
+      0;
+
+    casinoAmbient.volume =
+      .11;
+
+
+    const promise =
+      casinoAmbient.play();
+
+
+    if(
+      promise &&
+      typeof promise.catch ===
+      "function"
+    ){
+
+      promise.catch(
+        ()=>{}
+      );
+
+    }
+
+  }
+  catch(error){}
+
+}
+
+
+function stopAmbient(){
+
+  if(
+    !casinoAmbient
+  ){
+
+    return;
+
+  }
+
+  try{
+
+    casinoAmbient.pause();
+
+  }
+  catch(error){}
+
+}
+
+
+/* START GAME */
 
 function startGame(){
 
   startOverlay.classList.add(
     "hidden"
   );
-
 
   resultOverlay.classList.add(
     "hidden"
@@ -1505,14 +2058,14 @@ function startGame(){
 
   updateHUD();
 
+  startAmbient();
+
   startTimer();
 
 }
 
 
-/* ================================
-   FINISH GAME
-================================ */
+/* FINISH */
 
 function finishGame(
   success
@@ -1521,7 +2074,9 @@ function finishGame(
   if(
     gameFinished
   ){
+
     return;
+
   }
 
 
@@ -1537,6 +2092,9 @@ function finishGame(
   );
 
 
+  stopAmbient();
+
+
   timeElement.classList.remove(
     "timer-danger"
   );
@@ -1547,11 +2105,18 @@ function finishGame(
   ){
 
     const timeBonus =
-      timeLeft * 10;
+      timeLeft *
+      10;
 
 
     score +=
       timeBonus;
+
+
+    playSound(
+      soundWin,
+      .82
+    );
 
 
     resultIcon.textContent =
@@ -1590,6 +2155,12 @@ function finishGame(
 
   }
   else{
+
+    playSound(
+      soundMiss,
+      .65
+    );
+
 
     resultIcon.textContent =
       "⏱️";
@@ -1641,15 +2212,31 @@ function finishGame(
 }
 
 
-/* ================================
-   RESET
-================================ */
+/* RESET */
 
 function resetGame(){
 
   clearInterval(
     timer
   );
+
+
+  stopAmbient();
+
+
+  if(
+    casinoAmbient
+  ){
+
+    try{
+
+      casinoAmbient.currentTime =
+        0;
+
+    }
+    catch(error){}
+
+  }
 
 
   gameStarted =
@@ -1709,44 +2296,61 @@ function resetGame(){
 }
 
 
-/* ================================
-   AMBIENT PARTICLES
-================================ */
+/* PARTICLES */
 
-function createParticle(){
+function createAmbientDot(){
 
   if(
     document.hidden
   ){
+
     return;
+
   }
 
 
-  const particle =
+  const dot =
     document.createElement(
       "span"
     );
 
 
-  particle.className =
-    "particle";
+  dot.className =
+    "ambient-dot";
 
 
-  particle.style.left =
+  if(
+    Math.random() >
+    .62
+  ){
+
+    dot.classList.add(
+      "blue"
+    );
+
+  }
+
+
+  dot.style.left =
+
     Math.random() *
     100 +
     "vw";
 
 
-  particle.style.bottom =
-    Math.random() *
-    25 +
+  dot.style.bottom =
+
+    (
+      Math.random() *
+      45
+    ) +
     "px";
 
 
-  particle.style.animationDuration =
+  dot.style.animationDuration =
+
     (
-      3 +
+      4.5 +
       Math.random() *
       4
     ) +
@@ -1754,37 +2358,33 @@ function createParticle(){
 
 
   document.body.appendChild(
-    particle
+    dot
   );
 
 
   setTimeout(
     ()=>{
 
-      particle.remove();
+      dot.remove();
 
     },
-    7500
+    9000
   );
 
 }
 
 
-/* ================================
-   BUTTON EVENT
-================================ */
+/* EVENTS */
 
 startButton.addEventListener(
   "click",
   startGame
 );
 
-
 resetButton.addEventListener(
   "click",
   resetGame
 );
-
 
 playAgainButton.addEventListener(
   "click",
@@ -1792,9 +2392,7 @@ playAgainButton.addEventListener(
 );
 
 
-/* ================================
-   INIT
-================================ */
+/* INIT */
 
 deck =
   createDeck();
@@ -1805,8 +2403,8 @@ updateHUD();
 
 
 setInterval(
-  createParticle,
-  950
+  createAmbientDot,
+  720
 );
 
 </script>
