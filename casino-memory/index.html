@@ -28,6 +28,7 @@ body{
 body{
   font-family:Arial,Helvetica,sans-serif;
   color:#fff;
+
   background:
     linear-gradient(
       rgba(1,7,17,.30),
@@ -41,7 +42,7 @@ body{
 
 
 /* =====================================
-   PREMIUM BACKGROUND - DESKTOP
+   BACKGROUND
 ===================================== */
 
 body::before{
@@ -66,18 +67,13 @@ body::before{
 }
 
 @keyframes bgGlow{
-  from{
-    opacity:.7;
-  }
-
-  to{
-    opacity:1;
-  }
+  from{opacity:.7;}
+  to{opacity:1;}
 }
 
 
 /* =====================================
-   WRAPPER
+   MAIN
 ===================================== */
 
 .game-wrapper{
@@ -162,8 +158,7 @@ body::before{
 .hud{
   width:min(920px,100%);
 
-  margin:
-    14px auto 12px;
+  margin:14px auto 12px;
 
   display:grid;
 
@@ -265,7 +260,7 @@ body::before{
 
 
 /* =====================================
-   LIGHTWEIGHT PREMIUM CARD
+   CARD
 ===================================== */
 
 .card{
@@ -292,11 +287,7 @@ body::before{
     0 8px 17px
     rgba(0,0,0,.42);
 
-  transform:
-    translateZ(0);
-
-  -webkit-transform:
-    translateZ(0);
+  transform:translateZ(0);
 }
 
 .card-image{
@@ -314,51 +305,38 @@ body::before{
 
   -webkit-user-drag:none;
 
-  backface-visibility:hidden;
-
-  transform:
-    translateZ(0);
+  transform:translateZ(0);
 }
 
 
-/* REVEAL */
+/* reveal */
 
 .card.reveal{
   animation:
-    premiumReveal
-    .20s ease-out;
+    premiumReveal .20s ease-out;
 }
 
 @keyframes premiumReveal{
 
   0%{
-    transform:
-      scale(.93);
-
-    filter:
-      brightness(.75);
+    transform:scale(.93);
+    filter:brightness(.75);
   }
 
   55%{
-    transform:
-      scale(1.025);
-
-    filter:
-      brightness(1.12);
+    transform:scale(1.025);
+    filter:brightness(1.12);
   }
 
   100%{
-    transform:
-      scale(1);
-
-    filter:
-      brightness(1);
+    transform:scale(1);
+    filter:brightness(1);
   }
 
 }
 
 
-/* MATCH */
+/* matched */
 
 .card.matched{
   pointer-events:none;
@@ -388,8 +366,7 @@ body::before{
     );
 
   animation:
-    matchShine
-    .65s ease-out;
+    matchShine .65s ease-out;
 }
 
 @keyframes matchShine{
@@ -405,6 +382,7 @@ body::before{
   }
 
 }
+
 
 @media(hover:hover) and (pointer:fine){
 
@@ -464,21 +442,16 @@ body::before{
 ===================================== */
 
 .timer-danger{
-  color:
-    #ff6374 !important;
+  color:#ff6374 !important;
 
   animation:
-    timerPulse
-    .5s infinite alternate;
+    timerPulse .5s infinite alternate;
 }
 
 @keyframes timerPulse{
-
   to{
-    transform:
-      scale(1.10);
+    transform:scale(1.10);
   }
-
 }
 
 
@@ -631,55 +604,17 @@ body::before{
 
 
 /* =====================================
-   LOADER
-===================================== */
-
-.loader{
-  display:inline-block;
-
-  width:15px;
-  height:15px;
-
-  margin-left:8px;
-
-  vertical-align:-2px;
-
-  border:
-    2px solid
-    rgba(255,255,255,.2);
-
-  border-top-color:
-    #e8bd5f;
-
-  border-radius:50%;
-
-  animation:
-    loaderSpin
-    .7s linear infinite;
-}
-
-@keyframes loaderSpin{
-  to{
-    transform:
-      rotate(360deg);
-  }
-}
-
-
-/* =====================================
-   MOBILE PERFORMANCE
+   MOBILE
 ===================================== */
 
 @media(max-width:700px){
 
   body{
-    background-attachment:
-      scroll;
+    background-attachment:scroll;
   }
 
   body::before{
     animation:none;
-
     opacity:.78;
   }
 
@@ -704,7 +639,6 @@ body::before{
 
   .subtitle{
     font-size:8px;
-
     letter-spacing:1.3px;
   }
 
@@ -773,7 +707,6 @@ body::before{
 
   .bottom-box{
     min-height:44px;
-
     font-size:12px;
   }
 
@@ -797,7 +730,7 @@ body::before{
 
 
 /* =====================================
-   REDUCE MOTION
+   REDUCED MOTION
 ===================================== */
 
 @media(prefers-reduced-motion:reduce){
@@ -805,8 +738,7 @@ body::before{
   body::before,
   .card,
   .card.matched::after,
-  .timer-danger,
-  .loader{
+  .timer-danger{
     animation:none !important;
   }
 
@@ -818,7 +750,6 @@ body::before{
 
 
 <div class="game-wrapper">
-
 
 <header class="header">
 
@@ -841,62 +772,23 @@ body::before{
 <section class="hud">
 
   <div class="hud-box">
-
-    <div class="hud-label">
-      TIME
-    </div>
-
-    <div
-      id="time"
-      class="hud-value">
-      60
-    </div>
-
+    <div class="hud-label">TIME</div>
+    <div id="time" class="hud-value">60</div>
   </div>
 
-
   <div class="hud-box">
-
-    <div class="hud-label">
-      MATCH
-    </div>
-
-    <div
-      id="match"
-      class="hud-value">
-      0 / 8
-    </div>
-
+    <div class="hud-label">MATCH</div>
+    <div id="match" class="hud-value">0 / 8</div>
   </div>
 
-
   <div class="hud-box">
-
-    <div class="hud-label">
-      MOVES
-    </div>
-
-    <div
-      id="moves"
-      class="hud-value">
-      0
-    </div>
-
+    <div class="hud-label">MOVES</div>
+    <div id="moves" class="hud-value">0</div>
   </div>
 
-
   <div class="hud-box">
-
-    <div class="hud-label">
-      SCORE
-    </div>
-
-    <div
-      id="score"
-      class="hud-value">
-      0
-    </div>
-
+    <div class="hud-label">SCORE</div>
+    <div id="score" class="hud-value">0</div>
   </div>
 
 </section>
@@ -923,7 +815,6 @@ body::before{
   </div>
 
 </section>
-
 
 </div>
 
@@ -1000,9 +891,7 @@ body::before{
     </div>
 
     <div class="popup-subtitle">
-
       Temukan seluruh pasangan kartu sebelum waktu habis.
-
     </div>
 
     <div class="popup-info">
@@ -1019,7 +908,6 @@ body::before{
       🎧 Luna akan menemani permainan kamu
 
     </div>
-
 
     <button
       id="startButton"
@@ -1080,22 +968,16 @@ body::before{
       alt="MAUSLOT">
 
     <div class="popup-title">
-
       PERMAINAN SUDAH SELESAI
-
     </div>
 
     <div class="popup-subtitle">
-
       VIP Memory hanya dapat dimainkan satu kali.
-
     </div>
 
     <div class="popup-info">
-
       Terima kasih sudah mengikuti
       Mini Game VIP MAUSLOT.
-
     </div>
 
   </div>
@@ -1206,7 +1088,7 @@ const startButton =
   document.getElementById("startButton");
 
 
-/* AUDIO */
+/* audio */
 
 const soundFlip =
   document.getElementById("soundFlip");
@@ -1234,7 +1116,7 @@ const lunaLose =
 
 
 /* =====================================
-   GAME STATE
+   STATE
 ===================================== */
 
 let deck = [];
@@ -1257,6 +1139,8 @@ let gameStarted = false;
 let gameFinished = false;
 
 let cardsReady = false;
+
+let cardPreloadPromise = null;
 
 let startInProgress = false;
 
@@ -1301,7 +1185,7 @@ function shuffle(array){
 
 
 /* =====================================
-   DECK
+   CREATE DECK
 ===================================== */
 
 function createDeck(){
@@ -1330,7 +1214,7 @@ function createDeck(){
 
 
 /* =====================================
-   RENDER
+   RENDER BOARD
 ===================================== */
 
 function renderBoard(){
@@ -1398,7 +1282,7 @@ function renderBoard(){
 
 
 /* =====================================
-   PRELOAD UNIQUE CARD IMAGES
+   PRELOAD CARDS
 ===================================== */
 
 function preloadImage(src){
@@ -1415,6 +1299,9 @@ function preloadImage(src){
       img.onerror =
         ()=>resolve(false);
 
+      img.decoding =
+        "async";
+
       img.src =
         src;
 
@@ -1424,26 +1311,45 @@ function preloadImage(src){
 }
 
 
-async function preloadCards(){
+function startPreloadingCards(){
 
   if(cardsReady){
-    return;
+    return Promise.resolve();
   }
 
-  statusElement.innerHTML =
-    'Menyiapkan kartu VIP <span class="loader"></span>';
 
-  const images =
-    cardAssets.map(
-      item => item.image
+  if(cardPreloadPromise){
+    return cardPreloadPromise;
+  }
+
+
+  const uniqueImages =
+    [
+      ...new Set(
+        cardAssets.map(
+          item => item.image
+        )
+      )
+    ];
+
+
+  cardPreloadPromise =
+    Promise.all(
+      uniqueImages.map(
+        preloadImage
+      )
+    )
+    .then(
+      ()=>{
+
+        cardsReady =
+          true;
+
+      }
     );
 
-  await Promise.all(
-    images.map(preloadImage)
-  );
 
-  cardsReady =
-    true;
+  return cardPreloadPromise;
 
 }
 
@@ -1495,21 +1401,6 @@ function playAudio(
 }
 
 
-/*
-  Tidak lagi menjalankan play/pause
-  ke SEMUA audio pada start.
-  Itu bisa bikin loading terasa lebih berat.
-*/
-
-function prepareSecondaryAudio(){
-
-  soundFlip.load();
-  soundMatch.load();
-  soundMiss.load();
-
-}
-
-
 /* =====================================
    HUD
 ===================================== */
@@ -1553,7 +1444,7 @@ function updateHUD(){
 
 
 /* =====================================
-   CARD REVEAL
+   REVEAL
 ===================================== */
 
 function revealCard(
@@ -1571,12 +1462,6 @@ function revealCard(
     "reveal"
   );
 
-
-  /*
-    force animation restart hanya
-    di elemen kecil, bukan seluruh board
-  */
-
   void button.offsetWidth;
 
   button.classList.add(
@@ -1587,13 +1472,14 @@ function revealCard(
 
 
 /* =====================================
-   SELECT CARD
+   SELECT
 ===================================== */
 
 function selectCard(event){
 
   const button =
     event.currentTarget;
+
 
   if(
     !gameStarted ||
@@ -1827,11 +1713,6 @@ function handleMiss(){
     "Belum cocok. Ingat posisi kartunya.";
 
 
-  /*
-    simpan referensi lokal.
-    Ini menghindari state berubah sebelum timeout.
-  */
-
   const cardA =
     firstCard.button;
 
@@ -1847,22 +1728,10 @@ function handleMiss(){
       }
 
 
-      const imageA =
-        cardA.firstElementChild;
-
-      const imageB =
-        cardB.firstElementChild;
-
-
-      /*
-        langsung ganti src back card.
-        Tidak ada transform 3D.
-      */
-
-      imageA.src =
+      cardA.firstElementChild.src =
         CARD_BACK;
 
-      imageB.src =
+      cardB.firstElementChild.src =
         CARD_BACK;
 
 
@@ -1978,7 +1847,7 @@ function stopAmbient(){
 
 
 /* =====================================
-   ACTIVATE
+   ACTIVATE GAME
 ===================================== */
 
 function activateGame(){
@@ -2011,11 +1880,6 @@ function activateGame(){
     60;
 
 
-  /*
-    render lagi setelah deck diacak.
-    Karena gambar depan sudah browser cache.
-  */
-
   renderBoard();
 
 
@@ -2044,28 +1908,7 @@ function activateGame(){
 
 
 /* =====================================
-   PREPARE AFTER LUNA
-===================================== */
-
-async function prepareGame(){
-
-  gameStarted =
-    false;
-
-  boardLocked =
-    true;
-
-
-  await preloadCards();
-
-
-  activateGame();
-
-}
-
-
-/* =====================================
-   START
+   START GAME
 ===================================== */
 
 async function startGame(){
@@ -2115,40 +1958,50 @@ async function startGame(){
 
 
   /*
-    Sound effects kecil mulai dipersiapkan
-    tanpa menunggu proses ini selesai.
+    INI BAGIAN PENTING:
+    preload kartu langsung mulai
+    bersamaan dengan suara Luna.
   */
 
-  prepareSecondaryAudio();
+  const cardLoading =
+    startPreloadingCards();
 
 
-  let welcomeEnded =
+  let welcomeDone =
     false;
 
 
-  const continueGame =
+  const finishWelcome =
     async ()=>{
 
-      if(welcomeEnded){
+      if(welcomeDone){
         return;
       }
 
 
-      welcomeEnded =
+      welcomeDone =
         true;
 
 
-      await prepareGame();
+      /*
+        Kartu sudah di-load sejak Luna mulai.
+        Biasanya promise ini sudah selesai.
+      */
 
-  };
+      await cardLoading;
+
+
+      activateGame();
+
+    };
 
 
   welcomeVoice.onended =
-    continueGame;
+    finishWelcome;
 
 
   welcomeVoice.onerror =
-    continueGame;
+    finishWelcome;
 
 
   try{
@@ -2166,26 +2019,25 @@ async function startGame(){
   catch(error){
 
     /*
-      Jika browser menolak voice,
-      jangan membuat member tertahan.
+      Kalau browser gagal play Luna,
+      kartu tetap preload lalu game mulai.
     */
 
-    await continueGame();
+    await finishWelcome();
 
   }
 
 
   /*
-    fail-safe Luna sekitar 10 detik.
-    Ini bukan timer permainan.
+    Failsafe kalau event onended tidak jalan.
   */
 
   setTimeout(
     ()=>{
 
-      if(!welcomeEnded){
+      if(!welcomeDone){
 
-        continueGame();
+        finishWelcome();
 
       }
 
@@ -2197,7 +2049,7 @@ async function startGame(){
 
 
 /* =====================================
-   FINISH
+   FINISH GAME
 ===================================== */
 
 function finishGame(success){
@@ -2402,12 +2254,6 @@ function init(){
   deck =
     createDeck();
 
-
-  /*
-    Di awal cuma card-back.
-    Tidak ada 8 front images yang
-    di-download sekaligus.
-  */
 
   renderBoard();
 
