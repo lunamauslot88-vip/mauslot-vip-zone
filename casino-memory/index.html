@@ -47,9 +47,9 @@ body{
 }
 
 
-/* ================================
-   BACKGROUND EFFECT DESKTOP
-================================ */
+/* =================================
+   BACKGROUND DESKTOP
+================================= */
 
 body::before{
   content:"";
@@ -125,9 +125,9 @@ body::after{
 }
 
 
-/* ================================
+/* =================================
    MAIN
-================================ */
+================================= */
 
 .game-wrapper{
   position:relative;
@@ -140,9 +140,9 @@ body::after{
 }
 
 
-/* ================================
+/* =================================
    HEADER
-================================ */
+================================= */
 
 .header{
   text-align:center;
@@ -188,6 +188,7 @@ body::after{
 
   -webkit-background-clip:text;
   background-clip:text;
+
   color:transparent;
 
   text-shadow:
@@ -198,15 +199,18 @@ body::after{
 .subtitle{
   font-size:12px;
   letter-spacing:2.6px;
+
   color:#e8dfcb;
+
   margin-top:7px;
+
   text-transform:uppercase;
 }
 
 
-/* ================================
+/* =================================
    HUD
-================================ */
+================================= */
 
 .hud{
   width:min(920px,100%);
@@ -214,7 +218,10 @@ body::after{
   margin:14px auto 12px;
 
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:9px;
 }
 
@@ -227,7 +234,8 @@ body::after{
     );
 
   border:
-    1px solid rgba(230,182,79,.82);
+    1px solid
+    rgba(230,182,79,.82);
 
   border-radius:14px;
 
@@ -236,14 +244,18 @@ body::after{
   text-align:center;
 
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 7px 18px rgba(0,0,0,.30);
+    inset 0 1px 0
+    rgba(255,255,255,.08),
+
+    0 7px 18px
+    rgba(0,0,0,.30);
 }
 
 .hud-label{
   color:#dcbf7e;
 
   font-size:10px;
+
   letter-spacing:1.4px;
 
   font-weight:700;
@@ -252,26 +264,31 @@ body::after{
 .hud-value{
   margin-top:2px;
 
-  font-size:clamp(20px,3vw,29px);
+  font-size:
+    clamp(20px,3vw,29px);
+
   font-weight:900;
 
-  font-variant-numeric:tabular-nums;
+  font-variant-numeric:
+    tabular-nums;
 }
 
 
-/* ================================
+/* =================================
    BOARD
-================================ */
+================================= */
 
 .board-frame{
   position:relative;
 
   width:min(920px,100%);
+
   margin:auto;
 
   padding:17px;
 
   border-radius:28px;
+
   overflow:hidden;
 
   background:
@@ -282,31 +299,43 @@ body::after{
     );
 
   border:
-    2px solid rgba(219,169,67,.93);
+    2px solid
+    rgba(219,169,67,.93);
 
   box-shadow:
-    0 34px 80px rgba(0,0,0,.58),
-    inset 0 0 0 4px rgba(255,228,156,.035),
-    inset 0 28px 80px rgba(39,113,205,.06),
-    0 0 30px rgba(223,166,55,.14);
+    0 34px 80px
+    rgba(0,0,0,.58),
+
+    inset 0 0 0 4px
+    rgba(255,228,156,.035),
+
+    inset 0 28px 80px
+    rgba(39,113,205,.06),
+
+    0 0 30px
+    rgba(223,166,55,.14);
 }
 
 .board-frame::before{
   content:"";
+
   position:absolute;
   inset:6px;
 
   pointer-events:none;
 
   border-radius:21px;
+
   border:
-    1px solid rgba(255,224,147,.18);
+    1px solid
+    rgba(255,224,147,.18);
 
   z-index:1;
 }
 
 .board-frame::after{
   content:"";
+
   position:absolute;
   inset:0;
 
@@ -324,10 +353,14 @@ body::after{
       transparent 100%
     );
 
-  transform:translateX(-120%);
+  transform:
+    translateX(-120%);
 
   animation:
-    boardShine 6.5s ease-in-out infinite;
+    boardShine
+    6.5s
+    ease-in-out
+    infinite;
 
   z-index:2;
 }
@@ -335,12 +368,14 @@ body::after{
 @keyframes boardShine{
   0%,
   38%{
-    transform:translateX(-120%);
+    transform:
+      translateX(-120%);
   }
 
   70%,
   100%{
-    transform:translateX(120%);
+    transform:
+      translateX(120%);
   }
 }
 
@@ -349,23 +384,27 @@ body::after{
   z-index:3;
 
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
 
   gap:12px;
 }
 
 
-/* ================================
+/* =================================
    CARD
-================================ */
+================================= */
 
 .card{
   position:relative;
 
   width:100%;
+
   aspect-ratio:2 / 3;
 
   padding:0;
+
   border:0;
 
   background:transparent;
@@ -389,10 +428,12 @@ body::after{
   position:absolute;
   inset:0;
 
-  transform-style:preserve-3d;
+  transform-style:
+    preserve-3d;
 
   transition:
-    transform .55s cubic-bezier(.2,.75,.15,1),
+    transform .55s
+      cubic-bezier(.2,.75,.15,1),
     filter .28s ease;
 }
 
@@ -415,11 +456,17 @@ body::after{
   -webkit-backface-visibility:hidden;
 
   border-radius:12px;
+
   overflow:hidden;
 
+  background:#06152d;
+
   box-shadow:
-    0 9px 17px rgba(0,0,0,.48),
-    0 2px 2px rgba(255,255,255,.08);
+    0 9px 17px
+    rgba(0,0,0,.48),
+
+    0 2px 2px
+    rgba(255,255,255,.08);
 }
 
 .card-face img{
@@ -443,14 +490,20 @@ body::after{
 
 .card.matched .card-front{
   box-shadow:
-    0 0 0 3px rgba(255,217,107,.96),
-    0 0 22px rgba(255,194,46,.85),
-    0 0 48px rgba(32,126,255,.35);
+    0 0 0 3px
+    rgba(255,217,107,.96),
+
+    0 0 22px
+    rgba(255,194,46,.85),
+
+    0 0 48px
+    rgba(32,126,255,.35);
 }
 
 .card.matched{
   animation:
-    matchPop .52s ease;
+    matchPop
+    .52s ease;
 }
 
 @keyframes matchPop{
@@ -468,13 +521,15 @@ body::after{
 }
 
 
-/* ================================
+/* =================================
    STATUS
-================================ */
+================================= */
 
 .bottom-panel{
   width:min(920px,100%);
-  margin:12px auto 0;
+
+  margin:
+    12px auto 0;
 }
 
 .bottom-box{
@@ -483,6 +538,7 @@ body::after{
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   text-align:center;
@@ -491,33 +547,42 @@ body::after{
     rgba(3,13,29,.94);
 
   border:
-    1px solid rgba(222,175,73,.68);
+    1px solid
+    rgba(222,175,73,.68);
 
   border-radius:14px;
 
-  padding:9px 14px;
+  padding:
+    9px 14px;
 
   box-shadow:
-    inset 0 1px rgba(255,255,255,.05),
-    0 7px 18px rgba(0,0,0,.3);
+    inset 0 1px
+    rgba(255,255,255,.05),
+
+    0 7px 18px
+    rgba(0,0,0,.3);
 }
 
 .game-status{
   color:#edf4ff;
+
   font-size:14px;
+
   font-weight:700;
 }
 
 
-/* ================================
+/* =================================
    BUTTON
-================================ */
+================================= */
 
 .gold-button{
   width:100%;
+
   min-height:54px;
 
   border:0;
+
   border-radius:14px;
 
   cursor:pointer;
@@ -525,7 +590,9 @@ body::after{
   color:#161005;
 
   font-weight:900;
+
   font-size:14px;
+
   letter-spacing:.4px;
 
   background:
@@ -537,20 +604,30 @@ body::after{
     );
 
   border:
-    1px solid #ffe39a;
+    1px solid
+    #ffe39a;
 
   box-shadow:
-    inset 0 2px rgba(255,255,255,.65),
-    0 8px 20px rgba(209,153,44,.25);
+    inset 0 2px
+    rgba(255,255,255,.65),
+
+    0 8px 20px
+    rgba(209,153,44,.25);
+}
+
+.gold-button:disabled{
+  opacity:.65;
+  cursor:default;
 }
 
 
-/* ================================
+/* =================================
    OVERLAY
-================================ */
+================================= */
 
 .overlay{
   position:fixed;
+
   inset:0;
 
   z-index:100;
@@ -558,6 +635,7 @@ body::after{
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   padding:20px;
@@ -578,7 +656,8 @@ body::after{
 
   text-align:center;
 
-  padding:27px 23px;
+  padding:
+    27px 23px;
 
   border-radius:24px;
 
@@ -590,15 +669,20 @@ body::after{
     );
 
   border:
-    1px solid #d3a449;
+    1px solid
+    #d3a449;
 
   box-shadow:
-    0 30px 90px rgba(0,0,0,.72),
-    inset 0 1px rgba(255,255,255,.08);
+    0 30px 90px
+    rgba(0,0,0,.72),
+
+    inset 0 1px
+    rgba(255,255,255,.08);
 }
 
 .popup-logo{
   width:min(245px,72%);
+
   max-height:80px;
 
   object-fit:contain;
@@ -630,7 +714,8 @@ body::after{
 }
 
 .popup-info{
-  margin:17px 0;
+  margin:
+    17px 0;
 
   border-radius:13px;
 
@@ -647,31 +732,84 @@ body::after{
 }
 
 
-/* ================================
-   TIMER WARNING
-================================ */
+/* =================================
+   LOADING
+================================= */
 
-.timer-danger{
-  color:#ff6374 !important;
+.loading-dots{
+  display:inline-flex;
+  gap:5px;
+
+  margin-left:5px;
+
+  vertical-align:middle;
+}
+
+.loading-dots span{
+  width:5px;
+  height:5px;
+
+  background:#f5cf73;
+
+  border-radius:50%;
 
   animation:
-    timerPulse .48s infinite alternate;
+    loadingDot
+    .9s
+    infinite alternate;
+}
+
+.loading-dots span:nth-child(2){
+  animation-delay:.15s;
+}
+
+.loading-dots span:nth-child(3){
+  animation-delay:.3s;
+}
+
+@keyframes loadingDot{
+  from{
+    opacity:.25;
+    transform:translateY(0);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(-3px);
+  }
+}
+
+
+/* =================================
+   TIMER WARNING
+================================= */
+
+.timer-danger{
+  color:
+    #ff6374 !important;
+
+  animation:
+    timerPulse
+    .48s
+    infinite alternate;
 }
 
 @keyframes timerPulse{
   from{
-    transform:scale(1);
+    transform:
+      scale(1);
   }
 
   to{
-    transform:scale(1.12);
+    transform:
+      scale(1.12);
   }
 }
 
 
-/* ================================
-   PARTICLES DESKTOP
-================================ */
+/* =================================
+   PARTICLES
+================================= */
 
 .ambient-dot{
   position:fixed;
@@ -696,7 +834,8 @@ body::after{
   opacity:0;
 
   animation:
-    ambientFloat linear forwards;
+    ambientFloat
+    linear forwards;
 }
 
 .ambient-dot.blue{
@@ -738,9 +877,9 @@ body::after{
 }
 
 
-/* ================================
-   MOBILE OPTIMIZATION
-================================ */
+/* =================================
+   MOBILE
+================================= */
 
 @media(max-width:700px){
 
@@ -748,12 +887,10 @@ body::after{
     background-attachment:scroll;
   }
 
-  /* matikan sweep paling berat */
   body::after{
     display:none;
   }
 
-  /* glow tetap ada tapi tanpa animasi */
   body::before{
     animation:none;
     opacity:.82;
@@ -797,8 +934,11 @@ body::after{
       7px 3px;
 
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.06),
-      0 4px 10px rgba(0,0,0,.22);
+      inset 0 1px 0
+      rgba(255,255,255,.06),
+
+      0 4px 10px
+      rgba(0,0,0,.22);
   }
 
   .hud-label{
@@ -815,8 +955,11 @@ body::after{
     border-radius:17px;
 
     box-shadow:
-      0 14px 32px rgba(0,0,0,.42),
-      inset 0 0 0 2px rgba(255,228,156,.03);
+      0 14px 32px
+      rgba(0,0,0,.42),
+
+      inset 0 0 0 2px
+      rgba(255,228,156,.03);
   }
 
   .board-frame::before{
@@ -836,7 +979,8 @@ body::after{
     border-radius:7px;
 
     box-shadow:
-      0 4px 9px rgba(0,0,0,.35);
+      0 4px 9px
+      rgba(0,0,0,.35);
   }
 
   .card:hover{
@@ -858,6 +1002,7 @@ body::after{
 
   .overlay{
     backdrop-filter:none;
+
     background:
       rgba(0,5,15,.90);
   }
@@ -867,15 +1012,16 @@ body::after{
       22px 16px;
 
     box-shadow:
-      0 18px 42px rgba(0,0,0,.58);
+      0 18px 42px
+      rgba(0,0,0,.58);
   }
 
 }
 
 
-/* ================================
+/* =================================
    REDUCED MOTION
-================================ */
+================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -885,7 +1031,8 @@ body::after{
   .ambient-dot,
   .card,
   .matched,
-  .timer-danger{
+  .timer-danger,
+  .loading-dots span{
     animation:none !important;
   }
 
@@ -1009,9 +1156,7 @@ body::after{
 </div>
 
 
-<!-- ================================
-     AUDIO
-================================ -->
+<!-- AUDIO -->
 
 <audio
   id="soundFlip"
@@ -1063,9 +1208,7 @@ body::after{
 </audio>
 
 
-<!-- ================================
-     START OVERLAY
-================================ -->
+<!-- START -->
 
 <div
   class="overlay"
@@ -1083,7 +1226,9 @@ body::after{
     </div>
 
     <div class="popup-subtitle">
+
       Temukan seluruh pasangan kartu sebelum waktu habis.
+
     </div>
 
     <div class="popup-info">
@@ -1115,9 +1260,7 @@ body::after{
 </div>
 
 
-<!-- ================================
-     RESULT
-================================ -->
+<!-- RESULT -->
 
 <div
   class="overlay hidden"
@@ -1134,7 +1277,9 @@ body::after{
     <div
       id="resultTitle"
       class="popup-title">
+
       VIP MEMORY COMPLETE
+
     </div>
 
     <div
@@ -1147,9 +1292,7 @@ body::after{
 </div>
 
 
-<!-- ================================
-     LOCKED
-================================ -->
+<!-- LOCKED -->
 
 <div
   class="overlay hidden"
@@ -1184,9 +1327,9 @@ body::after{
 
 <script>
 
-/* ================================
+/* =================================
    CONFIG
-================================ */
+================================= */
 
 const GAME_LOCK_KEY =
   "mauslot_vip_memory_played_final_v1";
@@ -1239,9 +1382,9 @@ const cardAssets = [
 ];
 
 
-/* ================================
+/* =================================
    ELEMENT
-================================ */
+================================= */
 
 const board =
   document.getElementById("board");
@@ -1283,9 +1426,9 @@ const startButton =
   document.getElementById("startButton");
 
 
-/* ================================
+/* =================================
    AUDIO
-================================ */
+================================= */
 
 const soundFlip =
   document.getElementById("soundFlip");
@@ -1312,9 +1455,9 @@ const lunaLose =
   document.getElementById("lunaLose");
 
 
-/* ================================
+/* =================================
    STATE
-================================ */
+================================= */
 
 let deck = [];
 
@@ -1337,10 +1480,12 @@ let gameFinished = false;
 
 let activationDone = false;
 
+let cardImagesReady = false;
 
-/* ================================
-   PLAY AUDIO
-================================ */
+
+/* =================================
+   AUDIO
+================================= */
 
 function playAudio(
   audio,
@@ -1356,7 +1501,9 @@ function playAudio(
     audio.pause();
 
     audio.currentTime = 0;
+
     audio.muted = false;
+
     audio.volume = volume;
 
     const result =
@@ -1380,10 +1527,6 @@ function playAudio(
 
 }
 
-
-/* ================================
-   UNLOCK AUDIO
-================================ */
 
 async function unlockAllAudio(){
 
@@ -1410,6 +1553,7 @@ async function unlockAllAudio(){
     try{
 
       audio.muted = true;
+
       audio.currentTime = 0;
 
       await audio.play();
@@ -1417,6 +1561,7 @@ async function unlockAllAudio(){
       audio.pause();
 
       audio.currentTime = 0;
+
       audio.muted = false;
 
     }
@@ -1431,9 +1576,9 @@ async function unlockAllAudio(){
 }
 
 
-/* ================================
+/* =================================
    SHUFFLE
-================================ */
+================================= */
 
 function shuffle(array){
 
@@ -1467,9 +1612,9 @@ function shuffle(array){
 }
 
 
-/* ================================
+/* =================================
    CREATE DECK
-================================ */
+================================= */
 
 function createDeck(){
 
@@ -1502,22 +1647,103 @@ function createDeck(){
 }
 
 
-/* ================================
+/* =================================
+   PRELOAD FRONT CARDS
+================================= */
+
+async function preloadGameCards(){
+
+  if(cardImagesReady){
+    return;
+  }
+
+  const uniqueImages =
+    [
+      ...new Set(
+        cardAssets.map(
+          item => item.image
+        )
+      )
+    ];
+
+  let loadedCount = 0;
+
+  statusElement.innerHTML =
+    `Menyiapkan kartu VIP
+    <span class="loading-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>`;
+
+  const preloadJobs =
+    uniqueImages.map(
+      src =>
+        new Promise(resolve => {
+
+          const img =
+            new Image();
+
+          img.decoding =
+            "async";
+
+          img.onload =
+            ()=>{
+              loadedCount++;
+              resolve();
+            };
+
+          img.onerror =
+            ()=>{
+              loadedCount++;
+              resolve();
+            };
+
+          img.src =
+            src;
+
+        })
+    );
+
+  await Promise.all(
+    preloadJobs
+  );
+
+  cardImagesReady =
+    true;
+
+}
+
+
+/* =================================
    RENDER BOARD
-================================ */
+================================= */
 
-function renderBoard(){
+function renderBoard(
+  loadFrontImages = false
+){
 
-  board.innerHTML = "";
+  board.innerHTML =
+    "";
 
   deck.forEach(
     (card,index)=>{
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
 
-      button.type = "button";
-      button.className = "card";
+      button.type =
+        "button";
+
+      button.className =
+        "card";
+
+      const frontImage =
+        loadFrontImages
+          ? `src="${card.image}"`
+          : `data-src="${card.image}"`;
 
       button.innerHTML = `
 
@@ -1535,7 +1761,7 @@ function renderBoard(){
           <span class="card-face card-front">
 
             <img
-              src="${card.image}"
+              ${frontImage}
               alt="${card.name}"
               decoding="async">
 
@@ -1567,9 +1793,43 @@ function renderBoard(){
 }
 
 
-/* ================================
-   SELECT CARD
-================================ */
+/* =================================
+   APPLY FRONT IMAGES
+================================= */
+
+function applyFrontCardImages(){
+
+  const images =
+    document.querySelectorAll(
+      ".card-front img[data-src]"
+    );
+
+  images.forEach(
+    img => {
+
+      const src =
+        img.dataset.src;
+
+      if(!src){
+        return;
+      }
+
+      img.src =
+        src;
+
+      img.removeAttribute(
+        "data-src"
+      );
+
+    }
+  );
+
+}
+
+
+/* =================================
+   CLICK CARD
+================================= */
 
 function selectCard(
   element,
@@ -1585,13 +1845,19 @@ function selectCard(
   }
 
   if(
-    element.classList.contains("open") ||
-    element.classList.contains("matched")
+    element.classList.contains(
+      "open"
+    ) ||
+    element.classList.contains(
+      "matched"
+    )
   ){
     return;
   }
 
-  element.classList.add("open");
+  element.classList.add(
+    "open"
+  );
 
   playAudio(
     soundFlip,
@@ -1630,9 +1896,9 @@ function selectCard(
 }
 
 
-/* ================================
+/* =================================
    COMPARE
-================================ */
+================================= */
 
 function compareCards(){
 
@@ -1655,37 +1921,51 @@ function compareCards(){
 }
 
 
-/* ================================
+/* =================================
    MATCH
-================================ */
+================================= */
 
 function handleMatch(){
 
   combo++;
   matches++;
 
-  let points = 100;
+  let points =
+    100;
 
   if(combo === 2){
-    points = 200;
+    points =
+      200;
   }
 
   if(combo >= 3){
-    points = 300;
+    points =
+      300;
   }
 
-  score += points;
+  score +=
+    points;
 
   playAudio(
     soundMatch,
     .85
   ).catch(()=>{});
 
-  firstCard.element.classList.remove("open");
-  secondCard.element.classList.remove("open");
+  firstCard.element.classList.remove(
+    "open"
+  );
 
-  firstCard.element.classList.add("matched");
-  secondCard.element.classList.add("matched");
+  secondCard.element.classList.remove(
+    "open"
+  );
+
+  firstCard.element.classList.add(
+    "matched"
+  );
+
+  secondCard.element.classList.add(
+    "matched"
+  );
 
   if(combo >= 2){
 
@@ -1705,9 +1985,11 @@ function handleMatch(){
   }
 
   firstCard = null;
+
   secondCard = null;
 
-  boardLocked = false;
+  boardLocked =
+    false;
 
   updateHUD();
 
@@ -1718,9 +2000,9 @@ function handleMatch(){
 }
 
 
-/* ================================
+/* =================================
    MISS
-================================ */
+================================= */
 
 function handleMiss(){
 
@@ -1741,13 +2023,20 @@ function handleMiss(){
         return;
       }
 
-      firstCard.element.classList.remove("open");
-      secondCard.element.classList.remove("open");
+      firstCard.element.classList.remove(
+        "open"
+      );
+
+      secondCard.element.classList.remove(
+        "open"
+      );
 
       firstCard = null;
+
       secondCard = null;
 
-      boardLocked = false;
+      boardLocked =
+        false;
 
     },
     800
@@ -1756,9 +2045,9 @@ function handleMiss(){
 }
 
 
-/* ================================
+/* =================================
    HUD
-================================ */
+================================= */
 
 function updateHUD(){
 
@@ -1766,7 +2055,8 @@ function updateHUD(){
     timeLeft;
 
   matchElement.textContent =
-    matches + " / 8";
+    matches +
+    " / 8";
 
   movesElement.textContent =
     moves;
@@ -1796,13 +2086,15 @@ function updateHUD(){
 }
 
 
-/* ================================
+/* =================================
    TIMER
-================================ */
+================================= */
 
 function startTimer(){
 
-  clearInterval(timer);
+  clearInterval(
+    timer
+  );
 
   timer =
     setInterval(
@@ -1838,9 +2130,9 @@ function startTimer(){
 }
 
 
-/* ================================
-   AMBIENT AUDIO
-================================ */
+/* =================================
+   AMBIENT
+================================= */
 
 function startAmbient(){
 
@@ -1848,14 +2140,20 @@ function startAmbient(){
     return;
   }
 
-  casinoAmbient.volume = .10;
-  casinoAmbient.muted = false;
-  casinoAmbient.currentTime = 0;
+  casinoAmbient.volume =
+    .10;
+
+  casinoAmbient.muted =
+    false;
+
+  casinoAmbient.currentTime =
+    0;
 
   casinoAmbient.play()
     .catch(()=>{});
 
 }
+
 
 function stopAmbient(){
 
@@ -1871,9 +2169,9 @@ function stopAmbient(){
 }
 
 
-/* ================================
-   ACTIVATE GAME
-================================ */
+/* =================================
+   ACTIVATE
+================================= */
 
 function activateGame(){
 
@@ -1881,40 +2179,77 @@ function activateGame(){
     return;
   }
 
-  activationDone = true;
+  activationDone =
+    true;
 
-  deck = createDeck();
+  firstCard =
+    null;
 
-  firstCard = null;
-  secondCard = null;
+  secondCard =
+    null;
 
-  matches = 0;
-  moves = 0;
-  score = 0;
-  combo = 0;
+  matches =
+    0;
 
-  timeLeft = 60;
+  moves =
+    0;
 
-  gameStarted = true;
-  gameFinished = false;
+  score =
+    0;
 
-  boardLocked = false;
+  combo =
+    0;
 
-  renderBoard();
+  timeLeft =
+    60;
+
+  gameStarted =
+    true;
+
+  gameFinished =
+    false;
+
+  boardLocked =
+    false;
+
+  applyFrontCardImages();
+
   updateHUD();
 
   statusElement.textContent =
     "Pilih 2 kartu untuk memulai.";
 
   startAmbient();
+
   startTimer();
 
 }
 
 
-/* ================================
-   START GAME
-================================ */
+/* =================================
+   PREPARE GAME
+================================= */
+
+async function prepareGame(){
+
+  boardLocked =
+    true;
+
+  gameStarted =
+    false;
+
+  await preloadGameCards();
+
+  applyFrontCardImages();
+
+  activateGame();
+
+}
+
+
+/* =================================
+   START
+================================= */
 
 async function startGame(){
 
@@ -1924,57 +2259,76 @@ async function startGame(){
     ) === "1"
   ){
 
-    startOverlay.classList.add("hidden");
-    lockedOverlay.classList.remove("hidden");
+    startOverlay.classList.add(
+      "hidden"
+    );
+
+    lockedOverlay.classList.remove(
+      "hidden"
+    );
 
     return;
 
   }
 
-  startButton.disabled = true;
+  startButton.disabled =
+    true;
+
   startButton.textContent =
     "MEMULAI...";
 
   await unlockAllAudio();
 
-  startOverlay.classList.add("hidden");
+  startOverlay.classList.add(
+    "hidden"
+  );
 
-  activationDone = false;
+  activationDone =
+    false;
 
-  boardLocked = true;
-  gameStarted = false;
+  boardLocked =
+    true;
+
+  gameStarted =
+    false;
 
   statusElement.textContent =
     "Luna sedang menyambut kamu...";
 
-  let welcomeFinished = false;
-
-  welcomeVoice.onended = null;
-  welcomeVoice.onerror = null;
+  let welcomeFinished =
+    false;
 
   welcomeVoice.onended =
-    ()=>{
+    null;
+
+  welcomeVoice.onerror =
+    null;
+
+  welcomeVoice.onended =
+    async ()=>{
 
       if(welcomeFinished){
         return;
       }
 
-      welcomeFinished = true;
+      welcomeFinished =
+        true;
 
-      activateGame();
+      await prepareGame();
 
     };
 
   welcomeVoice.onerror =
-    ()=>{
+    async ()=>{
 
       if(welcomeFinished){
         return;
       }
 
-      welcomeFinished = true;
+      welcomeFinished =
+        true;
 
-      activateGame();
+      await prepareGame();
 
     };
 
@@ -1983,13 +2337,14 @@ async function startGame(){
     1
   )
   .catch(
-    ()=>{
+    async ()=>{
 
       if(!welcomeFinished){
 
-        welcomeFinished = true;
+        welcomeFinished =
+          true;
 
-        activateGame();
+        await prepareGame();
 
       }
 
@@ -1997,41 +2352,51 @@ async function startGame(){
   );
 
   setTimeout(
-    ()=>{
+    async ()=>{
 
       if(
         !welcomeFinished &&
         !gameStarted
       ){
 
-        welcomeFinished = true;
+        welcomeFinished =
+          true;
 
-        activateGame();
+        await prepareGame();
 
       }
 
     },
-    11000
+    11500
   );
 
 }
 
 
-/* ================================
-   FINISH GAME
-================================ */
+/* =================================
+   FINISH
+================================= */
 
-function finishGame(success){
+function finishGame(
+  success
+){
 
   if(gameFinished){
     return;
   }
 
-  gameFinished = true;
-  gameStarted = false;
-  boardLocked = true;
+  gameFinished =
+    true;
 
-  clearInterval(timer);
+  gameStarted =
+    false;
+
+  boardLocked =
+    true;
+
+  clearInterval(
+    timer
+  );
 
   stopAmbient();
 
@@ -2047,13 +2412,16 @@ function finishGame(success){
   if(success){
 
     const timeBonus =
-      timeLeft * 10;
+      timeLeft *
+      10;
 
-    score += timeBonus;
+    score +=
+      timeBonus;
 
     updateHUD();
 
-    resultIcon.textContent = "🏆";
+    resultIcon.textContent =
+      "🏆";
 
     resultTitle.textContent =
       "VIP MEMORY COMPLETE";
@@ -2093,9 +2461,11 @@ function finishGame(success){
     statusElement.textContent =
       "Permainan selesai.";
 
-    let winSoundFinished = false;
+    let winSoundFinished =
+      false;
 
-    soundWin.onended = null;
+    soundWin.onended =
+      null;
 
     soundWin.onended =
       ()=>{
@@ -2104,7 +2474,8 @@ function finishGame(success){
           return;
         }
 
-        winSoundFinished = true;
+        winSoundFinished =
+          true;
 
         playAudio(
           lunaWin,
@@ -2122,7 +2493,8 @@ function finishGame(success){
 
         if(!winSoundFinished){
 
-          winSoundFinished = true;
+          winSoundFinished =
+            true;
 
           playAudio(
             lunaWin,
@@ -2139,7 +2511,8 @@ function finishGame(success){
 
         if(!winSoundFinished){
 
-          winSoundFinished = true;
+          winSoundFinished =
+            true;
 
           playAudio(
             lunaWin,
@@ -2155,7 +2528,8 @@ function finishGame(success){
   }
   else{
 
-    resultIcon.textContent = "⏱️";
+    resultIcon.textContent =
+      "⏱️";
 
     resultTitle.textContent =
       "WAKTU HABIS";
@@ -2206,9 +2580,9 @@ function finishGame(success){
 }
 
 
-/* ================================
-   PARTICLE DESKTOP ONLY
-================================ */
+/* =================================
+   PARTICLES
+================================= */
 
 function createAmbientDot(){
 
@@ -2217,15 +2591,20 @@ function createAmbientDot(){
   }
 
   const dot =
-    document.createElement("span");
+    document.createElement(
+      "span"
+    );
 
   dot.className =
     "ambient-dot";
 
   if(
-    Math.random() > .62
+    Math.random() >
+    .62
   ){
-    dot.classList.add("blue");
+    dot.classList.add(
+      "blue"
+    );
   }
 
   dot.style.left =
@@ -2248,7 +2627,9 @@ function createAmbientDot(){
     ) +
     "s";
 
-  document.body.appendChild(dot);
+  document.body.appendChild(
+    dot
+  );
 
   setTimeout(
     ()=>{
@@ -2260,15 +2641,22 @@ function createAmbientDot(){
 }
 
 
-/* ================================
+/* =================================
    INIT
-================================ */
+================================= */
 
 function init(){
 
-  deck = createDeck();
+  deck =
+    createDeck();
 
-  renderBoard();
+  /*
+    IMPORTANT:
+    hanya render card-back dulu.
+    front images belum dimuat.
+  */
+
+  renderBoard(false);
 
   updateHUD();
 
@@ -2279,13 +2667,20 @@ function init(){
 
   if(alreadyPlayed){
 
-    startOverlay.classList.add("hidden");
+    startOverlay.classList.add(
+      "hidden"
+    );
 
-    resultOverlay.classList.add("hidden");
+    resultOverlay.classList.add(
+      "hidden"
+    );
 
-    lockedOverlay.classList.remove("hidden");
+    lockedOverlay.classList.remove(
+      "hidden"
+    );
 
-    boardLocked = true;
+    boardLocked =
+      true;
 
     statusElement.textContent =
       "Permainan sudah pernah dimainkan.";
@@ -2293,20 +2688,25 @@ function init(){
   }
   else{
 
-    startOverlay.classList.remove("hidden");
+    startOverlay.classList.remove(
+      "hidden"
+    );
 
-    lockedOverlay.classList.add("hidden");
+    lockedOverlay.classList.add(
+      "hidden"
+    );
 
-    boardLocked = true;
+    boardLocked =
+      true;
 
   }
 
 }
 
 
-/* ================================
+/* =================================
    EVENTS
-================================ */
+================================= */
 
 startButton.addEventListener(
   "click",
@@ -2314,7 +2714,9 @@ startButton.addEventListener(
 );
 
 
-/* particle cuma jalan di desktop */
+/*
+  particle hanya desktop
+*/
 
 if(
   window.matchMedia(
