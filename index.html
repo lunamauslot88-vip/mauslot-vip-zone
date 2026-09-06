@@ -5,1799 +5,860 @@
 
 <meta
   name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
->
+  content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#020713">
+<title>MAUSLOT VIP MEMORY</title>
 
-<title>MAUSLOT 9.9 Claw Machine</title>
 
 <style>
-/* =========================================================
+
+:root{
+  --gold:#dcae4a;
+  --gold-light:#ffe29a;
+  --navy:#031126;
+}
+
+
+/* =====================================
    RESET
-========================================================= */
+===================================== */
 
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+  margin:0;
+  padding:0;
 }
 
 html,
 body{
-  margin:0;
+  width:100%;
   min-height:100%;
 }
 
 body{
-  position:relative;
-  overflow-x:hidden;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:#fff;
-  background:#020713;
-}
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-.bg-wall{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-
-  background:
-    url("./assets/bg-arcade-3d.jpg")
-    center center / cover no-repeat;
-
-  transform:scale(1.015);
-}
-
-.bg-overlay{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
 
   background:
     linear-gradient(
-      180deg,
-      rgba(1,5,13,.10),
-      rgba(1,6,15,.18) 38%,
-      rgba(1,6,15,.42)
-    );
-}
+      rgba(1,7,17,.30),
+      rgba(1,7,17,.74)
+    ),
+    url("asset/bg-casino-memory.png")
+    center center / cover fixed no-repeat;
 
-.bg-vignette{
-  position:fixed;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-
-  background:
-    radial-gradient(
-      circle at 50% 36%,
-      transparent 0%,
-      transparent 31%,
-      rgba(0,0,0,.16) 58%,
-      rgba(0,0,0,.50) 100%
-    );
-}
-
-.floor-light{
-  position:fixed;
-  left:50%;
-  bottom:-80px;
-
-  width:820px;
-  height:280px;
-
-  transform:translateX(-50%);
-
-  z-index:2;
-  pointer-events:none;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(46,147,255,.23),
-      rgba(255,199,67,.10) 38%,
-      transparent 73%
-    );
-
-  filter:blur(26px);
+  overflow-x:hidden;
 }
 
 
-/* =========================================================
-   SPOTLIGHT
-========================================================= */
-
-.spotlight{
-  position:fixed;
-  top:-20%;
-
-  width:24%;
-  height:92%;
-
-  z-index:2;
-  pointer-events:none;
-
-  opacity:.12;
-
-  filter:blur(8px);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.06),
-      rgba(104,188,255,.23) 28%,
-      rgba(255,218,125,.13) 58%,
-      transparent
-    );
-
-  clip-path:
-    polygon(
-      43% 0%,
-      57% 0%,
-      100% 100%,
-      0% 100%
-    );
-}
-
-.spot-left{
-  left:12%;
-  transform:rotate(7deg);
-}
-
-.spot-center{
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.spot-right{
-  right:12%;
-  transform:rotate(-7deg);
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.particles{
-  position:fixed;
-  inset:0;
-  z-index:2;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-.particle{
-  position:absolute;
-
-  width:3px;
-  height:3px;
-
-  border-radius:50%;
-
-  background:#ffd86a;
-
-  box-shadow:
-    0 0 7px rgba(255,211,95,.75);
-
-  opacity:.22;
-
-  animation:
-    particleFloat 8s linear infinite;
-}
-
-.p1{left:8%;top:82%;}
-.p2{left:17%;top:72%;animation-delay:1.5s;}
-.p3{left:28%;top:88%;animation-delay:3.2s;}
-.p4{right:9%;top:80%;animation-delay:.8s;}
-.p5{right:18%;top:69%;animation-delay:2.3s;}
-.p6{right:28%;top:87%;animation-delay:4s;}
-
-@keyframes particleFloat{
-  0%{
-    transform:translateY(0) scale(.8);
-    opacity:0;
-  }
-
-  20%{
-    opacity:.32;
-  }
-
-  80%{
-    opacity:.20;
-  }
-
-  100%{
-    transform:translateY(-250px) scale(1.15);
-    opacity:0;
-  }
-}
-
-
-/* =========================================================
-   PAGE
-========================================================= */
-
-.page{
-  position:relative;
-  z-index:5;
-
-  width:100%;
-  max-width:510px;
-
-  margin:0 auto;
-
-  padding:12px 12px 34px;
-}
-
-
-/* =========================================================
-   LOGO
-========================================================= */
-
-.logo{
-  text-align:center;
-  margin-bottom:5px;
-}
-
-.logo img{
-  display:block;
-
-  width:255px;
-  max-width:78%;
-
-  height:auto;
-
-  margin:0 auto;
-
-  object-fit:contain;
-
-  filter:
-    drop-shadow(
-      0 6px 12px rgba(0,0,0,.48)
-    );
-}
-
-
-/* =========================================================
-   TITLE
-========================================================= */
-
-.title{
-  text-align:center;
-  margin-bottom:11px;
-}
-
-.title small{
-  display:block;
-
-  color:#b6c7da;
-
-  font-size:9px;
-  font-weight:bold;
-
-  letter-spacing:3px;
-}
-
-.title h1{
-  margin:4px 0;
-
-  color:#ffd764;
-
-  font-size:30px;
-  line-height:1;
-
-  text-shadow:
-    0 2px 0 #724904,
-    0 0 17px rgba(255,202,50,.38),
-    0 6px 12px rgba(0,0,0,.62);
-}
-
-.title p{
-  margin:6px 0 0;
-
-  color:#e3e9ef;
-
-  font-size:9px;
-
-  letter-spacing:1.5px;
-}
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.status-row{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:9px;
-
-  margin-bottom:10px;
-}
-
-.status-box{
-  padding:9px 8px;
-
-  text-align:center;
-
-  border-radius:12px;
-
-  border:
-    1px solid rgba(217,173,53,.72);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(9,29,50,.89),
-      rgba(3,11,20,.95)
-    );
-
-  backdrop-filter:blur(8px);
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.04);
-}
-
-.status-box span{
-  display:block;
-
-  font-size:8px;
-
-  color:#94a5b9;
-
-  letter-spacing:1px;
-}
-
-.status-box strong{
-  display:block;
-
-  margin-top:4px;
-
-  color:#ffd75e;
-
-  font-size:14px;
-}
-
-
-/* =========================================================
-   MACHINE STAGE
-========================================================= */
-
-.machine-stage{
-  position:relative;
-  padding-bottom:74px;
-}
-
-.machine-floor-glow{
-  position:absolute;
-
-  left:50%;
-  bottom:29px;
-
-  width:82%;
-  height:82px;
-
-  transform:translateX(-50%);
-
-  z-index:1;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(53,151,255,.24),
-      rgba(255,199,71,.11) 38%,
-      transparent 77%
-    );
-
-  filter:blur(17px);
-}
-
-.machine-floor-shine{
-  position:absolute;
-
-  left:50%;
-  bottom:18px;
-
-  width:88%;
-  height:40px;
-
-  transform:translateX(-50%);
-
-  z-index:2;
-
-  border-radius:50%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(119,191,255,.10),
-      rgba(255,255,255,.22),
-      rgba(255,209,95,.10),
-      transparent
-    );
-
-  filter:blur(9px);
-}
-
-.machine-reflection{
-  position:absolute;
-
-  left:50%;
-  bottom:-46px;
-
-  width:94%;
-
-  transform:
-    translateX(-50%)
-    scaleY(-1);
-
-  z-index:0;
-
-  opacity:.13;
-
-  filter:blur(5px);
-
-  pointer-events:none;
-
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,.50),
-      rgba(255,255,255,.13),
-      transparent 75%
-    );
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      rgba(255,255,255,.50),
-      rgba(255,255,255,.13),
-      transparent 75%
-    );
-}
-
-
-/* =========================================================
-   MACHINE
-========================================================= */
-
-.machine-wrap{
-  position:relative;
-
-  width:107%;
-
-  margin-left:-3.5%;
-
-  aspect-ratio:3 / 4.05;
-
-  z-index:5;
-
-  filter:
-    drop-shadow(
-      0 24px 34px rgba(0,0,0,.56)
-    )
-    drop-shadow(
-      0 0 32px rgba(31,126,255,.12)
-    );
-}
-
-.machine-frame{
-  position:absolute;
-  inset:0;
-
-  width:100%;
-  height:100%;
-
-  object-fit:contain;
-
-  z-index:1;
-
-  pointer-events:none;
-}
-
-
-/* =========================================================
-   GAME GLASS
-========================================================= */
-
-.game-glass{
-  position:absolute;
-
-  left:15.4%;
-  right:15.4%;
-
-  top:15.7%;
-  bottom:34.1%;
-
-  z-index:5;
-
-  overflow:hidden;
-
-  border-radius:10px;
-
-  background:
-    radial-gradient(
-      circle at 50% 24%,
-      rgba(18,87,157,.98),
-      rgba(8,45,84,.98) 38%,
-      rgba(3,22,42,.98) 72%,
-      rgba(2,11,21,.98)
-    );
-
-  box-shadow:
-    inset 0 0 30px rgba(0,145,255,.27),
-    inset 0 -48px 68px rgba(0,0,0,.35);
-}
-
-.game-glass::before{
+/* =====================================
+   BACKGROUND EFFECT
+===================================== */
+
+body::before{
   content:"";
 
-  position:absolute;
-
-  left:-12%;
-  top:0;
-
-  width:47%;
-  height:100%;
-
-  z-index:18;
-
-  pointer-events:none;
-
-  background:
-    linear-gradient(
-      105deg,
-      rgba(255,255,255,.12),
-      rgba(255,255,255,.035) 34%,
-      transparent 58%
-    );
-}
-
-.game-glass::after{
-  content:"";
-
-  position:absolute;
+  position:fixed;
   inset:0;
 
-  z-index:60;
-
   pointer-events:none;
 
   background:
-    linear-gradient(
-      112deg,
-      rgba(255,255,255,.07),
-      transparent 24%,
-      transparent 74%,
-      rgba(255,255,255,.025)
+    radial-gradient(
+      circle at 18% 30%,
+      rgba(32,112,255,.16),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 82% 25%,
+      rgba(255,190,74,.14),
+      transparent 32%
     );
-}
-
-
-/* =========================================================
-   LIGHTS
-========================================================= */
-
-.lights{
-  position:absolute;
-
-  top:4.5%;
-
-  left:12%;
-  right:12%;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  z-index:8;
-}
-
-.light{
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:#69c2ff;
-
-  box-shadow:
-    0 0 8px #69c2ff,
-    0 0 16px #278fff;
 
   animation:
-    insideLight 1.8s ease-in-out infinite;
+    bgGlow
+    8s
+    ease-in-out
+    infinite alternate;
 }
 
-.light:nth-child(2){
-  animation-delay:.5s;
-}
+@keyframes bgGlow{
 
-.light:nth-child(3){
-  animation-delay:1s;
-}
-
-@keyframes insideLight{
-  0%,100%{
-    opacity:.55;
+  from{
+    opacity:.72;
   }
 
-  50%{
+  to{
     opacity:1;
   }
+
 }
 
 
-/* =========================================================
-   FLOOR INSIDE
-========================================================= */
+/* =====================================
+   WRAPPER
+===================================== */
 
-.inner-floor-glow{
-  position:absolute;
-
-  left:8%;
-  right:8%;
-  bottom:4%;
-
-  height:18px;
-
-  z-index:9;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(119,193,255,.22),
-      rgba(255,208,87,.08) 48%,
-      transparent 75%
-    );
-
-  filter:blur(6px);
-}
-
-
-/* =========================================================
-   RAIL
-========================================================= */
-
-.rail{
-  position:absolute;
-
-  top:9%;
-
-  left:7%;
-  right:7%;
-
-  height:6px;
-
-  z-index:10;
-
-  border-radius:20px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffe888,
-      #c58b16
-    );
-
-  box-shadow:
-    0 0 10px rgba(255,211,66,.55);
-}
-
-
-/* =========================================================
-   CLAW SYSTEM
-========================================================= */
-
-/*
-  --drop hanya mengatur gerak vertikal.
-
-  OPEN dan CLOSE menggunakan kotak visual
-  yang sama sehingga posisi tidak berubah
-  saat gambar claw diganti.
-*/
-
-.claw-system{
-  --drop:0px;
-
-  position:absolute;
-
-  left:50%;
-  top:5.5%;
-
-  width:112px;
-  height:100%;
-
-  transform:
-    translateX(-50%);
-
-  z-index:40;
-
-  transition:
-    left .32s cubic-bezier(.4,0,.2,1);
-
-  pointer-events:none;
-}
-
-
-/* carriage */
-
-.carriage{
-  position:absolute;
-
-  top:0;
-  left:50%;
-
-  width:42px;
-  height:23px;
-
-  transform:
-    translateX(-50%);
-
-  border-radius:6px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffed8d,
-      #b17810
-    );
-
-  border:
-    2px solid #ffe989;
-
-  box-shadow:
-    0 0 10px rgba(255,210,55,.42);
-}
-
-
-/* cable */
-
-.cable{
-  position:absolute;
-
-  top:21px;
-  left:50%;
-
-  width:4px;
-
-  height:
-    calc(
-      42px + var(--drop)
-    );
-
-  transform:
-    translateX(-50%);
-
-  background:
-    linear-gradient(
-      90deg,
-      #303030,
-      #dfdfdf,
-      #3d3d3d
-    );
-
-  box-shadow:
-    0 0 3px rgba(255,255,255,.25);
-
-  transition:
-    height .82s cubic-bezier(.35,.05,.2,1);
-}
-
-
-/* moving claw holder */
-
-.claw-holder{
-  position:absolute;
-
-  top:63px;
-  left:50%;
-
-  width:104px;
-
-  transform:
-    translateX(-50%)
-    translateY(var(--drop));
-
-  transition:
-    transform .82s cubic-bezier(.35,.05,.2,1);
-
-  will-change:transform;
-}
-
-
-/* =========================================================
-   FIXED CLAW VISUAL BOX
-========================================================= */
-
-.claw-visual{
+.game-wrapper{
   position:relative;
-
-  width:104px;
-  height:156px;
-
-  margin:0 auto;
-}
-
-
-/*
-  OPEN & CLOSE selalu berada
-  dalam kotak ukuran sama.
-*/
-
-.claw-layer{
-  position:absolute;
-
-  inset:0;
-
-  width:100%;
-  height:100%;
-
-  object-fit:contain;
-
-  object-position:center top;
-
-  filter:
-    drop-shadow(
-      0 7px 9px rgba(0,0,0,.60)
-    );
-
-  transition:
-    opacity .16s ease,
-    transform .16s ease;
-}
-
-
-/* open default */
-
-.claw-open{
-  z-index:3;
-
-  opacity:1;
-}
-
-
-/* close default hidden */
-
-.claw-close{
-  z-index:4;
-
-  opacity:0;
-
-  transform:
-    scale(.98);
-}
-
-
-/* ketika menjepit */
-
-.claw-holder.is-closed
-.claw-open{
-  opacity:0;
-}
-
-.claw-holder.is-closed
-.claw-close{
-  opacity:1;
-
-  transform:
-    scale(1);
-}
-
-
-/* =========================================================
-   CAUGHT PRIZE
-========================================================= */
-
-/*
-  Bola hasil tangkapan ditempatkan
-  DI DALAM rongga claw close.
-*/
-
-.caught{
-  position:absolute;
-
-  left:50%;
-
-  top:73%;
-
-  width:43px;
-  height:43px;
-
-  transform:
-    translate(-50%,-50%);
-
-  object-fit:contain;
-
-  display:none;
-
-  /*
-    di belakang gambar claw
-    sehingga capit terlihat
-    menutupi sisi bola
-  */
   z-index:2;
 
-  filter:
-    drop-shadow(
-      0 4px 6px rgba(0,0,0,.55)
-    );
-}
+  width:min(1180px,96%);
 
-.claw-holder.has-prize
-.caught{
-  display:block;
-}
-
-
-/* small grab movement */
-
-.claw-holder.grab-impact
-.claw-visual{
-  animation:
-    clawImpact .28s ease;
-}
-
-@keyframes clawImpact{
-  0%{
-    transform:scale(1);
-  }
-
-  45%{
-    transform:scale(.96);
-  }
-
-  100%{
-    transform:scale(1);
-  }
-}
-
-
-/* =========================================================
-   PRIZE FLOOR
-========================================================= */
-
-.prize-floor{
-  position:absolute;
-
-  left:4%;
-  right:4%;
-  bottom:.5%;
-
-  height:32%;
-
-  z-index:20;
-}
-
-
-/* =========================================================
-   BALLS
-========================================================= */
-
-.ball{
-  position:absolute;
-
-  width:21%;
-
-  aspect-ratio:1;
-
-  border-radius:50%;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border:
-    1.5px solid rgba(255,255,255,.38);
-
-  background:
-    radial-gradient(
-      circle at 30% 22%,
-      rgba(255,255,255,.55),
-      rgba(57,128,205,.15) 34%,
-      rgba(4,13,26,.18) 70%
-    );
-
-  box-shadow:
-    inset 0 0 15px rgba(255,255,255,.16),
-    0 7px 14px rgba(0,0,0,.42);
-
-  animation:
-    floatBall 3s ease-in-out infinite;
-
-  transition:
-    opacity .25s ease,
-    filter .25s ease;
-}
-
-.ball img{
-  width:78%;
-  height:78%;
-
-  object-fit:contain;
-
-  pointer-events:none;
-
-  filter:
-    drop-shadow(
-      0 3px 5px rgba(0,0,0,.35)
-    );
-}
-
-@keyframes floatBall{
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-3px);
-  }
-}
-
-
-/* positions */
-
-.b1{
-  left:0;
-  bottom:0;
-}
-
-.b2{
-  left:20%;
-  bottom:17%;
-}
-
-.b3{
-  left:40%;
-  bottom:0;
-}
-
-.b4{
-  right:20%;
-  bottom:18%;
-}
-
-.b5{
-  right:0;
-  bottom:0;
-}
-
-.b6{
-  left:50%;
-  bottom:40%;
-
-  width:23%;
-
-  transform:
-    translateX(-50%);
-
-  animation:none;
-
-  background:
-    radial-gradient(
-      circle at 32% 22%,
-      #fff3ad,
-      rgba(255,194,39,.5) 40%,
-      rgba(125,71,0,.27) 75%
-    );
-
-  box-shadow:
-    0 0 26px rgba(255,198,39,.7),
-    inset 0 0 15px rgba(255,255,255,.32);
-}
-
-.b7{
-  left:4%;
-  bottom:31%;
-  width:18%;
-}
-
-.b8{
-  right:4%;
-  bottom:31%;
-  width:18%;
-}
-
-.ball.target{
-  border-color:#ffe779;
-
-  box-shadow:
-    0 0 28px rgba(255,213,82,.78),
-    inset 0 0 17px rgba(255,255,255,.28);
-}
-
-.ball.winner{
-  filter:brightness(1.28);
-
-  border-color:#ffe66f;
-
-  box-shadow:
-    0 0 34px rgba(255,205,50,1),
-    inset 0 0 17px rgba(255,255,255,.4);
-}
-
-
-/* =========================================================
-   CONSOLE
-========================================================= */
-
-.control{
-  position:relative;
+  margin:auto;
 
   padding:
-    17px 16px 16px;
-
-  overflow:hidden;
-
-  border-radius:
-    22px 22px 28px 28px;
-
-  border:
-    2px solid #b98418;
-
-  background:
-    linear-gradient(
-      180deg,
-      #173b61,
-      #0a213b 16%,
-      #07172a 52%,
-      #030b15
-    );
-
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.12),
-    inset 0 -7px 14px rgba(0,0,0,.55),
-    0 12px 28px rgba(0,0,0,.48),
-    0 0 22px rgba(255,197,52,.10);
+    14px 0 30px;
 }
 
-.control::before{
-  content:"";
 
-  position:absolute;
+/* =====================================
+   HEADER
+===================================== */
 
-  left:4%;
-  right:4%;
-  top:7px;
+.header{
+  text-align:center;
+}
 
-  height:3px;
+.brand-logo{
+  display:block;
 
-  border-radius:20px;
+  width:min(280px,58vw);
+  max-height:82px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #684405,
-      #ffe282,
-      #9c6810,
-      #ffe282,
-      #684405
+  object-fit:contain;
+
+  margin:
+    0 auto 2px;
+
+  filter:
+    drop-shadow(
+      0 5px 13px
+      rgba(0,0,0,.60)
     );
 }
 
+.game-title{
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-/* =========================================================
-   LED
-========================================================= */
+  font-size:
+    clamp(30px,4vw,52px);
 
-.arcade-led-row{
-  position:relative;
+  line-height:1;
 
-  z-index:3;
+  font-weight:900;
 
-  display:flex;
+  letter-spacing:2px;
 
-  justify-content:center;
+  background:
+    linear-gradient(
+      #fff4bd 0%,
+      #ffd36b 35%,
+      #b87a1a 72%,
+      #fff0a8 100%
+    );
 
-  gap:12px;
+  -webkit-background-clip:text;
+  background-clip:text;
 
-  margin-bottom:11px;
+  color:transparent;
 }
 
-.arcade-led{
-  width:6px;
-  height:6px;
+.subtitle{
+  margin-top:7px;
 
-  border-radius:50%;
+  color:#e8dfcb;
 
-  background:#42b5ff;
+  font-size:11px;
 
-  box-shadow:
-    0 0 6px #42b5ff,
-    0 0 13px rgba(58,174,255,.65);
-
-  animation:
-    consoleLed 1.7s ease-in-out infinite;
-}
-
-.arcade-led:nth-child(2){
-  background:#ffd353;
-
-  box-shadow:
-    0 0 6px #ffd353,
-    0 0 13px rgba(255,203,64,.65);
-
-  animation-delay:.3s;
-}
-
-.arcade-led:nth-child(3){
-  animation-delay:.6s;
-}
-
-@keyframes consoleLed{
-  0%,100%{
-    opacity:.45;
-  }
-
-  50%{
-    opacity:1;
-  }
+  letter-spacing:2.5px;
 }
 
 
-/* =========================================================
-   BUTTON
-========================================================= */
+/* =====================================
+   HUD
+===================================== */
 
-.buttons{
-  position:relative;
-  z-index:3;
+.hud{
+  width:min(920px,100%);
+
+  margin:
+    14px auto 12px;
 
   display:grid;
 
   grid-template-columns:
-    76px 1fr 76px;
+    repeat(4,1fr);
 
-  gap:12px;
-
-  align-items:center;
+  gap:9px;
 }
 
-button{
-  height:58px;
+.hud-box{
+  padding:
+    9px 7px;
 
-  border-radius:50%;
+  text-align:center;
 
   border:
-    3px solid #d3a128;
+    1px solid
+    rgba(230,182,79,.82);
+
+  border-radius:14px;
 
   background:
-    radial-gradient(
-      circle at 35% 27%,
-      #284e79,
-      #102c4c 42%,
-      #061426 72%,
-      #020811
+    linear-gradient(
+      180deg,
+      rgba(8,28,54,.96),
+      rgba(3,12,28,.97)
     );
 
-  color:#ffd75d;
+  box-shadow:
+    0 6px 15px
+    rgba(0,0,0,.28);
+}
 
-  font-size:23px;
-  font-weight:bold;
+.hud-label{
+  color:#dcbf7e;
+
+  font-size:10px;
+
+  font-weight:700;
+
+  letter-spacing:1.4px;
+}
+
+.hud-value{
+  margin-top:2px;
+
+  font-size:
+    clamp(20px,3vw,29px);
+
+  font-weight:900;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+/* =====================================
+   BOARD
+===================================== */
+
+.board-frame{
+  width:min(920px,100%);
+
+  margin:auto;
+
+  padding:16px;
+
+  border:
+    2px solid
+    rgba(219,169,67,.92);
+
+  border-radius:26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(4,24,48,.96),
+      rgba(1,10,24,.98)
+    );
+
+  box-shadow:
+    0 26px 60px
+    rgba(0,0,0,.50),
+
+    0 0 22px
+    rgba(223,166,55,.10);
+}
+
+.board{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:12px;
+}
+
+
+/* =====================================
+   CARD
+===================================== */
+
+.card{
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:2 / 3;
+
+  padding:0;
+
+  border:0;
+
+  border-radius:13px;
+
+  overflow:hidden;
 
   cursor:pointer;
 
   touch-action:manipulation;
 
-  box-shadow:
-    inset 0 3px 4px rgba(255,255,255,.13),
-    inset 0 -8px 10px rgba(0,0,0,.48),
-    0 5px 0 #76500c,
-    0 10px 15px rgba(0,0,0,.38);
-
-  transition:
-    transform .08s ease,
-    box-shadow .08s ease;
-}
-
-button:active{
-  transform:
-    translateY(4px);
-}
-
-button:disabled{
-  opacity:.38;
-}
-
-
-/* grab */
-
-.grab{
-  height:64px;
-
-  border-radius:32px;
-
-  color:#191005;
-
-  font-size:15px;
-
-  letter-spacing:.6px;
-
-  border:
-    3px solid #8f620c;
-
   background:
-    radial-gradient(
-      circle at 50% 22%,
-      #fff9cb,
-      #ffe46e 27%,
-      #f7bc2b 62%,
-      #ad7006
-    );
+    #06152d
+    url("asset/card-back.png")
+    center center / cover no-repeat;
 
   box-shadow:
-    inset 0 4px 5px rgba(255,255,255,.72),
-    inset 0 -10px 13px rgba(142,82,0,.40),
-    0 6px 0 #785008,
-    0 11px 18px rgba(0,0,0,.40),
-    0 0 22px rgba(255,204,62,.36);
+    0 8px 17px
+    rgba(0,0,0,.42);
 
-  animation:
-    grabGlow 2s ease-in-out infinite;
-}
+  transform:
+    translateZ(0);
 
-@keyframes grabGlow{
-  0%,100%{
-    filter:brightness(1);
-  }
-
-  50%{
-    filter:brightness(1.14);
-  }
+  will-change:transform;
 }
 
 
-/* =========================================================
-   MESSAGE / CLAIM
-========================================================= */
+/* FRONT IMAGE */
 
-.message{
-  position:relative;
-  z-index:3;
+.card-image{
+  position:absolute;
 
-  min-height:40px;
+  inset:0;
 
-  margin-top:11px;
+  display:block;
 
-  padding:
-    9px 10px 0;
+  width:100%;
+  height:100%;
 
-  text-align:center;
-
-  font-size:10px;
-
-  line-height:1.55;
-
-  color:#cdd8e5;
-
-  border-top:
-    1px solid rgba(255,217,105,.13);
-}
-
-.claim{
-  position:relative;
-  z-index:3;
-
-  display:none;
-
-  margin-top:10px;
-
-  padding:13px;
+  object-fit:cover;
 
   border-radius:12px;
 
-  text-align:center;
-  text-decoration:none;
+  opacity:0;
 
-  color:#101010;
+  pointer-events:none;
 
-  font-size:12px;
-  font-weight:900;
+  user-select:none;
 
-  background:
-    linear-gradient(
-      90deg,
-      #ac7510,
-      #ffe887,
-      #ffc93f,
-      #ffe887,
-      #ac7510
-    );
+  -webkit-user-drag:none;
+
+  transform:
+    translateZ(0);
+
+  transition:
+    opacity .08s linear;
 }
 
 
-/* =========================================================
-   MODAL
-========================================================= */
+/* CARD OPEN */
 
-.modal{
-  position:fixed;
-  inset:0;
-
-  z-index:9999;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:18px;
-
-  background:
-    radial-gradient(
-      circle at 50% 42%,
-      rgba(14,56,104,.46),
-      rgba(0,0,0,.88) 64%
-    );
-
-  backdrop-filter:blur(8px);
+.card.opened .card-image,
+.card.matched .card-image{
+  opacity:1;
 }
 
-.modal.show{
-  display:flex;
-}
 
-.modal.show
-.modal-box{
+/* REVEAL EFFECT */
+
+.card.reveal{
   animation:
-    rewardPop
-    .55s
-    cubic-bezier(.2,.8,.2,1)
-    both;
+    premiumReveal
+    .20s ease-out;
 }
 
-@keyframes rewardPop{
+@keyframes premiumReveal{
+
   0%{
     transform:
-      scale(.65)
-      translateY(22px);
+      scale(.94);
 
-    opacity:0;
+    filter:
+      brightness(.82);
   }
 
-  70%{
+  55%{
     transform:
-      scale(1.04)
-      translateY(-3px);
+      scale(1.02);
 
-    opacity:1;
+    filter:
+      brightness(1.08);
   }
 
   100%{
-    transform:scale(1);
-    opacity:1;
+    transform:
+      scale(1);
+
+    filter:
+      brightness(1);
   }
+
 }
 
-.modal-box{
-  position:relative;
 
-  width:100%;
-  max-width:350px;
+/* MATCH */
 
-  padding:
-    25px 18px 18px;
-
-  overflow:hidden;
-
-  text-align:center;
-
-  border-radius:24px;
-
-  border:
-    2px solid #d6a528;
-
-  background:
-    radial-gradient(
-      circle at 50% 18%,
-      #19518b,
-      #0b284b 28%,
-      #06182d 58%,
-      #030a13
-    );
+.card.matched{
+  pointer-events:none;
 
   box-shadow:
-    0 25px 70px rgba(0,0,0,.65),
-    0 0 45px rgba(255,200,45,.22);
+    0 0 0 3px
+    rgba(255,218,107,.95),
+
+    0 0 20px
+    rgba(255,190,55,.68);
 }
 
 
-/* reward */
-
-.reward-stage{
-  position:relative;
-
-  width:154px;
-  height:154px;
-
-  margin:0 auto 8px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-}
-
-.reward-ring{
-  position:absolute;
-  inset:3px;
-
-  border-radius:50%;
-
-  border:
-    2px solid rgba(255,207,67,.58);
-
-  box-shadow:
-    0 0 18px rgba(255,197,53,.28);
-
-  animation:
-    rewardRing 7s linear infinite;
-}
-
-.reward-ring::before,
-.reward-ring::after{
+.card.matched::after{
   content:"";
 
   position:absolute;
 
-  width:9px;
-  height:9px;
+  inset:0;
 
-  border-radius:50%;
-
-  background:#ffe278;
-
-  box-shadow:
-    0 0 9px #ffd351;
-}
-
-.reward-ring::before{
-  left:50%;
-  top:-5px;
-}
-
-.reward-ring::after{
-  left:50%;
-  bottom:-5px;
-}
-
-@keyframes rewardRing{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.reward-burst{
-  position:absolute;
-
-  inset:-15px;
-
-  border-radius:50%;
+  pointer-events:none;
 
   background:
-    repeating-conic-gradient(
-      rgba(255,215,93,.14) 0deg 5deg,
-      transparent 5deg 13deg
+    linear-gradient(
+      120deg,
+      transparent 35%,
+      rgba(255,245,195,.28) 50%,
+      transparent 65%
     );
 
   animation:
-    rewardBurst 16s linear infinite;
+    matchShine
+    .55s ease-out;
 }
 
-@keyframes rewardBurst{
-  to{
-    transform:rotate(-360deg);
+
+@keyframes matchShine{
+
+  from{
+    transform:
+      translateX(-100%);
   }
+
+  to{
+    transform:
+      translateX(100%);
+  }
+
 }
 
-.reward-image{
-  position:relative;
 
-  z-index:4;
+/* DESKTOP HOVER */
 
-  width:112px;
-  height:112px;
+@media(hover:hover) and (pointer:fine){
+
+  .card:not(.matched):hover{
+
+    transform:
+      translateY(-2px);
+
+    box-shadow:
+      0 10px 21px
+      rgba(0,0,0,.50);
+
+  }
+
+}
+
+
+/* =====================================
+   STATUS
+===================================== */
+
+.bottom-panel{
+  width:min(920px,100%);
+
+  margin:
+    12px auto 0;
+}
+
+.bottom-box{
+  min-height:52px;
 
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
-  border-radius:50%;
+  padding:
+    9px 14px;
 
-  background:
-    radial-gradient(
-      circle at 38% 28%,
-      #1c5e9b,
-      #0b315c 43%,
-      #06182d
-    );
+  text-align:center;
 
   border:
-    2px solid rgba(255,208,74,.78);
+    1px solid
+    rgba(222,175,73,.68);
 
-  box-shadow:
-    0 0 28px rgba(255,199,52,.22);
+  border-radius:14px;
 
-  animation:
-    rewardFloat 2.3s ease-in-out infinite;
+  background:
+    rgba(3,13,29,.94);
+
+  font-size:14px;
+
+  font-weight:700;
 }
 
-.reward-image img{
-  width:92px;
-  height:92px;
+
+/* =====================================
+   TIMER WARNING
+===================================== */
+
+.timer-danger{
+  color:
+    #ff6374 !important;
+
+  animation:
+    timerPulse
+    .5s
+    infinite alternate;
+}
+
+@keyframes timerPulse{
+
+  to{
+    transform:
+      scale(1.10);
+  }
+
+}
+
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.gold-button{
+  width:100%;
+
+  min-height:54px;
+
+  border:
+    1px solid
+    #ffe39a;
+
+  border-radius:14px;
+
+  cursor:pointer;
+
+  color:#161005;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  letter-spacing:.3px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff0ae,
+      #edbd51 43%,
+      #ae7018
+    );
+
+  box-shadow:
+    inset 0 2px
+    rgba(255,255,255,.65),
+
+    0 8px 20px
+    rgba(209,153,44,.24);
+}
+
+.gold-button:disabled{
+  opacity:.60;
+
+  cursor:default;
+}
+
+
+/* =====================================
+   OVERLAY
+===================================== */
+
+.overlay{
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  background:
+    rgba(0,5,15,.84);
+
+  backdrop-filter:
+    blur(6px);
+}
+
+.overlay.hidden{
+  display:none;
+}
+
+.popup{
+  width:min(470px,100%);
+
+  padding:
+    26px 22px;
+
+  text-align:center;
+
+  border:
+    1px solid
+    #d3a449;
+
+  border-radius:23px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9,33,63,.99),
+      rgba(2,12,27,.99)
+    );
+
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.68);
+}
+
+.popup-logo{
+  width:min(245px,72%);
+
+  max-height:80px;
+
+  margin-bottom:10px;
 
   object-fit:contain;
 }
 
-@keyframes rewardFloat{
-  0%,100%{
-    transform:translateY(0);
-  }
+.popup-title{
+  color:#f5d174;
 
-  50%{
-    transform:translateY(-6px);
-  }
-}
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-.reward-label{
-  display:inline-block;
+  font-size:29px;
 
-  padding:5px 13px;
-
-  border-radius:999px;
-
-  color:#ffd969;
-
-  font-size:9px;
-  font-weight:800;
-
-  letter-spacing:1.8px;
-
-  border:
-    1px solid rgba(255,208,74,.42);
-
-  background:
-    rgba(6,18,34,.72);
-}
-
-.modal h2{
-  margin:9px 0 4px;
-
-  color:#ffe274;
-
-  font-size:25px;
-}
-
-.reward-name{
-  margin:8px 0 5px;
-
-  font-size:18px;
   font-weight:900;
 }
 
-.reward-desc{
-  max-width:270px;
+.popup-subtitle{
+  margin-top:9px;
 
-  margin:0 auto;
+  color:#bdcbe0;
 
-  color:#bdcada;
-
-  font-size:10px;
+  font-size:14px;
 
   line-height:1.55;
 }
 
-.modal-claim{
-  display:block;
-
-  margin-top:15px;
+.popup-info{
+  margin:
+    17px 0;
 
   padding:13px;
 
-  border-radius:12px;
+  color:#e9eef7;
 
-  text-decoration:none;
+  font-size:13px;
 
-  color:#111;
+  line-height:1.65;
 
-  font-size:12px;
-  font-weight:900;
+  border-radius:13px;
 
   background:
-    linear-gradient(
-      90deg,
-      #a66d09,
-      #ffe786,
-      #ffc93e,
-      #ffe786,
-      #a66d09
-    );
-}
-
-.footer{
-  padding-top:12px;
-
-  text-align:center;
-
-  color:#7a8b9e;
-
-  font-size:8px;
+    rgba(255,255,255,.04);
 }
 
 
-/* =========================================================
+/* =====================================
    MOBILE
-========================================================= */
+===================================== */
 
-@media(max-width:370px){
+@media(max-width:700px){
 
-  .page{
-    padding-left:8px;
-    padding-right:8px;
+  body{
+    background-attachment:
+      scroll;
   }
 
-  .title h1{
-    font-size:25px;
+
+  body::before{
+    animation:none;
+
+    opacity:.76;
   }
 
-  .machine-stage{
-    padding-bottom:60px;
+
+  .game-wrapper{
+    width:
+      calc(100% - 10px);
+
+    padding-top:7px;
   }
 
-  .claw-system{
-    width:104px;
+
+  .brand-logo{
+    width:
+      min(210px,58vw);
+
+    max-height:65px;
+
+    filter:none;
   }
 
-  .claw-holder{
-    width:96px;
+
+  .game-title{
+    font-size:27px;
   }
 
-  .claw-visual{
-    width:96px;
-    height:144px;
+
+  .subtitle{
+    font-size:8px;
+
+    letter-spacing:1.3px;
   }
 
-  .caught{
-    width:39px;
-    height:39px;
+
+  .hud{
+    margin:
+      9px auto 7px;
+
+    gap:5px;
   }
 
-  .buttons{
-    grid-template-columns:
-      62px 1fr 62px;
 
-    gap:9px;
+  .hud-box{
+    padding:
+      7px 3px;
+
+    border-radius:10px;
+
+    box-shadow:none;
   }
 
-  button{
-    height:54px;
+
+  .hud-label{
+    font-size:8px;
   }
 
-  .grab{
-    height:58px;
-    font-size:13px;
+
+  .hud-value{
+    font-size:17px;
   }
+
+
+  .board-frame{
+    padding:6px;
+
+    border-radius:16px;
+
+    box-shadow:
+      0 12px 25px
+      rgba(0,0,0,.42);
+  }
+
+
+  .board{
+    gap:5px;
+  }
+
+
+  .card{
+    border-radius:7px;
+
+    box-shadow:
+      0 3px 7px
+      rgba(0,0,0,.34);
+  }
+
+
+  .card-image{
+    border-radius:7px;
+  }
+
+
+  .card.matched{
+    box-shadow:
+      0 0 0 2px
+      rgba(255,218,107,.85),
+
+      0 0 9px
+      rgba(255,190,55,.45);
+  }
+
+
+  .card.matched::after{
+    display:none;
+  }
+
+
+  .bottom-box{
+    min-height:44px;
+
+    font-size:12px;
+  }
+
+
+  .overlay{
+    backdrop-filter:none;
+
+    background:
+      rgba(0,5,15,.92);
+  }
+
+
+  .popup{
+    padding:
+      21px 15px;
+
+    box-shadow:
+      0 15px 35px
+      rgba(0,0,0,.55);
+  }
+
+}
+
+
+/* =====================================
+   REDUCE MOTION
+===================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+  body::before,
+  .card,
+  .card.matched::after,
+  .timer-danger{
+
+    animation:none !important;
+
+  }
+
 }
 
 </style>
@@ -1806,1293 +867,2018 @@ button:disabled{
 
 <body>
 
-<!-- BACKGROUND -->
 
-<div class="bg-wall"></div>
-<div class="bg-overlay"></div>
-<div class="bg-vignette"></div>
-<div class="floor-light"></div>
-
-<div class="spotlight spot-left"></div>
-<div class="spotlight spot-center"></div>
-<div class="spotlight spot-right"></div>
-
-<div class="particles">
-  <div class="particle p1"></div>
-  <div class="particle p2"></div>
-  <div class="particle p3"></div>
-  <div class="particle p4"></div>
-  <div class="particle p5"></div>
-  <div class="particle p6"></div>
-</div>
+<div class="game-wrapper">
 
 
-<div class="page">
+<header class="header">
 
-  <!-- LOGO -->
-
-  <div class="logo">
-    <img
-      src="./assets/logo-mauslot.png"
-      alt="MAUSLOT"
-    >
-  </div>
+  <img
+    src="asset/logo-mauslot.png"
+    class="brand-logo"
+    alt="MAUSLOT">
 
 
-  <!-- TITLE -->
+  <div class="game-title">
 
-  <div class="title">
-    <small>EVENT SPECIAL</small>
-
-    <h1>
-      9.9 CLAW MACHINE
-    </h1>
-
-    <p>
-      GRAB IT • WIN IT • CLAIM IT
-    </p>
-  </div>
-
-
-  <!-- STATUS -->
-
-  <div class="status-row">
-
-    <div class="status-box">
-      <span>TIKET BERMAIN</span>
-      <strong id="ticket">1</strong>
-    </div>
-
-    <div class="status-box">
-      <span>STATUS</span>
-      <strong id="status">SIAP MAIN</strong>
-    </div>
+    VIP MEMORY
 
   </div>
 
 
-  <!-- MACHINE -->
+  <div class="subtitle">
 
-  <div class="machine-stage">
-
-    <div class="machine-floor-glow"></div>
-    <div class="machine-floor-shine"></div>
-
-    <img
-      class="machine-reflection"
-      src="./assets/claw%20machine.png"
-      alt=""
-    >
-
-    <div class="machine-wrap">
-
-      <img
-        class="machine-frame"
-        src="./assets/claw%20machine.png"
-        alt=""
-      >
-
-      <div
-        class="game-glass"
-        id="gameGlass"
-      >
-
-        <div class="lights">
-          <div class="light"></div>
-          <div class="light"></div>
-          <div class="light"></div>
-        </div>
-
-        <div class="rail"></div>
-
-        <div class="inner-floor-glow"></div>
-
-
-        <!-- =================================================
-             CLAW
-        ================================================= -->
-
-        <div
-          class="claw-system"
-          id="clawSystem"
-        >
-
-          <div class="carriage"></div>
-
-          <div
-            class="cable"
-            id="cable"
-          ></div>
-
-
-          <div
-            class="claw-holder"
-            id="clawHolder"
-          >
-
-            <div
-              class="claw-visual"
-              id="clawVisual"
-            >
-
-              <!-- OPEN CLAW -->
-
-              <img
-                class="claw-layer claw-open"
-                src="./assets/claw%20open.png"
-                alt=""
-              >
-
-
-              <!-- CAUGHT BALL -->
-
-              <img
-                class="caught"
-                id="caughtPrize"
-                src=""
-                alt=""
-              >
-
-
-              <!-- CLOSED CLAW -->
-
-              <img
-                class="claw-layer claw-close"
-                src="./assets/claw%20close.png"
-                alt=""
-              >
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =================================================
-             PRIZES
-        ================================================= -->
-
-        <div class="prize-floor">
-
-          <div class="ball b1" data-id="0">
-            <img src="./assets/coin.png" alt="">
-          </div>
-
-          <div class="ball b2" data-id="1">
-            <img src="./assets/gift.png" alt="">
-          </div>
-
-          <div class="ball b3" data-id="2">
-            <img src="./assets/diamond.png" alt="">
-          </div>
-
-          <div class="ball b4" data-id="3">
-            <img src="./assets/crown.png" alt="">
-          </div>
-
-          <div class="ball b5" data-id="4">
-            <img src="./assets/chip.png" alt="">
-          </div>
-
-          <div class="ball b6" data-id="5">
-            <img src="./assets/grand%20prize.png" alt="">
-          </div>
-
-          <div class="ball b7" data-id="6">
-            <img src="./assets/ticket.png" alt="">
-          </div>
-
-          <div class="ball b8" data-id="7">
-            <img src="./assets/mystery.png" alt="">
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
+    MATCH THE CARDS • COMPLETE THE CHALLENGE
 
   </div>
 
+</header>
 
-  <!-- CONTROL -->
 
-  <div class="control">
 
-    <div class="arcade-led-row">
-      <div class="arcade-led"></div>
-      <div class="arcade-led"></div>
-      <div class="arcade-led"></div>
-    </div>
+<section class="hud">
 
-    <div class="buttons">
 
-      <button
-        id="leftButton"
-        onclick="moveLeft()"
-      >
-        ◀
-      </button>
+  <div class="hud-box">
 
-      <button
-        class="grab"
-        id="grabButton"
-        onclick="grabPrize()"
-      >
-        🎯 GRAB
-      </button>
+    <div class="hud-label">
 
-      <button
-        id="rightButton"
-        onclick="moveRight()"
-      >
-        ▶
-      </button>
+      TIME
 
     </div>
 
     <div
-      class="message"
-      id="message"
-    >
-      Gerakkan capit ke hadiah pilihan lalu tekan
-      <b>GRAB</b>.
+      id="time"
+      class="hud-value">
+
+      60
+
     </div>
 
-    <a
-      href="https://mauslot.life/"
-      id="claimButton"
-      class="claim"
-    >
-      🎁 CLAIM HADIAH
-    </a>
+  </div>
+
+
+
+  <div class="hud-box">
+
+    <div class="hud-label">
+
+      MATCH
+
+    </div>
+
+    <div
+      id="match"
+      class="hud-value">
+
+      0 / 8
+
+    </div>
 
   </div>
 
 
-  <div class="footer">
-    MAUSLOT VIP • EVENT SPECIAL 9.9
+
+  <div class="hud-box">
+
+    <div class="hud-label">
+
+      MOVES
+
+    </div>
+
+    <div
+      id="moves"
+      class="hud-value">
+
+      0
+
+    </div>
+
   </div>
+
+
+
+  <div class="hud-box">
+
+    <div class="hud-label">
+
+      SCORE
+
+    </div>
+
+    <div
+      id="score"
+      class="hud-value">
+
+      0
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<section class="board-frame">
+
+  <div
+    id="board"
+    class="board">
+  </div>
+
+</section>
+
+
+
+<section class="bottom-panel">
+
+  <div
+    id="status"
+    class="bottom-box">
+
+    Tekan MULAI PERMAINAN.
+
+  </div>
+
+</section>
+
 
 </div>
 
 
-<!-- =====================================================
-     RESULT
-===================================================== -->
+
+<!-- =====================================
+     AUDIO
+===================================== -->
+
+<audio
+  id="soundFlip"
+  src="asset/sound-flip.mp3"
+  preload="metadata">
+</audio>
+
+
+<audio
+  id="soundMatch"
+  src="asset/sound-match.mp3"
+  preload="metadata">
+</audio>
+
+
+<audio
+  id="soundMiss"
+  src="asset/sound-miss.mp3"
+  preload="metadata">
+</audio>
+
+
+<audio
+  id="soundWin"
+  src="asset/sound-win.mp3"
+  preload="none">
+</audio>
+
+
+<audio
+  id="casinoAmbient"
+  src="asset/casino-ambient.mp3"
+  preload="none"
+  loop>
+</audio>
+
+
+<audio
+  id="welcomeVoice"
+  src="asset/welcome-vip-mauslot.mp3"
+  preload="auto">
+</audio>
+
+
+<audio
+  id="lunaWin"
+  src="asset/luna-win.mp3"
+  preload="none">
+</audio>
+
+
+<audio
+  id="lunaLose"
+  src="asset/luna-lose.mp3"
+  preload="none">
+</audio>
+
+
+
+<!-- =====================================
+     START OVERLAY
+===================================== -->
 
 <div
-  class="modal"
-  id="modal"
->
+  class="overlay"
+  id="startOverlay">
 
-  <div class="modal-box">
 
-    <div class="reward-stage">
+  <div class="popup">
 
-      <div class="reward-burst"></div>
 
-      <div class="reward-ring"></div>
+    <img
+      src="asset/logo-mauslot.png"
+      class="popup-logo"
+      alt="MAUSLOT">
 
-      <div class="reward-image">
-        <img
-          id="resultImage"
-          src="./assets/gift.png"
-          alt=""
-        >
-      </div>
+
+    <div class="popup-title">
+
+      VIP MEMORY
 
     </div>
 
-    <div class="reward-label">
-      VIP REWARD UNLOCKED
+
+    <div class="popup-subtitle">
+
+      Temukan seluruh pasangan kartu sebelum waktu habis.
+
     </div>
 
-    <h2>
-      SELAMAT!
-    </h2>
 
-    <div
-      class="reward-name"
-      id="resultName"
-    >
-      VIP REWARD
+    <div class="popup-info">
+
+      🃏 16 Kartu • 8 Pasangan
+
+      <br>
+
+      ⏱️ Waktu Bermain 60 Detik
+
+      <br>
+
+      ⭐ Match berturut-turut menghasilkan Combo
+
+      <br>
+
+      🎧 Luna akan menemani permainan kamu
+
     </div>
 
-    <div
-      class="reward-desc"
-      id="resultDesc"
-    >
-      Hadiah berhasil didapatkan.
-    </div>
 
-    <a
-      href="https://mauslot.life/"
-      class="modal-claim"
-    >
-      🎁 CLAIM HADIAH
-    </a>
+    <button
+      id="startButton"
+      type="button"
+      class="gold-button">
+
+      MULAI PERMAINAN ▶
+
+    </button>
+
 
   </div>
 
 </div>
+
+
+
+<!-- =====================================
+     RESULT
+===================================== -->
+
+<div
+  class="overlay hidden"
+  id="resultOverlay">
+
+
+  <div class="popup">
+
+
+    <div
+      id="resultIcon"
+      style="font-size:48px">
+
+      🏆
+
+    </div>
+
+
+    <div
+      id="resultTitle"
+      class="popup-title">
+    </div>
+
+
+    <div
+      id="resultText"
+      class="popup-subtitle">
+    </div>
+
+
+  </div>
+
+</div>
+
 
 
 <script>
 
-/* =========================================================
-   CLAW CALIBRATION
-========================================================= */
+
+/* =====================================
+   CONFIG
+===================================== */
 
 /*
-  Berdasarkan claw close yang kamu kirim,
-  area jepit berada kira-kira 73%
-  dari tinggi visual claw.
+  TESTING MODE.
 
-  Jadi bukan lagi offset pixel random.
+  Refresh halaman = bisa main lagi.
+
+  Nanti setelah database member sudah jadi,
+  baru kita pasang lock berdasarkan username.
 */
 
-const GRIP_RATIO = 0.73;
+const TESTING_MODE =
+  true;
 
 
-/*
-  Target claw diarahkan ke pusat bola.
-  0 = tepat pusat bola.
-*/
-
-const TARGET_BALL_RATIO = 0.50;
+const CARD_BACK =
+  "asset/card-back.png";
 
 
-/*
-  Batas minimum gerakan turun.
-*/
-
-const MIN_DROP = 16;
-
-
-/* =========================================================
-   PRIZES
-========================================================= */
-
-const prizes = [
+const cardAssets = [
 
   {
-    name:"BONUS SALDO",
-    image:"./assets/coin.png",
-    description:"Bonus saldo spesial Event 9.9."
+    name:"Spade",
+    image:"asset/card-spade.png"
   },
 
   {
-    name:"VIP GIFT",
-    image:"./assets/gift.png",
-    description:"Hadiah VIP spesial berhasil didapatkan."
+    name:"Heart",
+    image:"asset/card-heart.png"
   },
 
   {
-    name:"DIAMOND REWARD",
-    image:"./assets/diamond.png",
-    description:"Diamond Reward spesial MAUSLOT."
+    name:"Diamond",
+    image:"asset/card-diamond.png"
   },
 
   {
-    name:"CROWN REWARD",
-    image:"./assets/crown.png",
-    description:"Crown Reward spesial Event 9.9."
+    name:"Club",
+    image:"asset/card-club.png"
   },
 
   {
-    name:"VIP POINT",
-    image:"./assets/chip.png",
-    description:"Tambahan VIP Point berhasil didapatkan."
+    name:"VIP",
+    image:"asset/card-vip.png"
   },
 
   {
-    name:"GRAND PRIZE",
-    image:"./assets/grand%20prize.png",
-    description:"Grand Prize spesial MAUSLOT 9.9."
+    name:"Crown",
+    image:"asset/card-crown.png"
   },
 
   {
-    name:"VIP TICKET",
-    image:"./assets/ticket.png",
-    description:"VIP Ticket berhasil didapatkan."
+    name:"777",
+    image:"asset/card-777.png"
   },
 
   {
-    name:"MYSTERY REWARD",
-    image:"./assets/mystery.png",
-    description:"Mystery Reward berhasil didapatkan."
+    name:"Gift",
+    image:"asset/card-gift.png"
   }
 
 ];
 
 
-/* =========================================================
-   STATE
-========================================================= */
 
-let ticket = 1;
+/* =====================================
+   ELEMENTS
+===================================== */
 
-let position = 50;
-
-let playing = false;
-
-
-/* =========================================================
-   ELEMENT
-========================================================= */
-
-const gameGlass =
+const board =
   document.getElementById(
-    "gameGlass"
+    "board"
   );
 
-const clawSystem =
+
+const timeElement =
   document.getElementById(
-    "clawSystem"
+    "time"
   );
 
-const clawHolder =
+
+const matchElement =
   document.getElementById(
-    "clawHolder"
+    "match"
   );
 
-const clawVisual =
+
+const movesElement =
   document.getElementById(
-    "clawVisual"
+    "moves"
   );
 
-const caughtPrize =
+
+const scoreElement =
   document.getElementById(
-    "caughtPrize"
+    "score"
   );
 
-const statusText =
+
+const statusElement =
   document.getElementById(
     "status"
   );
 
-const ticketText =
-  document.getElementById(
-    "ticket"
-  );
 
-const message =
+const startOverlay =
   document.getElementById(
-    "message"
-  );
-
-const leftButton =
-  document.getElementById(
-    "leftButton"
-  );
-
-const rightButton =
-  document.getElementById(
-    "rightButton"
-  );
-
-const grabButton =
-  document.getElementById(
-    "grabButton"
+    "startOverlay"
   );
 
 
-/* =========================================================
-   SET DROP
-========================================================= */
+const resultOverlay =
+  document.getElementById(
+    "resultOverlay"
+  );
 
-function setClawDrop(px){
 
-  clawSystem.style.setProperty(
-    "--drop",
-    px + "px"
+const resultIcon =
+  document.getElementById(
+    "resultIcon"
+  );
+
+
+const resultTitle =
+  document.getElementById(
+    "resultTitle"
+  );
+
+
+const resultText =
+  document.getElementById(
+    "resultText"
+  );
+
+
+const startButton =
+  document.getElementById(
+    "startButton"
+  );
+
+
+
+/* AUDIO */
+
+const soundFlip =
+  document.getElementById(
+    "soundFlip"
+  );
+
+
+const soundMatch =
+  document.getElementById(
+    "soundMatch"
+  );
+
+
+const soundMiss =
+  document.getElementById(
+    "soundMiss"
+  );
+
+
+const soundWin =
+  document.getElementById(
+    "soundWin"
+  );
+
+
+const casinoAmbient =
+  document.getElementById(
+    "casinoAmbient"
+  );
+
+
+const welcomeVoice =
+  document.getElementById(
+    "welcomeVoice"
+  );
+
+
+const lunaWin =
+  document.getElementById(
+    "lunaWin"
+  );
+
+
+const lunaLose =
+  document.getElementById(
+    "lunaLose"
+  );
+
+
+
+/* =====================================
+   STATE
+===================================== */
+
+let deck =
+  [];
+
+
+let firstCard =
+  null;
+
+
+let secondCard =
+  null;
+
+
+let boardLocked =
+  true;
+
+
+let matches =
+  0;
+
+
+let moves =
+  0;
+
+
+let score =
+  0;
+
+
+let combo =
+  0;
+
+
+let timeLeft =
+  60;
+
+
+let timer =
+  null;
+
+
+let gameStarted =
+  false;
+
+
+let gameFinished =
+  false;
+
+
+let startInProgress =
+  false;
+
+
+let cardsReady =
+  false;
+
+
+let cardPreloadPromise =
+  null;
+
+
+
+/* =====================================
+   SHUFFLE
+===================================== */
+
+function shuffle(array){
+
+  const copy =
+    [...array];
+
+
+  for(
+    let i =
+      copy.length - 1;
+
+    i > 0;
+
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random() *
+        (i + 1)
+      );
+
+
+    [
+      copy[i],
+      copy[j]
+    ] = [
+
+      copy[j],
+      copy[i]
+
+    ];
+
+  }
+
+
+  return copy;
+
+}
+
+
+
+/* =====================================
+   CREATE DECK
+===================================== */
+
+function createDeck(){
+
+  const cards =
+    [];
+
+
+  cardAssets.forEach(
+    (asset,index)=>{
+
+
+      cards.push({
+
+        ...asset,
+
+        pair:index
+
+      });
+
+
+      cards.push({
+
+        ...asset,
+
+        pair:index
+
+      });
+
+    }
+  );
+
+
+  return shuffle(
+    cards
   );
 
 }
 
 
-/* =========================================================
-   POSITION X
-========================================================= */
 
-function updatePosition(){
+/* =====================================
+   RENDER BOARD
+===================================== */
 
-  clawSystem.style.left =
-    position + "%";
+function renderBoard(){
+
+  board.replaceChildren();
+
+
+  deck.forEach(
+    (card,index)=>{
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "card";
+
+
+      button.dataset.index =
+        index;
+
+
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+
+      image.className =
+        "card-image";
+
+
+      /*
+        Front card belum perlu terlihat.
+
+        Tapi data src disimpan supaya
+        reveal bisa cepat.
+      */
+
+      image.dataset.src =
+        card.image;
+
+
+      image.alt =
+        card.name;
+
+
+      image.draggable =
+        false;
+
+
+      image.decoding =
+        "async";
+
+
+      button.appendChild(
+        image
+      );
+
+
+      button.addEventListener(
+        "click",
+        selectCard
+      );
+
+
+      board.appendChild(
+        button
+      );
+
+    }
+  );
 
 }
 
 
-/* =========================================================
-   LEFT
-========================================================= */
 
-function moveLeft(){
+/* =====================================
+   PRELOAD CARDS
+===================================== */
 
-  if(playing){
+function preloadImage(
+  src
+){
+
+  return new Promise(
+    resolve => {
+
+
+      const img =
+        new Image();
+
+
+      /*
+        Prioritas rendah supaya
+        welcome Luna tetap mendapat bandwidth.
+      */
+
+      try{
+
+        img.fetchPriority =
+          "low";
+
+      }
+      catch(error){}
+
+
+      img.onload =
+        ()=>resolve(true);
+
+
+      img.onerror =
+        ()=>resolve(false);
+
+
+      img.src =
+        src;
+
+    }
+  );
+
+}
+
+
+
+function startPreloadingCards(){
+
+  if(cardsReady){
+
+    return Promise.resolve();
+
+  }
+
+
+  if(cardPreloadPromise){
+
+    return cardPreloadPromise;
+
+  }
+
+
+  const uniqueImages =
+
+    [
+      ...new Set(
+
+        cardAssets.map(
+          item =>
+            item.image
+        )
+
+      )
+    ];
+
+
+  cardPreloadPromise =
+
+    Promise.all(
+
+      uniqueImages.map(
+        preloadImage
+      )
+
+    )
+
+    .then(
+      ()=>{
+
+
+        cardsReady =
+          true;
+
+
+      }
+    );
+
+
+  return cardPreloadPromise;
+
+}
+
+
+
+/* =====================================
+   BACKGROUND PRELOAD SCHEDULER
+===================================== */
+
+function scheduleCardPreload(){
+
+  /*
+    Beri welcome audio waktu lebih dulu.
+
+    Setelah ±1.2 detik sejak halaman terbuka,
+    kartu mulai preload diam-diam.
+  */
+
+
+  const begin =
+    ()=>{
+
+      startPreloadingCards();
+
+    };
+
+
+  if(
+    "requestIdleCallback"
+    in window
+  ){
+
+    requestIdleCallback(
+      begin,
+      {
+        timeout:1200
+      }
+    );
+
+  }
+  else{
+
+    setTimeout(
+      begin,
+      1200
+    );
+
+  }
+
+}
+
+
+
+/* =====================================
+   AUDIO
+===================================== */
+
+function playAudio(
+  audio,
+  volume = 1
+){
+
+  if(!audio){
+
+    return Promise.resolve();
+
+  }
+
+
+  try{
+
+    audio.pause();
+
+
+    audio.currentTime =
+      0;
+
+
+    audio.volume =
+      volume;
+
+
+    audio.muted =
+      false;
+
+
+    const result =
+      audio.play();
+
+
+    if(
+      result &&
+      typeof result.catch ===
+      "function"
+    ){
+
+      return result;
+
+    }
+
+  }
+  catch(error){}
+
+
+  return Promise.resolve();
+
+}
+
+
+
+/* =====================================
+   HUD
+===================================== */
+
+function updateHUD(){
+
+  timeElement.textContent =
+    timeLeft;
+
+
+  matchElement.textContent =
+
+    matches +
+    " / 8";
+
+
+  movesElement.textContent =
+    moves;
+
+
+  scoreElement.textContent =
+    score;
+
+
+  if(
+    timeLeft <= 10 &&
+    gameStarted &&
+    !gameFinished
+  ){
+
+    timeElement.classList.add(
+      "timer-danger"
+    );
+
+  }
+  else{
+
+    timeElement.classList.remove(
+      "timer-danger"
+    );
+
+  }
+
+}
+
+
+
+/* =====================================
+   REVEAL CARD
+===================================== */
+
+function revealCard(
+  button,
+  index
+){
+
+  const image =
+
+    button.querySelector(
+      ".card-image"
+    );
+
+
+  /*
+    Kalau front card belum punya SRC,
+    pasang sekarang.
+
+    Karena sudah dipreload,
+    browser biasanya ambil dari cache.
+  */
+
+  if(
+    !image.getAttribute(
+      "src"
+    )
+  ){
+
+    image.src =
+      deck[index].image;
+
+  }
+
+
+  button.classList.remove(
+    "reveal"
+  );
+
+
+  void button.offsetWidth;
+
+
+  button.classList.add(
+    "reveal"
+  );
+
+}
+
+
+
+/* =====================================
+   SELECT CARD
+===================================== */
+
+function selectCard(
+  event
+){
+
+  const button =
+    event.currentTarget;
+
+
+  if(
+    !gameStarted ||
+    gameFinished ||
+    boardLocked
+  ){
+
     return;
+
   }
 
-  position -= 7;
 
-  if(position < 12){
-    position = 12;
-  }
+  if(
+    button.classList.contains(
+      "opened"
+    ) ||
+    button.classList.contains(
+      "matched"
+    )
+  ){
 
-  updatePosition();
-
-  message.innerHTML =
-    "Capit bergerak ke kiri.";
-
-}
-
-
-/* =========================================================
-   RIGHT
-========================================================= */
-
-function moveRight(){
-
-  if(playing){
     return;
+
   }
 
-  position += 7;
 
-  if(position > 88){
-    position = 88;
+  const index =
+
+    Number(
+      button.dataset.index
+    );
+
+
+  /*
+    IMPORTANT:
+    isi SRC dahulu.
+  */
+
+  revealCard(
+    button,
+    index
+  );
+
+
+  /*
+    Baru tampilkan.
+  */
+
+  button.classList.add(
+    "opened"
+  );
+
+
+  playAudio(
+    soundFlip,
+    .72
+  ).catch(()=>{});
+
+
+  if(!firstCard){
+
+    firstCard = {
+
+      button,
+      index
+
+    };
+
+
+    statusElement.textContent =
+      "Pilih kartu kedua.";
+
+
+    return;
+
   }
 
-  updatePosition();
 
-  message.innerHTML =
-    "Capit bergerak ke kanan.";
+  secondCard = {
 
-}
-
-
-/* =========================================================
-   CENTER OF PRIZE
-========================================================= */
-
-function getPrizeCenter(element){
-
-  const glassRect =
-    gameGlass.getBoundingClientRect();
-
-  const prizeRect =
-    element.getBoundingClientRect();
-
-  return {
-
-    x:
-      (prizeRect.left - glassRect.left)
-      +
-      (prizeRect.width / 2),
-
-    y:
-      (prizeRect.top - glassRect.top)
-      +
-      (prizeRect.height / 2)
+    button,
+    index
 
   };
 
-}
+
+  moves++;
 
 
-/* =========================================================
-   FIND CLOSEST BALL
-========================================================= */
-
-function findClosestPrize(){
-
-  const balls =
-    document.querySelectorAll(
-      ".ball"
-    );
-
-  const glassRect =
-    gameGlass.getBoundingClientRect();
-
-  const targetX =
-    glassRect.width *
-    (position / 100);
-
-  let winner = 0;
-
-  let smallest =
-    Infinity;
+  boardLocked =
+    true;
 
 
-  balls.forEach(
-    (ball,index)=>{
+  updateHUD();
 
 
-      if(
-        ball.style.opacity ===
-        "0"
-      ){
-        return;
-      }
-
-
-      const center =
-        getPrizeCenter(
-          ball
-        );
-
-
-      const distance =
-        Math.abs(
-          center.x -
-          targetX
-        );
-
-
-      if(
-        distance <
-        smallest
-      ){
-
-        smallest =
-          distance;
-
-        winner =
-          index;
-
-      }
-
-
-    }
-  );
-
-
-  return winner;
+  compareCards();
 
 }
 
 
-/* =========================================================
-   MOVE X EXACTLY TO BALL
-========================================================= */
 
-function moveToPrize(
-  prizeElement
-){
+/* =====================================
+   COMPARE
+===================================== */
 
-  const glassRect =
-    gameGlass.getBoundingClientRect();
+function compareCards(){
 
-  const center =
-    getPrizeCenter(
-      prizeElement
-    );
+  const first =
 
-  const percentage =
-    (
-      center.x /
-      glassRect.width
-    )
-    *
+    deck[
+      firstCard.index
+    ];
+
+
+  const second =
+
+    deck[
+      secondCard.index
+    ];
+
+
+  if(
+    first.pair ===
+    second.pair
+  ){
+
+    handleMatch();
+
+  }
+  else{
+
+    handleMiss();
+
+  }
+
+}
+
+
+
+/* =====================================
+   MATCH
+===================================== */
+
+function handleMatch(){
+
+  combo++;
+
+
+  matches++;
+
+
+  let points =
     100;
 
 
-  position =
-    Math.max(
-      12,
-      Math.min(
-        88,
-        percentage
-      )
-    );
+  if(combo === 2){
 
-
-  updatePosition();
-
-}
-
-
-/* =========================================================
-   PRECISE DROP CALCULATION
-========================================================= */
-
-function calculateDrop(
-  prizeElement
-){
-
-  const glassRect =
-    gameGlass.getBoundingClientRect();
-
-
-  const prizeRect =
-    prizeElement.getBoundingClientRect();
-
-
-  const visualRect =
-    clawVisual.getBoundingClientRect();
-
-
-  /*
-    Titik target pada bola.
-    Saat ini tepat di tengah bola.
-  */
-
-  const ballTargetY =
-    (
-      prizeRect.top -
-      glassRect.top
-    )
-    +
-    (
-      prizeRect.height *
-      TARGET_BALL_RATIO
-    );
-
-
-  /*
-    Titik jepit claw berdasarkan
-    proporsi visual claw.
-
-    Ini yang membuat perhitungan
-    tidak tergantung ukuran asli PNG.
-  */
-
-  const clawGripY =
-    (
-      visualRect.top -
-      glassRect.top
-    )
-    +
-    (
-      visualRect.height *
-      GRIP_RATIO
-    );
-
-
-  let drop =
-    ballTargetY -
-    clawGripY;
-
-
-  if(
-    drop <
-    MIN_DROP
-  ){
-
-    drop =
-      MIN_DROP;
+    points =
+      200;
 
   }
 
 
-  /*
-    Jangan sampai claw
-    keluar dari game glass.
-  */
+  if(combo >= 3){
 
-  const currentBottom =
-    visualRect.bottom -
-    glassRect.top;
-
-
-  const maxDrop =
-    glassRect.height -
-    currentBottom -
-    6;
-
-
-  if(
-    drop >
-    maxDrop
-  ){
-
-    drop =
-      maxDrop;
+    points =
+      300;
 
   }
 
 
-  return Math.max(
-    0,
-    drop
+  score +=
+    points;
+
+
+  playAudio(
+    soundMatch,
+    .82
+  ).catch(()=>{});
+
+
+  const cardA =
+    firstCard.button;
+
+
+  const cardB =
+    secondCard.button;
+
+
+  cardA.classList.remove(
+    "opened"
   );
 
+
+  cardB.classList.remove(
+    "opened"
+  );
+
+
+  cardA.classList.add(
+    "matched"
+  );
+
+
+  cardB.classList.add(
+    "matched"
+  );
+
+
+  if(combo >= 2){
+
+    statusElement.textContent =
+
+      "MATCH! COMBO x" +
+      combo +
+      " +" +
+      points;
+
+  }
+  else{
+
+    statusElement.textContent =
+
+      "MATCH! +" +
+      points;
+
+  }
+
+
+  firstCard =
+    null;
+
+
+  secondCard =
+    null;
+
+
+  boardLocked =
+    false;
+
+
+  updateHUD();
+
+
+  if(matches === 8){
+
+    finishGame(
+      true
+    );
+
+  }
+
 }
 
 
-/* =========================================================
-   CONTROL
-========================================================= */
 
-function lockControls(){
+/* =====================================
+   MISS
+===================================== */
 
-  leftButton.disabled =
-    true;
+function handleMiss(){
 
-  rightButton.disabled =
-    true;
-
-  grabButton.disabled =
-    true;
-
-}
+  combo =
+    0;
 
 
-function unlockControls(){
-
-  leftButton.disabled =
-    false;
-
-  rightButton.disabled =
-    false;
-
-  grabButton.disabled =
-    false;
-
-}
+  playAudio(
+    soundMiss,
+    .80
+  ).catch(()=>{});
 
 
-/* =========================================================
-   CLEAR TARGET
-========================================================= */
+  statusElement.textContent =
+    "Belum cocok. Ingat posisi kartunya.";
 
-function clearTargets(){
 
-  document
-  .querySelectorAll(
-    ".ball"
-  )
-  .forEach(
-    ball => {
+  const cardA =
+    firstCard.button;
 
-      ball.classList.remove(
-        "target"
+
+  const cardB =
+    secondCard.button;
+
+
+  setTimeout(
+    ()=>{
+
+
+      if(gameFinished){
+
+        return;
+
+      }
+
+
+      /*
+        Tidak ganti image src lagi.
+
+        Cukup sembunyikan front image.
+        Card-back otomatis muncul.
+      */
+
+      cardA.classList.remove(
+        "opened",
+        "reveal"
       );
 
-      ball.classList.remove(
-        "winner"
+
+      cardB.classList.remove(
+        "opened",
+        "reveal"
       );
 
-    }
-  );
 
-}
-
-
-/* =========================================================
-   WAIT
-========================================================= */
-
-function wait(ms){
-
-  return new Promise(
-    resolve =>
-      setTimeout(
-        resolve,
-        ms
-      )
-  );
-
-}
+      firstCard =
+        null;
 
 
-/* =========================================================
-   GRAB
-========================================================= */
-
-async function grabPrize(){
-
-  if(playing){
-    return;
-  }
+      secondCard =
+        null;
 
 
-  if(ticket <= 0){
-
-    message.innerHTML =
-      "Tiket bermain sudah habis.";
-
-    return;
-
-  }
+      boardLocked =
+        false;
 
 
-  playing =
-    true;
-
-
-  lockControls();
-
-  clearTargets();
-
-
-  /*
-    RESET CLAW
-  */
-
-  setClawDrop(0);
-
-
-  clawHolder.classList.remove(
-    "is-closed"
-  );
-
-
-  clawHolder.classList.remove(
-    "has-prize"
-  );
-
-
-  clawHolder.classList.remove(
-    "grab-impact"
-  );
-
-
-  caughtPrize.src =
-    "";
-
-
-  /*
-    FIND BALL
-  */
-
-  const winnerIndex =
-    findClosestPrize();
-
-
-  const prize =
-    prizes[winnerIndex];
-
-
-  const prizeElement =
-    document.querySelector(
-      `.ball[data-id="${winnerIndex}"]`
-    );
-
-
-  prizeElement.classList.add(
-    "target"
-  );
-
-
-  /*
-    MOVE X
-  */
-
-  statusText.innerHTML =
-    "MENUJU HADIAH";
-
-
-  message.innerHTML =
-    "Capit bergerak menuju hadiah...";
-
-
-  moveToPrize(
-    prizeElement
-  );
-
-
-  await wait(
+    },
     650
   );
 
+}
 
-  /*
-    HITUNG POSISI TURUN
-  */
 
-  const dropDistance =
-    calculateDrop(
-      prizeElement
+
+/* =====================================
+   TIMER
+===================================== */
+
+function startTimer(){
+
+  clearInterval(
+    timer
+  );
+
+
+  timer =
+    setInterval(
+      ()=>{
+
+
+        if(
+          !gameStarted ||
+          gameFinished
+        ){
+
+          return;
+
+        }
+
+
+        timeLeft--;
+
+
+        if(timeLeft <= 0){
+
+          timeLeft =
+            0;
+
+
+          updateHUD();
+
+
+          finishGame(
+            false
+          );
+
+
+          return;
+
+        }
+
+
+        updateHUD();
+
+
+      },
+      1000
     );
 
-
-  /*
-    TURUN
-  */
-
-  statusText.innerHTML =
-    "MENURUNKAN CAPIT";
+}
 
 
-  message.innerHTML =
-    "Capit sedang turun ke hadiah...";
+
+/* =====================================
+   AMBIENT
+===================================== */
+
+function startAmbient(){
+
+  try{
+
+    casinoAmbient.volume =
+      .07;
 
 
-  setClawDrop(
-    dropDistance
-  );
+    casinoAmbient.currentTime =
+      0;
 
 
-  await wait(
-    900
-  );
+    casinoAmbient.play()
+      .catch(()=>{});
+
+  }
+  catch(error){}
+
+}
 
 
-  /*
-    MENJEPIT
 
-    Tidak ada tambahan turun lagi.
-    Claw tetap di posisi bola.
-  */
+function stopAmbient(){
 
-  statusText.innerHTML =
-    "MENJEPIT";
+  try{
+
+    casinoAmbient.pause();
 
 
-  message.innerHTML =
-    "Capit sedang menjepit hadiah...";
+    casinoAmbient.currentTime =
+      0;
+
+  }
+  catch(error){}
+
+}
 
 
-  prizeElement.classList.add(
-    "winner"
-  );
+
+/* =====================================
+   ACTIVATE GAME
+===================================== */
+
+function activateGame(){
+
+  deck =
+    createDeck();
 
 
-  clawHolder.classList.add(
-    "grab-impact"
-  );
+  firstCard =
+    null;
 
 
-  /*
-    OPEN -> CLOSE
-  */
-
-  clawHolder.classList.add(
-    "is-closed"
-  );
+  secondCard =
+    null;
 
 
-  await wait(
-    300
-  );
+  matches =
+    0;
 
 
-  /*
-    Sekarang bola asli hilang
-    dan versi caught muncul
-    di DALAM capit.
-  */
-
-  prizeElement.style.opacity =
-    "0";
+  moves =
+    0;
 
 
-  caughtPrize.src =
-    prize.image;
+  score =
+    0;
 
 
-  clawHolder.classList.add(
-    "has-prize"
-  );
+  combo =
+    0;
 
 
-  await wait(
-    380
-  );
-
-
-  /*
-    ANGKAT
-  */
-
-  statusText.innerHTML =
-    "MENGANGKAT";
-
-
-  message.innerHTML =
-    "Hadiah sedang diangkat...";
-
-
-  setClawDrop(
-    0
-  );
-
-
-  await wait(
-    1050
-  );
+  timeLeft =
+    60;
 
 
   /*
-    FINISH
+    Render kartu kembali dengan
+    susunan random.
   */
 
-  ticket--;
+  renderBoard();
 
 
-  ticketText.innerHTML =
-    ticket;
+  gameStarted =
+    true;
 
 
-  statusText.innerHTML =
-    "BERHASIL";
-
-
-  message.innerHTML =
-    "🎉 Hadiah berhasil didapatkan.";
-
-
-  document
-  .getElementById(
-    "claimButton"
-  )
-  .style
-  .display =
-    "block";
-
-
-  showResult(
-    prize
-  );
-
-
-  playing =
+  gameFinished =
     false;
 
 
-  if(
-    ticket > 0
-  ){
+  boardLocked =
+    false;
 
-    unlockControls();
 
-  }
+  updateHUD();
+
+
+  statusElement.textContent =
+    "Pilih 2 kartu untuk memulai.";
+
+
+  startAmbient();
+
+
+  startTimer();
 
 }
 
 
-/* =========================================================
-   RESULT
-========================================================= */
 
-function showResult(
-  prize
+/* =====================================
+   START GAME
+===================================== */
+
+async function startGame(){
+
+  if(startInProgress){
+
+    return;
+
+  }
+
+
+  startInProgress =
+    true;
+
+
+  startButton.disabled =
+    true;
+
+
+  startButton.textContent =
+    "MEMULAI...";
+
+
+  startOverlay.classList.add(
+    "hidden"
+  );
+
+
+  statusElement.textContent =
+    "Luna sedang menyambut kamu...";
+
+
+  /*
+    Kalau preload kartu belum mulai,
+    pastikan sekarang mulai juga.
+
+    TIDAK DITUNGGU.
+  */
+
+  startPreloadingCards();
+
+
+  let welcomeFinished =
+    false;
+
+
+
+  const finishWelcome =
+    ()=>{
+
+
+      if(welcomeFinished){
+
+        return;
+
+      }
+
+
+      welcomeFinished =
+        true;
+
+
+      /*
+        Luna selesai =
+        langsung game aktif.
+
+        Tidak await cardsReady.
+      */
+
+      activateGame();
+
+    };
+
+
+
+  welcomeVoice.onended =
+    finishWelcome;
+
+
+  welcomeVoice.onerror =
+    finishWelcome;
+
+
+
+  try{
+
+    welcomeVoice.pause();
+
+
+    welcomeVoice.currentTime =
+      0;
+
+
+    welcomeVoice.volume =
+      1;
+
+
+    welcomeVoice.muted =
+      false;
+
+
+    /*
+      Luna langsung play dari click.
+    */
+
+    await welcomeVoice.play();
+
+  }
+  catch(error){
+
+    finishWelcome();
+
+  }
+
+
+
+  /*
+    Failsafe.
+  */
+
+  setTimeout(
+    ()=>{
+
+
+      if(!welcomeFinished){
+
+        finishWelcome();
+
+      }
+
+
+    },
+    11200
+  );
+
+}
+
+
+
+/* =====================================
+   FINISH
+===================================== */
+
+function finishGame(
+  success
 ){
 
-  document
-  .getElementById(
-    "resultImage"
-  )
-  .src =
-    prize.image;
+  if(gameFinished){
+
+    return;
+
+  }
 
 
-  document
-  .getElementById(
-    "resultName"
-  )
-  .innerHTML =
-    prize.name;
+  gameFinished =
+    true;
 
 
-  document
-  .getElementById(
-    "resultDesc"
-  )
-  .innerHTML =
-    prize.description;
+  gameStarted =
+    false;
 
 
-  const modal =
-    document.getElementById(
-      "modal"
+  boardLocked =
+    true;
+
+
+  clearInterval(
+    timer
+  );
+
+
+  stopAmbient();
+
+
+  timeElement.classList.remove(
+    "timer-danger"
+  );
+
+
+
+  if(success){
+
+    const timeBonus =
+
+      timeLeft *
+      10;
+
+
+    score +=
+      timeBonus;
+
+
+    updateHUD();
+
+
+    resultIcon.textContent =
+      "🏆";
+
+
+    resultTitle.textContent =
+      "VIP MEMORY COMPLETE";
+
+
+    resultText.innerHTML =
+
+      "Semua pasangan berhasil ditemukan!" +
+
+      "<br><br>" +
+
+      "MATCH : <b>8 / 8</b>" +
+
+      "<br>" +
+
+      "MOVES : <b>" +
+      moves +
+      "</b>" +
+
+      "<br>" +
+
+      "SISA WAKTU : <b>" +
+      timeLeft +
+      " detik</b>" +
+
+      "<br>" +
+
+      "BONUS WAKTU : <b>+" +
+      timeBonus +
+      "</b>" +
+
+      "<br><br>" +
+
+      "TOTAL SCORE : <b>" +
+      score +
+      "</b>";
+
+
+
+    let lunaStarted =
+      false;
+
+
+
+    const playLunaWin =
+      ()=>{
+
+
+        if(lunaStarted){
+
+          return;
+
+        }
+
+
+        lunaStarted =
+          true;
+
+
+        playAudio(
+          lunaWin,
+          1
+        ).catch(()=>{});
+
+      };
+
+
+
+    soundWin.onended =
+      playLunaWin;
+
+
+
+    playAudio(
+      soundWin,
+      .88
+    )
+    .catch(
+      playLunaWin
     );
 
 
-  modal.style.display =
-    "flex";
+
+    setTimeout(
+      playLunaWin,
+      2700
+    );
+
+  }
 
 
-  modal.classList.remove(
-    "show"
-  );
+  else{
+
+    resultIcon.textContent =
+      "⏱️";
 
 
-  void modal.offsetWidth;
+    resultTitle.textContent =
+      "WAKTU HABIS";
 
 
-  modal.classList.add(
-    "show"
+    resultText.innerHTML =
+
+      "Kamu berhasil menemukan " +
+
+      "<b>" +
+      matches +
+      " / 8</b>" +
+
+      " pasangan." +
+
+      "<br><br>" +
+
+      "MOVES : <b>" +
+      moves +
+      "</b>" +
+
+      "<br>" +
+
+      "SCORE : <b>" +
+      score +
+      "</b>";
+
+
+
+    playAudio(
+      lunaLose,
+      1
+    ).catch(()=>{});
+
+  }
+
+
+
+  statusElement.textContent =
+    "Permainan selesai.";
+
+
+
+  setTimeout(
+    ()=>{
+
+
+      resultOverlay.classList.remove(
+        "hidden"
+      );
+
+
+    },
+    450
   );
 
 }
 
 
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
 
-document
-.getElementById(
-  "modal"
-)
-.addEventListener(
-  "click",
-  function(e){
-
-    if(
-      e.target ===
-      this
-    ){
-
-      this.classList.remove(
-        "show"
-      );
-
-      this.style.display =
-        "none";
-
-    }
-
-  }
-);
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  function(e){
-
-    if(
-      e.key ===
-      "ArrowLeft"
-    ){
-      moveLeft();
-    }
-
-    if(
-      e.key ===
-      "ArrowRight"
-    ){
-      moveRight();
-    }
-
-    if(
-      e.key ===
-      "Enter"
-    ){
-      grabPrize();
-    }
-
-  }
-);
-
-
-/* =========================================================
+/* =====================================
    INIT
-========================================================= */
+===================================== */
 
-setClawDrop(0);
+function init(){
 
-updatePosition();
+  deck =
+    createDeck();
+
+
+  renderBoard();
+
+
+  updateHUD();
+
+
+  boardLocked =
+    true;
+
+
+  gameStarted =
+    false;
+
+
+  gameFinished =
+    false;
+
+
+  startInProgress =
+    false;
+
+
+  resultOverlay.classList.add(
+    "hidden"
+  );
+
+
+  startOverlay.classList.remove(
+    "hidden"
+  );
+
+
+  statusElement.textContent =
+    "Tekan MULAI PERMAINAN.";
+
+
+  /*
+    Mulai preload optimized card
+    secara background.
+
+    Tidak langsung pada frame pertama,
+    supaya welcome audio tetap ringan.
+  */
+
+  scheduleCardPreload();
+
+}
+
+
+
+/* =====================================
+   EVENT
+===================================== */
+
+startButton.addEventListener(
+  "click",
+  startGame
+);
+
+
+init();
+
 
 </script>
+
 
 </body>
 </html>
