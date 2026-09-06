@@ -36,8 +36,8 @@ body{
 
   background:
     linear-gradient(
-      rgba(1,7,17,.34),
-      rgba(1,7,17,.76)
+      rgba(1,7,17,.30),
+      rgba(1,7,17,.74)
     ),
     url("asset/bg-casino-memory.png")
     center center / cover fixed no-repeat;
@@ -47,9 +47,9 @@ body{
 }
 
 
-/* =========================
-   BACKGROUND
-========================= */
+/* =================================
+   BACKGROUND ANIMATION
+================================= */
 
 body::before{
   content:"";
@@ -61,71 +61,81 @@ body::before{
   background:
     radial-gradient(
       circle at 18% 30%,
-      rgba(31,108,255,.19),
-      transparent 34%
+      rgba(32,112,255,.20),
+      transparent 35%
     ),
     radial-gradient(
-      circle at 82% 24%,
-      rgba(255,187,65,.16),
+      circle at 82% 25%,
+      rgba(255,190,74,.17),
       transparent 32%
     ),
     radial-gradient(
       circle at 50% 88%,
-      rgba(20,71,179,.19),
-      transparent 40%
+      rgba(23,78,190,.18),
+      transparent 41%
     );
 
-  animation:bgGlow 9s ease-in-out infinite alternate;
+  animation:
+    bgGlow 9s
+    ease-in-out
+    infinite alternate;
 }
 
 body::after{
   content:"";
+
   position:fixed;
   inset:-25%;
+
   z-index:0;
+
   pointer-events:none;
 
   background:
     linear-gradient(
       115deg,
-      transparent 37%,
-      rgba(255,231,167,.025) 44%,
-      rgba(255,218,126,.08) 49%,
-      rgba(255,245,202,.12) 50%,
-      rgba(255,218,126,.08) 51%,
-      rgba(255,231,167,.025) 56%,
-      transparent 63%
+      transparent 38%,
+      rgba(255,232,170,.02) 44%,
+      rgba(255,215,118,.08) 49%,
+      rgba(255,247,206,.13) 50%,
+      rgba(255,215,118,.08) 51%,
+      rgba(255,232,170,.02) 56%,
+      transparent 62%
     );
 
-  animation:lightSweep 9s linear infinite;
+  animation:
+    lightSweep 10s
+    linear infinite;
 }
 
 @keyframes bgGlow{
   from{
-    opacity:.7;
+    opacity:.68;
     transform:scale(1);
   }
 
   to{
     opacity:1;
-    transform:scale(1.06);
+    transform:scale(1.07);
   }
 }
 
 @keyframes lightSweep{
   from{
-    transform:translateX(-28%);
+    transform:
+      translateX(-28%);
   }
 
   to{
-    transform:translateX(28%);
+    transform:
+      translateX(28%);
   }
 }
 
 
-/* =========================
+/* =================================
    MAIN
-========================= */
+================================= */
 
 .game-wrapper{
   position:relative;
@@ -134,13 +144,13 @@ body::after{
   width:min(1180px,96%);
   margin:auto;
 
-  padding:16px 0 34px;
+  padding:16px 0 35px;
 }
 
 
-/* =========================
+/* =================================
    HEADER
-========================= */
+================================= */
 
 .header{
   text-align:center;
@@ -155,19 +165,29 @@ body::after{
 
   object-fit:contain;
 
-  margin:0 auto 3px;
+  margin:
+    0 auto 3px;
 
   filter:
-    drop-shadow(0 5px 14px rgba(0,0,0,.65));
+    drop-shadow(
+      0 5px 14px
+      rgba(0,0,0,.65)
+    );
 }
 
 .game-title{
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  font-size:clamp(30px,4vw,52px);
+  font-size:
+    clamp(30px,4vw,52px);
+
   line-height:1;
 
   font-weight:900;
+
   letter-spacing:2px;
 
   background:
@@ -184,11 +204,13 @@ body::after{
   color:transparent;
 
   text-shadow:
-    0 4px 10px rgba(0,0,0,.38);
+    0 4px 10px
+    rgba(0,0,0,.38);
 }
 
 .subtitle{
   font-size:12px;
+
   letter-spacing:2.6px;
 
   color:#e8dfcb;
@@ -199,16 +221,20 @@ body::after{
 }
 
 
-/* =========================
+/* =================================
    HUD
-========================= */
+================================= */
 
 .hud{
   width:min(920px,100%);
-  margin:14px auto 12px;
+
+  margin:
+    14px auto 12px;
 
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
 
   gap:9px;
 }
@@ -222,41 +248,50 @@ body::after{
     );
 
   border:
-    1px solid rgba(230,182,79,.82);
+    1px solid
+    rgba(230,182,79,.82);
 
   border-radius:14px;
 
-  padding:9px 7px;
+  padding:
+    9px 7px;
 
   text-align:center;
 
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 7px 18px rgba(0,0,0,.3);
+    inset 0 1px 0
+    rgba(255,255,255,.08),
+
+    0 7px 18px
+    rgba(0,0,0,.30);
 }
 
 .hud-label{
   color:#dcbf7e;
 
   font-size:10px;
+
   letter-spacing:1.4px;
+
   font-weight:700;
 }
 
 .hud-value{
   margin-top:2px;
 
-  font-size:clamp(20px,3vw,29px);
+  font-size:
+    clamp(20px,3vw,29px);
 
   font-weight:900;
 
-  font-variant-numeric:tabular-nums;
+  font-variant-numeric:
+    tabular-nums;
 }
 
 
-/* =========================
+/* =================================
    BOARD
-========================= */
+================================= */
 
 .board-frame{
   position:relative;
@@ -279,19 +314,28 @@ body::after{
     );
 
   border:
-    2px solid rgba(219,169,67,.93);
+    2px solid
+    rgba(219,169,67,.93);
 
   box-shadow:
-    0 34px 80px rgba(0,0,0,.58),
-    inset 0 0 0 4px rgba(255,228,156,.035),
-    inset 0 28px 80px rgba(39,113,205,.06),
-    0 0 30px rgba(223,166,55,.14);
+    0 34px 80px
+    rgba(0,0,0,.58),
+
+    inset 0 0 0 4px
+    rgba(255,228,156,.035),
+
+    inset 0 28px 80px
+    rgba(39,113,205,.06),
+
+    0 0 30px
+    rgba(223,166,55,.14);
 }
 
 .board-frame::before{
   content:"";
 
   position:absolute;
+
   inset:6px;
 
   pointer-events:none;
@@ -299,7 +343,8 @@ body::after{
   border-radius:21px;
 
   border:
-    1px solid rgba(255,224,147,.18);
+    1px solid
+    rgba(255,224,147,.18);
 
   z-index:1;
 }
@@ -328,7 +373,10 @@ body::after{
     translateX(-120%);
 
   animation:
-    boardShine 6.5s ease-in-out infinite;
+    boardShine
+    6.5s
+    ease-in-out
+    infinite;
 
   z-index:2;
 }
@@ -360,9 +408,9 @@ body::after{
 }
 
 
-/* =========================
-   CARDS
-========================= */
+/* =================================
+   CARD
+================================= */
 
 .card{
   position:relative;
@@ -372,6 +420,7 @@ body::after{
   aspect-ratio:2 / 3;
 
   padding:0;
+
   border:0;
 
   background:transparent;
@@ -427,8 +476,11 @@ body::after{
   overflow:hidden;
 
   box-shadow:
-    0 9px 17px rgba(0,0,0,.48),
-    0 2px 2px rgba(255,255,255,.08);
+    0 9px 17px
+    rgba(0,0,0,.48),
+
+    0 2px 2px
+    rgba(255,255,255,.08);
 }
 
 .card-face img{
@@ -452,14 +504,20 @@ body::after{
 
 .card.matched .card-front{
   box-shadow:
-    0 0 0 3px rgba(255,217,107,.96),
-    0 0 22px rgba(255,194,46,.85),
-    0 0 48px rgba(32,126,255,.35);
+    0 0 0 3px
+    rgba(255,217,107,.96),
+
+    0 0 22px
+    rgba(255,194,46,.85),
+
+    0 0 48px
+    rgba(32,126,255,.35);
 }
 
 .card.matched{
   animation:
-    matchPop .52s ease;
+    matchPop
+    .52s ease;
 }
 
 @keyframes matchPop{
@@ -477,14 +535,15 @@ body::after{
 }
 
 
-/* =========================
+/* =================================
    STATUS
-========================= */
+================================= */
 
 .bottom-panel{
   width:min(920px,100%);
 
-  margin:12px auto 0;
+  margin:
+    12px auto 0;
 }
 
 .bottom-box{
@@ -493,6 +552,7 @@ body::after{
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   text-align:center;
@@ -501,15 +561,20 @@ body::after{
     rgba(3,13,29,.94);
 
   border:
-    1px solid rgba(222,175,73,.68);
+    1px solid
+    rgba(222,175,73,.68);
 
   border-radius:14px;
 
-  padding:9px 14px;
+  padding:
+    9px 14px;
 
   box-shadow:
-    inset 0 1px rgba(255,255,255,.05),
-    0 7px 18px rgba(0,0,0,.3);
+    inset 0 1px
+    rgba(255,255,255,.05),
+
+    0 7px 18px
+    rgba(0,0,0,.3);
 }
 
 .game-status{
@@ -521,9 +586,9 @@ body::after{
 }
 
 
-/* =========================
+/* =================================
    BUTTON
-========================= */
+================================= */
 
 .gold-button{
   width:100%;
@@ -553,20 +618,25 @@ body::after{
     );
 
   border:
-    1px solid #ffe39a;
+    1px solid
+    #ffe39a;
 
   box-shadow:
-    inset 0 2px rgba(255,255,255,.65),
-    0 8px 20px rgba(209,153,44,.25);
+    inset 0 2px
+    rgba(255,255,255,.65),
+
+    0 8px 20px
+    rgba(209,153,44,.25);
 }
 
 
-/* =========================
+/* =================================
    OVERLAY
-========================= */
+================================= */
 
 .overlay{
   position:fixed;
+
   inset:0;
 
   z-index:100;
@@ -574,12 +644,13 @@ body::after{
   display:flex;
 
   align-items:center;
+
   justify-content:center;
 
   padding:20px;
 
   background:
-    rgba(0,5,15,.8);
+    rgba(0,5,15,.80);
 
   backdrop-filter:
     blur(8px);
@@ -594,7 +665,8 @@ body::after{
 
   text-align:center;
 
-  padding:27px 23px;
+  padding:
+    27px 23px;
 
   border-radius:24px;
 
@@ -606,15 +678,20 @@ body::after{
     );
 
   border:
-    1px solid #d3a449;
+    1px solid
+    #d3a449;
 
   box-shadow:
-    0 30px 90px rgba(0,0,0,.72),
-    inset 0 1px rgba(255,255,255,.08);
+    0 30px 90px
+    rgba(0,0,0,.72),
+
+    inset 0 1px
+    rgba(255,255,255,.08);
 }
 
 .popup-logo{
   width:min(245px,72%);
+
   max-height:80px;
 
   object-fit:contain;
@@ -646,7 +723,8 @@ body::after{
 }
 
 .popup-info{
-  margin:17px 0;
+  margin:
+    17px 0;
 
   border-radius:13px;
 
@@ -663,32 +741,36 @@ body::after{
 }
 
 
-/* =========================
-   TIMER
-========================= */
+/* =================================
+   TIMER WARNING
+================================= */
 
 .timer-danger{
-  color:#ff6374 !important;
+  color:
+    #ff6374 !important;
 
   animation:
-    timerPulse .48s
+    timerPulse
+    .48s
     infinite alternate;
 }
 
 @keyframes timerPulse{
   from{
-    transform:scale(1);
+    transform:
+      scale(1);
   }
 
   to{
-    transform:scale(1.12);
+    transform:
+      scale(1.12);
   }
 }
 
 
-/* =========================
+/* =================================
    PARTICLES
-========================= */
+================================= */
 
 .ambient-dot{
   position:fixed;
@@ -756,9 +838,9 @@ body::after{
 }
 
 
-/* =========================
+/* =================================
    MOBILE
-========================= */
+================================= */
 
 @media(max-width:700px){
 
@@ -775,7 +857,8 @@ body::after{
   }
 
   .brand-logo{
-    width:min(220px,60vw);
+    width:
+      min(220px,60vw);
 
     max-height:68px;
   }
@@ -800,7 +883,8 @@ body::after{
   .hud-box{
     border-radius:10px;
 
-    padding:7px 3px;
+    padding:
+      7px 3px;
   }
 
   .hud-label{
@@ -834,9 +918,9 @@ body::after{
 }
 
 
-/* =========================
-   ACCESSIBILITY
-========================= */
+/* =================================
+   REDUCED MOTION
+================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -863,6 +947,9 @@ body::after{
 
 <div class="game-wrapper">
 
+
+  <!-- HEADER -->
+
   <header class="header">
 
     <img
@@ -881,6 +968,8 @@ body::after{
   </header>
 
 
+  <!-- HUD -->
+
   <section class="hud">
 
     <div class="hud-box">
@@ -890,8 +979,8 @@ body::after{
       </div>
 
       <div
-        class="hud-value"
-        id="time">
+        id="time"
+        class="hud-value">
         60
       </div>
 
@@ -905,8 +994,8 @@ body::after{
       </div>
 
       <div
-        class="hud-value"
-        id="match">
+        id="match"
+        class="hud-value">
         0 / 8
       </div>
 
@@ -920,8 +1009,8 @@ body::after{
       </div>
 
       <div
-        class="hud-value"
-        id="moves">
+        id="moves"
+        class="hud-value">
         0
       </div>
 
@@ -935,8 +1024,8 @@ body::after{
       </div>
 
       <div
-        class="hud-value"
-        id="score">
+        id="score"
+        class="hud-value">
         0
       </div>
 
@@ -945,21 +1034,25 @@ body::after{
   </section>
 
 
+  <!-- BOARD -->
+
   <section class="board-frame">
 
     <div
-      class="board"
-      id="board">
+      id="board"
+      class="board">
     </div>
 
   </section>
 
 
+  <!-- STATUS -->
+
   <section class="bottom-panel">
 
     <div
-      class="bottom-box game-status"
-      id="status">
+      id="status"
+      class="bottom-box game-status">
 
       Tekan MULAI PERMAINAN.
 
@@ -970,9 +1063,9 @@ body::after{
 </div>
 
 
-<!-- =========================
-     AUDIO
-========================= -->
+<!-- =================================
+     GAME EFFECT AUDIO
+================================= -->
 
 <audio
   id="soundFlip"
@@ -1006,30 +1099,32 @@ body::after{
 </audio>
 
 
-<!-- LUNA -->
+<!-- =================================
+     LUNA AUDIO
+================================= -->
 
 <audio
   id="welcomeVoice"
-  src="asset/welcome-vip-mauslot.MP3"
+  src="asset/welcome-vip-mauslot.mp3"
   preload="auto">
 </audio>
 
 <audio
   id="lunaWin"
-  src="asset/luna-win.MP3"
+  src="asset/luna-win.mp3"
   preload="auto">
 </audio>
 
 <audio
   id="lunaLose"
-  src="asset/luna-lose.MP3"
+  src="asset/luna-lose.mp3"
   preload="auto">
 </audio>
 
 
-<!-- =========================
+<!-- =================================
      START POPUP
-========================= -->
+================================= -->
 
 <div
   class="overlay"
@@ -1057,15 +1152,16 @@ body::after{
       🃏 16 Kartu • 8 Pasangan
       <br>
 
-      ⏱️ Waktu Bermain: 60 Detik
+      ⏱️ Waktu Bermain 60 Detik
       <br>
 
-      ⭐ Match beruntun menghasilkan Combo
+      ⭐ Match berturut-turut menghasilkan Combo
       <br>
 
-      🔊 Luna akan menemani permainan kamu
+      🎧 Luna akan menemani permainan kamu
 
     </div>
+
 
     <button
       id="startButton"
@@ -1081,9 +1177,9 @@ body::after{
 </div>
 
 
-<!-- =========================
-     RESULT
-========================= -->
+<!-- =================================
+     RESULT POPUP
+================================= -->
 
 <div
   class="overlay hidden"
@@ -1100,16 +1196,16 @@ body::after{
     </div>
 
     <div
-      class="popup-title"
-      id="resultTitle">
+      id="resultTitle"
+      class="popup-title">
 
       VIP MEMORY COMPLETE
 
     </div>
 
     <div
-      class="popup-subtitle"
-      id="resultText">
+      id="resultText"
+      class="popup-subtitle">
     </div>
 
   </div>
@@ -1117,9 +1213,9 @@ body::after{
 </div>
 
 
-<!-- =========================
-     ALREADY PLAYED
-========================= -->
+<!-- =================================
+     LOCKED POPUP
+================================= -->
 
 <div
   class="overlay hidden"
@@ -1140,14 +1236,14 @@ body::after{
 
     <div class="popup-subtitle">
 
-      Casino Memory hanya dapat dimainkan satu kali.
+      VIP Memory hanya dapat dimainkan satu kali.
 
     </div>
 
     <div class="popup-info">
 
       Terima kasih sudah mengikuti
-      VIP Memory MAUSLOT.
+      Mini Game VIP MAUSLOT.
 
     </div>
 
@@ -1158,12 +1254,12 @@ body::after{
 
 <script>
 
-/* =========================
+/* =================================
    CONFIG
-========================= */
+================================= */
 
 const GAME_LOCK_KEY =
-  "mauslot_casino_memory_played_v1";
+  "mauslot_vip_memory_played_final_v1";
 
 
 const CARD_BACK =
@@ -1215,9 +1311,9 @@ const cardAssets = [
 ];
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* =================================
+   ELEMENT
+================================= */
 
 const board =
   document.getElementById("board");
@@ -1246,22 +1342,22 @@ const resultOverlay =
 const lockedOverlay =
   document.getElementById("lockedOverlay");
 
+const resultIcon =
+  document.getElementById("resultIcon");
+
 const resultTitle =
   document.getElementById("resultTitle");
 
 const resultText =
   document.getElementById("resultText");
 
-const resultIcon =
-  document.getElementById("resultIcon");
-
 const startButton =
   document.getElementById("startButton");
 
 
-/* =========================
-   SOUND
-========================= */
+/* =================================
+   AUDIO ELEMENT
+================================= */
 
 const soundFlip =
   document.getElementById("soundFlip");
@@ -1288,90 +1384,146 @@ const lunaLose =
   document.getElementById("lunaLose");
 
 
-function safePlay(
+/* =================================
+   STATE
+================================= */
+
+let deck = [];
+
+let firstCard = null;
+let secondCard = null;
+
+let boardLocked = true;
+
+let matches = 0;
+let moves = 0;
+let score = 0;
+let combo = 0;
+
+let timeLeft = 60;
+
+let timer = null;
+
+let gameStarted = false;
+let gameFinished = false;
+
+let activationDone = false;
+
+
+/* =================================
+   AUDIO UNLOCK
+================================= */
+
+async function unlockAllAudio(){
+
+  const audioList = [
+
+    soundFlip,
+    soundMatch,
+    soundMiss,
+    soundWin,
+
+    casinoAmbient,
+
+    welcomeVoice,
+    lunaWin,
+    lunaLose
+
+  ];
+
+
+  for(
+    const audio of audioList
+  ){
+
+    if(!audio){
+      continue;
+    }
+
+
+    try{
+
+      audio.muted = true;
+
+      audio.currentTime = 0;
+
+      await audio.play();
+
+      audio.pause();
+
+      audio.currentTime = 0;
+
+      audio.muted = false;
+
+    }
+    catch(error){
+
+      audio.muted = false;
+
+    }
+
+  }
+
+}
+
+
+/* =================================
+   BASIC PLAY
+================================= */
+
+function playAudio(
   audio,
-  volume = .7
+  volume = 1
 ){
 
   if(!audio){
-    return;
+    return Promise.reject();
   }
+
 
   try{
 
     audio.pause();
 
-    audio.currentTime =
-      0;
+    audio.currentTime = 0;
+
+    audio.muted = false;
 
     audio.volume =
       volume;
 
-    const promise =
+
+    const result =
       audio.play();
 
+
     if(
-      promise &&
-      typeof promise.catch ===
-      "function"
+      result &&
+      typeof result.then === "function"
     ){
 
-      promise.catch(
-        ()=>{}
-      );
+      return result;
 
     }
 
+
+    return Promise.resolve();
+
   }
-  catch(error){}
+  catch(error){
+
+    return Promise.reject(
+      error
+    );
+
+  }
 
 }
 
 
-/* =========================
-   STATE
-========================= */
-
-let deck =
-  [];
-
-let firstCard =
-  null;
-
-let secondCard =
-  null;
-
-let boardLocked =
-  true;
-
-let matches =
-  0;
-
-let moves =
-  0;
-
-let score =
-  0;
-
-let combo =
-  0;
-
-let timeLeft =
-  60;
-
-let timer =
-  null;
-
-let gameStarted =
-  false;
-
-let gameFinished =
-  false;
-
-
-/* =========================
+/* =================================
    SHUFFLE
-========================= */
+================================= */
 
 function shuffle(
   array
@@ -1392,30 +1544,34 @@ function shuffle(
         (i + 1)
       );
 
+
     [
       array[i],
       array[j]
-    ] =
-    [
+    ] = [
+
       array[j],
       array[i]
+
     ];
 
   }
+
 
   return array;
 
 }
 
 
-/* =========================
-   DECK
-========================= */
+/* =================================
+   CREATE DECK
+================================= */
 
 function createDeck(){
 
   const cards =
     [];
+
 
   cardAssets.forEach(
     (asset,index)=>{
@@ -1430,6 +1586,7 @@ function createDeck(){
 
       });
 
+
       cards.push({
 
         ...asset,
@@ -1443,6 +1600,7 @@ function createDeck(){
     }
   );
 
+
   return shuffle(
     cards
   );
@@ -1450,14 +1608,15 @@ function createDeck(){
 }
 
 
-/* =========================
-   RENDER
-========================= */
+/* =================================
+   RENDER BOARD
+================================= */
 
 function renderBoard(){
 
   board.innerHTML =
     "";
+
 
   deck.forEach(
     (card,index)=>{
@@ -1467,14 +1626,13 @@ function renderBoard(){
           "button"
         );
 
+
       button.type =
         "button";
 
+
       button.className =
         "card";
-
-      button.dataset.index =
-        index;
 
 
       button.innerHTML = `
@@ -1485,9 +1643,10 @@ function renderBoard(){
 
             <img
               src="${CARD_BACK}"
-              alt="Kartu tertutup">
+              alt="Kartu">
 
           </span>
+
 
           <span class="card-face card-front">
 
@@ -1525,9 +1684,9 @@ function renderBoard(){
 }
 
 
-/* =========================
-   CARD CLICK
-========================= */
+/* =================================
+   CLICK CARD
+================================= */
 
 function selectCard(
   element,
@@ -1564,15 +1723,14 @@ function selectCard(
   );
 
 
-  safePlay(
+  playAudio(
     soundFlip,
-    .35
-  );
+    .75
+  ).catch(()=>{});
 
 
   if(
-    firstCard ===
-    null
+    firstCard === null
   ){
 
     firstCard = {
@@ -1615,26 +1773,27 @@ function selectCard(
 }
 
 
-/* =========================
+/* =================================
    COMPARE
-========================= */
+================================= */
 
 function compareCards(){
 
-  const firstData =
+  const cardOne =
     deck[
       firstCard.index
     ];
 
-  const secondData =
+
+  const cardTwo =
     deck[
       secondCard.index
     ];
 
 
   if(
-    firstData.pair ===
-    secondData.pair
+    cardOne.pair ===
+    cardTwo.pair
   ){
 
     handleMatch();
@@ -1649,9 +1808,9 @@ function compareCards(){
 }
 
 
-/* =========================
+/* =================================
    MATCH
-========================= */
+================================= */
 
 function handleMatch(){
 
@@ -1688,10 +1847,10 @@ function handleMatch(){
     points;
 
 
-  safePlay(
+  playAudio(
     soundMatch,
-    .7
-  );
+    .85
+  ).catch(()=>{});
 
 
   firstCard.element.classList.remove(
@@ -1720,7 +1879,7 @@ function handleMatch(){
 
       "MATCH! COMBO x" +
       combo +
-      " +" +
+      "  +" +
       points;
 
   }
@@ -1734,11 +1893,10 @@ function handleMatch(){
   }
 
 
-  firstCard =
-    null;
+  firstCard = null;
 
-  secondCard =
-    null;
+  secondCard = null;
+
 
   boardLocked =
     false;
@@ -1760,9 +1918,9 @@ function handleMatch(){
 }
 
 
-/* =========================
+/* =================================
    MISS
-========================= */
+================================= */
 
 function handleMiss(){
 
@@ -1770,10 +1928,10 @@ function handleMiss(){
     0;
 
 
-  safePlay(
+  playAudio(
     soundMiss,
-    .55
-  );
+    .82
+  ).catch(()=>{});
 
 
   statusElement.textContent =
@@ -1801,39 +1959,40 @@ function handleMiss(){
       );
 
 
-      firstCard =
-        null;
+      firstCard = null;
 
-      secondCard =
-        null;
+      secondCard = null;
 
 
       boardLocked =
         false;
 
     },
-    780
+    800
   );
 
 }
 
 
-/* =========================
+/* =================================
    HUD
-========================= */
+================================= */
 
 function updateHUD(){
 
   timeElement.textContent =
     timeLeft;
 
+
   matchElement.textContent =
 
     matches +
     " / 8";
 
+
   movesElement.textContent =
     moves;
+
 
   scoreElement.textContent =
     score;
@@ -1861,9 +2020,9 @@ function updateHUD(){
 }
 
 
-/* =========================
+/* =================================
    TIMER
-========================= */
+================================= */
 
 function startTimer(){
 
@@ -1876,6 +2035,16 @@ function startTimer(){
     setInterval(
       ()=>{
 
+        if(
+          !gameStarted ||
+          gameFinished
+        ){
+
+          return;
+
+        }
+
+
         timeLeft--;
 
 
@@ -1886,11 +2055,14 @@ function startTimer(){
           timeLeft =
             0;
 
+
           updateHUD();
+
 
           finishGame(
             false
           );
+
 
           return;
 
@@ -1906,44 +2078,41 @@ function startTimer(){
 }
 
 
-/* =========================
+/* =================================
    AMBIENT
-========================= */
+================================= */
 
 function startAmbient(){
 
-  if(
-    !casinoAmbient
-  ){
+  if(!casinoAmbient){
     return;
   }
 
-  try{
 
-    casinoAmbient.pause();
+  casinoAmbient.volume =
+    .10;
 
-    casinoAmbient.currentTime =
-      0;
 
-    casinoAmbient.volume =
-      .10;
+  casinoAmbient.muted =
+    false;
 
-    casinoAmbient.play()
-      .catch(()=>{});
 
-  }
-  catch(error){}
+  casinoAmbient.currentTime =
+    0;
+
+
+  casinoAmbient.play()
+    .catch(()=>{});
 
 }
 
 
 function stopAmbient(){
 
-  if(
-    !casinoAmbient
-  ){
+  if(!casinoAmbient){
     return;
   }
+
 
   try{
 
@@ -1955,34 +2124,38 @@ function stopAmbient(){
 }
 
 
-/* =========================
-   ACTUAL GAME START
-========================= */
+/* =================================
+   ACTIVATE GAME
+================================= */
 
 function activateGame(){
+
+  if(
+    activationDone
+  ){
+
+    return;
+
+  }
+
+
+  activationDone =
+    true;
+
 
   deck =
     createDeck();
 
 
-  firstCard =
-    null;
-
-  secondCard =
-    null;
+  firstCard = null;
+  secondCard = null;
 
 
-  matches =
-    0;
+  matches = 0;
+  moves = 0;
+  score = 0;
+  combo = 0;
 
-  moves =
-    0;
-
-  score =
-    0;
-
-  combo =
-    0;
 
   timeLeft =
     60;
@@ -2014,11 +2187,11 @@ function activateGame(){
 }
 
 
-/* =========================
-   START CLICK
-========================= */
+/* =================================
+   START GAME
+================================= */
 
-function startGame(){
+async function startGame(){
 
   if(
     localStorage.getItem(
@@ -2030,13 +2203,30 @@ function startGame(){
       "hidden"
     );
 
+
     lockedOverlay.classList.remove(
       "hidden"
     );
 
+
     return;
 
   }
+
+
+  startButton.disabled =
+    true;
+
+
+  startButton.textContent =
+    "MEMULAI...";
+
+
+  /*
+    User click unlock semua audio
+  */
+
+  await unlockAllAudio();
 
 
   startOverlay.classList.add(
@@ -2044,8 +2234,13 @@ function startGame(){
   );
 
 
+  activationDone =
+    false;
+
+
   boardLocked =
     true;
+
 
   gameStarted =
     false;
@@ -2055,70 +2250,118 @@ function startGame(){
     "Luna sedang menyambut kamu...";
 
 
-  if(
-    welcomeVoice
-  ){
+  /*
+    PLAY WELCOME
+  */
 
-    welcomeVoice.onended =
-      null;
-
-
-    safePlay(
-      welcomeVoice,
-      .95
-    );
+  welcomeVoice.onended =
+    null;
 
 
-    welcomeVoice.onended =
-      ()=>{
+  welcomeVoice.onerror =
+    null;
+
+
+  let welcomeFinished =
+    false;
+
+
+  welcomeVoice.onended =
+    ()=>{
+
+      if(
+        welcomeFinished
+      ){
+
+        return;
+
+      }
+
+
+      welcomeFinished =
+        true;
+
+
+      activateGame();
+
+    };
+
+
+  welcomeVoice.onerror =
+    ()=>{
+
+      if(
+        welcomeFinished
+      ){
+
+        return;
+
+      }
+
+
+      welcomeFinished =
+        true;
+
+
+      activateGame();
+
+    };
+
+
+  playAudio(
+    welcomeVoice,
+    1
+  )
+  .catch(
+    ()=>{
+
+      if(
+        !welcomeFinished
+      ){
+
+        welcomeFinished =
+          true;
+
 
         activateGame();
 
-      };
+      }
+
+    }
+  );
 
 
-    /*
-      Fallback jika browser gagal
-      mendeteksi event ended.
-    */
+  /*
+    Backup jika onended tidak terbaca.
+    Welcome sekitar 10 detik.
+  */
 
-    setTimeout(
-      ()=>{
+  setTimeout(
+    ()=>{
 
-        if(
-          !gameStarted &&
-          !gameFinished
-        ){
+      if(
+        !welcomeFinished &&
+        !gameStarted
+      ){
 
-          activateGame();
+        welcomeFinished =
+          true;
 
-        }
 
-      },
-      Math.max(
-        4000,
-        (
-          welcomeVoice.duration ||
-          0
-        ) *
-        1000 +
-        600
-      )
-    );
+        activateGame();
 
-  }
-  else{
+      }
 
-    activateGame();
-
-  }
+    },
+    11000
+  );
 
 }
 
 
-/* =========================
+/* =================================
    FINISH
-========================= */
+================================= */
 
 function finishGame(
   success
@@ -2127,15 +2370,19 @@ function finishGame(
   if(
     gameFinished
   ){
+
     return;
+
   }
 
 
   gameFinished =
     true;
 
+
   gameStarted =
     false;
+
 
   boardLocked =
     true;
@@ -2222,39 +2469,94 @@ function finishGame(
 
 
     /*
-      WIN SOUND
-      lalu LUNA WIN
+      Sound WIN dulu.
+      Luna WIN setelah sound selesai.
     */
 
-    safePlay(
+    soundWin.onended =
+      null;
+
+
+    let winSoundFinished =
+      false;
+
+
+    soundWin.onended =
+      ()=>{
+
+        if(
+          winSoundFinished
+        ){
+
+          return;
+
+        }
+
+
+        winSoundFinished =
+          true;
+
+
+        playAudio(
+          lunaWin,
+          1
+        ).catch(()=>{});
+
+      };
+
+
+    playAudio(
       soundWin,
-      .78
+      .88
+    )
+    .catch(
+      ()=>{
+
+        if(
+          !winSoundFinished
+        ){
+
+          winSoundFinished =
+            true;
+
+
+          playAudio(
+            lunaWin,
+            1
+          ).catch(()=>{});
+
+        }
+
+      }
     );
 
 
-    if(
-      soundWin
-    ){
+    /*
+      fallback
+      sound win sekitar 2.25 detik
+    */
 
-      soundWin.onended =
-        ()=>{
+    setTimeout(
+      ()=>{
 
-          safePlay(
+        if(
+          !winSoundFinished
+        ){
+
+          winSoundFinished =
+            true;
+
+
+          playAudio(
             lunaWin,
-            .95
-          );
+            1
+          ).catch(()=>{});
 
-        };
+        }
 
-    }
-    else{
-
-      safePlay(
-        lunaWin,
-        .95
-      );
-
-    }
+      },
+      2600
+    );
 
   }
   else{
@@ -2295,20 +2597,19 @@ function finishGame(
 
 
     /*
-      LUNA LOSE
+      Luna LOSE
     */
 
-    safePlay(
+    playAudio(
       lunaLose,
-      .95
-    );
+      1
+    ).catch(()=>{});
 
   }
 
 
   /*
-    Popup result muncul,
-    tetapi tidak ada Main Lagi.
+    Popup muncul tanpa tombol Main Lagi
   */
 
   setTimeout(
@@ -2319,22 +2620,24 @@ function finishGame(
       );
 
     },
-    700
+    600
   );
 
 }
 
 
-/* =========================
+/* =================================
    PARTICLES
-========================= */
+================================= */
 
 function createAmbientDot(){
 
   if(
     document.hidden
   ){
+
     return;
+
   }
 
 
@@ -2403,9 +2706,9 @@ function createAmbientDot(){
 }
 
 
-/* =========================
+/* =================================
    INIT
-========================= */
+================================= */
 
 function init(){
 
@@ -2433,21 +2736,23 @@ function init(){
       "hidden"
     );
 
+
     resultOverlay.classList.add(
       "hidden"
     );
+
 
     lockedOverlay.classList.remove(
       "hidden"
     );
 
 
-    statusElement.textContent =
-      "Permainan sudah pernah dimainkan.";
-
-
     boardLocked =
       true;
+
+
+    statusElement.textContent =
+      "Permainan sudah pernah dimainkan.";
 
   }
   else{
@@ -2456,9 +2761,11 @@ function init(){
       "hidden"
     );
 
+
     lockedOverlay.classList.add(
       "hidden"
     );
+
 
     boardLocked =
       true;
@@ -2468,9 +2775,9 @@ function init(){
 }
 
 
-/* =========================
-   EVENTS
-========================= */
+/* =================================
+   EVENT
+================================= */
 
 startButton.addEventListener(
   "click",
