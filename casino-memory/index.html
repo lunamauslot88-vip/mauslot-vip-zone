@@ -41,9 +41,9 @@ body{
 }
 
 
-/* =====================================
+/* ===============================
    BACKGROUND
-===================================== */
+=============================== */
 
 body::before{
   content:"";
@@ -72,9 +72,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    MAIN
-===================================== */
+=============================== */
 
 .game-wrapper{
   position:relative;
@@ -87,9 +87,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    HEADER
-===================================== */
+=============================== */
 
 .header{
   text-align:center;
@@ -151,9 +151,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    HUD
-===================================== */
+=============================== */
 
 .hud{
   width:min(920px,100%);
@@ -215,9 +215,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    BOARD
-===================================== */
+=============================== */
 
 .board-frame{
   position:relative;
@@ -259,9 +259,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    CARD
-===================================== */
+=============================== */
 
 .card{
   position:relative;
@@ -308,9 +308,6 @@ body::before{
   transform:translateZ(0);
 }
 
-
-/* reveal */
-
 .card.reveal{
   animation:
     premiumReveal .20s ease-out;
@@ -334,9 +331,6 @@ body::before{
   }
 
 }
-
-
-/* matched */
 
 .card.matched{
   pointer-events:none;
@@ -383,7 +377,6 @@ body::before{
 
 }
 
-
 @media(hover:hover) and (pointer:fine){
 
   .card:not(.matched):hover{
@@ -398,9 +391,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    STATUS
-===================================== */
+=============================== */
 
 .bottom-panel{
   width:min(920px,100%);
@@ -437,9 +430,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    TIMER
-===================================== */
+=============================== */
 
 .timer-danger{
   color:#ff6374 !important;
@@ -455,9 +448,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    BUTTON
-===================================== */
+=============================== */
 
 .gold-button{
   width:100%;
@@ -498,9 +491,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    OVERLAY
-===================================== */
+=============================== */
 
 .overlay{
   position:fixed;
@@ -603,9 +596,9 @@ body::before{
 }
 
 
-/* =====================================
+/* ===============================
    MOBILE
-===================================== */
+=============================== */
 
 @media(max-width:700px){
 
@@ -727,11 +720,6 @@ body::before{
   }
 
 }
-
-
-/* =====================================
-   REDUCED MOTION
-===================================== */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -988,16 +976,15 @@ body::before{
 
 <script>
 
-/* =====================================
+/* ===============================
    CONFIG
-===================================== */
+=============================== */
 
 const GAME_LOCK_KEY =
   "mauslot_vip_memory_played_final_v1";
 
 const CARD_BACK =
   "asset/card-back.png";
-
 
 const cardAssets = [
 
@@ -1044,9 +1031,9 @@ const cardAssets = [
 ];
 
 
-/* =====================================
+/* ===============================
    ELEMENTS
-===================================== */
+=============================== */
 
 const board =
   document.getElementById("board");
@@ -1088,7 +1075,7 @@ const startButton =
   document.getElementById("startButton");
 
 
-/* audio */
+/* AUDIO */
 
 const soundFlip =
   document.getElementById("soundFlip");
@@ -1115,9 +1102,9 @@ const lunaLose =
   document.getElementById("lunaLose");
 
 
-/* =====================================
+/* ===============================
    STATE
-===================================== */
+=============================== */
 
 let deck = [];
 
@@ -1138,16 +1125,15 @@ let timer = null;
 let gameStarted = false;
 let gameFinished = false;
 
-let cardsReady = false;
-
-let cardPreloadPromise = null;
-
 let startInProgress = false;
 
+let cardsReady = false;
+let cardPreloadPromise = null;
 
-/* =====================================
+
+/* ===============================
    SHUFFLE
-===================================== */
+=============================== */
 
 function shuffle(array){
 
@@ -1184,9 +1170,9 @@ function shuffle(array){
 }
 
 
-/* =====================================
+/* ===============================
    CREATE DECK
-===================================== */
+=============================== */
 
 function createDeck(){
 
@@ -1213,9 +1199,9 @@ function createDeck(){
 }
 
 
-/* =====================================
-   RENDER BOARD
-===================================== */
+/* ===============================
+   RENDER
+=============================== */
 
 function renderBoard(){
 
@@ -1281,9 +1267,9 @@ function renderBoard(){
 }
 
 
-/* =====================================
-   PRELOAD CARDS
-===================================== */
+/* ===============================
+   PRELOAD
+=============================== */
 
 function preloadImage(src){
 
@@ -1317,11 +1303,9 @@ function startPreloadingCards(){
     return Promise.resolve();
   }
 
-
   if(cardPreloadPromise){
     return cardPreloadPromise;
   }
-
 
   const uniqueImages =
     [
@@ -1331,7 +1315,6 @@ function startPreloadingCards(){
         )
       )
     ];
-
 
   cardPreloadPromise =
     Promise.all(
@@ -1348,15 +1331,14 @@ function startPreloadingCards(){
       }
     );
 
-
   return cardPreloadPromise;
 
 }
 
 
-/* =====================================
+/* ===============================
    AUDIO
-===================================== */
+=============================== */
 
 function playAudio(
   audio,
@@ -1401,9 +1383,9 @@ function playAudio(
 }
 
 
-/* =====================================
+/* ===============================
    HUD
-===================================== */
+=============================== */
 
 function updateHUD(){
 
@@ -1419,7 +1401,6 @@ function updateHUD(){
 
   scoreElement.textContent =
     score;
-
 
   if(
     timeLeft <= 10 &&
@@ -1443,9 +1424,9 @@ function updateHUD(){
 }
 
 
-/* =====================================
+/* ===============================
    REVEAL
-===================================== */
+=============================== */
 
 function revealCard(
   button,
@@ -1471,15 +1452,14 @@ function revealCard(
 }
 
 
-/* =====================================
+/* ===============================
    SELECT
-===================================== */
+=============================== */
 
 function selectCard(event){
 
   const button =
     event.currentTarget;
-
 
   if(
     !gameStarted ||
@@ -1488,7 +1468,6 @@ function selectCard(event){
   ){
     return;
   }
-
 
   if(
     button.classList.contains(
@@ -1501,29 +1480,24 @@ function selectCard(event){
     return;
   }
 
-
   const index =
     Number(
       button.dataset.index
     );
 
-
   button.classList.add(
     "opened"
   );
-
 
   revealCard(
     button,
     index
   );
 
-
   playAudio(
     soundFlip,
     .72
   ).catch(()=>{});
-
 
   if(!firstCard){
 
@@ -1539,12 +1513,10 @@ function selectCard(event){
 
   }
 
-
   secondCard = {
     button,
     index
   };
-
 
   moves++;
 
@@ -1558,9 +1530,9 @@ function selectCard(event){
 }
 
 
-/* =====================================
+/* ===============================
    COMPARE
-===================================== */
+=============================== */
 
 function compareCards(){
 
@@ -1573,7 +1545,6 @@ function compareCards(){
     deck[
       secondCard.index
     ];
-
 
   if(
     first.pair ===
@@ -1592,9 +1563,9 @@ function compareCards(){
 }
 
 
-/* =====================================
+/* ===============================
    MATCH
-===================================== */
+=============================== */
 
 function handleMatch(){
 
@@ -1602,37 +1573,30 @@ function handleMatch(){
 
   matches++;
 
-
   let points =
     100;
-
 
   if(combo === 2){
     points = 200;
   }
 
-
   if(combo >= 3){
     points = 300;
   }
 
-
   score +=
     points;
-
 
   playAudio(
     soundMatch,
     .82
   ).catch(()=>{});
 
-
   const cardA =
     firstCard.button;
 
   const cardB =
     secondCard.button;
-
 
   cardA.classList.remove(
     "opened"
@@ -1642,7 +1606,6 @@ function handleMatch(){
     "opened"
   );
 
-
   cardA.classList.add(
     "matched"
   );
@@ -1650,7 +1613,6 @@ function handleMatch(){
   cardB.classList.add(
     "matched"
   );
-
 
   if(combo >= 2){
 
@@ -1669,20 +1631,16 @@ function handleMatch(){
 
   }
 
-
   firstCard =
     null;
 
   secondCard =
     null;
 
-
   boardLocked =
     false;
 
-
   updateHUD();
-
 
   if(matches === 8){
 
@@ -1693,32 +1651,28 @@ function handleMatch(){
 }
 
 
-/* =====================================
+/* ===============================
    MISS
-===================================== */
+=============================== */
 
 function handleMiss(){
 
   combo =
     0;
 
-
   playAudio(
     soundMiss,
     .80
   ).catch(()=>{});
 
-
   statusElement.textContent =
     "Belum cocok. Ingat posisi kartunya.";
-
 
   const cardA =
     firstCard.button;
 
   const cardB =
     secondCard.button;
-
 
   setTimeout(
     ()=>{
@@ -1727,13 +1681,11 @@ function handleMiss(){
         return;
       }
 
-
       cardA.firstElementChild.src =
         CARD_BACK;
 
       cardB.firstElementChild.src =
         CARD_BACK;
-
 
       cardA.classList.remove(
         "opened",
@@ -1745,13 +1697,11 @@ function handleMiss(){
         "reveal"
       );
 
-
       firstCard =
         null;
 
       secondCard =
         null;
-
 
       boardLocked =
         false;
@@ -1763,16 +1713,15 @@ function handleMiss(){
 }
 
 
-/* =====================================
+/* ===============================
    TIMER
-===================================== */
+=============================== */
 
 function startTimer(){
 
   clearInterval(
     timer
   );
-
 
   timer =
     setInterval(
@@ -1785,9 +1734,7 @@ function startTimer(){
           return;
         }
 
-
         timeLeft--;
-
 
         if(timeLeft <= 0){
 
@@ -1802,7 +1749,6 @@ function startTimer(){
 
         }
 
-
         updateHUD();
 
       },
@@ -1812,9 +1758,9 @@ function startTimer(){
 }
 
 
-/* =====================================
+/* ===============================
    AMBIENT
-===================================== */
+=============================== */
 
 function startAmbient(){
 
@@ -1823,7 +1769,6 @@ function startAmbient(){
 
   casinoAmbient.currentTime =
     0;
-
 
   casinoAmbient.play()
     .catch(()=>{});
@@ -1846,22 +1791,20 @@ function stopAmbient(){
 }
 
 
-/* =====================================
+/* ===============================
    ACTIVATE GAME
-===================================== */
+=============================== */
 
 function activateGame(){
 
   deck =
     createDeck();
 
-
   firstCard =
     null;
 
   secondCard =
     null;
-
 
   matches =
     0;
@@ -1875,13 +1818,10 @@ function activateGame(){
   combo =
     0;
 
-
   timeLeft =
     60;
 
-
   renderBoard();
-
 
   gameStarted =
     true;
@@ -1892,13 +1832,10 @@ function activateGame(){
   boardLocked =
     false;
 
-
   updateHUD();
-
 
   statusElement.textContent =
     "Pilih 2 kartu untuk memulai.";
-
 
   startAmbient();
 
@@ -1907,16 +1844,15 @@ function activateGame(){
 }
 
 
-/* =====================================
+/* ===============================
    START GAME
-===================================== */
+=============================== */
 
 async function startGame(){
 
   if(startInProgress){
     return;
   }
-
 
   if(
     localStorage.getItem(
@@ -1936,10 +1872,8 @@ async function startGame(){
 
   }
 
-
   startInProgress =
     true;
-
 
   startButton.disabled =
     true;
@@ -1947,24 +1881,20 @@ async function startGame(){
   startButton.textContent =
     "MEMULAI...";
 
-
   startOverlay.classList.add(
     "hidden"
   );
-
 
   statusElement.textContent =
     "Luna sedang menyambut kamu...";
 
 
   /*
-    INI BAGIAN PENTING:
-    preload kartu langsung mulai
-    bersamaan dengan suara Luna.
+    Pastikan preload sudah berjalan.
+    Tapi JANGAN DITUNGGU.
   */
 
-  const cardLoading =
-    startPreloadingCards();
+  startPreloadingCards();
 
 
   let welcomeDone =
@@ -1972,24 +1902,20 @@ async function startGame(){
 
 
   const finishWelcome =
-    async ()=>{
+    ()=>{
 
       if(welcomeDone){
         return;
       }
-
 
       welcomeDone =
         true;
 
 
       /*
-        Kartu sudah di-load sejak Luna mulai.
-        Biasanya promise ini sudah selesai.
+        Luna selesai = langsung main.
+        TIDAK ADA await preload.
       */
-
-      await cardLoading;
-
 
       activateGame();
 
@@ -1998,7 +1924,6 @@ async function startGame(){
 
   welcomeVoice.onended =
     finishWelcome;
-
 
   welcomeVoice.onerror =
     finishWelcome;
@@ -2012,25 +1937,15 @@ async function startGame(){
     welcomeVoice.volume =
       1;
 
-
     await welcomeVoice.play();
 
   }
   catch(error){
 
-    /*
-      Kalau browser gagal play Luna,
-      kartu tetap preload lalu game mulai.
-    */
-
-    await finishWelcome();
+    finishWelcome();
 
   }
 
-
-  /*
-    Failsafe kalau event onended tidak jalan.
-  */
 
   setTimeout(
     ()=>{
@@ -2048,16 +1963,15 @@ async function startGame(){
 }
 
 
-/* =====================================
+/* ===============================
    FINISH GAME
-===================================== */
+=============================== */
 
 function finishGame(success){
 
   if(gameFinished){
     return;
   }
-
 
   gameFinished =
     true;
@@ -2068,25 +1982,20 @@ function finishGame(success){
   boardLocked =
     true;
 
-
   clearInterval(
     timer
   );
 
-
   stopAmbient();
-
 
   localStorage.setItem(
     GAME_LOCK_KEY,
     "1"
   );
 
-
   timeElement.classList.remove(
     "timer-danger"
   );
-
 
   if(success){
 
@@ -2094,21 +2003,16 @@ function finishGame(success){
       timeLeft *
       10;
 
-
     score +=
       timeBonus;
 
-
     updateHUD();
-
 
     resultIcon.textContent =
       "🏆";
 
-
     resultTitle.textContent =
       "VIP MEMORY COMPLETE";
-
 
     resultText.innerHTML =
 
@@ -2142,10 +2046,8 @@ function finishGame(success){
       score +
       "</b>";
 
-
     let winVoiceStarted =
       false;
-
 
     const playLunaWin =
       ()=>{
@@ -2154,22 +2056,18 @@ function finishGame(success){
           return;
         }
 
-
         winVoiceStarted =
           true;
-
 
         playAudio(
           lunaWin,
           1
         ).catch(()=>{});
 
-    };
-
+      };
 
     soundWin.onended =
       playLunaWin;
-
 
     playAudio(
       soundWin,
@@ -2178,7 +2076,6 @@ function finishGame(success){
     .catch(
       playLunaWin
     );
-
 
     setTimeout(
       playLunaWin,
@@ -2191,10 +2088,8 @@ function finishGame(success){
     resultIcon.textContent =
       "⏱️";
 
-
     resultTitle.textContent =
       "WAKTU HABIS";
-
 
     resultText.innerHTML =
 
@@ -2218,7 +2113,6 @@ function finishGame(success){
       score +
       "</b>";
 
-
     playAudio(
       lunaLose,
       1
@@ -2226,10 +2120,8 @@ function finishGame(success){
 
   }
 
-
   statusElement.textContent =
     "Permainan selesai.";
-
 
   setTimeout(
     ()=>{
@@ -2245,27 +2137,34 @@ function finishGame(success){
 }
 
 
-/* =====================================
+/* ===============================
    INIT
-===================================== */
+=============================== */
 
 function init(){
 
   deck =
     createDeck();
 
-
   renderBoard();
 
-
   updateHUD();
+
+
+  /*
+    INI PERUBAHAN UTAMA:
+    begitu halaman dibuka,
+    semua kartu depan langsung preload
+    diam-diam di background.
+  */
+
+  startPreloadingCards();
 
 
   const alreadyPlayed =
     localStorage.getItem(
       GAME_LOCK_KEY
     ) === "1";
-
 
   if(alreadyPlayed){
 
@@ -2277,10 +2176,8 @@ function init(){
       "hidden"
     );
 
-
     statusElement.textContent =
       "Permainan sudah pernah dimainkan.";
-
 
     boardLocked =
       true;
@@ -2297,15 +2194,14 @@ function init(){
 }
 
 
-/* =====================================
+/* ===============================
    EVENT
-===================================== */
+=============================== */
 
 startButton.addEventListener(
   "click",
   startGame
 );
-
 
 init();
 
