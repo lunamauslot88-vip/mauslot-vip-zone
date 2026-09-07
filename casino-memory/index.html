@@ -679,6 +679,76 @@ body::before{
 }
 
 
+
+/* =================================
+   MEMBER LOGIN / ACCESS
+================================= */
+
+.access-box{
+  margin:17px 0 12px;
+  padding:14px;
+  border:1px solid rgba(222,175,73,.55);
+  border-radius:14px;
+  background:rgba(255,255,255,.04);
+}
+
+.username-input{
+  width:100%;
+  min-height:50px;
+  padding:0 14px;
+  border:1px solid rgba(220,174,74,.72);
+  border-radius:12px;
+  outline:none;
+  color:#fff;
+  font-size:15px;
+  font-weight:700;
+  text-align:center;
+  background:rgba(2,12,27,.92);
+}
+
+.username-input::placeholder{
+  color:#8291a8;
+  font-weight:600;
+}
+
+.username-input:focus{
+  border-color:#ffe29a;
+  box-shadow:0 0 0 3px rgba(220,174,74,.12);
+}
+
+.access-button{
+  margin-top:10px;
+}
+
+.access-message{
+  min-height:20px;
+  margin-top:10px;
+  color:#bdcbe0;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.access-message.success{
+  color:#79e7a8;
+}
+
+.access-message.error{
+  color:#ff8b98;
+}
+
+.member-badge{
+  display:none;
+  margin:10px 0 2px;
+  padding:9px 12px;
+  border-radius:10px;
+  color:#ffe29a;
+  font-size:13px;
+  font-weight:800;
+  background:rgba(220,174,74,.09);
+  border:1px solid rgba(220,174,74,.35);
+}
+
+
 /* =================================
    MOBILE
 ================================= */
@@ -1063,10 +1133,50 @@ body::before{
     </div>
 
 
+    <div
+      id="accessBox"
+      class="access-box">
+
+      <input
+        id="usernameInput"
+        class="username-input"
+        type="text"
+        autocomplete="off"
+        autocapitalize="none"
+        spellcheck="false"
+        placeholder="Masukkan Username">
+
+      <button
+        id="checkAccessButton"
+        type="button"
+        class="gold-button access-button">
+
+        CEK AKSES
+
+      </button>
+
+      <div
+        id="accessMessage"
+        class="access-message">
+
+        Masukkan username yang sudah diberikan akses oleh Admin VIP.
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="memberBadge"
+      class="member-badge">
+    </div>
+
+
     <button
       id="startButton"
       type="button"
-      class="gold-button">
+      class="gold-button"
+      style="display:none">
 
       MULAI PERMAINAN ▶
 
@@ -1121,15 +1231,17 @@ body::before{
 ================================= */
 
 /*
-  TRUE = TESTING
-  Refresh bisa main lagi.
-
-  Nanti database sudah siap,
-  sistem lock diganti dari sini.
+  DATABASE / API GOOGLE APPS SCRIPT
 */
 
-const TESTING_MODE =
-  true;
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbwNkXcvRC4MxWcRJjLgbKXzAnRYem2N8toAIT8l0XsZpiqgXu5fDq1rC7OQ0CZQRkLgQw/exec";
+
+let currentUsername =
+  "";
+
+let accessVerified =
+  false;
 
 
 const CARD_BACK =
@@ -1257,6 +1369,36 @@ const startButton =
   );
 
 
+const usernameInput =
+  document.getElementById(
+    "usernameInput"
+  );
+
+
+const checkAccessButton =
+  document.getElementById(
+    "checkAccessButton"
+  );
+
+
+const accessMessage =
+  document.getElementById(
+    "accessMessage"
+  );
+
+
+const accessBox =
+  document.getElementById(
+    "accessBox"
+  );
+
+
+const memberBadge =
+  document.getElementById(
+    "memberBadge"
+  );
+
+
 
 /* AUDIO */
 
@@ -1370,6 +1512,323 @@ let cardsReady =
 
 let cardPreloadPromise =
   null;
+
+
+
+
+/* =================================
+   API / MEMBER ACCESS
+================================= */
+
+function setAccessMessage(
+  message,
+  type = ""
+){
+
+  accessMessage.textContent =
+    message;
+
+  accessMessage.classList.remove(
+    "success",
+    "error"
+  );
+
+  if(type){
+
+    accessMessage.classList.add(
+      type
+    );
+
+  }
+
+}
+
+
+async function checkMemberAccess(){
+
+  if(gameStarted || startInProgress){
+
+    return;
+
+  }
+
+
+  const username =
+    String(
+      usernameInput.value || ""
+    )
+    .trim();
+
+
+  if(!username){
+
+    setAccessMessage(
+      "Username belum diisi.",
+      "error"
+    );
+
+    usernameInput.focus();
+
+    return;
+
+  }
+
+
+  checkAccessButton.disabled =
+    true;
+
+  checkAccessButton.textContent =
+    "MEMERIKSA...";
+
+  startButton.style.display =
+    "none";
+
+  memberBadge.style.display =
+    "none";
+
+  accessVerified =
+    false;
+
+
+  try{
+
+    const url =
+      API_URL +
+      "?action=check&username=" +
+      encodeURIComponent(
+        username
+      ) +
+      "&t=" +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!data.success){
+
+      throw new Error(
+        data.message ||
+        "Akses tidak tersedia."
+      );
+
+    }
+
+
+    currentUsername =
+      String(
+        data.username ||
+        username
+      ).trim();
+
+
+    accessVerified =
+      true;
+
+
+    usernameInput.value =
+      currentUsername;
+
+    usernameInput.disabled =
+      true;
+
+    checkAccessButton.style.display =
+      "none";
+
+
+    memberBadge.textContent =
+      "USERNAME : " +
+      currentUsername +
+      "  •  PLAY CHANCE : " +
+      Number(
+        data.playChance || 0
+      );
+
+    memberBadge.style.display =
+      "block";
+
+
+    setAccessMessage(
+      "Akses ditemukan. Silakan mulai permainan.",
+      "success"
+    );
+
+
+    startButton.style.display =
+      "block";
+
+
+  }
+  catch(error){
+
+    currentUsername =
+      "";
+
+    accessVerified =
+      false;
+
+    usernameInput.disabled =
+      false;
+
+    checkAccessButton.style.display =
+      "block";
+
+    startButton.style.display =
+      "none";
+
+
+    setAccessMessage(
+      error.message ||
+      "Gagal memeriksa akses.",
+      "error"
+    );
+
+  }
+  finally{
+
+    checkAccessButton.disabled =
+      false;
+
+    checkAccessButton.textContent =
+      "CEK AKSES";
+
+  }
+
+}
+
+
+async function requestStartGame(){
+
+  const response =
+    await fetch(
+      API_URL,
+      {
+        method:"POST",
+
+        /*
+          text/plain membuat request tetap sederhana
+          sehingga lebih aman dipanggil dari GitHub Pages
+          tanpa preflight application/json.
+        */
+        headers:{
+          "Content-Type":
+            "text/plain;charset=utf-8"
+        },
+
+        body:
+          JSON.stringify({
+            action:"start",
+            username:
+              currentUsername
+          })
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if(!data.success){
+
+    throw new Error(
+      data.message ||
+      "Permainan tidak dapat dimulai."
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+async function saveResultToAPI(
+  result,
+  matchCount,
+  moveCount,
+  finalScore
+){
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify({
+              action:"finish",
+              username:
+                currentUsername,
+              result:
+                result,
+              match:
+                matchCount,
+              moves:
+                moveCount,
+              score:
+                finalScore
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!data.success){
+
+      console.error(
+        "Gagal simpan hasil:",
+        data.message
+      );
+
+      return false;
+
+    }
+
+
+    console.log(
+      "Hasil tersimpan:",
+      data
+    );
+
+    return true;
+
+  }
+  catch(error){
+
+    console.error(
+      "API finish error:",
+      error
+    );
+
+    return false;
+
+  }
+
+}
 
 
 
@@ -2308,6 +2767,21 @@ async function startGame(){
   }
 
 
+  if(
+    !accessVerified ||
+    !currentUsername
+  ){
+
+    setAccessMessage(
+      "Cek username terlebih dahulu.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
   startInProgress =
     true;
 
@@ -2317,12 +2791,56 @@ async function startGame(){
 
 
   startButton.textContent =
-    "MEMULAI...";
+    "VALIDASI TIKET...";
 
 
   /*
-    Overlay ditutup segera.
+    Tiket baru dipotong di server
+    saat tombol MULAI benar-benar ditekan.
   */
+
+  try{
+
+    const startData =
+      await requestStartGame();
+
+
+    memberBadge.textContent =
+      "USERNAME : " +
+      currentUsername +
+      "  •  SISA CHANCE : " +
+      Number(
+        startData.playChance || 0
+      );
+
+  }
+  catch(error){
+
+    startInProgress =
+      false;
+
+    startButton.disabled =
+      false;
+
+    startButton.textContent =
+      "MULAI PERMAINAN ▶";
+
+
+    setAccessMessage(
+      error.message ||
+      "Gagal memulai permainan.",
+      "error"
+    );
+
+
+    return;
+
+  }
+
+
+  startButton.textContent =
+    "MEMULAI...";
+
 
   startOverlay.classList.add(
     "hidden"
@@ -2691,6 +3209,19 @@ function finishGame(
 
 
 
+  /*
+    Simpan hasil ke Google Spreadsheet.
+    Tidak menghambat popup hasil permainan.
+  */
+
+  saveResultToAPI(
+    success ? "WIN" : "LOSE",
+    matches,
+    moves,
+    score
+  );
+
+
   statusElement.textContent =
     "Permainan selesai.";
 
@@ -2759,8 +3290,54 @@ function init(){
   );
 
 
+  currentUsername =
+    "";
+
+  accessVerified =
+    false;
+
+
+  usernameInput.value =
+    "";
+
+  usernameInput.disabled =
+    false;
+
+
+  checkAccessButton.disabled =
+    false;
+
+  checkAccessButton.style.display =
+    "block";
+
+  checkAccessButton.textContent =
+    "CEK AKSES";
+
+
+  startButton.disabled =
+    false;
+
+  startButton.style.display =
+    "none";
+
+  startButton.textContent =
+    "MULAI PERMAINAN ▶";
+
+
+  memberBadge.style.display =
+    "none";
+
+  memberBadge.textContent =
+    "";
+
+
+  setAccessMessage(
+    "Masukkan username yang sudah diberikan akses oleh Admin VIP."
+  );
+
+
   statusElement.textContent =
-    "Tekan MULAI PERMAINAN.";
+    "Silakan verifikasi username terlebih dahulu.";
 
 }
 
@@ -2768,6 +3345,26 @@ function init(){
 /* =================================
    EVENT
 ================================= */
+
+checkAccessButton.addEventListener(
+  "click",
+  checkMemberAccess
+);
+
+
+usernameInput.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Enter"){
+
+      checkMemberAccess();
+
+    }
+
+  }
+);
+
 
 startButton.addEventListener(
   "click",
