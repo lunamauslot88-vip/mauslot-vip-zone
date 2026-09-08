@@ -186,15 +186,93 @@ body{display:flex;justify-content:center;min-height:100svh}
   filter:drop-shadow(0 8px 12px rgba(0,0,0,.34));
 }
 .hook-asset img{width:100%;display:block}
-.hook-wrap.wait .hook-asset{animation:bob 1.6s ease-in-out infinite}
-.hook-wrap.strike .hook-asset{animation:strikeShake .10s linear infinite}
+/* Realistic fishing motion */
+.hook-wrap.wait{
+  transform-origin:50% 0%;
+  animation:lineDrift 3.8s ease-in-out infinite;
+}
+.hook-wrap.wait .hook-asset{
+  animation:bob 1.55s ease-in-out infinite;
+}
+.hook-wrap.nibble{
+  transform-origin:50% 0%;
+  animation:nibbleLine .42s ease-in-out 2;
+}
+.hook-wrap.nibble .hook-asset{
+  animation:nibbleFloat .18s ease-in-out 4;
+}
+.hook-wrap.strike{
+  transform-origin:50% 0%;
+  animation:lineTug .11s linear infinite;
+}
+.hook-wrap.strike .hook-asset{
+  animation:strikeShake .10s linear infinite;
+}
+.hook-wrap.catch-pull{
+  transform-origin:50% 0%;
+  animation:catchPull .58s cubic-bezier(.18,.9,.28,1) forwards;
+}
+.hook-wrap.catch-pull .hook-asset{
+  animation:catchHook .58s cubic-bezier(.18,.9,.28,1) forwards;
+}
+.hook-wrap.escape-snap{
+  transform-origin:50% 0%;
+  animation:escapeSnap .52s ease-out forwards;
+}
+.hook-wrap.escape-snap .hook-asset{
+  animation:escapeHook .52s ease-out forwards;
+}
+
+@keyframes lineDrift{
+  0%   {transform:translateX(-50%) rotate(-2.2deg)}
+  25%  {transform:translateX(-50%) rotate(1.3deg)}
+  50%  {transform:translateX(-50%) rotate(2.6deg)}
+  75%  {transform:translateX(-50%) rotate(-.8deg)}
+  100% {transform:translateX(-50%) rotate(-2.2deg)}
+}
 @keyframes bob{
   0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1deg)}
-  50%{transform:translate(-50%,-50%) translateY(5px) rotate(2deg)}
+  25%{transform:translate(-50%,-50%) translateY(3px) rotate(.7deg)}
+  55%{transform:translate(-50%,-50%) translateY(7px) rotate(2deg)}
+  78%{transform:translate(-50%,-50%) translateY(2px) rotate(-.6deg)}
+}
+@keyframes nibbleLine{
+  0%,100%{transform:translateX(-50%) rotate(-1deg)}
+  40%{transform:translateX(-50%) rotate(2.8deg)}
+  70%{transform:translateX(-50%) rotate(-2deg)}
+}
+@keyframes nibbleFloat{
+  0%,100%{transform:translate(-50%,-50%) translateY(0)}
+  50%{transform:translate(-50%,-50%) translateY(10px) rotate(3deg)}
+}
+@keyframes lineTug{
+  0%,100%{transform:translateX(-50%) rotate(-3deg)}
+  50%{transform:translateX(-50%) rotate(3.5deg)}
 }
 @keyframes strikeShake{
-  0%,100%{transform:translate(-50%,-50%) translate(0,9px)}
-  50%{transform:translate(-50%,-50%) translate(4px,14px)}
+  0%,100%{transform:translate(-50%,-50%) translate(0,12px) rotate(-2deg)}
+  50%{transform:translate(-50%,-50%) translate(5px,19px) rotate(3deg)}
+}
+@keyframes catchPull{
+  0%{transform:translateX(-50%) rotate(2deg) translateY(0)}
+  35%{transform:translateX(-50%) rotate(-4deg) translateY(-24px)}
+  100%{transform:translateX(-50%) rotate(-1deg) translateY(-120px)}
+}
+@keyframes catchHook{
+  0%{transform:translate(-50%,-50%) translateY(15px) scale(1)}
+  40%{transform:translate(-50%,-50%) translateY(-8px) scale(1.03)}
+  100%{transform:translate(-50%,-50%) translateY(-80px) scale(.9)}
+}
+@keyframes escapeSnap{
+  0%{transform:translateX(-50%) rotate(-2deg)}
+  25%{transform:translateX(-50%) rotate(6deg)}
+  55%{transform:translateX(-50%) rotate(-5deg)}
+  100%{transform:translateX(-50%) rotate(0deg)}
+}
+@keyframes escapeHook{
+  0%{transform:translate(-50%,-50%) translateY(15px)}
+  35%{transform:translate(-50%,-50%) translate(8px,-10px) rotate(8deg)}
+  100%{transform:translate(-50%,-50%) translateY(0)}
 }
 
 /* STRIKE FX */
@@ -332,6 +410,18 @@ body{display:flex;justify-content:center;min-height:100svh}
 @keyframes screenShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
 
 
+
+@media (prefers-reduced-motion: reduce){
+  .hook-wrap.wait,
+  .hook-wrap.nibble,
+  .hook-wrap.strike,
+  .hook-wrap.catch-pull,
+  .hook-wrap.escape-snap,
+  .hook-wrap .hook-asset{
+    animation:none !important;
+  }
+}
+
 @media(max-width:430px){
   .luna{
     left:0;
@@ -357,6 +447,13 @@ body{display:flex;justify-content:center;min-height:100svh}
 <body>
 
 <div class="game" id="game">
+
+  <!-- LUNA VOICE -->
+  <audio id="voiceOpening" preload="auto" src="assets/luna-opening.mp3"></audio>
+  <audio id="voiceStrike" preload="auto" src="assets/luna-strike.mp3"></audio>
+  <audio id="voiceSuccess" preload="auto" src="assets/luna-success.mp3"></audio>
+  <audio id="voiceEscape" preload="auto" src="assets/luna-escape.mp3"></audio>
+  <audio id="voiceRare" preload="auto" src="assets/luna-rare.mp3"></audio>
 
   <div class="brand">
     <img src="assets/logo-mauslot.png" alt="MAUSLOT">
@@ -519,7 +616,7 @@ body{display:flex;justify-content:center;min-height:100svh}
   let score=0, strikeCount=0, caught=0, escaped=0, early=0;
   let perfect=0, great=0, normalCatch=0, combo=0, maxCombo=0;
   let currentWindow=1200;
-  let biteTimer=null, strikeTimer=null, gameTimer=null, shadowTimer=null;
+  let biteTimer=null, strikeTimer=null, gameTimer=null, shadowTimer=null, nibbleTimer=null;
   let strikeStartedAt=0;
   let locked=false;
   let soundOn=true;
@@ -544,6 +641,15 @@ body{display:flex;justify-content:center;min-height:100svh}
   const resultOverlay=$("#resultOverlay");
   const diffFill=$("#diffFill");
   const soundBtn=$("#soundBtn");
+
+  const lunaVoices={
+    opening:$("#voiceOpening"),
+    strike:$("#voiceStrike"),
+    success:$("#voiceSuccess"),
+    escape:$("#voiceEscape"),
+    rare:$("#voiceRare")
+  };
+  let activeVoice=null;
   const lunaBubble=$("#lunaBubble");
 
   function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
@@ -636,6 +742,35 @@ body{display:flex;justify-content:center;min-height:100svh}
     toastTimer=setTimeout(()=>toast.className="toast",1050);
   }
 
+  function stopVoice(){
+    if(activeVoice){
+      try{
+        activeVoice.pause();
+        activeVoice.currentTime=0;
+      }catch(e){}
+    }
+    activeVoice=null;
+  }
+
+  function playLunaVoice(name){
+    if(!soundOn || !lunaVoices[name]) return;
+
+    stopVoice();
+    const audio=lunaVoices[name];
+    activeVoice=audio;
+
+    try{
+      audio.currentTime=0;
+      const promise=audio.play();
+      if(promise && typeof promise.catch==="function"){
+        promise.catch(()=>{});
+      }
+      audio.onended=()=>{
+        if(activeVoice===audio) activeVoice=null;
+      };
+    }catch(e){}
+  }
+
   function makeBubbles(){
     const holder=$("#bubbles");
     for(let i=0;i<18;i++){
@@ -655,11 +790,13 @@ body{display:flex;justify-content:center;min-height:100svh}
     clearTimeout(biteTimer);
     clearTimeout(strikeTimer);
     clearTimeout(shadowTimer);
+    clearTimeout(nibbleTimer);
     clearInterval(gameTimer);
   }
 
   function reset(){
     clearTimers();
+    stopVoice();
     state="idle";
     timeLeft=GAME_DURATION;
     score=strikeCount=caught=escaped=early=perfect=great=normalCatch=combo=maxCombo=0;
@@ -685,6 +822,7 @@ body{display:flex;justify-content:center;min-height:100svh}
   function begin(){
     if(state!=="idle")return;
     initAudio();
+    playLunaVoice("opening");
     startOverlay.classList.add("hide");
     state="waiting";
     hookWrap.className="hook-wrap wait";
@@ -726,8 +864,23 @@ body{display:flex;justify-content:center;min-height:100svh}
 
     const delay=calcBiteDelay();
 
-    // visual tension: shadow approaches shortly before bite
-    const shadowDelay=Math.max(400,delay-rand(700,1200));
+    // Random "nibble" before the real bite: visual tension only, NOT a strike.
+    // It makes the bobber feel alive and punishes players who react too early.
+    if(delay > 1900 && Math.random() < .78){
+      const nibbleAt=rand(700,Math.max(850,delay-950));
+      nibbleTimer=setTimeout(()=>{
+        if(state==="waiting"){
+          hookWrap.className="hook-wrap nibble";
+          tone(330,.045,"sine",.008);
+          setTimeout(()=>{
+            if(state==="waiting") hookWrap.className="hook-wrap wait";
+          },760);
+        }
+      },nibbleAt);
+    }
+
+    // Visual tension: a dark fish silhouette approaches shortly before the real bite.
+    const shadowDelay=Math.max(500,delay-rand(650,1050));
     shadowTimer=setTimeout(()=>{
       if(state==="waiting"){
         fishShadow.classList.remove("approach");
@@ -741,6 +894,8 @@ body{display:flex;justify-content:center;min-height:100svh}
 
   function triggerStrike(){
     if(state!=="waiting"||timeLeft<=0)return;
+    clearTimeout(nibbleTimer);
+    clearTimeout(shadowTimer);
     state="strike";
     strikeCount++;
     currentWindow=calcReactionWindow();
@@ -761,6 +916,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     strikeFlash.classList.add("show");
 
     sfxStrike();
+    playLunaVoice("strike");
     vibrate([55,30,70]);
     updateHud();
 
@@ -825,7 +981,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     if(tier.key==="great")great++;
     if(tier.key==="catch")normalCatch++;
 
-    hookWrap.className="hook-wrap";
+    hookWrap.className="hook-wrap catch-pull";
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
     strikeText.classList.remove("show");
@@ -840,7 +996,9 @@ body{display:flex;justify-content:center;min-height:100svh}
     void catchReveal.offsetWidth;
     catchReveal.classList.add("show");
 
-    sfxSuccess(fish.base>=750);
+    const isRareCatch=fish.base>=750;
+    sfxSuccess(isRareCatch);
+    playLunaVoice(isRareCatch ? "rare" : "success");
     vibrate([30,20,70]);
     setStatus(tier.label,`${fish.name} berhasil ditangkap!`);
     lunaBubble.textContent=fish.base>=750
@@ -861,7 +1019,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     escaped++;
     combo=0;
 
-    hookWrap.className="hook-wrap";
+    hookWrap.className="hook-wrap escape-snap";
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
     strikeText.classList.remove("show");
@@ -869,6 +1027,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     fishShadow.classList.remove("approach");
 
     sfxFail();
+    playLunaVoice("escape");
     vibrate(80);
     showToast("💨 IKAN KABUR!","bad");
     setStatus("IKAN KABUR!","Reaction terlalu lambat.");
@@ -884,6 +1043,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     if(state==="ended")return;
     state="ended";
     clearTimers();
+    stopVoice();
 
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
@@ -941,7 +1101,11 @@ Total Score : ${score}`;
   soundBtn.addEventListener("click",()=>{
     soundOn=!soundOn;
     soundBtn.textContent=soundOn?"🔊":"🔇";
-    if(soundOn)tone(640,.08,"sine",.02);
+    if(!soundOn){
+      stopVoice();
+    }else{
+      tone(640,.08,"sine",.02);
+    }
   });
 
   document.addEventListener("keydown",e=>{
