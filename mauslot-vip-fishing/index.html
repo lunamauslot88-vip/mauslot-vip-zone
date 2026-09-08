@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>MAUSLOT VIP Fishing — Hook Timing</title>
+<link rel="preload" href="assets/ocean-bg.webp" as="image">
+<link rel="preload" href="assets/logo-mauslot.webp" as="image">
+<link rel="preload" href="assets/fishing-hook.webp" as="image">
 <style>
 :root{
   --navy:#031326;
@@ -30,7 +33,7 @@ body{display:flex;justify-content:center;min-height:100svh}
   width:min(100vw,560px);
   height:100svh;
   overflow:hidden;
-  background:#05203a url("assets/ocean-bg.png") center center/cover no-repeat;
+  background:#05203a url("assets/ocean-bg.webp") center center/cover no-repeat;
   isolation:isolate;
 }
 .game::after{
@@ -152,6 +155,7 @@ body{display:flex;justify-content:center;min-height:100svh}
 
 /* GENERIC SHADOW THAT APPROACHES HOOK - DOESN'T REVEAL REWARD */
 .fish-shadow{
+  display:none;
   position:absolute;z-index:8;left:50%;top:54%;
   width:95px;height:34px;border-radius:60% 42% 50% 50%;
   background:rgba(0,12,26,.66);
@@ -168,6 +172,59 @@ body{display:flex;justify-content:center;min-height:100svh}
   0%{opacity:0;transform:translate(-230px,50px) scale(.65)}
   35%{opacity:.45}
   100%{opacity:.78;transform:translate(-78px,-8px) scale(.88)}
+}
+
+/* REAL BITE FISH
+   A dark neutral fish approaches the hook so the reward remains a surprise. */
+.bite-fish{
+  position:absolute;
+  z-index:13;
+  left:-180px;
+  top:55%;
+  width:118px;
+  opacity:0;
+  pointer-events:none;
+  will-change:left,top,transform,opacity;
+  transform-origin:50% 50%;
+  filter:
+    brightness(.25)
+    saturate(.55)
+    drop-shadow(0 10px 12px rgba(0,0,0,.42));
+}
+.bite-fish img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+.bite-fish.flip img{transform:scaleX(-1)}
+.bite-fish.ready{
+  opacity:.82;
+}
+.bite-fish.biting{
+  opacity:.95;
+  animation:biteTug .11s linear infinite;
+}
+.bite-fish.caught{
+  opacity:.98;
+  animation:fishPulled .58s cubic-bezier(.18,.9,.28,1) forwards;
+}
+.bite-fish.escaped{
+  opacity:.9;
+  animation:fishEscape .46s ease-in forwards;
+}
+@keyframes biteTug{
+  0%,100%{transform:translate(0,0) rotate(-1.5deg)}
+  50%{transform:translate(4px,4px) rotate(2deg)}
+}
+@keyframes fishPulled{
+  0%{transform:translate(0,0) rotate(0deg) scale(1)}
+  35%{transform:translate(2px,-25px) rotate(-5deg) scale(.98)}
+  100%{transform:translate(0,-120px) rotate(-9deg) scale(.82);opacity:.15}
+}
+@keyframes fishEscape{
+  0%{transform:translate(0,0) scale(1)}
+  35%{transform:translate(18px,3px) rotate(4deg) scale(1.03)}
+  100%{transform:translate(190px,34px) rotate(7deg) scale(.88);opacity:0}
 }
 
 /* HOOK */
@@ -447,20 +504,26 @@ body{display:flex;justify-content:center;min-height:100svh}
 <body>
 
 <div class="game" id="game">
+  <div id="bootLoader" style="position:absolute;inset:0;z-index:100;background:#031326;display:flex;align-items:center;justify-content:center;transition:opacity .25s ease;pointer-events:none">
+    <div style="text-align:center;color:#fff;font-weight:900;font-size:12px;letter-spacing:.08em">
+      <img src="assets/logo-mauslot.webp" alt="" style="width:180px;max-width:55vw;display:block;margin:0 auto 12px">
+      MENYIAPKAN VIP FISHING...
+    </div>
+  </div>
 
   <!-- LUNA VOICE -->
   <audio id="voiceOpening" preload="auto" src="assets/luna-opening.mp3"></audio>
-  <audio id="voiceStrike" preload="auto" src="assets/luna-strike.mp3"></audio>
-  <audio id="voiceSuccess" preload="auto" src="assets/luna-success.mp3"></audio>
-  <audio id="voiceEscape" preload="auto" src="assets/luna-escape.mp3"></audio>
-  <audio id="voiceRare" preload="auto" src="assets/luna-rare.mp3"></audio>
+  <audio id="voiceStrike" preload="none" src="assets/luna-strike.mp3"></audio>
+  <audio id="voiceSuccess" preload="none" src="assets/luna-success.mp3"></audio>
+  <audio id="voiceEscape" preload="none" src="assets/luna-escape.mp3"></audio>
+  <audio id="voiceRare" preload="none" src="assets/luna-rare.mp3"></audio>
 
   <div class="brand">
-    <img src="assets/logo-mauslot.png" alt="MAUSLOT">
+    <img src="assets/logo-mauslot.webp" alt="MAUSLOT" decoding="async">
   </div>
 
   <div class="luna">
-    <img src="assets/luna-fishing.png" alt="Luna">
+    <img src="assets/luna-fishing.webp" alt="Luna" decoding="async">
   </div>
   <div class="luna-bubble" id="lunaBubble">
     Tunggu sampai ikan benar-benar menggigit. Jangan tarik terlalu cepat!
@@ -492,24 +555,29 @@ body{display:flex;justify-content:center;min-height:100svh}
     <div class="bubbles" id="bubbles"></div>
 
     <div class="fish small" style="top:10%;--dur:12s;animation-delay:-7s">
-      <img src="assets/blue-fish.png" alt="">
+      <img src="assets/blue-fish.webp" alt="" loading="lazy" decoding="async">
     </div>
     <div class="fish reverse small" style="top:32%;--dur:14s;animation-delay:-4s">
-      <img src="assets/vip-fish.png" alt="">
+      <img src="assets/vip-fish.webp" alt="" loading="lazy" decoding="async">
     </div>
     <div class="fish" style="top:58%;--dur:15s;animation-delay:-10s">
-      <img src="assets/golden-fish.png" alt="">
+      <img src="assets/golden-fish.webp" alt="" loading="lazy" decoding="async">
     </div>
     <div class="fish reverse large" style="top:72%;--dur:19s;animation-delay:-3s">
-      <img src="assets/royal-fish.png" alt="">
+      <img src="assets/royal-fish.webp" alt="" loading="lazy" decoding="async">
     </div>
     <div class="fish-shadow" id="fishShadow"></div>
+  </div>
+
+  <!-- Active fish: approaches the real hook position before STRIKE -->
+  <div class="bite-fish" id="biteFish" aria-hidden="true">
+    <img src="assets/blue-fish.webp" alt="">
   </div>
 
   <div class="hook-wrap" id="hookWrap">
     <div class="line"></div>
     <div class="hook-asset">
-      <img src="assets/fishing-hook.png" alt="Kail">
+      <img src="assets/fishing-hook.webp" alt="Kail" decoding="async">
     </div>
   </div>
 
@@ -524,7 +592,7 @@ body{display:flex;justify-content:center;min-height:100svh}
   <div class="toast" id="toast"></div>
 
   <div class="catch-reveal" id="catchReveal">
-    <img class="caught-img" id="caughtImg" src="assets/blue-fish.png" alt="">
+    <img class="caught-img" id="caughtImg" src="assets/blue-fish.webp" alt="">
     <div class="catch-grade" id="catchGrade">PERFECT HOOK!</div>
     <div class="catch-name" id="catchName">Blue Fish</div>
     <div class="catch-point" id="catchPoint">+100 POINT</div>
@@ -553,7 +621,7 @@ body{display:flex;justify-content:center;min-height:100svh}
 
   <div class="overlay" id="startOverlay">
     <div class="modal">
-      <img class="modal-logo" src="assets/logo-mauslot.png" alt="MAUSLOT">
+      <img class="modal-logo" src="assets/logo-mauslot.webp" alt="MAUSLOT">
       <div class="modal-title">VIP FISHING</div>
       <div class="modal-desc">
         Tunggu ikan mendekati kail. Saat muncul <b>STRIKE!</b>, tarik secepat mungkin.
@@ -603,15 +671,19 @@ body{display:flex;justify-content:center;min-height:100svh}
   const ADMIN_URL = ""; // isi link WA/admin di sini nanti
 
   const fishRewards = [
-    {name:"Blue Fish",src:"assets/blue-fish.png",base:100,weight:38},
-    {name:"Golden Fish",src:"assets/golden-fish.png",base:200,weight:26},
-    {name:"VIP Fish",src:"assets/vip-fish.png",base:300,weight:18},
-    {name:"Royal Fish",src:"assets/royal-fish.png",base:500,weight:10},
-    {name:"Legendary Shark",src:"assets/legendary-shark.png",base:750,weight:6},
-    {name:"Golden MAUSLOT Fish",src:"assets/golden-mauslot-fish.png",base:1000,weight:2}
+    {name:"Blue Fish",src:"assets/blue-fish.webp",base:100,weight:38},
+    {name:"Golden Fish",src:"assets/golden-fish.webp",base:200,weight:26},
+    {name:"VIP Fish",src:"assets/vip-fish.webp",base:300,weight:18},
+    {name:"Royal Fish",src:"assets/royal-fish.webp",base:500,weight:10},
+    {name:"Legendary Shark",src:"assets/legendary-shark.webp",base:750,weight:6},
+    {name:"Golden MAUSLOT Fish",src:"assets/golden-mauslot-fish.webp",base:1000,weight:2}
   ];
 
   let state="idle";
+  let gameClockStarted=false;
+  let introFinished=false;
+  let biteFishAnimation=null;
+  let biteFishSide="left";
   let timeLeft=GAME_DURATION;
   let score=0, strikeCount=0, caught=0, escaped=0, early=0;
   let perfect=0, great=0, normalCatch=0, combo=0, maxCombo=0;
@@ -628,6 +700,8 @@ body{display:flex;justify-content:center;min-height:100svh}
   const startBtn=$("#startBtn");
   const hookWrap=$("#hookWrap");
   const fishShadow=$("#fishShadow");
+  const biteFish=$("#biteFish");
+  const biteFishImg=biteFish.querySelector("img");
   const strikeFlash=$("#strikeFlash");
   const strikeText=$("#strikeText");
   const danger=$("#danger");
@@ -650,6 +724,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     rare:$("#voiceRare")
   };
   let activeVoice=null;
+  let queuedVoice=null;
   const lunaBubble=$("#lunaBubble");
 
   function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
@@ -743,6 +818,7 @@ body{display:flex;justify-content:center;min-height:100svh}
   }
 
   function stopVoice(){
+    queuedVoice=null;
     if(activeVoice){
       try{
         activeVoice.pause();
@@ -755,7 +831,14 @@ body{display:flex;justify-content:center;min-height:100svh}
   function playLunaVoice(name){
     if(!soundOn || !lunaVoices[name]) return;
 
-    stopVoice();
+    queuedVoice=null;
+    if(activeVoice && activeVoice!==lunaVoices[name]){
+      try{
+        activeVoice.pause();
+        activeVoice.currentTime=0;
+      }catch(e){}
+    }
+
     const audio=lunaVoices[name];
     activeVoice=audio;
 
@@ -767,8 +850,31 @@ body{display:flex;justify-content:center;min-height:100svh}
       }
       audio.onended=()=>{
         if(activeVoice===audio) activeVoice=null;
+        if(queuedVoice && soundOn){
+          const next=queuedVoice;
+          queuedVoice=null;
+          playLunaVoice(next);
+        }
       };
     }catch(e){}
+  }
+
+  function playResultVoiceAfterStrike(name){
+    if(!soundOn || !lunaVoices[name]) return;
+
+    const strikeAudio=lunaVoices.strike;
+    if(activeVoice===strikeAudio && !strikeAudio.paused && !strikeAudio.ended){
+      queuedVoice=name;
+      return;
+    }
+    playLunaVoice(name);
+  }
+
+  function warmAudioAfterStart(){
+    ["strike","success","escape","rare"].forEach(name=>{
+      const audio=lunaVoices[name];
+      try{ audio.load(); }catch(e){}
+    });
   }
 
   function makeBubbles(){
@@ -784,6 +890,94 @@ body{display:flex;justify-content:center;min-height:100svh}
       b.style.animationDelay=(-rand(0,16))+"s";
       holder.appendChild(b);
     }
+  }
+
+  function cancelBiteFish(){
+    if(biteFishAnimation){
+      try{ biteFishAnimation.cancel(); }catch(e){}
+      biteFishAnimation=null;
+    }
+    biteFish.className="bite-fish";
+    biteFish.style.opacity="0";
+    biteFish.style.left="-180px";
+    biteFish.style.top="55%";
+  }
+
+  function getHookTarget(){
+    const gameRect=game.getBoundingClientRect();
+    const hookImg=hookWrap.querySelector(".hook-asset img");
+    const hookRect=hookImg.getBoundingClientRect();
+
+    // The hook tip is in the lower part of fishing-hook.webp.
+    return {
+      x:(hookRect.left-gameRect.left)+(hookRect.width*.51),
+      y:(hookRect.top-gameRect.top)+(hookRect.height*.84)
+    };
+  }
+
+  function approachHook(duration=1000){
+    cancelBiteFish();
+
+    const gameRect=game.getBoundingClientRect();
+    const target=getHookTarget();
+    const fishW=Math.min(126,Math.max(94,gameRect.width*.225));
+    const fishH=fishW*.75;
+
+    biteFishSide=Math.random()<.5 ? "left" : "right";
+    biteFish.style.width=fishW+"px";
+    biteFish.classList.toggle("flip",biteFishSide==="right");
+    biteFish.style.opacity=".82";
+
+    // Mouth is near the leading edge of the fish asset.
+    const mouthXRatio=biteFishSide==="left" ? .94 : .06;
+    const mouthYRatio=.52;
+
+    const endLeft=target.x-(fishW*mouthXRatio);
+    const endTop=target.y-(fishH*mouthYRatio);
+
+    const startLeft=biteFishSide==="left" ? -fishW-18 : gameRect.width+18;
+    const startTop=endTop+rand(-55,45);
+    const nearLeft=biteFishSide==="left" ? endLeft-34 : endLeft+34;
+    const almostLeft=biteFishSide==="left" ? endLeft-10 : endLeft+10;
+
+    biteFish.style.left=endLeft+"px";
+    biteFish.style.top=endTop+"px";
+
+    // Swim in, slow down, inspect the bait, then touch the hook at the mouth.
+    biteFishAnimation=biteFish.animate([
+      {left:startLeft+"px", top:startTop+"px", opacity:0, transform:"rotate(0deg)", offset:0},
+      {left:nearLeft+"px", top:(endTop+7)+"px", opacity:.68, transform:"rotate(-1deg)", offset:.67},
+      {left:almostLeft+"px", top:(endTop-2)+"px", opacity:.82, transform:"rotate(1.2deg)", offset:.88},
+      {left:endLeft+"px", top:endTop+"px", opacity:.92, transform:"rotate(0deg)", offset:1}
+    ],{
+      duration,
+      easing:"cubic-bezier(.18,.72,.22,1)",
+      fill:"forwards"
+    });
+
+    biteFishAnimation.onfinish=()=>{
+      biteFishAnimation=null;
+      biteFish.classList.add("ready");
+    };
+  }
+
+  function markFishBiting(){
+    if(biteFishAnimation){
+      try{ biteFishAnimation.finish(); }catch(e){}
+      biteFishAnimation=null;
+    }
+    biteFish.classList.add("ready","biting");
+  }
+
+  function pullBitingFish(){
+    biteFish.classList.remove("biting","ready","escaped");
+    biteFish.classList.add("caught");
+  }
+
+  function releaseBitingFish(){
+    biteFish.classList.remove("biting","ready","caught");
+    biteFish.classList.add("escaped");
+    setTimeout(cancelBiteFish,500);
   }
 
   function clearTimers(){
@@ -802,6 +996,9 @@ body{display:flex;justify-content:center;min-height:100svh}
     score=strikeCount=caught=escaped=early=perfect=great=normalCatch=combo=maxCombo=0;
     currentWindow=1200;
     locked=false;
+    gameClockStarted=false;
+    introFinished=false;
+    cancelBiteFish();
 
     hookWrap.className="hook-wrap";
     fishShadow.classList.remove("approach");
@@ -819,16 +1016,18 @@ body{display:flex;justify-content:center;min-height:100svh}
     updateHud();
   }
 
-  function begin(){
-    if(state!=="idle")return;
-    initAudio();
-    playLunaVoice("opening");
-    startOverlay.classList.add("hide");
+  function startFishingAfterIntro(){
+    if(state==="ended" || gameClockStarted) return;
+
+    introFinished=true;
+    gameClockStarted=true;
     state="waiting";
+
     hookWrap.className="hook-wrap wait";
+    actionBtn.disabled=false;
     actionBtn.textContent="🎣 TARIK KAIL";
     setStatus("WAITING FOR FISH...","Perhatikan pelampung. Jangan asal tarik!");
-    lunaBubble.textContent="Fokus ke pelampung. STRIKE bisa muncul kapan saja!";
+    lunaBubble.textContent="Sekarang fokus ke pelampung. STRIKE bisa muncul kapan saja!";
     updateHud();
 
     gameTimer=setInterval(()=>{
@@ -842,6 +1041,62 @@ body{display:flex;justify-content:center;min-height:100svh}
     },1000);
 
     scheduleBite();
+  }
+
+  function begin(){
+    if(state!=="idle")return;
+
+    initAudio();
+    startOverlay.classList.add("hide");
+    state="intro";
+    gameClockStarted=false;
+    introFinished=false;
+
+    actionBtn.disabled=true;
+    actionBtn.classList.remove("strike");
+    actionBtn.textContent="🎣 SIAPKAN KAIL...";
+    hookWrap.className="hook-wrap wait";
+    setStatus("LUNA MENJELASKAN...","Permainan mulai setelah instruksi selesai.");
+    lunaBubble.textContent="Tunggu sampai ikan benar-benar menggigit, lalu tarik secepat mungkin ya.";
+
+    const opening=lunaVoices.opening;
+
+    if(!soundOn || !opening){
+      startFishingAfterIntro();
+      return;
+    }
+
+    stopVoice();
+    activeVoice=opening;
+
+    let started=false;
+    const finishIntro=()=>{
+      if(started)return;
+      started=true;
+      if(activeVoice===opening)activeVoice=null;
+      startFishingAfterIntro();
+    };
+
+    try{
+      opening.currentTime=0;
+      opening.onended=finishIntro;
+      opening.onerror=finishIntro;
+      const p=opening.play();
+
+      if(p && typeof p.catch==="function"){
+        p.catch(finishIntro);
+      }
+
+      // Warm the other voices only AFTER opening starts.
+      setTimeout(warmAudioAfterStart,350);
+
+      // Safety fallback only if metadata/audio events fail.
+      setTimeout(()=>{
+        if(state==="intro" && opening.paused)finishIntro();
+      },2500);
+    }catch(e){
+      finishIntro();
+    }
   }
 
   function scheduleBite(){
@@ -879,15 +1134,17 @@ body{display:flex;justify-content:center;min-height:100svh}
       },nibbleAt);
     }
 
-    // Visual tension: a dark fish silhouette approaches shortly before the real bite.
-    const shadowDelay=Math.max(500,delay-rand(650,1050));
+    // Realistic pre-strike approach.
+    // The active fish is positioned from the actual hook image coordinates,
+    // so its mouth reaches the hook tip exactly when STRIKE begins.
+    const approachDuration=rand(850,1150);
+    const approachDelay=Math.max(300,delay-approachDuration);
+
     shadowTimer=setTimeout(()=>{
       if(state==="waiting"){
-        fishShadow.classList.remove("approach");
-        void fishShadow.offsetWidth;
-        fishShadow.classList.add("approach");
+        approachHook(approachDuration);
       }
-    },shadowDelay);
+    },approachDelay);
 
     biteTimer=setTimeout(triggerStrike,delay);
   }
@@ -901,6 +1158,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     currentWindow=calcReactionWindow();
     strikeStartedAt=performance.now();
 
+    markFishBiting();
     hookWrap.className="hook-wrap strike";
     actionBtn.textContent="🎣 TARIK SEKARANG!";
     actionBtn.classList.add("strike");
@@ -915,6 +1173,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     void strikeFlash.offsetWidth;
     strikeFlash.classList.add("show");
 
+    queuedVoice=null;
     sfxStrike();
     playLunaVoice("strike");
     vibrate([55,30,70]);
@@ -943,6 +1202,24 @@ body{display:flex;justify-content:center;min-height:100svh}
     lunaBubble.textContent="Jangan buru-buru. Tunggu sampai benar-benar STRIKE!";
 
     actionBtn.disabled=true;
+
+    // If a fish was already approaching, it gets scared and swims away.
+    if(biteFishAnimation || biteFish.classList.contains("ready")){
+      clearTimeout(biteTimer);
+      clearTimeout(shadowTimer);
+      releaseBitingFish();
+
+      setTimeout(()=>{
+        if(state==="waiting"){
+          locked=false;
+          actionBtn.disabled=false;
+          setStatus("WAITING FOR FISH...","Ikan tadi kabur karena kail ditarik terlalu cepat.");
+          scheduleBite();
+        }
+      },900);
+      return;
+    }
+
     setTimeout(()=>{
       if(state==="waiting"){
         locked=false;
@@ -981,6 +1258,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     if(tier.key==="great")great++;
     if(tier.key==="catch")normalCatch++;
 
+    pullBitingFish();
     hookWrap.className="hook-wrap catch-pull";
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
@@ -998,7 +1276,7 @@ body{display:flex;justify-content:center;min-height:100svh}
 
     const isRareCatch=fish.base>=750;
     sfxSuccess(isRareCatch);
-    playLunaVoice(isRareCatch ? "rare" : "success");
+    playResultVoiceAfterStrike(isRareCatch ? "rare" : "success");
     vibrate([30,20,70]);
     setStatus(tier.label,`${fish.name} berhasil ditangkap!`);
     lunaBubble.textContent=fish.base>=750
@@ -1008,6 +1286,7 @@ body{display:flex;justify-content:center;min-height:100svh}
 
     setTimeout(()=>{
       catchReveal.classList.remove("show");
+      cancelBiteFish();
       if(state!=="ended")scheduleBite();
     },1250);
   }
@@ -1019,6 +1298,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     escaped++;
     combo=0;
 
+    releaseBitingFish();
     hookWrap.className="hook-wrap escape-snap";
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
@@ -1027,7 +1307,7 @@ body{display:flex;justify-content:center;min-height:100svh}
     fishShadow.classList.remove("approach");
 
     sfxFail();
-    playLunaVoice("escape");
+    playResultVoiceAfterStrike("escape");
     vibrate(80);
     showToast("💨 IKAN KABUR!","bad");
     setStatus("IKAN KABUR!","Reaction terlalu lambat.");
@@ -1103,6 +1383,7 @@ Total Score : ${score}`;
     soundBtn.textContent=soundOn?"🔊":"🔇";
     if(!soundOn){
       stopVoice();
+      if(state==="intro")startFishingAfterIntro();
     }else{
       tone(640,.08,"sine",.02);
     }
@@ -1115,6 +1396,20 @@ Total Score : ${score}`;
       actionBtn.click();
     }
   });
+
+  function dismissBootLoader(){
+    const loader=$("#bootLoader");
+    if(!loader) return;
+    loader.style.opacity="0";
+    setTimeout(()=>loader.remove(),260);
+  }
+
+  if(document.readyState==="complete"){
+    dismissBootLoader();
+  }else{
+    window.addEventListener("load",dismissBootLoader,{once:true});
+    setTimeout(dismissBootLoader,1800);
+  }
 
   makeBubbles();
   reset();
