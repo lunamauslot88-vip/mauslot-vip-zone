@@ -1,415 +1,445 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>MAUSLOT VIP Fishing — Hook Timing</title>
 <style>
-  :root{
-    --bg:#03101f;
-    --bg2:#071a2e;
-    --gold:#f7d77a;
-    --gold2:#c99a2e;
-    --text:#f8fbff;
-    --muted:#9fb4c9;
-    --cyan:#51d8ff;
-    --danger:#ff667d;
-    --good:#8ff7b0;
-    --panel:rgba(5,20,37,.72);
-    --line:rgba(247,215,122,.23);
-  }
+:root{
+  --navy:#031326;
+  --navy2:#071d35;
+  --blue:#0585d8;
+  --cyan:#63e1ff;
+  --gold:#ffd667;
+  --gold2:#e6aa32;
+  --gold3:#8e5a12;
+  --text:#f8fbff;
+  --muted:#b5c8d9;
+  --green:#78efae;
+  --red:#ff627b;
+  --panel:rgba(2,14,29,.84);
+  --line:rgba(255,222,126,.38);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#010814;font-family:Inter,Arial,sans-serif;color:var(--text);overflow:hidden}
+button{font:inherit}
+body{display:flex;justify-content:center;min-height:100svh}
 
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#020b15;color:var(--text);overflow-x:hidden}
-  button{font:inherit}
+.game{
+  position:relative;
+  width:min(100vw,560px);
+  height:100svh;
+  overflow:hidden;
+  background:#05203a url("assets/ocean-bg.png") center center/cover no-repeat;
+  isolation:isolate;
+}
+.game::after{
+  content:"";
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(0,5,16,.05),transparent 18%,transparent 68%,rgba(0,7,17,.3)),
+    radial-gradient(circle at 50% 36%,transparent 0 35%,rgba(0,7,17,.15) 85%);
+}
 
-  body{
-    min-height:100svh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
-      radial-gradient(circle at 50% 10%, rgba(247,215,122,.12), transparent 28%),
-      linear-gradient(180deg,#020a14 0%,#061629 40%,#02101d 100%);
-  }
+/* BRAND */
+.brand{
+  position:absolute;z-index:30;top:max(8px,env(safe-area-inset-top));left:50%;
+  transform:translateX(-50%);
+  width:42%;max-width:225px;
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.36));
+}
+.brand img{display:block;width:100%;height:auto}
 
-  .game-shell{
-    width:min(100%,560px);
-    min-height:100svh;
-    position:relative;
-    overflow:hidden;
-    background:
-      linear-gradient(180deg, rgba(6,24,42,.98) 0 20%, rgba(4,39,61,.98) 20% 48%, rgba(1,20,35,.99) 48% 100%);
-    box-shadow:0 0 80px rgba(0,0,0,.7);
-  }
+/* LUNA */
+.luna{
+  position:absolute;z-index:12;left:-10px;top:4.5%;
+  width:38%;max-width:210px;
+  filter:drop-shadow(0 12px 18px rgba(0,0,0,.42));
+  pointer-events:none;
+}
+.luna img{width:100%;display:block}
+.luna-bubble{
+  position:absolute;left:24%;top:16%;z-index:31;
+  max-width:200px;padding:9px 12px;border-radius:13px 13px 13px 3px;
+  background:linear-gradient(180deg,rgba(4,46,88,.95),rgba(1,21,46,.95));
+  border:1px solid rgba(112,221,255,.62);
+  font-size:10px;line-height:1.28;font-weight:800;
+  box-shadow:0 7px 22px rgba(0,0,0,.35),0 0 18px rgba(38,160,255,.18);
+}
 
-  .surface-glow{
-    position:absolute;left:-20%;right:-20%;top:18%;height:130px;
-    background:radial-gradient(ellipse at center, rgba(255,222,127,.28), rgba(255,222,127,.05) 44%, transparent 70%);
-    filter:blur(8px);pointer-events:none;z-index:1;
-  }
+/* SOUND */
+.sound{
+  position:absolute;right:10px;top:max(10px,env(safe-area-inset-top));z-index:40;
+  width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,230,150,.5);
+  background:linear-gradient(180deg,#092c54,#03172e);color:#fff;cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.15);
+}
 
-  .water-lines::before,
-  .water-lines::after{
-    content:"";position:absolute;left:-20%;width:140%;height:2px;top:22%;
-    background:linear-gradient(90deg,transparent,rgba(255,230,157,.45),transparent);
-    animation:waterline 4s ease-in-out infinite;
-    z-index:2;
-  }
-  .water-lines::after{top:25%;opacity:.45;animation-delay:-2s}
-  @keyframes waterline{
-    0%,100%{transform:translateX(-4%) scaleX(.92)}
-    50%{transform:translateX(4%) scaleX(1.05)}
-  }
+/* HUD */
+.hud{
+  position:absolute;z-index:35;left:8px;right:8px;top:26%;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:5px;
+}
+.hud-card{
+  min-width:0;text-align:center;padding:7px 3px 6px;
+  border-radius:11px;
+  background:linear-gradient(180deg,rgba(6,36,70,.94),rgba(2,15,34,.94));
+  border:1px solid rgba(255,211,91,.66);
+  box-shadow:0 8px 18px rgba(0,0,0,.33),inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.hud-label{font-size:7px;font-weight:900;letter-spacing:.1em;color:#c9d9e8;white-space:nowrap}
+.hud-value{font-size:16px;font-weight:1000;margin-top:2px;color:#fff}
+.hud-value.gold{color:var(--gold)}
 
-  .yacht{
-    position:absolute;top:11%;right:8%;width:112px;height:24px;z-index:1;opacity:.18;filter:blur(.2px);
-  }
-  .yacht:before{
-    content:"";position:absolute;right:0;bottom:0;width:96px;height:12px;background:#f1e7cf;
-    clip-path:polygon(0 0,100% 0,86% 100%,16% 100%);
-  }
-  .yacht:after{
-    content:"";position:absolute;right:22px;bottom:10px;width:44px;height:11px;border-radius:7px 7px 0 0;background:#f1e7cf;
-  }
+/* WATER PLAY ZONE */
+.play-zone{
+  position:absolute;z-index:5;left:0;right:0;top:33%;bottom:18%;
+  overflow:hidden;
+}
+.light-rays{
+  position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background:
+    linear-gradient(105deg,transparent 28%,rgba(103,216,255,.07) 38%,transparent 48%),
+    linear-gradient(78deg,transparent 52%,rgba(255,235,170,.05) 61%,transparent 72%);
+}
+.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bubble{
+  position:absolute;bottom:-25px;border-radius:50%;
+  border:1px solid rgba(203,241,255,.42);
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.22),transparent 45%);
+  animation:bubbleUp linear infinite;
+}
+@keyframes bubbleUp{
+  from{transform:translateY(0) translateX(0);opacity:.6}
+  to{transform:translateY(-80vh) translateX(22px);opacity:0}
+}
 
-  .topbar{
-    position:relative;z-index:20;padding:14px 14px 10px;
-    background:linear-gradient(180deg,rgba(2,10,20,.88),rgba(2,10,20,.18));
-  }
+/* AMBIENT FISH */
+.fish{
+  position:absolute;z-index:7;left:-38%;
+  width:24%;max-width:140px;
+  pointer-events:none;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.28));
+  animation:swim var(--dur,10s) linear infinite;
+  opacity:.88;
+}
+.fish img{display:block;width:100%;height:auto}
+.fish.reverse{left:auto;right:-38%;animation-name:swimReverse}
+.fish.reverse img{transform:scaleX(-1)}
+.fish.small{width:17%;opacity:.68}
+.fish.large{width:28%}
+@keyframes swim{to{transform:translateX(760px)}}
+@keyframes swimReverse{to{transform:translateX(-760px)}}
 
-  .brand{
-    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;
-  }
-  .brand-left{display:flex;align-items:center;gap:10px}
-  .logo-mark{
-    width:38px;height:38px;border-radius:50%;
-    display:grid;place-items:center;font-size:19px;
-    background:linear-gradient(145deg,#ffe7a0,#9c6d12);
-    color:#0c1822;box-shadow:0 0 24px rgba(247,215,122,.28), inset 0 1px 1px rgba(255,255,255,.6);
-  }
-  .brand-title{font-weight:900;letter-spacing:.08em;font-size:13px;color:#fff}
-  .brand-sub{font-size:10px;letter-spacing:.22em;color:var(--gold);margin-top:2px}
-  .sound-btn{
-    width:36px;height:36px;border-radius:12px;border:1px solid var(--line);
-    color:var(--gold);background:rgba(3,17,31,.7);cursor:pointer;
-  }
+/* GENERIC SHADOW THAT APPROACHES HOOK - DOESN'T REVEAL REWARD */
+.fish-shadow{
+  position:absolute;z-index:8;left:50%;top:54%;
+  width:95px;height:34px;border-radius:60% 42% 50% 50%;
+  background:rgba(0,12,26,.66);
+  filter:blur(6px);
+  transform:translate(-230px,50px) scale(.65);
+  opacity:0;
+}
+.fish-shadow::after{
+  content:"";position:absolute;left:-22px;top:6px;width:28px;height:22px;
+  background:rgba(0,12,26,.66);clip-path:polygon(100% 50%,0 0,18% 50%,0 100%);
+}
+.fish-shadow.approach{animation:approach 1.25s ease-out forwards}
+@keyframes approach{
+  0%{opacity:0;transform:translate(-230px,50px) scale(.65)}
+  35%{opacity:.45}
+  100%{opacity:.78;transform:translate(-78px,-8px) scale(.88)}
+}
 
-  .hud{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .hud-card{
-    border:1px solid var(--line);
-    background:linear-gradient(180deg,rgba(11,31,50,.86),rgba(3,15,28,.82));
-    border-radius:14px;padding:9px 8px;text-align:center;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-  }
-  .hud-label{font-size:9px;letter-spacing:.16em;color:var(--muted);font-weight:800}
-  .hud-value{font-size:18px;font-weight:900;margin-top:2px;color:white}
-  .hud-value.gold{color:var(--gold)}
+/* HOOK */
+.hook-wrap{
+  position:absolute;z-index:14;top:31%;left:50%;transform:translateX(-50%);
+  width:150px;height:46%;pointer-events:none;
+}
+.line{
+  position:absolute;left:50%;top:-7%;width:2px;height:63%;transform:translateX(-50%);
+  background:linear-gradient(#f8f4dc,rgba(255,255,255,.38));
+  box-shadow:0 0 6px rgba(255,255,255,.24);
+}
+.hook-asset{
+  position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);
+  width:82px;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.34));
+}
+.hook-asset img{width:100%;display:block}
+.hook-wrap.wait .hook-asset{animation:bob 1.6s ease-in-out infinite}
+.hook-wrap.strike .hook-asset{animation:strikeShake .10s linear infinite}
+@keyframes bob{
+  0%,100%{transform:translate(-50%,-50%) translateY(0) rotate(-1deg)}
+  50%{transform:translate(-50%,-50%) translateY(5px) rotate(2deg)}
+}
+@keyframes strikeShake{
+  0%,100%{transform:translate(-50%,-50%) translate(0,9px)}
+  50%{transform:translate(-50%,-50%) translate(4px,14px)}
+}
 
-  .ocean{
-    position:relative;height:calc(100svh - 132px);min-height:520px;overflow:hidden;
-  }
+/* STRIKE FX */
+.strike-flash{
+  position:absolute;inset:0;z-index:19;opacity:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 52%,rgba(255,224,121,.32),transparent 27%);
+}
+.strike-flash.show{animation:flash .28s ease forwards}
+@keyframes flash{0%{opacity:0}35%{opacity:1}100%{opacity:.35}}
+.strike-text{
+  position:absolute;z-index:22;left:50%;top:49%;transform:translate(-50%,-50%) scale(.78);
+  opacity:0;text-align:center;pointer-events:none;width:95%;
+}
+.strike-text.show{animation:strikePop .3s cubic-bezier(.2,1.5,.2,1) forwards}
+.strike-text b{
+  display:block;font-size:clamp(43px,13vw,68px);line-height:.95;
+  color:#ffe38e;text-shadow:0 0 30px rgba(255,210,80,.66),0 5px 13px rgba(0,0,0,.7);
+}
+.strike-text span{font-size:14px;font-weight:1000;text-shadow:0 4px 8px #000}
+@keyframes strikePop{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.danger{
+  position:absolute;inset:0;z-index:20;pointer-events:none;opacity:0;
+  background:radial-gradient(circle,transparent 53%,rgba(255,61,89,.25));
+  transition:.2s;
+}
+.danger.on{opacity:1;animation:dangerPulse .8s ease-in-out infinite alternate}
+@keyframes dangerPulse{to{opacity:.45}}
 
-  .light-ray{
-    position:absolute;top:20%;width:120px;height:65%;background:linear-gradient(180deg,rgba(109,216,255,.11),transparent);
-    filter:blur(14px);transform:skewX(-12deg);opacity:.7;z-index:0;
-  }
-  .ray1{left:10%}.ray2{right:5%;transform:skewX(18deg);opacity:.45}
+/* STATUS / DIFFICULTY */
+.info-strip{
+  position:absolute;z-index:34;left:10px;right:10px;bottom:105px;
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+}
+.mini-panel{
+  padding:7px 9px;border-radius:12px;
+  background:linear-gradient(180deg,rgba(4,24,46,.9),rgba(2,13,27,.94));
+  border:1px solid rgba(255,217,110,.36);box-shadow:0 7px 16px rgba(0,0,0,.25)
+}
+.mini-title{font-size:8px;font-weight:950;letter-spacing:.08em;color:#dceaf6;margin-bottom:5px}
+.diff-bar{height:8px;border-radius:999px;overflow:hidden;background:#071626;border:1px solid rgba(255,255,255,.08)}
+.diff-fill{height:100%;width:0;background:linear-gradient(90deg,#49d9ff,#71efba,#ffe26f,#ffb24c,#ff586f);transition:width .4s ease}
+.stats-row{display:flex;justify-content:space-between;gap:4px;font-size:9px;color:var(--muted)}
+.stats-row b{color:#fff}
 
-  .bubbles{position:absolute;inset:0;z-index:3;pointer-events:none}
-  .bubble{
-    position:absolute;bottom:-30px;width:8px;height:8px;border:1px solid rgba(202,240,255,.45);
-    border-radius:50%;animation:bubbleUp linear infinite;
-  }
-  @keyframes bubbleUp{
-    to{transform:translateY(-120vh) translateX(28px);opacity:0}
-  }
+/* MAIN ACTION */
+.action-area{
+  position:absolute;z-index:38;left:50%;bottom:max(15px,env(safe-area-inset-bottom));transform:translateX(-50%);
+  width:min(88%,460px);text-align:center;
+}
+.status-main{font-size:12px;font-weight:1000;text-shadow:0 2px 5px #000;margin-bottom:4px}
+.status-sub{font-size:9px;color:#d0deea;text-shadow:0 2px 5px #000;margin-bottom:7px}
+.action{
+  width:100%;height:68px;border-radius:50px;border:3px solid #f2c54e;cursor:pointer;
+  color:#fff;font-size:18px;font-weight:1000;letter-spacing:.03em;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(70,167,255,.45),transparent 42%),
+    linear-gradient(180deg,#0b5fa2,#062d5a 60%,#041a38);
+  box-shadow:
+    0 0 0 3px rgba(4,19,37,.82),
+    0 0 0 5px rgba(255,213,98,.8),
+    0 14px 28px rgba(0,0,0,.4),
+    inset 0 3px 6px rgba(255,255,255,.15),
+    inset 0 -9px 18px rgba(0,0,0,.23);
+}
+.action:active{transform:scale(.985)}
+.action[disabled]{filter:saturate(.35) brightness(.7);cursor:not-allowed}
+.action.strike{animation:buttonPulse .34s ease-in-out infinite alternate}
+@keyframes buttonPulse{
+  from{box-shadow:0 0 0 3px #051a35,0 0 0 5px #ffd66b,0 0 18px rgba(255,209,82,.36)}
+  to{box-shadow:0 0 0 3px #051a35,0 0 0 7px #ffe59d,0 0 38px rgba(255,216,95,.72)}
+}
 
-  .fish-layer{position:absolute;inset:24% 0 17%;z-index:4;pointer-events:none}
-  .fish{
-    position:absolute;left:-90px;width:74px;height:34px;
-    filter:drop-shadow(0 8px 10px rgba(0,0,0,.35));
-    animation:swim var(--dur,9s) linear infinite;
-    opacity:.75;
-  }
-  .fish .body{
-    position:absolute;left:14px;top:3px;width:46px;height:27px;border-radius:55% 45% 48% 52%;
-    background:linear-gradient(145deg,rgba(89,207,255,.82),rgba(17,92,137,.82));
-  }
-  .fish .tail{
-    position:absolute;left:0;top:7px;width:22px;height:20px;
-    background:rgba(70,168,211,.76);clip-path:polygon(100% 50%,0 0,18% 50%,0 100%);
-  }
-  .fish .eye{position:absolute;right:7px;top:8px;width:4px;height:4px;background:#fff;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.35)}
-  .fish.reverse{transform:scaleX(-1);left:auto;right:-90px;animation-name:swimReverse}
-  .fish.gold .body{background:linear-gradient(145deg,#f8d96e,#ad7418)}
-  .fish.gold .tail{background:#d69d28}
-  .fish.small{transform:scale(.72)}
-  .fish.reverse.small{transform:scaleX(-1) scale(.72)}
-  @keyframes swim{to{transform:translateX(680px)}}
-  @keyframes swimReverse{to{transform:scaleX(-1) translateX(680px)}}
+/* CATCH REVEAL */
+.catch-reveal{
+  position:absolute;z-index:45;left:50%;top:52%;transform:translate(-50%,-50%) scale(.72);
+  width:88%;max-width:410px;opacity:0;pointer-events:none;
+  padding:18px;border-radius:23px;text-align:center;
+  background:linear-gradient(180deg,rgba(7,36,67,.96),rgba(2,13,29,.98));
+  border:1px solid rgba(255,224,130,.6);
+  box-shadow:0 22px 70px rgba(0,0,0,.6),0 0 42px rgba(255,207,74,.18);
+}
+.catch-reveal.show{animation:catchIn .32s cubic-bezier(.2,1.4,.2,1) forwards}
+@keyframes catchIn{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.caught-img{
+  width:52%;max-width:190px;max-height:140px;object-fit:contain;
+  filter:drop-shadow(0 13px 15px rgba(0,0,0,.34));
+}
+.catch-grade{font-size:23px;font-weight:1000;color:var(--gold);margin-top:2px}
+.catch-name{font-size:15px;font-weight:950;margin-top:4px}
+.catch-point{font-size:11px;color:#c4d6e4;margin-top:4px}
 
-  .line-wrap{
-    position:absolute;top:19%;left:50%;width:2px;height:50%;transform:translateX(-50%);
-    z-index:8;transition:height .6s cubic-bezier(.2,.8,.2,1);
-  }
-  .fishing-line{
-    width:1px;height:100%;margin:auto;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.18));
-    box-shadow:0 0 5px rgba(255,255,255,.22);
-  }
-  .float{
-    position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);
-    width:18px;height:39px;border-radius:9px 9px 12px 12px;
-    background:linear-gradient(180deg,#ff596c 0 43%,#f3f1d8 43% 67%,#d1a339 67%);
-    box-shadow:0 8px 18px rgba(0,0,0,.4);
-    transition:transform .14s ease, bottom .18s ease;
-  }
-  .float::after{
-    content:"";position:absolute;left:8px;bottom:-45px;width:1px;height:45px;background:rgba(255,255,255,.55)
-  }
-  .hook{
-    position:absolute;left:50%;bottom:-66px;width:18px;height:25px;transform:translateX(-3px);
-    border-right:2px solid #e1e7eb;border-bottom:2px solid #e1e7eb;border-radius:0 0 12px 0;
-  }
-  .hook::after{
-    content:"";position:absolute;right:-2px;bottom:-1px;width:7px;height:7px;border-left:2px solid #e1e7eb;transform:rotate(-26deg);
-  }
+/* TOAST */
+.toast{
+  position:absolute;z-index:46;left:50%;top:31%;transform:translate(-50%,-10px);
+  min-width:230px;max-width:88%;text-align:center;padding:11px 14px;border-radius:13px;
+  background:rgba(2,13,27,.95);border:1px solid var(--line);
+  font-size:12px;font-weight:900;opacity:0;pointer-events:none;transition:.2s;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.bad{color:#ffd5dc;border-color:rgba(255,98,123,.5)}
+.toast.good{color:#d6ffe5;border-color:rgba(120,239,174,.45)}
 
-  .line-wrap.waiting .float{animation:bob 1.7s ease-in-out infinite}
-  @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0) rotate(-1deg)}50%{transform:translateX(-50%) translateY(5px) rotate(2deg)}}
-  .line-wrap.strike .float{
-    transform:translateX(-50%) translateY(28px) scale(.92);
-    animation:strikeBob .11s linear infinite;
-  }
-  @keyframes strikeBob{0%,100%{margin-left:-3px}50%{margin-left:3px}}
+/* START / RESULT MODALS */
+.overlay{
+  position:absolute;z-index:70;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(0,7,17,.68);backdrop-filter:blur(6px);
+}
+.overlay.hide{display:none}
+.modal{
+  width:100%;max-width:400px;padding:20px;border-radius:25px;
+  background:linear-gradient(180deg,rgba(7,36,69,.98),rgba(2,13,28,.99));
+  border:1px solid rgba(255,221,120,.55);
+  box-shadow:0 30px 90px rgba(0,0,0,.65);
+}
+.modal-logo{width:64%;max-width:230px;margin:0 auto 9px;display:block}
+.modal-title{text-align:center;color:var(--gold);font-size:24px;font-weight:1000}
+.modal-desc{text-align:center;color:#c5d8e7;font-size:11px;line-height:1.5;margin:7px 0 14px}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px}
+.rule{padding:9px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);font-size:9px;line-height:1.35}
+.rule b{display:block;color:#fff;font-size:10px;margin-bottom:2px}
+.start-btn,.modal-btn{
+  width:100%;min-height:50px;border:0;border-radius:15px;cursor:pointer;
+  background:linear-gradient(180deg,#ffe79c,#d69f2d);color:#101923;font-weight:1000;
+}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:13px 0}
+.result-item{padding:10px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.result-item span{display:block;color:#aebfd0;font-size:8px;letter-spacing:.08em}
+.result-item b{display:block;font-size:19px;margin-top:2px}
+.total{padding:12px;border-radius:14px;text-align:center;border:1px solid rgba(255,222,121,.34);background:rgba(255,214,85,.08);margin-bottom:11px}
+.total span{font-size:9px;color:#ffe391;letter-spacing:.11em}.total b{display:block;font-size:30px}
+.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.modal-btn.secondary{background:#07192d;color:#fff;border:1px solid rgba(255,255,255,.1)}
 
-  .ripple{
-    position:absolute;left:50%;top:26%;width:70px;height:18px;transform:translate(-50%,-50%);
-    border:1px solid rgba(225,245,255,.3);border-radius:50%;z-index:5;
-    box-shadow:0 0 20px rgba(96,207,255,.06);
-    animation:ripple 2s ease-out infinite;
-  }
-  .ripple::after{
-    content:"";position:absolute;inset:-12px;border:1px solid rgba(225,245,255,.16);border-radius:50%;
-  }
-  @keyframes ripple{0%{transform:translate(-50%,-50%) scale(.75);opacity:.7}100%{transform:translate(-50%,-50%) scale(1.35);opacity:.1}}
+.shake{animation:screenShake .25s linear}
+@keyframes screenShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
 
-  .status-box{
-    position:absolute;z-index:15;left:16px;right:16px;bottom:max(18px,env(safe-area-inset-bottom));
-    border:1px solid var(--line);
-    background:linear-gradient(180deg,rgba(3,17,31,.86),rgba(2,11,22,.94));
-    backdrop-filter:blur(14px);
-    border-radius:20px;padding:14px;
-    box-shadow:0 18px 40px rgba(0,0,0,.32);
-  }
-
-  .status{
-    min-height:43px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    margin-bottom:10px;
-  }
-  .status-main{font-weight:950;letter-spacing:.05em;font-size:18px}
-  .status-sub{font-size:12px;color:var(--muted);margin-top:3px}
-
-  .action{
-    width:100%;height:58px;border:0;border-radius:17px;cursor:pointer;
-    font-weight:950;letter-spacing:.04em;font-size:16px;
-    color:#10161d;
-    background:linear-gradient(180deg,#ffeaa5,#d3a73b);
-    box-shadow:0 10px 26px rgba(211,167,59,.22), inset 0 1px 0 rgba(255,255,255,.85);
-    transition:transform .08s ease,filter .2s ease;
-  }
-  .action:active{transform:scale(.985)}
-  .action[disabled]{cursor:not-allowed;filter:saturate(.35) brightness(.62);box-shadow:none}
-
-  .action.strike{
-    animation:goldPulse .45s ease-in-out infinite alternate;
-  }
-  @keyframes goldPulse{
-    from{box-shadow:0 0 0 0 rgba(247,215,122,.16),0 10px 26px rgba(211,167,59,.22)}
-    to{box-shadow:0 0 0 8px rgba(247,215,122,.08),0 0 34px rgba(247,215,122,.48)}
-  }
-
-  .strike-overlay{
-    position:absolute;z-index:13;inset:0;pointer-events:none;display:none;
-    background:radial-gradient(circle at 50% 45%,rgba(255,218,105,.18),transparent 28%);
-  }
-  .strike-overlay.show{display:block;animation:flash .26s ease}
-  @keyframes flash{0%{opacity:0}35%{opacity:1}100%{opacity:.5}}
-
-  .strike-text{
-    position:absolute;z-index:16;top:42%;left:50%;transform:translate(-50%,-50%) scale(.8);
-    width:92%;text-align:center;opacity:0;pointer-events:none;
-  }
-  .strike-text.show{animation:strikePop .38s cubic-bezier(.2,1.4,.2,1) forwards}
-  .strike-text .big{
-    color:#ffe793;font-weight:1000;font-size:clamp(42px,13vw,66px);
-    letter-spacing:.06em;text-shadow:0 0 28px rgba(247,215,122,.5),0 4px 15px #000;
-  }
-  .strike-text .small{font-weight:900;font-size:17px;margin-top:-4px}
-  @keyframes strikePop{to{transform:translate(-50%,-50%) scale(1);opacity:1}}
-
-  .toast{
-    position:absolute;z-index:25;top:135px;left:50%;transform:translateX(-50%) translateY(-14px);
-    min-width:220px;max-width:86%;text-align:center;padding:11px 16px;border-radius:14px;
-    background:rgba(3,13,24,.92);border:1px solid var(--line);
-    opacity:0;pointer-events:none;transition:.22s ease;font-weight:800;
-  }
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .toast.bad{border-color:rgba(255,102,125,.42);color:#ffd0d8}
-  .toast.good{border-color:rgba(143,247,176,.38);color:#d7ffe3}
-
-  .catch-card{
-    position:absolute;z-index:30;left:50%;top:45%;transform:translate(-50%,-50%) scale(.88);
-    width:min(86%,360px);padding:20px;border-radius:24px;text-align:center;
-    background:linear-gradient(180deg,rgba(10,31,49,.96),rgba(2,12,24,.98));
-    border:1px solid rgba(247,215,122,.36);
-    box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 40px rgba(247,215,122,.11);
-    opacity:0;pointer-events:none;transition:.25s ease;
-  }
-  .catch-card.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
-  .catch-emoji{font-size:54px;filter:drop-shadow(0 10px 16px rgba(0,0,0,.25))}
-  .catch-rank{font-weight:1000;color:var(--gold);font-size:22px;margin-top:4px}
-  .catch-fish{font-size:16px;font-weight:900;margin-top:4px}
-  .catch-points{font-size:13px;color:var(--muted);margin-top:4px}
-
-  .modal{
-    position:absolute;z-index:40;inset:0;display:none;align-items:center;justify-content:center;padding:20px;
-    background:rgba(1,8,15,.78);backdrop-filter:blur(9px);
-  }
-  .modal.show{display:flex}
-  .modal-card{
-    width:100%;max-width:400px;padding:22px;border-radius:26px;
-    background:linear-gradient(180deg,#0c263b,#061522);
-    border:1px solid rgba(247,215,122,.34);
-    box-shadow:0 25px 90px rgba(0,0,0,.6);
-  }
-  .modal-title{text-align:center;font-size:24px;font-weight:1000;color:var(--gold)}
-  .modal-sub{text-align:center;color:var(--muted);font-size:12px;margin:5px 0 17px}
-  .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .result-item{
-    padding:11px;border-radius:14px;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.06);
-  }
-  .result-item span{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em;font-weight:800}
-  .result-item b{display:block;font-size:20px;margin-top:2px}
-  .result-score{
-    margin:10px 0 14px;padding:14px;border-radius:16px;text-align:center;
-    background:linear-gradient(180deg,rgba(247,215,122,.13),rgba(247,215,122,.05));
-    border:1px solid rgba(247,215,122,.25);
-  }
-  .result-score span{font-size:10px;letter-spacing:.12em;color:var(--gold)}
-  .result-score b{display:block;font-size:31px;margin-top:2px}
-  .modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .secondary,.primary{
-    min-height:48px;border-radius:14px;border:1px solid var(--line);cursor:pointer;font-weight:900;
-  }
-  .secondary{background:#071728;color:white}
-  .primary{background:linear-gradient(180deg,#ffeaa5,#d3a73b);color:#12171e;border:0}
-
-  .shake{animation:shake .24s linear}
-  @keyframes shake{
-    0%,100%{transform:translateX(0)}
-    25%{transform:translateX(-4px)}
-    50%{transform:translateX(4px)}
-    75%{transform:translateX(-2px)}
-  }
-
-  @media (min-width:700px){
-    .game-shell{min-height:850px;height:850px;border-radius:30px;margin:24px 0}
-    .ocean{height:718px;min-height:0}
-  }
+@media(min-width:700px){
+  .game{height:900px;min-height:900px;border-radius:28px;margin-top:16px}
+  body{align-items:flex-start}
+}
 </style>
 </head>
 <body>
-<div class="game-shell" id="gameShell">
-  <div class="surface-glow"></div>
-  <div class="water-lines"></div>
-  <div class="yacht"></div>
 
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-left">
-        <div class="logo-mark">M</div>
-        <div>
-          <div class="brand-title">MAUSLOT VIP FISHING</div>
-          <div class="brand-sub">HOOK TIMING</div>
-        </div>
-      </div>
-      <button class="sound-btn" id="soundBtn" aria-label="Sound">🔊</button>
+<div class="game" id="game">
+
+  <div class="brand">
+    <img src="assets/logo-mauslot.png" alt="MAUSLOT">
+  </div>
+
+  <div class="luna">
+    <img src="assets/luna-fishing.png" alt="Luna">
+  </div>
+  <div class="luna-bubble" id="lunaBubble">
+    Tunggu sampai ikan benar-benar menggigit. Jangan tarik terlalu cepat!
+  </div>
+
+  <button class="sound" id="soundBtn">🔊</button>
+
+  <div class="hud">
+    <div class="hud-card">
+      <div class="hud-label">TIME</div>
+      <div class="hud-value" id="timeVal">60</div>
     </div>
-
-    <div class="hud">
-      <div class="hud-card">
-        <div class="hud-label">TIME</div>
-        <div class="hud-value" id="timeVal">01:00</div>
-      </div>
-      <div class="hud-card">
-        <div class="hud-label">FISH</div>
-        <div class="hud-value" id="fishVal">0/6</div>
-      </div>
-      <div class="hud-card">
-        <div class="hud-label">SCORE</div>
-        <div class="hud-value gold" id="scoreVal">0</div>
-      </div>
+    <div class="hud-card">
+      <div class="hud-label">KESEMPATAN</div>
+      <div class="hud-value" id="chanceVal">0/6</div>
     </div>
-  </header>
+    <div class="hud-card">
+      <div class="hud-label">SCORE</div>
+      <div class="hud-value gold" id="scoreVal">0</div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-label">COMBO</div>
+      <div class="hud-value" id="comboVal">×0</div>
+    </div>
+  </div>
 
-  <main class="ocean" id="ocean">
-    <div class="light-ray ray1"></div>
-    <div class="light-ray ray2"></div>
-
+  <div class="play-zone">
+    <div class="light-rays"></div>
     <div class="bubbles" id="bubbles"></div>
 
-    <div class="fish-layer">
-      <div class="fish" style="top:12%;--dur:9.5s;animation-delay:-2.7s">
-        <div class="tail"></div><div class="body"><div class="eye"></div></div>
-      </div>
-      <div class="fish reverse small" style="top:37%;--dur:12s;animation-delay:-5s">
-        <div class="tail"></div><div class="body"><div class="eye"></div></div>
-      </div>
-      <div class="fish gold small" style="top:63%;--dur:14s;animation-delay:-8.5s">
-        <div class="tail"></div><div class="body"><div class="eye"></div></div>
-      </div>
-      <div class="fish reverse" style="top:76%;--dur:10.5s;animation-delay:-1.5s">
-        <div class="tail"></div><div class="body"><div class="eye"></div></div>
+    <div class="fish small" style="top:10%;--dur:12s;animation-delay:-7s">
+      <img src="assets/blue-fish.png" alt="">
+    </div>
+    <div class="fish reverse small" style="top:32%;--dur:14s;animation-delay:-4s">
+      <img src="assets/vip-fish.png" alt="">
+    </div>
+    <div class="fish" style="top:58%;--dur:15s;animation-delay:-10s">
+      <img src="assets/golden-fish.png" alt="">
+    </div>
+    <div class="fish reverse large" style="top:72%;--dur:19s;animation-delay:-3s">
+      <img src="assets/royal-fish.png" alt="">
+    </div>
+    <div class="fish-shadow" id="fishShadow"></div>
+  </div>
+
+  <div class="hook-wrap" id="hookWrap">
+    <div class="line"></div>
+    <div class="hook-asset">
+      <img src="assets/fishing-hook.png" alt="Kail">
+    </div>
+  </div>
+
+  <div class="strike-flash" id="strikeFlash"></div>
+  <div class="danger" id="danger"></div>
+
+  <div class="strike-text" id="strikeText">
+    <b>STRIKE!</b>
+    <span>TARIK SEKARANG!</span>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="catch-reveal" id="catchReveal">
+    <img class="caught-img" id="caughtImg" src="assets/blue-fish.png" alt="">
+    <div class="catch-grade" id="catchGrade">PERFECT HOOK!</div>
+    <div class="catch-name" id="catchName">Blue Fish</div>
+    <div class="catch-point" id="catchPoint">+100 POINT</div>
+  </div>
+
+  <div class="info-strip">
+    <div class="mini-panel">
+      <div class="mini-title">TINGKAT KESULITAN</div>
+      <div class="diff-bar"><div class="diff-fill" id="diffFill"></div></div>
+    </div>
+    <div class="mini-panel">
+      <div class="mini-title">HASIL TANGKAPAN</div>
+      <div class="stats-row">
+        <span>✓ <b id="caughtMini">0</b></span>
+        <span>✕ <b id="escapedMini">0</b></span>
+        <span>⚡ <b id="earlyMini">0</b></span>
       </div>
     </div>
+  </div>
 
-    <div class="ripple"></div>
+  <div class="action-area">
+    <div class="status-main" id="statusMain">SIAP MEMANCING?</div>
+    <div class="status-sub" id="statusSub">6 strike • 60 detik • timing menentukan hasil</div>
+    <button class="action" id="actionBtn">🎣 MULAI MEMANCING</button>
+  </div>
 
-    <div class="line-wrap" id="lineWrap">
-      <div class="fishing-line"></div>
-      <div class="float"></div>
-      <div class="hook"></div>
-    </div>
-
-    <div class="strike-overlay" id="strikeOverlay"></div>
-    <div class="strike-text" id="strikeText">
-      <div class="big">STRIKE!</div>
-      <div class="small">TARIK SEKARANG!</div>
-    </div>
-
-    <div class="toast" id="toast"></div>
-
-    <div class="catch-card" id="catchCard">
-      <div class="catch-emoji" id="catchEmoji">🐟</div>
-      <div class="catch-rank" id="catchRank">PERFECT HOOK!</div>
-      <div class="catch-fish" id="catchFish">Golden Fish</div>
-      <div class="catch-points" id="catchPoints">+300 POINT</div>
-    </div>
-
-    <section class="status-box">
-      <div class="status">
-        <div class="status-main" id="statusMain">VIP DEEP SEA FISHING</div>
-        <div class="status-sub" id="statusSub">Tunggu strike, lalu tarik kail secepat mungkin.</div>
+  <div class="overlay" id="startOverlay">
+    <div class="modal">
+      <img class="modal-logo" src="assets/logo-mauslot.png" alt="MAUSLOT">
+      <div class="modal-title">VIP FISHING</div>
+      <div class="modal-desc">
+        Tunggu ikan mendekati kail. Saat muncul <b>STRIKE!</b>, tarik secepat mungkin.
+        Semakin cepat reaksimu, semakin tinggi nilai tangkapan.
       </div>
-      <button class="action" id="actionBtn">🎣 MULAI MEMANCING</button>
-    </section>
-  </main>
+      <div class="rules">
+        <div class="rule"><b>🔥 PERFECT</b>0–0.35 detik</div>
+        <div class="rule"><b>⭐ GREAT</b>0.36–0.75 detik</div>
+        <div class="rule"><b>✅ CATCH</b>sampai batas waktu</div>
+        <div class="rule"><b>❌ EARLY TAP</b>Combo langsung putus</div>
+      </div>
+      <button class="start-btn" id="startBtn">🎣 MULAI MEMANCING</button>
+    </div>
+  </div>
 
-  <div class="modal" id="resultModal">
-    <div class="modal-card">
+  <div class="overlay hide" id="resultOverlay">
+    <div class="modal">
       <div class="modal-title">HASIL MEMANCING</div>
-      <div class="modal-sub">MAUSLOT VIP Fishing — Hook Timing</div>
+      <div class="modal-desc">MAUSLOT VIP Fishing — Hook Timing</div>
 
       <div class="result-grid">
         <div class="result-item"><span>FISH CAUGHT</span><b id="rCaught">0</b></div>
@@ -420,14 +450,14 @@
         <div class="result-item"><span>EARLY TAP</span><b id="rEarly">0</b></div>
       </div>
 
-      <div class="result-score">
+      <div class="total">
         <span>TOTAL SCORE</span>
         <b id="rScore">0</b>
       </div>
 
       <div class="modal-actions">
-        <button class="secondary" id="restartBtn">↻ MAIN LAGI</button>
-        <button class="primary" id="adminBtn">HUBUNGI ADMIN</button>
+        <button class="modal-btn secondary" id="restartBtn">↻ MAIN LAGI</button>
+        <button class="modal-btn" id="adminBtn">HUBUNGI ADMIN</button>
       </div>
     </div>
   </div>
@@ -435,147 +465,131 @@
 
 <script>
 (() => {
-  // =========================
-  // CONFIG
-  // =========================
-  const GAME_DURATION = 60;           // detik
-  const TARGET_STRIKES = 6;           // maksimal kesempatan strike
-  const BITE_MIN = 2000;              // min 2 detik
-  const BITE_MAX = 6000;              // max 6 detik
-  const MAX_REACTION = 1200;          // 1.20 detik
-  const EARLY_COOLDOWN = 800;         // anti spam
-  const ADMIN_URL = "";               // isi link WA/admin nanti
+  const GAME_DURATION = 60;
+  const TARGET_STRIKES = 6;
+  const ADMIN_URL = ""; // isi link WA/admin di sini nanti
 
-  const FISH_TABLE = [
-    {name:"Blue Fish", emoji:"🐟", base:100, weight:42},
-    {name:"Golden Fish", emoji:"🐠", base:200, weight:29},
-    {name:"VIP Fish", emoji:"🐡", base:300, weight:18},
-    {name:"Royal Shark", emoji:"🦈", base:500, weight:9},
-    {name:"Golden MAUSLOT Fish", emoji:"✨🐟", base:1000, weight:2},
+  const fishRewards = [
+    {name:"Blue Fish",src:"assets/blue-fish.png",base:100,weight:38},
+    {name:"Golden Fish",src:"assets/golden-fish.png",base:200,weight:26},
+    {name:"VIP Fish",src:"assets/vip-fish.png",base:300,weight:18},
+    {name:"Royal Fish",src:"assets/royal-fish.png",base:500,weight:10},
+    {name:"Legendary Shark",src:"assets/legendary-shark.png",base:750,weight:6},
+    {name:"Golden MAUSLOT Fish",src:"assets/golden-mauslot-fish.png",base:1000,weight:2}
   ];
 
-  // =========================
-  // STATE
-  // =========================
-  let state = "idle"; // idle | waiting | strike | resolving | ended
-  let timeLeft = GAME_DURATION;
-  let score = 0;
-  let strikeCount = 0;
-  let caught = 0;
-  let escaped = 0;
-  let early = 0;
-  let perfect = 0;
-  let great = 0;
-  let normalCatch = 0;
-  let biteTimer = null;
-  let strikeTimer = null;
-  let gameTimer = null;
-  let strikeStartedAt = 0;
-  let locked = false;
-  let soundOn = true;
-  let audioCtx = null;
+  let state="idle";
+  let timeLeft=GAME_DURATION;
+  let score=0, strikeCount=0, caught=0, escaped=0, early=0;
+  let perfect=0, great=0, normalCatch=0, combo=0, maxCombo=0;
+  let currentWindow=1200;
+  let biteTimer=null, strikeTimer=null, gameTimer=null, shadowTimer=null;
+  let strikeStartedAt=0;
+  let locked=false;
+  let soundOn=true;
+  let audioCtx=null;
 
-  // =========================
-  // DOM
-  // =========================
-  const $ = s => document.querySelector(s);
-  const gameShell = $("#gameShell");
-  const lineWrap = $("#lineWrap");
-  const actionBtn = $("#actionBtn");
-  const statusMain = $("#statusMain");
-  const statusSub = $("#statusSub");
-  const timeVal = $("#timeVal");
-  const fishVal = $("#fishVal");
-  const scoreVal = $("#scoreVal");
-  const strikeOverlay = $("#strikeOverlay");
-  const strikeText = $("#strikeText");
-  const toast = $("#toast");
-  const catchCard = $("#catchCard");
-  const catchEmoji = $("#catchEmoji");
-  const catchRank = $("#catchRank");
-  const catchFish = $("#catchFish");
-  const catchPoints = $("#catchPoints");
-  const resultModal = $("#resultModal");
-  const soundBtn = $("#soundBtn");
-  const bubbles = $("#bubbles");
+  const $=s=>document.querySelector(s);
+  const game=$("#game");
+  const actionBtn=$("#actionBtn");
+  const startBtn=$("#startBtn");
+  const hookWrap=$("#hookWrap");
+  const fishShadow=$("#fishShadow");
+  const strikeFlash=$("#strikeFlash");
+  const strikeText=$("#strikeText");
+  const danger=$("#danger");
+  const toast=$("#toast");
+  const catchReveal=$("#catchReveal");
+  const caughtImg=$("#caughtImg");
+  const catchGrade=$("#catchGrade");
+  const catchName=$("#catchName");
+  const catchPoint=$("#catchPoint");
+  const startOverlay=$("#startOverlay");
+  const resultOverlay=$("#resultOverlay");
+  const diffFill=$("#diffFill");
+  const soundBtn=$("#soundBtn");
+  const lunaBubble=$("#lunaBubble");
 
-  // =========================
-  // HELPERS
-  // =========================
-  function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
-
-  function formatTime(sec){
-    const m = Math.floor(sec/60).toString().padStart(2,"0");
-    const s = (sec%60).toString().padStart(2,"0");
-    return `${m}:${s}`;
-  }
+  function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+  function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+  function progress(){return (GAME_DURATION-timeLeft)/GAME_DURATION}
 
   function updateHud(){
-    timeVal.textContent = formatTime(timeLeft);
-    fishVal.textContent = `${caught}/${TARGET_STRIKES}`;
-    scoreVal.textContent = score.toLocaleString("id-ID");
+    $("#timeVal").textContent=timeLeft;
+    $("#chanceVal").textContent=`${strikeCount}/${TARGET_STRIKES}`;
+    $("#scoreVal").textContent=score.toLocaleString("id-ID");
+    $("#comboVal").textContent=`×${combo}`;
+    $("#caughtMini").textContent=caught;
+    $("#escapedMini").textContent=escaped;
+    $("#earlyMini").textContent=early;
+    diffFill.style.width=`${Math.min(100,progress()*100)}%`;
+  }
+
+  function setStatus(main,sub){
+    $("#statusMain").textContent=main;
+    $("#statusSub").textContent=sub||"";
   }
 
   function weightedFish(){
-    const total = FISH_TABLE.reduce((a,f)=>a+f.weight,0);
-    let r = Math.random()*total;
-    for(const f of FISH_TABLE){
-      if(r < f.weight) return f;
-      r -= f.weight;
+    const total=fishRewards.reduce((a,f)=>a+f.weight,0);
+    let r=Math.random()*total;
+    for(const f of fishRewards){
+      if(r<f.weight)return f;
+      r-=f.weight;
     }
-    return FISH_TABLE[0];
+    return fishRewards[0];
   }
 
-  function reactionTier(ms){
-    if(ms <= 350) return {key:"perfect", label:"🔥 PERFECT HOOK!", mult:1.5};
-    if(ms <= 750) return {key:"great", label:"⭐ GREAT HOOK!", mult:1.25};
-    if(ms <= MAX_REACTION) return {key:"catch", label:"✅ GOOD CATCH!", mult:1};
-    return {key:"escaped", label:"💨 IKAN KABUR!", mult:0};
+  function calcReactionWindow(){
+    return Math.round(1200-(progress()*350)); // 1.20 -> 0.85 sec
   }
 
-  function vibrate(pattern){
-    if(navigator.vibrate) navigator.vibrate(pattern);
+  function calcBiteDelay(){
+    const p=progress();
+    const min=Math.round(2400-(p*800));
+    const max=Math.round(5600-(p*1700));
+    return rand(min,max);
   }
+
+  function getTier(ms){
+    if(ms<=350)return {key:"perfect",label:"🔥 PERFECT HOOK!",mult:1.5};
+    if(ms<=750)return {key:"great",label:"⭐ GREAT HOOK!",mult:1.25};
+    if(ms<=currentWindow)return {key:"catch",label:"✅ GOOD CATCH!",mult:1};
+    return {key:"escaped",label:"💨 IKAN KABUR!",mult:0};
+  }
+
+  function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
 
   function initAudio(){
-    if(!audioCtx){
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if(audioCtx.state === "suspended") audioCtx.resume();
+    if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    if(audioCtx.state==="suspended")audioCtx.resume();
   }
 
-  function tone(freq=440,duration=.12,type="sine",gain=.035){
-    if(!soundOn) return;
+  function tone(freq,dur=.1,type="sine",gain=.025){
+    if(!soundOn)return;
     try{
       initAudio();
-      const osc=audioCtx.createOscillator();
-      const g=audioCtx.createGain();
-      osc.frequency.value=freq;
-      osc.type=type;
+      const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+      o.frequency.value=freq;o.type=type;
       g.gain.setValueAtTime(gain,audioCtx.currentTime);
-      g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);
-      osc.connect(g).connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime+duration);
+      g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+dur);
+      o.connect(g).connect(audioCtx.destination);
+      o.start();o.stop(audioCtx.currentTime+dur);
     }catch(e){}
   }
 
-  function playCast(){
-    tone(250,.09,"sine",.02);
-    setTimeout(()=>tone(180,.15,"sine",.018),70);
+  function sfxStrike(){
+    tone(850,.08,"square",.022);
+    setTimeout(()=>tone(1080,.11,"square",.02),80);
   }
-  function playStrike(){
-    tone(740,.08,"square",.028);
-    setTimeout(()=>tone(980,.11,"square",.022),90);
+  function sfxSuccess(rare=false){
+    tone(540,.08,"sine",.025);
+    setTimeout(()=>tone(720,.09,"sine",.025),75);
+    setTimeout(()=>tone(rare?1250:930,.15,"sine",.028),155);
   }
-  function playSuccess(rare=false){
-    tone(520,.09,"sine",.028);
-    setTimeout(()=>tone(680,.1,"sine",.028),80);
-    setTimeout(()=>tone(rare?1040:840,.16,"sine",.032),170);
-  }
-  function playFail(){
-    tone(220,.15,"sawtooth",.018);
-    setTimeout(()=>tone(160,.18,"sawtooth",.016),110);
+  function sfxFail(){
+    tone(230,.13,"sawtooth",.014);
+    setTimeout(()=>tone(165,.18,"sawtooth",.013),100);
   }
 
   let toastTimer;
@@ -583,18 +597,11 @@
     clearTimeout(toastTimer);
     toast.textContent=msg;
     toast.className=`toast show ${type}`;
-    toastTimer=setTimeout(()=>toast.className="toast",1100);
+    toastTimer=setTimeout(()=>toast.className="toast",1050);
   }
 
-  function setStatus(main,sub){
-    statusMain.textContent=main;
-    statusSub.textContent=sub || "";
-  }
-
-  // =========================
-  // BUBBLES
-  // =========================
   function makeBubbles(){
+    const holder=$("#bubbles");
     for(let i=0;i<18;i++){
       const b=document.createElement("i");
       b.className="bubble";
@@ -602,223 +609,251 @@
       b.style.width=size+"px";
       b.style.height=size+"px";
       b.style.left=rand(3,96)+"%";
-      b.style.animationDuration=rand(7,16)+"s";
-      b.style.animationDelay=(-rand(0,14))+"s";
-      b.style.opacity=(Math.random()*.5+.15).toFixed(2);
-      bubbles.appendChild(b);
+      b.style.animationDuration=rand(8,17)+"s";
+      b.style.animationDelay=(-rand(0,16))+"s";
+      holder.appendChild(b);
     }
   }
 
-  // =========================
-  // GAME FLOW
-  // =========================
-  function resetGame(){
+  function clearTimers(){
     clearTimeout(biteTimer);
     clearTimeout(strikeTimer);
+    clearTimeout(shadowTimer);
     clearInterval(gameTimer);
+  }
 
+  function reset(){
+    clearTimers();
     state="idle";
     timeLeft=GAME_DURATION;
-    score=0;
-    strikeCount=0;
-    caught=0;
-    escaped=0;
-    early=0;
-    perfect=0;
-    great=0;
-    normalCatch=0;
+    score=strikeCount=caught=escaped=early=perfect=great=normalCatch=combo=maxCombo=0;
+    currentWindow=1200;
     locked=false;
 
-    lineWrap.className="line-wrap";
+    hookWrap.className="hook-wrap";
+    fishShadow.classList.remove("approach");
+    strikeText.classList.remove("show");
+    strikeFlash.classList.remove("show");
+    danger.classList.remove("on");
+    catchReveal.classList.remove("show");
     actionBtn.disabled=false;
     actionBtn.classList.remove("strike");
     actionBtn.textContent="🎣 MULAI MEMANCING";
-    setStatus("VIP DEEP SEA FISHING","Tunggu strike, lalu tarik kail secepat mungkin.");
-    strikeOverlay.classList.remove("show");
-    strikeText.classList.remove("show");
-    catchCard.classList.remove("show");
-    resultModal.classList.remove("show");
+    setStatus("SIAP MEMANCING?","6 strike • 60 detik • timing menentukan hasil");
+    lunaBubble.textContent="Tunggu sampai ikan benar-benar menggigit. Jangan tarik terlalu cepat!";
+    resultOverlay.classList.add("hide");
+    startOverlay.classList.remove("hide");
     updateHud();
   }
 
-  function startGame(){
-    if(state !== "idle") return;
+  function begin(){
+    if(state!=="idle")return;
     initAudio();
+    startOverlay.classList.add("hide");
     state="waiting";
-    playCast();
-    vibrate(25);
-
-    lineWrap.className="line-wrap waiting";
+    hookWrap.className="hook-wrap wait";
     actionBtn.textContent="🎣 TARIK KAIL";
-    setStatus("🎣 WAITING FOR FISH...","Jangan tarik sebelum ikan menggigit.");
+    setStatus("WAITING FOR FISH...","Perhatikan pelampung. Jangan asal tarik!");
+    lunaBubble.textContent="Fokus ke pelampung. STRIKE bisa muncul kapan saja!";
     updateHud();
 
     gameTimer=setInterval(()=>{
-      if(state==="ended") return;
+      if(state==="ended")return;
       timeLeft--;
+      currentWindow=calcReactionWindow();
       updateHud();
 
-      if(timeLeft <= 0){
-        endGame();
-      }
+      if(timeLeft<=15)danger.classList.add("on");
+      if(timeLeft<=0)endGame();
     },1000);
 
     scheduleBite();
   }
 
   function scheduleBite(){
-    if(state==="ended") return;
-    if(strikeCount >= TARGET_STRIKES){
-      setStatus("SELESAI","Semua kesempatan strike sudah digunakan.");
-      setTimeout(endGame,700);
+    if(state==="ended")return;
+    if(strikeCount>=TARGET_STRIKES){
+      setTimeout(endGame,500);
       return;
     }
 
     state="waiting";
     locked=false;
-    lineWrap.className="line-wrap waiting";
-    strikeOverlay.classList.remove("show");
-    strikeText.classList.remove("show");
+    hookWrap.className="hook-wrap wait";
+    fishShadow.classList.remove("approach");
     actionBtn.disabled=false;
     actionBtn.classList.remove("strike");
     actionBtn.textContent="🎣 TARIK KAIL";
-    setStatus("🎣 WAITING FOR FISH...","Tunggu sampai muncul STRIKE!");
+    strikeText.classList.remove("show");
+    strikeFlash.classList.remove("show");
+    setStatus("WAITING FOR FISH...","Tunggu ikan benar-benar menggigit.");
 
-    const delay=rand(BITE_MIN,BITE_MAX);
+    const delay=calcBiteDelay();
+
+    // visual tension: shadow approaches shortly before bite
+    const shadowDelay=Math.max(400,delay-rand(700,1200));
+    shadowTimer=setTimeout(()=>{
+      if(state==="waiting"){
+        fishShadow.classList.remove("approach");
+        void fishShadow.offsetWidth;
+        fishShadow.classList.add("approach");
+      }
+    },shadowDelay);
+
     biteTimer=setTimeout(triggerStrike,delay);
   }
 
   function triggerStrike(){
-    if(state!=="waiting" || timeLeft<=0) return;
-
+    if(state!=="waiting"||timeLeft<=0)return;
     state="strike";
     strikeCount++;
+    currentWindow=calcReactionWindow();
     strikeStartedAt=performance.now();
 
-    lineWrap.className="line-wrap strike";
-    strikeOverlay.classList.add("show");
+    hookWrap.className="hook-wrap strike";
+    actionBtn.textContent="🎣 TARIK SEKARANG!";
+    actionBtn.classList.add("strike");
+    setStatus("⚠️ STRIKE!","Cepat! Tarik sebelum ikan kabur!");
+    lunaBubble.textContent="STRIKE! Tarik sekarang!";
+
     strikeText.classList.remove("show");
     void strikeText.offsetWidth;
     strikeText.classList.add("show");
 
-    actionBtn.textContent="🎣 TARIK SEKARANG!";
-    actionBtn.classList.add("strike");
-    setStatus("⚠️ STRIKE!","Cepat! Tarik sebelum ikan kabur.");
+    strikeFlash.classList.remove("show");
+    void strikeFlash.offsetWidth;
+    strikeFlash.classList.add("show");
 
-    playStrike();
-    vibrate([60,35,60]);
+    sfxStrike();
+    vibrate([55,30,70]);
+    updateHud();
 
     strikeTimer=setTimeout(()=>{
-      if(state==="strike") resolveEscape();
-    },MAX_REACTION+30);
+      if(state==="strike")escapeFish();
+    },currentWindow+25);
   }
 
   function earlyTap(){
-    if(locked || state!=="waiting") return;
+    if(state!=="waiting"||locked)return;
     locked=true;
     early++;
+    combo=0;
+    updateHud();
+    sfxFail();
+    vibrate(40);
+
+    game.classList.remove("shake");
+    void game.offsetWidth;
+    game.classList.add("shake");
 
     showToast("❌ TERLALU CEPAT — ikan belum menggigit!","bad");
-    gameShell.classList.remove("shake");
-    void gameShell.offsetWidth;
-    gameShell.classList.add("shake");
-    playFail();
-    vibrate(45);
+    setStatus("TERLALU CEPAT!","Tunggu STRIKE sebelum menarik kail.");
+    lunaBubble.textContent="Jangan buru-buru. Tunggu sampai benar-benar STRIKE!";
 
     actionBtn.disabled=true;
     setTimeout(()=>{
       if(state==="waiting"){
-        actionBtn.disabled=false;
         locked=false;
+        actionBtn.disabled=false;
+        setStatus("WAITING FOR FISH...","Fokus ke pelampung.");
       }
-    },EARLY_COOLDOWN);
+    },900);
   }
 
   function hookNow(){
-    if(state!=="strike") return;
+    if(state!=="strike")return;
 
     clearTimeout(strikeTimer);
     state="resolving";
+
     const reaction=Math.round(performance.now()-strikeStartedAt);
-    const tier=reactionTier(reaction);
+    const tier=getTier(reaction);
 
     if(tier.key==="escaped"){
-      resolveEscape();
+      escapeFish();
       return;
     }
 
     const fish=weightedFish();
-    const points=Math.round(fish.base*tier.mult);
+    let points=Math.round(fish.base*tier.mult);
 
-    caught++;
+    combo++;
+    maxCombo=Math.max(maxCombo,combo);
+    const comboBonus=combo>=2 ? combo*15 : 0;
+    points+=comboBonus;
+
     score+=points;
+    caught++;
 
-    if(tier.key==="perfect") perfect++;
-    if(tier.key==="great") great++;
-    if(tier.key==="catch") normalCatch++;
+    if(tier.key==="perfect")perfect++;
+    if(tier.key==="great")great++;
+    if(tier.key==="catch")normalCatch++;
 
-    updateHud();
+    hookWrap.className="hook-wrap";
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
     strikeText.classList.remove("show");
-    strikeOverlay.classList.remove("show");
-    lineWrap.className="line-wrap";
+    strikeFlash.classList.remove("show");
+    fishShadow.classList.remove("approach");
 
-    catchEmoji.textContent=fish.emoji;
-    catchRank.textContent=tier.label;
-    catchFish.textContent=fish.name;
-    catchPoints.textContent=`+${points.toLocaleString("id-ID")} POINT • ${reaction} ms`;
-    catchCard.classList.add("show");
+    caughtImg.src=fish.src;
+    catchGrade.textContent=tier.label;
+    catchName.textContent=fish.name;
+    catchPoint.textContent=`+${points.toLocaleString("id-ID")} POINT • ${reaction} ms${comboBonus?` • COMBO +${comboBonus}`:""}`;
+    catchReveal.classList.remove("show");
+    void catchReveal.offsetWidth;
+    catchReveal.classList.add("show");
 
-    playSuccess(fish.base>=1000);
-    vibrate([35,20,80]);
+    sfxSuccess(fish.base>=750);
+    vibrate([30,20,70]);
     setStatus(tier.label,`${fish.name} berhasil ditangkap!`);
+    lunaBubble.textContent=fish.base>=750
+      ? "Wow! Tangkapan langka! Pertahankan combo!"
+      : "Nice catch! Jangan kehilangan fokus!";
+    updateHud();
 
     setTimeout(()=>{
-      catchCard.classList.remove("show");
-      if(state!=="ended") scheduleBite();
+      catchReveal.classList.remove("show");
+      if(state!=="ended")scheduleBite();
     },1250);
   }
 
-  function resolveEscape(){
-    if(state==="ended") return;
-
+  function escapeFish(){
+    if(state==="ended")return;
     clearTimeout(strikeTimer);
     state="resolving";
     escaped++;
+    combo=0;
 
-    strikeText.classList.remove("show");
-    strikeOverlay.classList.remove("show");
-    lineWrap.className="line-wrap";
-    actionBtn.classList.remove("strike");
+    hookWrap.className="hook-wrap";
     actionBtn.disabled=true;
+    actionBtn.classList.remove("strike");
+    strikeText.classList.remove("show");
+    strikeFlash.classList.remove("show");
+    fishShadow.classList.remove("approach");
 
-    playFail();
-    vibrate(90);
+    sfxFail();
+    vibrate(80);
     showToast("💨 IKAN KABUR!","bad");
-    setStatus("💨 IKAN KABUR!","Tunggu strike berikutnya.");
+    setStatus("IKAN KABUR!","Reaction terlalu lambat.");
+    lunaBubble.textContent="Yah, ikannya kabur. Strike berikutnya jangan sampai lepas!";
+    updateHud();
 
     setTimeout(()=>{
-      if(state!=="ended") scheduleBite();
-    },900);
+      if(state!=="ended")scheduleBite();
+    },850);
   }
 
   function endGame(){
-    if(state==="ended") return;
-
+    if(state==="ended")return;
     state="ended";
-    clearTimeout(biteTimer);
-    clearTimeout(strikeTimer);
-    clearInterval(gameTimer);
-
-    timeLeft=Math.max(0,timeLeft);
-    updateHud();
+    clearTimers();
 
     actionBtn.disabled=true;
     actionBtn.classList.remove("strike");
-    lineWrap.className="line-wrap";
+    hookWrap.className="hook-wrap";
     strikeText.classList.remove("show");
-    strikeOverlay.classList.remove("show");
+    fishShadow.classList.remove("approach");
 
     $("#rCaught").textContent=caught;
     $("#rEscaped").textContent=escaped;
@@ -828,12 +863,12 @@
     $("#rEarly").textContent=early;
     $("#rScore").textContent=score.toLocaleString("id-ID");
 
-    setTimeout(()=>resultModal.classList.add("show"),350);
+    lunaBubble.textContent="Selesai! Cek hasil tangkapanmu.";
+    setTimeout(()=>resultOverlay.classList.remove("hide"),350);
   }
 
-  function adminMessage(){
-    const text =
-`MAUSLOT VIP FISHING — HOOK TIMING
+  function adminAction(){
+    const text=`MAUSLOT VIP FISHING — HOOK TIMING
 
 Fish Caught : ${caught}
 Perfect : ${perfect}
@@ -841,53 +876,49 @@ Great : ${great}
 Catch : ${normalCatch}
 Escaped : ${escaped}
 Early Tap : ${early}
+Max Combo : ${maxCombo}
 Total Score : ${score}`;
 
     if(ADMIN_URL){
-      const join=ADMIN_URL.includes("?")?"&":"?";
-      window.open(`${ADMIN_URL}${join}text=${encodeURIComponent(text)}`,"_blank");
+      const sep=ADMIN_URL.includes("?")?"&":"?";
+      window.open(`${ADMIN_URL}${sep}text=${encodeURIComponent(text)}`,"_blank");
       return;
     }
 
     if(navigator.clipboard){
-      navigator.clipboard.writeText(text).then(()=>{
-        showToast("Hasil berhasil disalin. Link admin belum diisi.","good");
-      });
-    } else {
+      navigator.clipboard.writeText(text).then(()=>alert("Hasil game berhasil disalin. Link admin belum diisi."));
+    }else{
       alert(text);
     }
   }
 
-  // =========================
-  // EVENTS
-  // =========================
   actionBtn.addEventListener("click",()=>{
-    if(state==="idle") startGame();
-    else if(state==="waiting") earlyTap();
-    else if(state==="strike") hookNow();
+    if(state==="idle")begin();
+    else if(state==="waiting")earlyTap();
+    else if(state==="strike")hookNow();
   });
 
-  $("#restartBtn").addEventListener("click",resetGame);
-  $("#adminBtn").addEventListener("click",adminMessage);
+  startBtn.addEventListener("click",begin);
+  $("#restartBtn").addEventListener("click",reset);
+  $("#adminBtn").addEventListener("click",adminAction);
 
   soundBtn.addEventListener("click",()=>{
     soundOn=!soundOn;
     soundBtn.textContent=soundOn?"🔊":"🔇";
-    if(soundOn) tone(620,.08,"sine",.02);
+    if(soundOn)tone(640,.08,"sine",.02);
   });
 
-  document.addEventListener("keydown",(e)=>{
-    if(e.code==="Space" || e.code==="Enter"){
-      if(resultModal.classList.contains("show")) return;
+  document.addEventListener("keydown",e=>{
+    if((e.code==="Space"||e.code==="Enter") && resultOverlay.classList.contains("hide")){
+      if(!startOverlay.classList.contains("hide"))return;
       e.preventDefault();
       actionBtn.click();
     }
   });
 
   makeBubbles();
-  resetGame();
+  reset();
 })();
 </script>
 </body>
 </html>
-
